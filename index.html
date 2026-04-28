@@ -3,493 +3,597 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoL Build Recommender</title>
+  <title>Urgot — Build Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --gold: #C89B3C;
-      --gold-light: #F0E6B2;
-      --gold-dark: #785A28;
-      --bg: #010A13;
-      --bg-surface: #0A1428;
-      --bg-card: #0D1B2E;
-      --border: #1E3A5F;
-      --border-gold: #785A28;
-      --text: #C8AA6E;
-      --text-dim: #5B5A56;
-      --text-bright: #F0E6B2;
-      --blue: #0BC4E3;
-      --blue-dark: #0A3A4A;
+      --gold: #C89B3C; --gold-light: #F0E6B2; --gold-dark: #785A28;
+      --bg: #010A13; --bg-surface: #0A1428; --bg-card: #0D1B2E;
+      --border: #1E3A5F; --border-gold: #785A28;
+      --text: #C8AA6E; --text-dim: #5B5A56; --text-bright: #F0E6B2;
+      --blue: #0BC4E3; --blue-dark: #0A3A4A;
+      --red: #C84B4B; --red-dark: #2E0A0A;
+      --purple: #9B59B6; --purple-dark: #1A0A2E;
+      --orange: #E67E22; --orange-dark: #2E1A0A;
     }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
-      min-height: 100vh;
-      padding: 2rem 1rem;
+      background: var(--bg); color: var(--text);
+      font-family: 'Rajdhani', sans-serif; font-size: 16px;
+      min-height: 100vh; padding: 2rem 1rem 3rem;
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200,155,60,0.08) 0%, transparent 60%),
-        repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(30,58,95,0.15) 50px),
-        repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(30,58,95,0.15) 50px);
+        radial-gradient(ellipse 80% 40% at 50% -5%, rgba(200,155,60,0.07) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(30,58,95,0.1) 50px),
+        repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(30,58,95,0.1) 50px);
     }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      animation: fadeDown 0.6s ease both;
-    }
-
-    .logo-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 0.5rem;
-    }
-
-    .logo-line::before,
-    .logo-line::after {
-      content: '';
-      height: 1px;
-      width: 60px;
-      background: linear-gradient(90deg, transparent, var(--gold-dark));
-    }
+    .container { max-width: 820px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; animation: fadeDown 0.5s ease both; }
+    .logo-line { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 4px; }
+    .logo-line::before, .logo-line::after { content: ''; height: 1px; width: 70px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
     .logo-line::after { background: linear-gradient(90deg, var(--gold-dark), transparent); }
-
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(18px, 4vw, 26px);
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    h1 { font-family: 'Cinzel', serif; font-size: clamp(20px, 5vw, 28px); color: var(--gold); letter-spacing: 0.12em; }
+    .subtitle { font-size: 13px; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 4px; }
+    .section {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.5rem; margin-bottom: 1.25rem;
+      position: relative; animation: fadeUp 0.4s ease both;
     }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    .panel {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.5rem;
-      position: relative;
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.5s ease both 0.1s;
-    }
-
-    .panel::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 4px;
+    .section::before {
+      content: ''; position: absolute; inset: 0; border-radius: 4px;
       border: 1px solid transparent;
-      background: linear-gradient(135deg, rgba(200,155,60,0.2), transparent 40%) border-box;
+      background: linear-gradient(135deg, rgba(200,155,60,0.15), transparent 40%) border-box;
       -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      pointer-events: none;
+      -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
     }
+    .section-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 1.25rem; }
 
-    .panel-title {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: var(--gold-dark);
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
+    /* Input grid avec preview champion */
+    .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+    .input-group label { display: block; font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+    .input-wrap { position: relative; display: flex; align-items: center; }
+    .champ-preview {
+      position: absolute; left: 6px; width: 26px; height: 26px;
+      border-radius: 3px; overflow: hidden; border: 1px solid var(--border-gold);
+      background: var(--bg-card); display: none;
+      flex-shrink: 0;
     }
-
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
+    .champ-preview img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .champ-preview.visible { display: block; }
+    .input-group input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 3px; color: var(--text-bright);
+      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500;
+      padding: 8px 10px; outline: none; transition: border-color 0.2s, box-shadow 0.2s, padding-left 0.15s;
     }
+    .input-group input.has-icon { padding-left: 38px; }
+    .input-group input:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 2px rgba(200,155,60,0.1); }
+    .input-group input::placeholder { color: var(--text-dim); font-weight: 400; }
 
-    .role-slot label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
+    /* Tags */
+    .comp-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .comp-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
+    .tag { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 2px; }
+    .tag-ad    { background: rgba(200,75,75,0.12);  color: #E07070; border: 1px solid rgba(200,75,75,0.3); }
+    .tag-ap    { background: var(--purple-dark);    color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
+    .tag-cc    { background: var(--blue-dark);      color: var(--blue);   border: 1px solid rgba(11,196,227,0.3); }
+    .tag-crit  { background: rgba(200,155,60,0.1);  color: var(--gold);   border: 1px solid rgba(200,155,60,0.3); }
+    .tag-burst { background: rgba(180,30,180,0.1);  color: #D070D0;       border: 1px solid rgba(180,30,180,0.3); }
+    .tag-burn  { background: var(--orange-dark);    color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
+    .tag-shield{ background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25);}
+    .tag-heal  { background: rgba(30,164,122,0.08); color: #1EA47A;       border: 1px solid rgba(30,164,122,0.25);}
+    .tag-empty { font-size: 12px; color: var(--text-dim); font-style: italic; }
 
-    .role-icon {
-      width: 14px;
-      height: 14px;
-      display: inline-block;
-      opacity: 0.6;
-    }
-
-    .role-slot input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text-bright);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 8px 10px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .role-slot input:focus {
-      border-color: var(--gold-dark);
-      box-shadow: 0 0 0 2px rgba(200,155,60,0.1);
-    }
-
-    .role-slot input::placeholder { color: var(--text-dim); font-weight: 400; }
-
+    /* Bouton */
     .btn-wrap { text-align: center; margin-top: 1.25rem; }
-
     .btn {
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: transparent;
-      border: 1px solid var(--gold-dark);
-      border-radius: 3px;
-      padding: 11px 32px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: color 0.2s, background 0.2s;
+      font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold); background: transparent;
+      border: 1px solid var(--gold-dark); border-radius: 3px;
+      padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s;
     }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,155,60,0.12), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
+    .btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,155,60,0.12), transparent); opacity: 0; transition: opacity 0.2s; }
     .btn:hover { color: var(--gold-light); }
     .btn:hover::before { opacity: 1; }
     .btn:active { transform: scale(0.97); }
-    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    .loading {
-      text-align: center;
-      padding: 2rem 0;
-      animation: pulse 1.5s ease-in-out infinite;
+    /* Result headers */
+    .result-header { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+    .result-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* Runes */
+    .rune-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1rem 1.25rem; }
+    .rune-path { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+    .rune-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+    .rune-pill { font-size: 13px; font-weight: 500; padding: 4px 12px; border-radius: 2px; }
+    .rune-keystone { background: rgba(200,155,60,0.12); color: var(--gold); border: 1px solid rgba(200,155,60,0.3); font-size: 14px; }
+    .rune-primary { background: var(--blue-dark); color: var(--blue); border: 1px solid rgba(11,196,227,0.2); }
+    .rune-secondary { background: var(--purple-dark); color: var(--purple); border: 1px solid rgba(155,89,182,0.25); }
+    .divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+    /* Build layout 2 colonnes */
+    .build-layout { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
+    @media(max-width: 640px) { .build-layout { grid-template-columns: 1fr; } }
+
+    /* Items */
+    .items-grid { display: flex; flex-direction: column; gap: 8px; }
+    .item-row {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px;
+      padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s;
     }
-
-    .loading p {
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .loading-bar {
-      width: 120px;
-      height: 2px;
-      background: var(--border);
-      border-radius: 2px;
-      margin: 10px auto 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .loading-bar::after {
-      content: '';
-      position: absolute;
-      left: -40%;
-      width: 40%;
-      height: 100%;
-      background: var(--gold);
-      animation: slide 1s ease-in-out infinite;
-    }
-
-    @keyframes slide { to { left: 140%; } }
-    @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-    @keyframes cardIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-
-    .error {
-      background: rgba(180,30,30,0.1);
-      border: 1px solid rgba(180,30,30,0.3);
-      border-radius: 3px;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #E84141;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .synergy-box {
+    .item-row:hover { border-color: var(--border-gold); }
+    .item-icon {
+      width: 40px; height: 40px; border-radius: 4px; overflow: hidden;
+      border: 1px solid var(--border-gold); flex-shrink: 0;
       background: var(--bg-card);
-      border: 1px solid var(--border-gold);
-      border-radius: 4px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.25rem;
-      animation: cardIn 0.4s ease both;
     }
+    .item-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .item-slot { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; color: var(--gold-dark); text-transform: uppercase; min-width: 48px; }
+    .item-name { font-size: 14px; font-weight: 600; color: var(--text-bright); }
+    .item-note { font-size: 12px; color: var(--text-dim); margin-top: 1px; line-height: 1.4; }
 
-    .synergy-label {
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--gold-dark);
-      text-transform: uppercase;
-      margin-bottom: 6px;
+    /* Situationnel */
+    .situ-panel {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1rem; position: relative;
+      animation: fadeUp 0.4s ease both 0.15s;
     }
-
-    .synergy-text {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.6;
+    .situ-panel::before {
+      content: ''; position: absolute; inset: 0; border-radius: 4px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(200,155,60,0.1), transparent 40%) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
     }
-
-    .champ-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 10px;
-      animation: cardIn 0.4s ease both;
-      transition: border-color 0.2s;
+    .situ-title { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 10px; }
+    .situ-item {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px;
+      padding: 8px 10px; margin-bottom: 7px; transition: border-color 0.2s;
+      display: flex; align-items: flex-start; gap: 8px;
     }
+    .situ-item:last-child { margin-bottom: 0; }
+    .situ-item:hover { border-color: var(--border-gold); }
+    .situ-icon { width: 36px; height: 36px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-gold); flex-shrink: 0; background: var(--bg-card); }
+    .situ-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .situ-text { flex: 1; }
+    .situ-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 2px; margin-bottom: 4px; letter-spacing: 0.06em; }
+    .situ-tag-shield { background: rgba(11,196,227,0.1); color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
+    .situ-tag-heal { background: rgba(30,164,122,0.1); color: #1EA47A; border: 1px solid rgba(30,164,122,0.25); }
+    .situ-item-name { font-size: 13px; font-weight: 600; color: var(--text-bright); margin-bottom: 2px; }
+    .situ-item-cond { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+    .situ-empty { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 0.75rem 0; }
 
-    .champ-card:hover { border-color: var(--border-gold); }
-
-    .champ-header {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .champ-name {
-      font-family: 'Cinzel', serif;
-      font-size: 15px;
-      color: var(--gold);
-    }
-
-    .champ-role-tag {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-
-    .items-label {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-
-    .items-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 10px;
-    }
-
-    .item-pill {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 2px;
-      background: var(--blue-dark);
-      color: var(--blue);
-      border: 1px solid rgba(11,196,227,0.2);
-      letter-spacing: 0.03em;
-    }
-
-    .item-pill:first-child {
-      background: rgba(200,155,60,0.1);
-      color: var(--gold);
-      border-color: rgba(200,155,60,0.3);
-    }
-
-    .tip-text {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.55;
-      border-top: 1px solid var(--border);
-      padding-top: 8px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-    }
-
-    footer a { color: var(--gold-dark); text-decoration: none; }
-
-    @media (max-width: 480px) {
-      .roles-grid { grid-template-columns: 1fr 1fr; }
-    }
+    /* Misc */
+    .warn-box { background: rgba(200,155,60,0.07); border: 1px solid rgba(200,155,60,0.2); border-radius: 3px; padding: 8px 12px; font-size: 13px; color: var(--gold); margin-bottom: 8px; }
+    .error { background: var(--red-dark); border: 1px solid rgba(200,75,75,0.3); border-radius: 3px; padding: 10px 14px; font-size: 13px; color: var(--red); text-align: center; margin-top: 1rem; }
+    footer { text-align: center; margin-top: 2.5rem; font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:none} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    @media(max-width:500px) { .input-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo-line">
-        <h1>Build Recommender</h1>
-      </div>
-      <p class="subtitle">League of Legends · Powered by Claude AI</p>
-    </header>
+<div class="container">
+  <header>
+    <div class="logo-line"><h1>Urgot · Build Calculator</h1></div>
+    <p class="subtitle">Runes & build adaptatif selon la composition ennemie</p>
+  </header>
 
-    <div class="panel">
-      <p class="panel-title">✦ Composition d'équipe</p>
-      <div class="roles-grid">
-        <div class="role-slot">
-          <label>⚔ Top</label>
-          <input id="c1" placeholder="ex: Darius" />
-        </div>
-        <div class="role-slot">
-          <label>🌿 Jungle</label>
-          <input id="c2" placeholder="ex: Lee Sin" />
-        </div>
-        <div class="role-slot">
-          <label>✦ Mid</label>
-          <input id="c3" placeholder="ex: Syndra" />
-        </div>
-        <div class="role-slot">
-          <label>🏹 ADC</label>
-          <input id="c4" placeholder="ex: Jinx" />
-        </div>
-        <div class="role-slot">
-          <label>🛡 Support</label>
-          <input id="c5" placeholder="ex: Thresh" />
+  <div class="section">
+    <p class="section-title">✦ Composition ennemie</p>
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Top (adversaire)</label>
+        <div class="input-wrap">
+          <div class="champ-preview" id="prev-top"><img id="img-top" src="" alt="" /></div>
+          <input id="top" placeholder="ex: Darius" list="list-top" autocomplete="off" oninput="onInput()" />
+          <datalist id="list-top"></datalist>
         </div>
       </div>
-      <div class="btn-wrap">
-        <button class="btn" id="go-btn" onclick="getBuilds()">Analyser la composition</button>
+      <div class="input-group">
+        <label>Jungle</label>
+        <div class="input-wrap">
+          <div class="champ-preview" id="prev-jg"><img id="img-jg" src="" alt="" /></div>
+          <input id="jg" placeholder="ex: Lee Sin" list="list-jg" autocomplete="off" oninput="onInput()" />
+          <datalist id="list-jg"></datalist>
+        </div>
       </div>
-      <div id="error-msg"></div>
+      <div class="input-group">
+        <label>Mid</label>
+        <div class="input-wrap">
+          <div class="champ-preview" id="prev-mid"><img id="img-mid" src="" alt="" /></div>
+          <input id="mid" placeholder="ex: Syndra" list="list-mid" autocomplete="off" oninput="onInput()" />
+          <datalist id="list-mid"></datalist>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>ADC</label>
+        <div class="input-wrap">
+          <div class="champ-preview" id="prev-adc"><img id="img-adc" src="" alt="" /></div>
+          <input id="adc" placeholder="ex: Jinx" list="list-adc" autocomplete="off" oninput="onInput()" />
+          <datalist id="list-adc"></datalist>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Support</label>
+        <div class="input-wrap">
+          <div class="champ-preview" id="prev-sup"><img id="img-sup" src="" alt="" /></div>
+          <input id="sup" placeholder="ex: Thresh" list="list-sup" autocomplete="off" oninput="onInput()" />
+          <datalist id="list-sup"></datalist>
+        </div>
+      </div>
     </div>
-
-    <div id="results"></div>
-
-    <footer>
-      Non affilié à Riot Games &nbsp;·&nbsp; Suggestions générées par IA
-    </footer>
+    <p class="comp-label">Analyse composition</p>
+    <div class="comp-tags" id="comp-tags">
+      <span class="tag-empty">Entrez les champions pour voir l'analyse…</span>
+    </div>
+    <div class="btn-wrap">
+      <button class="btn" onclick="calculate()">Générer le build</button>
+    </div>
+    <div id="error-msg"></div>
   </div>
 
-  <script>
-    document.querySelectorAll('input').forEach(inp => {
-      inp.addEventListener('keydown', e => { if (e.key === 'Enter') getBuilds(); });
+  <div id="results"></div>
+  <footer>Non affilié à Riot Games &nbsp;·&nbsp; Urgot Build Calculator</footer>
+</div>
+
+<script>
+const DDV = "14.24.1"; // version Data Dragon
+const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
+const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
+
+// Noms spéciaux Data Dragon (nom affiché → clé DDragon)
+const CHAMP_DDR = {
+  "Aurelion Sol":"AurelionSol","Bel'Veth":"Belveth","Cho'Gath":"Chogath",
+  "Dr. Mundo":"DrMundo","Jarvan IV":"JarvanIV","Kai'Sa":"Kaisa",
+  "Kha'Zix":"Khazix","K'Sante":"KSante","LeBlanc":"Leblanc",
+  "Lee Sin":"LeeSin","Master Yi":"MasterYi","Miss Fortune":"MissFortune",
+  "Nunu":"Nunu","Rek'Sai":"RekSai","Renata Glasc":"Renata",
+  "Tahm Kench":"TahmKench","Twisted Fate":"TwistedFate","Vel'Koz":"Velkoz",
+  "Wukong":"MonkeyKing","Xin Zhao":"XinZhao","Aurelion Sol":"AurelionSol",
+  "Naafiri":"Naafiri","Hwei":"Hwei","Smolder":"Smolder","Ambessa":"Ambessa",
+  "Mel":"Mel","Yunara":"Yunara","Zaahen":"Zaahen"
+};
+
+function champImg(name) {
+  const key = CHAMP_DDR[name] || name.replace(/['\s.]/g,'');
+  return DDC(key);
+}
+
+// IDs items Data Dragon
+const ITEM_IDS = {
+  "Black Cleaver": 3071,
+  "Boots of Swiftness": 3009,
+  "Plated Steelcaps": 3047,
+  "Mercury's Treads": 3111,
+  "Sterak's Gage": 3053,
+  "Deadman's Plate": 3742,
+  "Randuin's Omen": 3143,
+  "Force of Nature": 4401,
+  "Rookern": 6696,
+  "Jak'Sho, The Protean": 6665,
+  "Bloodmail": 236020,
+  "Serpent's Fang": 3814,
+  "Thornmail": 3075,
+  "Chempunk Chainsword": 6609,
+  "Bramble Vest": 3076,
+  "Ionian Boots of Lucidity": 3158,
+};
+
+function itemImg(name) {
+  const id = ITEM_IDS[name];
+  return id ? DDI(id) : null;
+}
+
+const CHAMPS_BY_ROLE = {
+  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yorick","Zac"],
+  jg:  ["Amumu","Bel'Veth","Briar","Diana","Ekko","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed"],
+  mid: ["Ahri","Akali","Anivia","Annie","Aurelion Sol","Azir","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Viktor","Vladimir","Yasuo","Yone","Zed","Zoe","Zyra"],
+  adc: ["Aphelios","Ashe","Caitlyn","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Xayah","Yunara","Zeri","Ziggs"],
+  sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Heimerdinger","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Pyke","Rakan","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
+};
+
+const CHAMP_TAGS = {
+  "Aatrox":["AD","HEAL"],"Akali":["AP","BURST"],"Alistar":["CC"],"Amumu":["AP","CC"],
+  "Ambessa":["AD","BURST","SHIELD"],"Annie":["AP","BURST","CC","SHIELD"],
+  "Aphelios":["AD","CRIT"],"Ashe":["AD","CRIT","CC"],
+  "Aurelion Sol":["AP","BURN"],"Aurora":["AP","BURST"],"Azir":["AP"],
+  "Bard":["CC","AP","HEAL"],"Bel'Veth":["AD"],"Blitzcrank":["CC","SHIELD"],
+  "Brand":["AP","BURN","BURST","CC"],"Braum":["CC","AP"],"Briar":["AD","CC","HEAL"],
+  "Caitlyn":["AD","CRIT"],"Camille":["AD","SHIELD"],"Cassiopeia":["AP","BURN","CC","HEAL"],
+  "Cho'Gath":["AP","CC"],"Corki":["AD"],"Darius":["AD","HEAL"],
+  "Diana":["AP","BURST","CC","SHIELD"],"Dr. Mundo":["AD","HEAL"],
+  "Draven":["AD","CRIT"],"Ekko":["AP","BURST","SHIELD"],"Elise":["AP","BURST"],
+  "Evelynn":["AP","BURST"],"Ezreal":["AD"],"Fiddlesticks":["AP","BURN","CC","HEAL"],
+  "Fiora":["AD","HEAL"],"Fizz":["AP","BURST"],"Galio":["AP","CC","SHIELD"],
+  "Garen":["AD"],"Gnar":["AD","CC"],"Gragas":["AP","CC"],"Graves":["AD","CRIT"],
+  "Gwen":["AP","BURST","HEAL"],"Hecarim":["AD","CC","HEAL"],"Heimerdinger":["AP","BURN"],
+  "Hwei":["AP","BURN","BURST","CC","SHIELD"],"Illaoi":["AD","HEAL"],"Irelia":["AD","HEAL"],
+  "Ivern":["CC","SHIELD"],"Janna":["AP","CC","HEAL","SHIELD"],
+  "Jarvan IV":["AD","CC","SHIELD"],"Jax":["AD","CC"],"Jayce":["AD"],
+  "Jhin":["AD","CRIT"],"Jinx":["AD","CRIT"],"K'Sante":["CC","SHIELD"],
+  "Kai'Sa":["AD","CRIT","AP","SHIELD"],"Kalista":["AD"],"Karma":["AP","CC","SHIELD"],
+  "Kassadin":["AP","BURST","SHIELD"],"Katarina":["AP","BURST"],"Kennen":["AP","CC"],
+  "Kha'Zix":["AD","BURST"],"Kindred":["AD","CRIT"],"Kog'Maw":["AD","AP","BURN"],
+  "LeBlanc":["AP","BURST"],"Lee Sin":["AD","HEAL"],"Leona":["CC"],
+  "Lillia":["AP","BURN","CC"],"Lissandra":["AP","CC"],"Lucian":["AD"],
+  "Lulu":["CC","SHIELD"],"Lux":["AP","BURST","SHIELD"],"Malphite":["AP","CC","SHIELD"],
+  "Malzahar":["AP","BURN","CC"],"Maokai":["CC","AP","HEAL"],"Master Yi":["AD","HEAL"],
+  "Mel":["AP","BURST","SHIELD"],"Miss Fortune":["AD","CRIT"],
+  "Mordekaiser":["AP","BURN","HEAL","SHIELD"],"Morgana":["AP","CC","BURN","SHIELD"],
+  "Naafiri":["AD","BURST"],"Nami":["CC","HEAL"],"Nasus":["AD","HEAL"],
+  "Nautilus":["CC","SHIELD"],"Nidalee":["AP","BURST","HEAL"],"Nilah":["AD","CRIT"],
+  "Nocturne":["AD","BURST"],"Nunu":["CC","HEAL"],"Olaf":["AD","HEAL"],
+  "Orianna":["AP","CC","SHIELD"],"Ornn":["CC"],"Pantheon":["AD","BURST"],
+  "Poppy":["CC"],"Pyke":["AD","CC","BURST"],"Qiyana":["AD","BURST"],
+  "Quinn":["AD","CRIT"],"Rakan":["CC","SHIELD"],"Rammus":["CC"],
+  "Rek'Sai":["AD"],"Renata Glasc":["CC","SHIELD"],"Renekton":["AD","HEAL"],
+  "Rengar":["AD","BURST"],"Rumble":["AP","BURN","SHIELD"],"Ryze":["AP"],
+  "Samira":["AD","CRIT"],"Sejuani":["CC"],"Senna":["AD","SHIELD"],
+  "Seraphine":["AP","CC","SHIELD"],"Sett":["AD","SHIELD"],"Shaco":["AD","BURST"],
+  "Shen":["AD","SHIELD"],"Shyvana":["AP","BURN","SHIELD"],
+  "Singed":["AP","BURN"],"Sion":["CC","SHIELD"],"Sivir":["AD","CRIT"],
+  "Skarner":["CC","SHIELD"],"Smolder":["AD","CRIT","BURN"],
+  "Sona":["CC","SHIELD","HEAL"],"Soraka":["HEAL"],"Swain":["AP","BURN","HEAL"],
+  "Syndra":["AP","BURST"],"Tahm Kench":["CC","HEAL","AP","SHIELD"],
+  "Taliyah":["AP","CC"],"Talon":["AD","BURST"],"Teemo":["AP","BURN"],
+  "Thresh":["CC","SHIELD"],"Tristana":["AD","CRIT"],"Trundle":["AD","HEAL"],
+  "Tryndamere":["AD","CRIT","HEAL"],"Twisted Fate":["AP","CC"],"Twitch":["AD","CRIT"],
+  "Udyr":["AP","AD","CC","HEAL","SHIELD"],"Varus":["AD","AP","BURST"],
+  "Vayne":["AD"],"Veigar":["AP","BURST"],"Vel'Koz":["AP","BURST"],
+  "Vi":["AD","CC","SHIELD"],"Viego":["AD","HEAL"],"Viktor":["AP","BURN","SHIELD"],
+  "Vladimir":["AP","BURN","HEAL"],"Volibear":["CC","AP","HEAL","SHIELD"],
+  "Warwick":["AD","HEAL"],"Wukong":["AD"],"Xayah":["AD","CRIT"],
+  "Xerath":["AP","BURST"],"Xin Zhao":["AD","HEAL"],"Yasuo":["AD","CRIT","SHIELD"],
+  "Yone":["AD","CRIT","SHIELD"],"Yorick":["AD","HEAL"],"Yunara":["AD","AP","CRIT"],
+  "Yuumi":["HEAL","SHIELD"],"Zaahen":["AD","HEAL"],"Zac":["CC","AP","HEAL"],
+  "Zed":["AD","BURST"],"Zeri":["AD","CRIT"],"Ziggs":["AP","BURST"],
+  "Zilean":["AP","CC"],"Zoe":["AP","BURST"],"Zyra":["AP","BURN","CC"]
+};
+
+const BASE_URL = "https://barnhak.github.io/Urgot-build-calculator/";
+
+const RUNE_PAGES = {
+  page1: { label:"Standard",     img:"rune-page1.png" },
+  page2: { label:"Cut Down",     img:"rune-page2.png" },
+  page3: { label:"Tanks",        img:"rune-page3.png" },
+  page4: { label:"Résolution",   img:"rune-page4.png" },
+  page5: { label:"Rumble",       img:"rune-page5.png" },
+  page6: { label:"Olaf",         img:"rune-page6.png" },
+  page7: { label:"Heimerdinger", img:"rune-page7.png" },
+  page8: { label:"Yorick",       img:"rune-page8.png" },
+};
+
+const CHAMP_RUNE_MAP = {
+  "aatrox":"page2","darius":"page2","aurora":"page2","irelia":"page2","varus":"page2","vayne":"page2","vladimir":"page2",
+  "ornn":"page3","malphite":"page3","dr. mundo":"page3","cho'gath":"page3","zac":"page3","tahm kench":"page3","k'sante":"page3","maokai":"page3",
+  "renekton":"page4","shen":"page4",
+  "rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
+};
+
+const BRAMBLE_CHAMPS  = ["irelia","fiora","warwick","wukong"];
+const BOOTS_FIRST     = ["olaf"];
+const ABATTEUR_CHAMPS = ["garen","k'sante","yorick"];
+
+// Init datalists
+Object.entries(CHAMPS_BY_ROLE).forEach(([role, list]) => {
+  const dl = document.getElementById('list-' + role);
+  if (dl) list.forEach(c => { const o = document.createElement('option'); o.value = c; dl.appendChild(o); });
+});
+
+function getChamps() {
+  return ['top','jg','mid','adc','sup'].map(id => document.getElementById(id).value.trim());
+}
+
+function getTags(name) {
+  if (!name) return [];
+  const key = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === name.toLowerCase());
+  return key ? CHAMP_TAGS[key] : [];
+}
+
+function analyzeComp(champs) {
+  let ad=0,ap=0,cc=0,crit=0,burst=0,burn=0,shield=0,heal=0;
+  champs.filter(Boolean).forEach(c => {
+    const t = getTags(c);
+    if (t.includes("AD"))     ad++;
+    if (t.includes("AP"))     ap++;
+    if (t.includes("CC"))     cc++;
+    if (t.includes("CRIT"))   crit++;
+    if (t.includes("BURST"))  burst++;
+    if (t.includes("BURN"))   burn++;
+    if (t.includes("SHIELD")) shield++;
+    if (t.includes("HEAL"))   heal++;
+  });
+  return { ad,ap,cc,crit,burst,burn,shield,heal };
+}
+
+// Met à jour le preview champion sur un champ
+function updateChampPreview(role) {
+  const val = document.getElementById(role).value.trim();
+  const prev = document.getElementById('prev-' + role);
+  const img  = document.getElementById('img-' + role);
+  const input = document.getElementById(role);
+  // Cherche si le nom correspond à un champion connu
+  const known = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === val.toLowerCase());
+  if (known) {
+    img.src = champImg(known);
+    img.onerror = () => { prev.classList.remove('visible'); input.classList.remove('has-icon'); };
+    prev.classList.add('visible');
+    input.classList.add('has-icon');
+  } else {
+    prev.classList.remove('visible');
+    input.classList.remove('has-icon');
+  }
+}
+
+function onInput() {
+  ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
+  const champs = getChamps();
+  if (!champs.some(Boolean)) {
+    document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Entrez les champions pour voir l\'analyse…</span>';
+    return;
+  }
+  const a = analyzeComp(champs);
+  const tags = [];
+  if (a.ad > 0)     tags.push(`<span class="tag tag-ad">${a.ad} AD</span>`);
+  if (a.ap > 0)     tags.push(`<span class="tag tag-ap">${a.ap} AP</span>`);
+  if (a.cc >= 2)    tags.push(`<span class="tag tag-cc">CC</span>`);
+  if (a.crit >= 2)  tags.push(`<span class="tag tag-crit">${a.crit} Crit</span>`);
+  if (a.burst >= 2) tags.push(`<span class="tag tag-burst">Burst</span>`);
+  if (a.burn >= 1)  tags.push(`<span class="tag tag-burn">Burn</span>`);
+  if (a.shield >= 2)tags.push(`<span class="tag tag-shield">${a.shield} Boucliers</span>`);
+  if (a.heal >= 2)  tags.push(`<span class="tag tag-heal">${a.heal} Heals</span>`);
+  document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">Aucun profil particulier détecté</span>';
+}
+
+function getBoots(a) {
+  if (a.ad >= 3 || a.crit >= 2) return { name:"Plated Steelcaps",  note:"Nombreux auto-attaquants / crit ennemis" };
+  if (a.cc >= 2)                 return { name:"Mercury's Treads",   note:"Beaucoup de CC ennemis" };
+  return                                { name:"Boots of Swiftness", note:"Situation standard — mobilité" };
+}
+
+function getSituItems(a) {
+  const situ = [];
+  if (a.shield >= 2) {
+    situ.push({ tag:"shield", tagLabel:`${a.shield} Boucliers`, name:"Serpent's Fang", note:"Réduit les boucliers ennemis de 50% — remplace un item défensif" });
+  }
+  if (a.heal >= 2) {
+    const isAD = a.ad >= a.ap;
+    situ.push({
+      tag:"heal", tagLabel:`${a.heal} Heals`,
+      name: isAD ? "Thornmail" : "Chempunk Chainsword",
+      note: isAD ? "Comp AD/tanks — Grievous Wounds sur auto-attaques reçues" : "Comp AP/burst — Grievous Wounds actif + passif"
     });
+  }
+  return situ;
+}
 
-    async function getBuilds() {
-      const roles = ['Top','Jungle','Mid','ADC','Support'];
-      const ids = ['c1','c2','c3','c4','c5'];
-      const champs = ids.map((id, i) => ({
-        role: roles[i],
-        name: document.getElementById(id).value.trim()
-      }));
+function buildItems(top, a) {
+  const n = (top||"").toLowerCase();
+  const bootsFirst = BOOTS_FIRST.includes(n);
+  const bramble    = BRAMBLE_CHAMPS.includes(n);
+  const abatteur   = ABATTEUR_CHAMPS.includes(n);
+  const boots = getBoots(a);
+  const warnings = [];
+  if (bootsFirst) warnings.push("⚡ Contre Olaf : achète les bottes en premier avant Black Cleaver");
+  if (bramble)    warnings.push("🌿 Contre " + top + " : rush Bramble Vest avant Black Cleaver");
+  if (abatteur)   warnings.push("⚔ Contre " + top + " : Abatteur possible avant Black Cleaver");
 
-      const missing = champs.filter(c => !c.name);
-      if (missing.length > 0) {
-        document.getElementById('error-msg').innerHTML = '<div class="error">Veuillez renseigner les 5 champions avant de continuer.</div>';
-        return;
-      }
-      document.getElementById('error-msg').innerHTML = '';
+  const items = [];
+  if (bootsFirst) {
+    items.push({ slot:"Bottes", name:boots.name, note:boots.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — réduction armure + santé" });
+  } else {
+    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — réduction armure + santé" });
+    items.push({ slot:"Bottes", name:boots.name, note:boots.note });
+  }
 
-      const btn = document.getElementById('go-btn');
-      btn.disabled = true;
+  if (a.ad >= 3) items.push({ slot:"Item 2", name:"Deadman's Plate", note:"3+ champions AD — armure + engage" });
+  else           items.push({ slot:"Item 2", name:"Sterak's Gage",   note:"Bouclier + résistances — standard" });
 
-      document.getElementById('results').innerHTML = `
-        <div class="loading">
-          <p>Analyse en cours</p>
-          <div class="loading-bar"></div>
-        </div>`;
+  if (a.ad >= 3) {
+    if (a.crit >= 2) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"2+ crit ennemis — réduit les dégâts crit reçus" });
+    else             items.push({ slot:"Item 3", name:"Sterak's Gage",    note:"Bouclier + résistances" });
+  } else if (a.ap >= 2 || a.burn >= 1) {
+    if (a.burn >= 1) items.push({ slot:"Item 3", name:"Force of Nature",  note:"AP + brûlure — mobilité et résistance magique" });
+    else             items.push({ slot:"Item 3", name:"Rookern",           note:"Bouclier contre dégâts AP" });
+  } else {
+    items.push({ slot:"Item 3", name:"Deadman's Plate", note:"Armure + mobilité" });
+  }
 
-      const prompt = `Tu es un coach League of Legends expert patch actuel. Pour la composition suivante, fournis pour chaque champion :
-- 6 objets recommandés dans l'ordre d'achat (commence par le mythique au slot 1)
-- 1 conseil tactique court (1-2 phrases max)
-Et une analyse de synergie globale de la team (2-3 phrases).
+  const has = name => items.some(i => i.name === name);
+  if (a.ad >= 3 && a.ap >= 2)      items.push({ slot:"Item 4", name:"Force of Nature",      note:"Couverture AP en complément anti-AD" });
+  else if (a.ad >= 3)               items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
+  else if (a.ap >= 2) {
+    if (has("Force of Nature"))     items.push({ slot:"Item 4", name:"Rookern",               note:"Complément anti-AP" });
+    else                            items.push({ slot:"Item 4", name:"Force of Nature",        note:"Mobilité sous dégâts AP" });
+  } else                            items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
 
-Composition :
-${champs.map(c => `- ${c.role} : ${c.name}`).join('\n')}
+  const majoriteAP = a.ap >= 4;
+  const mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
+  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Majorité AP — résistances magique + armure" });
+  else if (mixte)                                   items.push({ slot:"Item 5", name:"Bloodmail",             note:"Composition mixte — conversion dégâts → santé" });
+  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Bloodmail",             note:"Conversion dégâts → santé en prolonged fight" });
+  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
 
-Réponds UNIQUEMENT en JSON valide, sans markdown ni backticks, structure exacte :
-{
-  "synergy": "...",
-  "builds": [
-    { "name": "...", "role": "...", "items": ["item1","item2","item3","item4","item5","item6"], "tip": "..." }
-  ]
-}`;
+  return { items, warnings };
+}
 
-      try {
-        const res = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1000,
-            messages: [{ role: "user", content: prompt }]
-          })
-        });
-        const data = await res.json();
-        const text = data.content.map(b => b.text || '').join('');
-        const clean = text.replace(/```json|```/g, '').trim();
-        const parsed = JSON.parse(clean);
-        renderResults(parsed);
-      } catch (e) {
-        document.getElementById('results').innerHTML = '<div class="error">Erreur lors de la génération. Vérifiez les noms des champions et réessayez.</div>';
-      }
+function itemRowHTML(item, i) {
+  const img = itemImg(item.name);
+  const iconHTML = img
+    ? `<div class="item-icon"><img src="${img}" alt="${item.name}" loading="lazy" /></div>`
+    : `<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>`;
+  return `<div class="item-row" style="animation:fadeUp 0.3s ease both ${i*0.05}s">
+    ${iconHTML}
+    <div class="item-slot">${item.slot}</div>
+    <div><div class="item-name">${item.name}</div><div class="item-note">${item.note}</div></div>
+  </div>`;
+}
 
-      btn.disabled = false;
-    }
+function calculate() {
+  const [top,jg,mid,adc,sup] = getChamps();
+  if (!top) {
+    document.getElementById('error-msg').innerHTML = '<div class="error">Renseigne au moins le champion top ennemi.</div>';
+    return;
+  }
+  document.getElementById('error-msg').innerHTML = '';
+  const a = analyzeComp([top,jg,mid,adc,sup]);
+  const rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
+  const { items, warnings } = buildItems(top, a);
+  const situ = getSituItems(a);
 
-    function renderResults(data) {
-      let html = '';
+  let html = '';
 
-      if (data.synergy) {
-        html += `<div class="synergy-box">
-          <p class="synergy-label">✦ Synergie d'équipe</p>
-          <p class="synergy-text">${data.synergy}</p>
-        </div>`;
-      }
+  // Runes
+  html += `<div class="section" style="animation:fadeUp 0.4s ease both">
+    <div class="result-header">Page de runes — ${rune.label}</div>
+    <div class="rune-card" style="padding:0;overflow:hidden;background:transparent;border:none;">
+      <img
+        src="${BASE_URL}${rune.img}"
+        alt="Page de runes ${rune.label}"
+        style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);"
+        loading="lazy"
+      />
+    </div>
+  </div>`;
 
-      for (let i = 0; i < data.builds.length; i++) {
-        const b = data.builds[i];
-        const delay = i * 0.07;
-        html += `<div class="champ-card" style="animation-delay:${delay}s">
-          <div class="champ-header">
-            <span class="champ-name">${b.name}</span>
-            <span class="champ-role-tag">${b.role}</span>
-          </div>
-          <p class="items-label">Objets recommandés</p>
-          <div class="items-row">
-            ${b.items.map(it => `<span class="item-pill">${it}</span>`).join('')}
-          </div>
-          <p class="tip-text">${b.tip}</p>
-        </div>`;
-      }
+  // Build + situationnel
+  html += `<div class="build-layout">`;
+  html += `<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">
+    <div class="result-header">Build recommandé</div>`;
+  warnings.forEach(w => { html += `<div class="warn-box">${w}</div>`; });
+  html += '<div class="items-grid">';
+  items.forEach((item,i) => { html += itemRowHTML(item, i); });
+  html += '</div></div>';
 
-      document.getElementById('results').innerHTML = html;
-    }
-  </script>
+  // Panneau situationnel
+  html += `<div class="situ-panel"><p class="situ-title">✦ Situationnel</p>`;
+  if (!situ.length) {
+    html += `<p class="situ-empty">Aucun item situationnel</p>`;
+  } else {
+    situ.forEach((s,i) => {
+      const img = itemImg(s.name);
+      const iconHTML = img
+        ? `<div class="situ-icon"><img src="${img}" alt="${s.name}" loading="lazy" /></div>`
+        : '';
+      const tagClass = s.tag === 'shield' ? 'situ-tag-shield' : 'situ-tag-heal';
+      html += `<div class="situ-item" style="animation-delay:${i*0.08}s">
+        ${iconHTML}
+        <div class="situ-text">
+          <span class="situ-tag ${tagClass}">${s.tagLabel}</span>
+          <div class="situ-item-name">${s.name}</div>
+          <div class="situ-item-cond">${s.note}</div>
+        </div>
+      </div>`;
+    });
+  }
+  html += `</div></div>`;
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
 </body>
 </html>

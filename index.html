@@ -278,11 +278,12 @@ const ITEM_IDS = {
   "Rookern": 6696,
   "Jak'Sho, The Protean": 6665,
   "Overlord's Bloodmail": 2501,
-  "Serpent's Fang": 226695,
+  "Serpent's Fang": 3814,
   "Thornmail": 3075,
   "Chempunk Chainsword": 6609,
   "Bramble Vest": 3076,
-  "Ionian Boots of Lucidity": 3158,
+  "Doran's Blade": 1055,
+  "Doran's Shield": 1054,
 };
 
 function itemImg(name) {
@@ -376,9 +377,12 @@ const CHAMP_RUNE_MAP = {
   "rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
 };
 
-const BRAMBLE_CHAMPS  = ["irelia","fiora","warwick","wukong"];
-const BOOTS_FIRST     = ["olaf"];
-const ABATTEUR_CHAMPS = ["garen","k'sante","yorick"];
+const BRAMBLE_CHAMPS   = ["irelia","zac","fiora","warwick","renekton","wukong"];
+const BOOTS_FIRST      = ["olaf"];
+const MERC_FIRST       = ["kennen"];
+const STEELCAPS_FIRST  = ["ambessa","yasuo","tryndamere","gnar"];
+const ABATTEUR_CHAMPS  = ["garen","k'sante","yorick"];
+const SHIELD_START     = ["teemo","rumble"];
 
 // Init datalists
 Object.entries(CHAMPS_BY_ROLE).forEach(([role, list]) => {
@@ -418,7 +422,6 @@ function updateChampPreview(role) {
   const prev = document.getElementById('prev-' + role);
   const img  = document.getElementById('img-' + role);
   const input = document.getElementById(role);
-  // Cherche si le nom correspond à un champion connu
   const known = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === val.toLowerCase());
   if (known) {
     img.src = champImg(known);
@@ -460,14 +463,20 @@ function getBoots(a) {
 function getSituItems(a) {
   const situ = [];
   if (a.shield >= 2) {
-    situ.push({ tag:"shield", tagLabel:`${a.shield} Shields`, name:"Serpent's Fang", note:"Reduces enemy shields by 50% — replace a defensive item" });
+    situ.push({
+      tag:"shield", tagLabel:`${a.shield} Shields`,
+      type:"single",
+      items:[{ name:"Serpent's Fang", note:"Reduces enemy shields by 50% — replace a defensive item" }]
+    });
   }
   if (a.heal >= 2) {
-    const isAD = a.ad >= a.ap;
     situ.push({
       tag:"heal", tagLabel:`${a.heal} Heals`,
-      name: isAD ? "Thornmail" : "Chempunk Chainsword",
-      note: isAD ? "AD/tank comp — Grievous Wounds on incoming auto-attacks" : "AP/burst comp — Grievous Wounds active + passive"
+      type:"double",
+      items:[
+        { name:"Thornmail",           note:"AD/tank comp — Grievous Wounds on incoming auto-attacks" },
+        { name:"Chempunk Chainsword", note:"AP/burst comp — Grievous Wounds active + passive" }
+      ]
     });
   }
   return situ;
@@ -475,22 +484,43 @@ function getSituItems(a) {
 
 function buildItems(top, a) {
   const n = (top||"").toLowerCase();
-  const bootsFirst = BOOTS_FIRST.includes(n);
-  const bramble    = BRAMBLE_CHAMPS.includes(n);
-  const abatteur   = ABATTEUR_CHAMPS.includes(n);
+  const bootsFirst     = BOOTS_FIRST.includes(n);
+  const mercFirst      = MERC_FIRST.includes(n);
+  const steelcapsFirst = STEELCAPS_FIRST.includes(n);
+  const bramble        = BRAMBLE_CHAMPS.includes(n);
+  const abatteur       = ABATTEUR_CHAMPS.includes(n);
+  const shieldStart    = SHIELD_START.includes(n);
   const boots = getBoots(a);
   const warnings = [];
-  if (bootsFirst) warnings.push("⚡ vs Olaf: buy boots first before Black Cleaver");
-  if (bramble)    warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver");
-  if (abatteur)   warnings.push("⚔ vs " + top + ": Abatteur possible before Black Cleaver");
+
+  // Starting item
+  const startItem = shieldStart
+    ? { name:"Doran's Shield", note:"vs " + top + " — sustain against poke" }
+    : { name:"Doran's Blade",  note:"Standard start — damage + sustain" };
+  warnings.push(`🛡 Start: ${startItem.name} — ${startItem.note}`);
+
+  // Rush warnings
+  if (bootsFirst)     warnings.push("⚡ vs Olaf: buy Boots of Swiftness first before Black Cleaver");
+  if (mercFirst)      warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
+  if (steelcapsFirst) warnings.push("🥾 vs " + top + ": rush Plated Steelcaps before Black Cleaver");
+  if (bramble)        warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver");
+  if (abatteur)       warnings.push("⚔ vs " + top + ": Serrated Edge possible before Black Cleaver");
 
   const items = [];
+
+  // Boots or BC first
   if (bootsFirst) {
-    items.push({ slot:"Boots", name:boots.name, note:boots.note });
-    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — armor reduction + health" });
+    items.push({ slot:"Boots",  name:"Boots of Swiftness", note:"Rush vs Olaf — mobility" });
+    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot — armor reduction + health" });
+  } else if (mercFirst) {
+    items.push({ slot:"Boots",  name:"Mercury's Treads",    note:"Rush vs Kennen — CC reduction" });
+    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot — armor reduction + health" });
+  } else if (steelcapsFirst) {
+    items.push({ slot:"Boots",  name:"Plated Steelcaps",    note:"Rush vs " + top + " — block auto-attacks" });
+    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot — armor reduction + health" });
   } else {
-    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — armor reduction + health" });
-    items.push({ slot:"Boots", name:boots.name, note:boots.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot — armor reduction + health" });
+    items.push({ slot:"Boots",  name:boots.name,            note:boots.note });
   }
 
   if (a.ad >= 3) items.push({ slot:"Item 2", name:"Deadman's Plate", note:"3+ AD champions — armor + engage" });
@@ -516,10 +546,10 @@ function buildItems(top, a) {
 
   const majoriteAP = a.ap >= 4;
   const mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
-  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"AP majority — magic resistance + armor" });
-  else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail",             note:"Mixed composition — damage to health conversion" });
-  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail",             note:"Damage to health conversion in prolonged fights" });
-  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
+  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean",  note:"AP majority — magic resistance + armor" });
+  else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail",  note:"Mixed composition — damage to health conversion" });
+  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail",  note:"Damage to health conversion in prolonged fights" });
+  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean",  note:"Omnidirectional resistances" });
 
   return { items, warnings };
 }
@@ -578,19 +608,32 @@ function calculate() {
     html += `<p class="situ-empty">No situational items</p>`;
   } else {
     situ.forEach((s,i) => {
-      const img = itemImg(s.name);
-      const iconHTML = img
-        ? `<div class="situ-icon"><img src="${img}" alt="${s.name}" loading="lazy" /></div>`
-        : '';
       const tagClass = s.tag === 'shield' ? 'situ-tag-shield' : 'situ-tag-heal';
-      html += `<div class="situ-item" style="animation-delay:${i*0.08}s">
-        ${iconHTML}
-        <div class="situ-text">
+      if (s.type === 'double') {
+        // Carte avec deux items côte à côte
+        html += `<div class="situ-item" style="animation-delay:${i*0.08}s; flex-direction:column; gap:6px;">
           <span class="situ-tag ${tagClass}">${s.tagLabel}</span>
-          <div class="situ-item-name">${s.name}</div>
-          <div class="situ-item-cond">${s.note}</div>
-        </div>
-      </div>`;
+          ${s.items.map(it => {
+            const img = itemImg(it.name);
+            const icon = img ? `<div class="situ-icon"><img src="${img}" alt="${it.name}" loading="lazy"/></div>` : '';
+            return `<div style="display:flex;align-items:flex-start;gap:8px;">
+              ${icon}
+              <div><div class="situ-item-name">${it.name}</div><div class="situ-item-cond">${it.note}</div></div>
+            </div>`;
+          }).join('<div style="height:5px;"></div>')}
+        </div>`;
+      } else {
+        const img = itemImg(s.items[0].name);
+        const iconHTML = img ? `<div class="situ-icon"><img src="${img}" alt="${s.items[0].name}" loading="lazy"/></div>` : '';
+        html += `<div class="situ-item" style="animation-delay:${i*0.08}s">
+          ${iconHTML}
+          <div class="situ-text">
+            <span class="situ-tag ${tagClass}">${s.tagLabel}</span>
+            <div class="situ-item-name">${s.items[0].name}</div>
+            <div class="situ-item-cond">${s.items[0].note}</div>
+          </div>
+        </div>`;
+      }
     });
   }
   html += `</div></div>`;

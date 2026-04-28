@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -175,14 +175,14 @@
 <div class="container">
   <header>
     <div class="logo-line"><h1>Urgot · Build Calculator</h1></div>
-    <p class="subtitle">Runes & build adaptatif selon la composition ennemie</p>
+    <p class="subtitle">Adaptive runes & build based on enemy composition</p>
   </header>
 
   <div class="section">
-    <p class="section-title">✦ Composition ennemie</p>
+    <p class="section-title">✦ Enemy Composition</p>
     <div class="input-grid">
       <div class="input-group">
-        <label>Top (adversaire)</label>
+        <label>Top (opponent)</label>
         <div class="input-wrap">
           <div class="champ-preview" id="prev-top"><img id="img-top" src="" alt="" /></div>
           <input id="top" placeholder="ex: Darius" list="list-top" autocomplete="off" oninput="onInput()" />
@@ -222,24 +222,30 @@
         </div>
       </div>
     </div>
-    <p class="comp-label">Analyse composition</p>
+    <p class="comp-label">Team composition analysis</p>
     <div class="comp-tags" id="comp-tags">
-      <span class="tag-empty">Entrez les champions pour voir l'analyse…</span>
+      <span class="tag-empty">Enter champions to see the analysis…</span>
     </div>
     <div class="btn-wrap">
-      <button class="btn" onclick="calculate()">Générer le build</button>
+      <button class="btn" onclick="calculate()">Generate build</button>
     </div>
     <div id="error-msg"></div>
   </div>
 
   <div id="results"></div>
-  <footer>Non affilié à Riot Games &nbsp;·&nbsp; Urgot Build Calculator</footer>
+  <footer>Not affiliated with Riot Games &nbsp;·&nbsp; Urgot Build Calculator</footer>
 </div>
 
 <script>
-const DDV = "14.24.1"; // version Data Dragon
+let DDV = "14.24.1"; // fallback version, updated dynamically
 const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
 const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
+
+// Fetch latest DDragon version on load
+fetch("https://ddragon.leagueoflegends.com/api/versions.json")
+  .then(r => r.json())
+  .then(versions => { DDV = versions[0]; })
+  .catch(() => {});
 
 // Noms spéciaux Data Dragon (nom affiché → clé DDragon)
 const CHAMP_DDR = {
@@ -271,7 +277,7 @@ const ITEM_IDS = {
   "Force of Nature": 4401,
   "Rookern": 6696,
   "Jak'Sho, The Protean": 6665,
-  "Bloodmail": 236020,
+  "Overlord's Bloodmail": 236020,
   "Serpent's Fang": 3814,
   "Thornmail": 3075,
   "Chempunk Chainsword": 6609,
@@ -285,7 +291,7 @@ function itemImg(name) {
 }
 
 const CHAMPS_BY_ROLE = {
-  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yorick","Zac"],
+  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yorick","Zac","Zaahen"],
   jg:  ["Amumu","Bel'Veth","Briar","Diana","Ekko","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed"],
   mid: ["Ahri","Akali","Anivia","Annie","Aurelion Sol","Azir","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Viktor","Vladimir","Yasuo","Yone","Zed","Zoe","Zyra"],
   adc: ["Aphelios","Ashe","Caitlyn","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Xayah","Yunara","Zeri","Ziggs"],
@@ -440,28 +446,28 @@ function onInput() {
   if (a.crit >= 2)  tags.push(`<span class="tag tag-crit">${a.crit} Crit</span>`);
   if (a.burst >= 2) tags.push(`<span class="tag tag-burst">Burst</span>`);
   if (a.burn >= 1)  tags.push(`<span class="tag tag-burn">Burn</span>`);
-  if (a.shield >= 2)tags.push(`<span class="tag tag-shield">${a.shield} Boucliers</span>`);
+  if (a.shield >= 2)tags.push(`<span class="tag tag-shield">${a.shield} Shields</span>`);
   if (a.heal >= 2)  tags.push(`<span class="tag tag-heal">${a.heal} Heals</span>`);
-  document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">Aucun profil particulier détecté</span>';
+  document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">No particular profile detected</span>';
 }
 
 function getBoots(a) {
-  if (a.ad >= 3 || a.crit >= 2) return { name:"Plated Steelcaps",  note:"Nombreux auto-attaquants / crit ennemis" };
-  if (a.cc >= 2)                 return { name:"Mercury's Treads",   note:"Beaucoup de CC ennemis" };
-  return                                { name:"Boots of Swiftness", note:"Situation standard — mobilité" };
+  if (a.ad >= 3 || a.crit >= 2) return { name:"Plated Steelcaps",  note:"Many auto-attackers / crit enemies" };
+  if (a.cc >= 2)                 return { name:"Mercury's Treads",   note:"Many CC enemies" };
+  return                                { name:"Boots of Swiftness", note:"Standard situation — mobility" };
 }
 
 function getSituItems(a) {
   const situ = [];
   if (a.shield >= 2) {
-    situ.push({ tag:"shield", tagLabel:`${a.shield} Boucliers`, name:"Serpent's Fang", note:"Réduit les boucliers ennemis de 50% — remplace un item défensif" });
+    situ.push({ tag:"shield", tagLabel:`${a.shield} Shields`, name:"Serpent's Fang", note:"Reduces enemy shields by 50% — replace a defensive item" });
   }
   if (a.heal >= 2) {
     const isAD = a.ad >= a.ap;
     situ.push({
       tag:"heal", tagLabel:`${a.heal} Heals`,
       name: isAD ? "Thornmail" : "Chempunk Chainsword",
-      note: isAD ? "Comp AD/tanks — Grievous Wounds sur auto-attaques reçues" : "Comp AP/burst — Grievous Wounds actif + passif"
+      note: isAD ? "AD/tank comp — Grievous Wounds on incoming auto-attacks" : "AP/burst comp — Grievous Wounds active + passive"
     });
   }
   return situ;
@@ -474,46 +480,46 @@ function buildItems(top, a) {
   const abatteur   = ABATTEUR_CHAMPS.includes(n);
   const boots = getBoots(a);
   const warnings = [];
-  if (bootsFirst) warnings.push("⚡ Contre Olaf : achète les bottes en premier avant Black Cleaver");
-  if (bramble)    warnings.push("🌿 Contre " + top + " : rush Bramble Vest avant Black Cleaver");
-  if (abatteur)   warnings.push("⚔ Contre " + top + " : Abatteur possible avant Black Cleaver");
+  if (bootsFirst) warnings.push("⚡ vs Olaf: buy boots first before Black Cleaver");
+  if (bramble)    warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver");
+  if (abatteur)   warnings.push("⚔ vs " + top + ": Abatteur possible before Black Cleaver");
 
   const items = [];
   if (bootsFirst) {
-    items.push({ slot:"Bottes", name:boots.name, note:boots.note });
-    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — réduction armure + santé" });
+    items.push({ slot:"Boots", name:boots.name, note:boots.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — armor reduction + health" });
   } else {
-    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — réduction armure + santé" });
-    items.push({ slot:"Bottes", name:boots.name, note:boots.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot — armor reduction + health" });
+    items.push({ slot:"Boots", name:boots.name, note:boots.note });
   }
 
-  if (a.ad >= 3) items.push({ slot:"Item 2", name:"Deadman's Plate", note:"3+ champions AD — armure + engage" });
-  else           items.push({ slot:"Item 2", name:"Sterak's Gage",   note:"Bouclier + résistances — standard" });
+  if (a.ad >= 3) items.push({ slot:"Item 2", name:"Deadman's Plate", note:"3+ AD champions — armor + engage" });
+  else           items.push({ slot:"Item 2", name:"Sterak's Gage",   note:"Shield + resistances — standard" });
 
   if (a.ad >= 3) {
-    if (a.crit >= 2) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"2+ crit ennemis — réduit les dégâts crit reçus" });
-    else             items.push({ slot:"Item 3", name:"Sterak's Gage",    note:"Bouclier + résistances" });
+    if (a.crit >= 2) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"2+ crit enemies — reduces crit damage taken" });
+    else             items.push({ slot:"Item 3", name:"Sterak's Gage",    note:"Shield + resistances" });
   } else if (a.ap >= 2 || a.burn >= 1) {
-    if (a.burn >= 1) items.push({ slot:"Item 3", name:"Force of Nature",  note:"AP + brûlure — mobilité et résistance magique" });
-    else             items.push({ slot:"Item 3", name:"Rookern",           note:"Bouclier contre dégâts AP" });
+    if (a.burn >= 1) items.push({ slot:"Item 3", name:"Force of Nature",  note:"AP + burn — mobility and magic resistance" });
+    else             items.push({ slot:"Item 3", name:"Rookern",           note:"Shield against AP damage" });
   } else {
-    items.push({ slot:"Item 3", name:"Deadman's Plate", note:"Armure + mobilité" });
+    items.push({ slot:"Item 3", name:"Deadman's Plate", note:"Armor + mobility" });
   }
 
   const has = name => items.some(i => i.name === name);
-  if (a.ad >= 3 && a.ap >= 2)      items.push({ slot:"Item 4", name:"Force of Nature",      note:"Couverture AP en complément anti-AD" });
-  else if (a.ad >= 3)               items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
+  if (a.ad >= 3 && a.ap >= 2)      items.push({ slot:"Item 4", name:"Force of Nature",      note:"AP coverage alongside anti-AD" });
+  else if (a.ad >= 3)               items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
   else if (a.ap >= 2) {
-    if (has("Force of Nature"))     items.push({ slot:"Item 4", name:"Rookern",               note:"Complément anti-AP" });
-    else                            items.push({ slot:"Item 4", name:"Force of Nature",        note:"Mobilité sous dégâts AP" });
-  } else                            items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
+    if (has("Force of Nature"))     items.push({ slot:"Item 4", name:"Rookern",               note:"Anti-AP complement" });
+    else                            items.push({ slot:"Item 4", name:"Force of Nature",        note:"Mobility under AP damage" });
+  } else                            items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
 
   const majoriteAP = a.ap >= 4;
   const mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
-  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Majorité AP — résistances magique + armure" });
-  else if (mixte)                                   items.push({ slot:"Item 5", name:"Bloodmail",             note:"Composition mixte — conversion dégâts → santé" });
-  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Bloodmail",             note:"Conversion dégâts → santé en prolonged fight" });
-  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Résistances omnidirectionnelles" });
+  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"AP majority — magic resistance + armor" });
+  else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail",             note:"Mixed composition — damage to health conversion" });
+  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail",             note:"Damage to health conversion in prolonged fights" });
+  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
 
   return { items, warnings };
 }
@@ -533,7 +539,7 @@ function itemRowHTML(item, i) {
 function calculate() {
   const [top,jg,mid,adc,sup] = getChamps();
   if (!top) {
-    document.getElementById('error-msg').innerHTML = '<div class="error">Renseigne au moins le champion top ennemi.</div>';
+    document.getElementById('error-msg').innerHTML = '<div class="error">Enter at least the enemy top champion.</div>';
     return;
   }
   document.getElementById('error-msg').innerHTML = '';
@@ -546,7 +552,7 @@ function calculate() {
 
   // Runes
   html += `<div class="section" style="animation:fadeUp 0.4s ease both">
-    <div class="result-header">Page de runes — ${rune.label}</div>
+    <div class="result-header">Rune page — ${rune.label}</div>
     <div class="rune-card" style="padding:0;overflow:hidden;background:transparent;border:none;">
       <img
         src="${BASE_URL}${rune.img}"
@@ -560,16 +566,16 @@ function calculate() {
   // Build + situationnel
   html += `<div class="build-layout">`;
   html += `<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">
-    <div class="result-header">Build recommandé</div>`;
+    <div class="result-header">Recommended build</div>`;
   warnings.forEach(w => { html += `<div class="warn-box">${w}</div>`; });
   html += '<div class="items-grid">';
   items.forEach((item,i) => { html += itemRowHTML(item, i); });
   html += '</div></div>';
 
   // Panneau situationnel
-  html += `<div class="situ-panel"><p class="situ-title">✦ Situationnel</p>`;
+  html += `<div class="situ-panel"><p class="situ-title">✦ Situational</p>`;
   if (!situ.length) {
-    html += `<p class="situ-empty">Aucun item situationnel</p>`;
+    html += `<p class="situ-empty">No situational items</p>`;
   } else {
     situ.forEach((s,i) => {
       const img = itemImg(s.name);

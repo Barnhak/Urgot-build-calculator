@@ -438,7 +438,7 @@ function onInput() {
   ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
   const champs = getChamps();
   if (!champs.some(Boolean)) {
-    document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Entrez les champions pour voir l\'analyse…</span>';
+    document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter ennemie draft</span>';
     return;
   }
   const a = analyzeComp(champs);

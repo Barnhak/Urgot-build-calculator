@@ -217,7 +217,7 @@ const ITEM_IDS = {
   "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
   "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,
   "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
-  "Serpent's Fang":3814,"Thornmail":3075,"Chempunk Chainsword":6609,
+  "Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
   "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
 };
 function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
@@ -386,7 +386,8 @@ function onInput() {
 }
 
 function getBoots(a) {
-  if (a.ad >= 3 || a.crit >= 1) return { name:"Plated Steelcaps", note:"Auto-attackers / crit enemies" };
+  if (a.cc >= 3)                 return { name:"Mercury's Treads",  note:"3+ CC enemies -- forced Tenacity" };
+  if (a.ad >= 3 || a.crit >= 1) return { name:"Plated Steelcaps",  note:"Auto-attackers / crit enemies" };
   if (a.cc >= 2)                 return { name:"Mercury's Treads",  note:"Many CC enemies" };
   return                                { name:"Boots of Swiftness",note:"Standard -- mobility" };
 }

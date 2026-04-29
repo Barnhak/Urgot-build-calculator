@@ -511,20 +511,23 @@ function onInput() {
 }
 
 function getBoots(a) {
-  var wantSteelcaps = a.ad >= 3 || a.crit >= 1;
-  var wantMerc      = a.ccTotal >= 5;
-  var suggestMerc   = a.ccTotal >= 2;
-  if (wantSteelcaps && wantMerc) {
+  // CRIT priorité absolue (3+ crit → Steelcaps toujours)
+  if (a.crit >= 3)                return { name:"Plated Steelcaps",  note: a.crit + " crit enemies -- armor priority" };
+  // CC élevé (>= 5) bat AD mais pas crit
+  if (a.ccTotal >= 5)             return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- Tenacity mandatory" };
+  // 3+ AD ET CC modéré (3-4) → conflit
+  if (a.ad >= 3 && a.ccTotal >= 3) {
     return {
       conflict: true,
-      primary:   { name:"Plated Steelcaps", note:"3+ AD / crit -- armor priority" },
-      secondary: { name:"Mercury's Treads", note:a.ccTotal + " CC total -- consider Tenacity" }
+      primary:   { name:"Plated Steelcaps", note:"3+ AD -- armor priority" },
+      secondary: { name:"Mercury's Treads", note: a.ccTotal + " CC -- consider Tenacity" }
     };
   }
-  if (wantSteelcaps)  return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : "Crit enemies" };
-  if (wantMerc)       return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- forced Tenacity" };
-  if (suggestMerc)    return { name:"Mercury's Treads",  note: "CC enemies" };
-  return                     { name:"Boots of Swiftness", note:"Standard -- mobility" };
+  // 3+ AD ou crit sans CC menaçant → Steelcaps
+  if (a.ad >= 3 || a.crit >= 1)   return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : "Crit enemies" };
+  // CC modéré
+  if (a.ccTotal >= 2)             return { name:"Mercury's Treads",  note: "CC enemies" };
+  return                                 { name:"Boots of Swiftness", note: "Standard -- mobility" };
 }
 
 function getSituItems(a) {
@@ -572,6 +575,24 @@ function buildItems(top, a) {
   if (abatteur)       warnings.push("⚔ vs " + top + ": Serrated Edge possible before Black Cleaver");
 
   var items = [];
+
+  // ── BUILD CRIT (3+ crit → build dédié) ──────────────────────────────────
+  if (a.crit >= 3) {
+    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot -- armor reduction + health" });
+    items.push({ slot:"Item 2", name:"Sterak's Gage",        note:"Shield -- survive burst + execute threats" });
+    items.push({ slot:"Boots",  name:"Plated Steelcaps",     note:"3+ crit -- mandatory armor" });
+    items.push({ slot:"Item 3", name:"Randuin's Omen",       note:"Reduces crit damage taken" });
+    // MR selon AP/burn
+    if (a.burn >= 1)      items.push({ slot:"Item 4", name:"Force of Nature",      note:"AP + burn -- mobility and magic resistance" });
+    else if (a.ap >= 2)   items.push({ slot:"Item 4", name:"Rookern",               note:"Shield against AP damage" });
+    else                  items.push({ slot:"Item 4", name:"Force of Nature",       note:"Magic resistance layer" });
+    // Dernier item
+    if (a.ap >= 4)        items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"AP majority -- omnidirectional resistances" });
+    else                  items.push({ slot:"Item 5", name:"Deadman's Plate",       note:"Armor + mobility -- engage tool" });
+    return { items, warnings };
+  }
+
+  // ── BUILD STANDARD ───────────────────────────────────────────────────────
   if (bootsFirst) {
     items.push({ slot:"Boots",  name:"Boots of Swiftness", note:"Rush vs Olaf -- mobility" });
     items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot -- armor reduction + health" });

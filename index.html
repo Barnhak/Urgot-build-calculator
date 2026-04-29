@@ -16,6 +16,7 @@
       --red: #C84B4B; --red-dark: #2E0A0A;
       --purple: #9B59B6; --purple-dark: #1A0A2E;
       --orange: #E67E22; --orange-dark: #2E1A0A;
+      --green: #1EA47A; --green-dark: #0A2E1E;
     }
     body {
       background: var(--bg); color: var(--text);
@@ -46,30 +47,16 @@
       -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
     }
     .section-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 1.25rem; }
-
-    /* Input grid avec preview champion */
     .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1rem; }
     .input-group label { display: block; font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
     .input-wrap { position: relative; display: flex; align-items: center; }
-    .champ-preview {
-      position: absolute; left: 6px; width: 26px; height: 26px;
-      border-radius: 3px; overflow: hidden; border: 1px solid var(--border-gold);
-      background: var(--bg-card); display: none;
-      flex-shrink: 0;
-    }
+    .champ-preview { position: absolute; left: 6px; width: 26px; height: 26px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-gold); background: var(--bg-card); display: none; flex-shrink: 0; }
     .champ-preview img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .champ-preview.visible { display: block; }
-    .input-group input {
-      width: 100%; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 3px; color: var(--text-bright);
-      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500;
-      padding: 8px 10px; outline: none; transition: border-color 0.2s, box-shadow 0.2s, padding-left 0.15s;
-    }
+    .input-group input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; color: var(--text-bright); font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 10px; outline: none; transition: border-color 0.2s, box-shadow 0.2s, padding-left 0.15s; }
     .input-group input.has-icon { padding-left: 38px; }
     .input-group input:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 2px rgba(200,155,60,0.1); }
     .input-group input::placeholder { color: var(--text-dim); font-weight: 400; }
-
-    /* Tags */
     .comp-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
     .comp-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
     .tag { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 2px; }
@@ -79,91 +66,50 @@
     .tag-crit  { background: rgba(200,155,60,0.1);  color: var(--gold);   border: 1px solid rgba(200,155,60,0.3); }
     .tag-burst { background: rgba(180,30,180,0.1);  color: #D070D0;       border: 1px solid rgba(180,30,180,0.3); }
     .tag-burn  { background: var(--orange-dark);    color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
-    .tag-shield{ background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25);}
-    .tag-heal  { background: rgba(30,164,122,0.08); color: #1EA47A;       border: 1px solid rgba(30,164,122,0.25);}
+    .tag-shield{ background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25); }
+    .tag-heal  { background: rgba(30,164,122,0.08); color: #1EA47A;       border: 1px solid rgba(30,164,122,0.25); }
+    .tag-execute{ background: rgba(200,75,75,0.15); color: #FF6060;       border: 1px solid rgba(200,75,75,0.4); }
     .tag-empty { font-size: 12px; color: var(--text-dim); font-style: italic; }
-
-    /* Bouton */
     .btn-wrap { text-align: center; margin-top: 1.25rem; }
-    .btn {
-      font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--gold); background: transparent;
-      border: 1px solid var(--gold-dark); border-radius: 3px;
-      padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s;
-    }
+    .btn { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid var(--gold-dark); border-radius: 3px; padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s; }
     .btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,155,60,0.12), transparent); opacity: 0; transition: opacity 0.2s; }
     .btn:hover { color: var(--gold-light); }
     .btn:hover::before { opacity: 1; }
     .btn:active { transform: scale(0.97); }
-
-    /* Result headers */
     .result-header { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
     .result-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-    /* Runes */
     .rune-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1rem 1.25rem; }
-    .rune-path { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
-    .rune-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-    .rune-pill { font-size: 13px; font-weight: 500; padding: 4px 12px; border-radius: 2px; }
-    .rune-keystone { background: rgba(200,155,60,0.12); color: var(--gold); border: 1px solid rgba(200,155,60,0.3); font-size: 14px; }
-    .rune-primary { background: var(--blue-dark); color: var(--blue); border: 1px solid rgba(11,196,227,0.2); }
-    .rune-secondary { background: var(--purple-dark); color: var(--purple); border: 1px solid rgba(155,89,182,0.25); }
     .divider { height: 1px; background: var(--border); margin: 10px 0; }
-
-    /* Build layout 2 colonnes */
     .build-layout { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
     @media(max-width: 640px) { .build-layout { grid-template-columns: 1fr; } }
-
-    /* Items */
     .items-grid { display: flex; flex-direction: column; gap: 8px; }
-    .item-row {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px;
-      padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s;
-    }
+    .item-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s; }
     .item-row:hover { border-color: var(--border-gold); }
-    .item-icon {
-      width: 40px; height: 40px; border-radius: 4px; overflow: hidden;
-      border: 1px solid var(--border-gold); flex-shrink: 0;
-      background: var(--bg-card);
-    }
+    .item-icon { width: 40px; height: 40px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-gold); flex-shrink: 0; background: var(--bg-card); }
     .item-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .item-slot { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; color: var(--gold-dark); text-transform: uppercase; min-width: 48px; }
     .item-name { font-size: 14px; font-weight: 600; color: var(--text-bright); }
     .item-note { font-size: 12px; color: var(--text-dim); margin-top: 1px; line-height: 1.4; }
-
-    /* Situationnel */
-    .situ-panel {
-      background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 4px; padding: 1rem; position: relative;
-      animation: fadeUp 0.4s ease both 0.15s;
-    }
-    .situ-panel::before {
-      content: ''; position: absolute; inset: 0; border-radius: 4px;
-      border: 1px solid transparent;
-      background: linear-gradient(135deg, rgba(200,155,60,0.1), transparent 40%) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
-    }
+    .situ-panel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1rem; position: relative; animation: fadeUp 0.4s ease both 0.15s; }
+    .situ-panel::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(200,155,60,0.1), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
     .situ-title { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 10px; }
-    .situ-item {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px;
-      padding: 8px 10px; margin-bottom: 7px; transition: border-color 0.2s;
-      display: flex; align-items: flex-start; gap: 8px;
-    }
+    .situ-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 8px 10px; margin-bottom: 7px; transition: border-color 0.2s; display: flex; align-items: flex-start; gap: 8px; }
     .situ-item:last-child { margin-bottom: 0; }
     .situ-item:hover { border-color: var(--border-gold); }
     .situ-icon { width: 36px; height: 36px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-gold); flex-shrink: 0; background: var(--bg-card); }
     .situ-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .situ-text { flex: 1; }
     .situ-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 2px; margin-bottom: 4px; letter-spacing: 0.06em; }
-    .situ-tag-shield { background: rgba(11,196,227,0.1); color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
-    .situ-tag-heal { background: rgba(30,164,122,0.1); color: #1EA47A; border: 1px solid rgba(30,164,122,0.25); }
+    .situ-tag-shield  { background: rgba(11,196,227,0.1);  color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
+    .situ-tag-heal    { background: rgba(30,164,122,0.1);  color: #1EA47A;     border: 1px solid rgba(30,164,122,0.25); }
+    .situ-tag-execute { background: rgba(200,75,75,0.15);  color: #FF6060;     border: 1px solid rgba(200,75,75,0.4); }
     .situ-item-name { font-size: 13px; font-weight: 600; color: var(--text-bright); margin-bottom: 2px; }
     .situ-item-cond { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
     .situ-empty { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 0.75rem 0; }
-
-    /* Misc */
     .warn-box { background: rgba(200,155,60,0.07); border: 1px solid rgba(200,155,60,0.2); border-radius: 3px; padding: 8px 12px; font-size: 13px; color: var(--gold); margin-bottom: 8px; }
+    .guide-box { background: rgba(30,164,122,0.07); border: 1px solid rgba(30,164,122,0.25); border-radius: 3px; padding: 9px 14px; font-size: 13px; color: #1EA47A; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .guide-box a { color: #1EA47A; text-decoration: none; font-weight: 600; }
+    .guide-box a:hover { text-decoration: underline; }
     .error { background: var(--red-dark); border: 1px solid rgba(200,75,75,0.3); border-radius: 3px; padding: 10px 14px; font-size: 13px; color: var(--red); text-align: center; margin-top: 1rem; }
     footer { text-align: center; margin-top: 2.5rem; font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
     @keyframes fadeDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:none} }
@@ -224,7 +170,7 @@
     </div>
     <p class="comp-label">Team composition analysis</p>
     <div class="comp-tags" id="comp-tags">
-      <span class="tag-empty">Enter champions to see the analysis…</span>
+      <span class="tag-empty">Enter enemy draft…</span>
     </div>
     <div class="btn-wrap">
       <button class="btn" onclick="calculate()">Generate build</button>
@@ -237,17 +183,22 @@
 </div>
 
 <script>
-let DDV = "14.24.1"; // fallback version, updated dynamically
+let DDV = "14.24.1";
 const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
 const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
-
-// Fetch latest DDragon version on load
 fetch("https://ddragon.leagueoflegends.com/api/versions.json")
-  .then(r => r.json())
-  .then(versions => { DDV = versions[0]; })
-  .catch(() => {});
+  .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
 
-// Noms spéciaux Data Dragon (nom affiché → clé DDragon)
+const GUIDE_BASE = "https://sites.google.com/view/urgot-beginner-guide/urgot/";
+
+// Champion name → URL slug (lowercase, spaces replaced by hyphens, special chars removed)
+function champSlug(name) {
+  return name.toLowerCase()
+    .replace(/['\u2019]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
 const CHAMP_DDR = {
   "Aurelion Sol":"AurelionSol","Bel'Veth":"Belveth","Cho'Gath":"Chogath",
   "Dr. Mundo":"DrMundo","Jarvan IV":"JarvanIV","Kai'Sa":"Kaisa",
@@ -265,31 +216,15 @@ function champImg(name) {
   return DDC(key);
 }
 
-// IDs items Data Dragon
 const ITEM_IDS = {
-  "Black Cleaver": 3071,
-  "Boots of Swiftness": 3009,
-  "Plated Steelcaps": 3047,
-  "Mercury's Treads": 3111,
-  "Sterak's Gage": 3053,
-  "Deadman's Plate": 3742,
-  "Randuin's Omen": 3143,
-  "Force of Nature": 4401,
-  "Rookern": 222504,
-  "Jak'Sho, The Protean": 6665,
-  "Overlord's Bloodmail": 2501,
-  "Serpent's Fang": 3814,
-  "Thornmail": 3075,
-  "Chempunk Chainsword": 6609,
-  "Bramble Vest": 3076,
-  "Doran's Blade": 1055,
-  "Doran's Shield": 1054,
+  "Black Cleaver":3071,"Boots of Swiftness":3009,"Plated Steelcaps":3047,
+  "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
+  "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,
+  "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
+  "Serpent's Fang":3814,"Thornmail":3075,"Chempunk Chainsword":6609,
+  "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
 };
-
-function itemImg(name) {
-  const id = ITEM_IDS[name];
-  return id ? DDI(id) : null;
-}
+function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
 
 const CHAMPS_BY_ROLE = {
   top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yasuo","Yone","Yorick","Zac","Zaahen"],
@@ -307,67 +242,67 @@ const CHAMP_TAGS = {
   "Bard":["CC","AP","HEAL"],"Bel'Veth":["AD"],"Blitzcrank":["CC","SHIELD"],
   "Brand":["AP","BURN","BURST","CC"],"Braum":["CC","AP"],"Briar":["AD","CC","HEAL"],
   "Caitlyn":["AD","CRIT"],"Camille":["AD","SHIELD"],"Cassiopeia":["AP","BURN","CC","HEAL"],
-  "Cho'Gath":["AP","CC"],"Corki":["AD"],"Darius":["AD","HEAL"],
+  "Cho'Gath":["AP","CC","EXECUTE"],"Corki":["AD"],"Darius":["AD","HEAL","EXECUTE"],
   "Diana":["AP","BURST","CC","SHIELD"],"Dr. Mundo":["AD","HEAL"],
   "Draven":["AD","CRIT"],"Ekko":["AP","BURST","SHIELD"],"Elise":["AP","BURST"],
   "Evelynn":["AP","BURST"],"Ezreal":["AD"],"Fiddlesticks":["AP","BURN","CC","HEAL"],
-  "Fiora":["AD","HEAL"],"Fizz":["AP","BURST"],"Galio":["AP","CC","SHIELD"],
-  "Garen":["AD"],"Gnar":["AD","CC"],"Gragas":["AP","CC"],"Graves":["AD","CRIT"],
+  "Fiora":["AD","HEAL"],"Fizz":["AP","BURST","EXECUTE"],"Galio":["AP","CC","SHIELD"],
+  "Garen":["AD","EXECUTE"],"Gnar":["AD","CC"],"Gragas":["AP","CC"],"Graves":["AD","CRIT"],
   "Gwen":["AP","BURST","HEAL"],"Hecarim":["AD","CC","HEAL"],"Heimerdinger":["AP","BURN"],
   "Hwei":["AP","BURN","BURST","CC","SHIELD"],"Illaoi":["AD","HEAL"],"Irelia":["AD","HEAL"],
   "Ivern":["CC","SHIELD"],"Janna":["AP","CC","HEAL","SHIELD"],
   "Jarvan IV":["AD","CC","SHIELD"],"Jax":["AD","CC"],"Jayce":["AD"],
-  "Jhin":["AD","CRIT"],"Jinx":["AD","CRIT"],"K'Sante":["CC","SHIELD"],
+  "Jhin":["AD","CRIT","EXECUTE"],"Jinx":["AD","CRIT"],"K'Sante":["CC","SHIELD"],
   "Kai'Sa":["AD","CRIT","AP","SHIELD"],"Kalista":["AD"],"Karma":["AP","CC","SHIELD"],
   "Kassadin":["AP","BURST","SHIELD"],"Katarina":["AP","BURST"],"Kennen":["AP","CC"],
-  "Kha'Zix":["AD","BURST"],"Kindred":["AD","CRIT"],"Kog'Maw":["AD","AP","BURN"],
+  "Kha'Zix":["AD","BURST","EXECUTE"],"Kindred":["AD","CRIT"],"Kog'Maw":["AD","AP","BURN"],
   "LeBlanc":["AP","BURST"],"Lee Sin":["AD","HEAL"],"Leona":["CC"],
   "Lillia":["AP","BURN","CC"],"Lissandra":["AP","CC"],"Lucian":["AD"],
   "Lulu":["CC","SHIELD"],"Lux":["AP","BURST","SHIELD"],"Malphite":["AP","CC","SHIELD"],
-  "Malzahar":["AP","BURN","CC"],"Maokai":["CC","AP","HEAL"],"Master Yi":["AD","HEAL"],
+  "Malzahar":["AP","BURN","CC","EXECUTE"],"Maokai":["CC","AP","HEAL"],"Master Yi":["AD","HEAL"],
   "Mel":["AP","BURST","SHIELD"],"Miss Fortune":["AD","CRIT"],
   "Mordekaiser":["AP","BURN","HEAL","SHIELD"],"Morgana":["AP","CC","BURN","SHIELD"],
   "Naafiri":["AD","BURST"],"Nami":["CC","HEAL"],"Nasus":["AD","HEAL"],
   "Nautilus":["CC","SHIELD"],"Nidalee":["AP","BURST","HEAL"],"Nilah":["AD","CRIT"],
   "Nocturne":["AD","BURST"],"Nunu":["CC","HEAL"],"Olaf":["AD","HEAL"],
   "Orianna":["AP","CC","SHIELD"],"Ornn":["CC"],"Pantheon":["AD","BURST"],
-  "Poppy":["CC"],"Pyke":["AD","CC","BURST"],"Qiyana":["AD","BURST"],
+  "Poppy":["CC"],"Pyke":["AD","CC","BURST","EXECUTE"],"Qiyana":["AD","BURST"],
   "Quinn":["AD","CRIT"],"Rakan":["CC","SHIELD"],"Rammus":["CC"],
   "Rek'Sai":["AD"],"Renata Glasc":["CC","SHIELD"],"Renekton":["AD","HEAL"],
-  "Rengar":["AD","BURST"],"Rumble":["AP","BURN","SHIELD"],"Ryze":["AP"],
+  "Rengar":["AD","BURST","EXECUTE"],"Rumble":["AP","BURN","SHIELD"],"Ryze":["AP"],
   "Samira":["AD","CRIT"],"Sejuani":["CC"],"Senna":["AD","SHIELD"],
   "Seraphine":["AP","CC","SHIELD"],"Sett":["AD","SHIELD"],"Shaco":["AD","BURST"],
   "Shen":["AD","SHIELD"],"Shyvana":["AP","BURN","SHIELD"],
   "Singed":["AP","BURN"],"Sion":["CC","SHIELD"],"Sivir":["AD","CRIT"],
-  "Skarner":["CC","SHIELD"],"Smolder":["AD","CRIT","BURN"],
+  "Skarner":["CC","SHIELD"],"Smolder":["AD","CRIT","BURN","EXECUTE"],
   "Sona":["CC","SHIELD","HEAL"],"Soraka":["HEAL"],"Swain":["AP","BURN","HEAL"],
-  "Syndra":["AP","BURST"],"Tahm Kench":["CC","HEAL","AP","SHIELD"],
-  "Taliyah":["AP","CC"],"Talon":["AD","BURST"],"Teemo":["AP","BURN"],
+  "Syndra":["AP","BURST","EXECUTE"],"Tahm Kench":["CC","HEAL","AP","SHIELD"],
+  "Taliyah":["AP","CC"],"Talon":["AD","BURST","EXECUTE"],"Teemo":["AP","BURN"],
   "Thresh":["CC","SHIELD"],"Tristana":["AD","CRIT"],"Trundle":["AD","HEAL"],
   "Tryndamere":["AD","CRIT","HEAL"],"Twisted Fate":["AP","CC"],"Twitch":["AD","CRIT"],
   "Udyr":["AP","AD","CC","HEAL","SHIELD"],"Varus":["AD","AP","BURST"],
-  "Vayne":["AD"],"Veigar":["AP","BURST"],"Vel'Koz":["AP","BURST"],
+  "Vayne":["AD","EXECUTE"],"Veigar":["AP","BURST","EXECUTE"],"Vel'Koz":["AP","BURST"],
   "Vi":["AD","CC","SHIELD"],"Viego":["AD","HEAL"],"Viktor":["AP","BURN","SHIELD"],
   "Vladimir":["AP","BURN","HEAL"],"Volibear":["CC","AP","HEAL","SHIELD"],
-  "Warwick":["AD","HEAL"],"Wukong":["AD"],"Xayah":["AD","CRIT"],
+  "Warwick":["AD","HEAL","EXECUTE"],"Wukong":["AD"],"Xayah":["AD","CRIT"],
   "Xerath":["AP","BURST"],"Xin Zhao":["AD","HEAL"],"Yasuo":["AD","CRIT","SHIELD"],
   "Yone":["AD","CRIT","SHIELD"],"Yorick":["AD","HEAL"],"Yunara":["AD","AP","CRIT"],
   "Yuumi":["HEAL","SHIELD"],"Zaahen":["AD","HEAL"],"Zac":["CC","AP","HEAL"],
-  "Zed":["AD","BURST"],"Zeri":["AD","CRIT"],"Ziggs":["AP","BURST"],
+  "Zed":["AD","BURST","EXECUTE"],"Zeri":["AD","CRIT"],"Ziggs":["AP","BURST"],
   "Zilean":["AP","CC"],"Zoe":["AP","BURST"],"Zyra":["AP","BURN","CC"]
 };
 
 const BASE_URL = "https://barnhak.github.io/Urgot-build-calculator/";
 
 const RUNE_PAGES = {
-  page1: { label:"Standard",     img:"rune-page1.png" },
-  page2: { label:"Cut Down",     img:"rune-page2.png" },
-  page3: { label:"Tanks",        img:"rune-page3.png" },
-  page4: { label:"Résolution",   img:"rune-page4.png" },
-  page5: { label:"Rumble",       img:"rune-page5.png" },
-  page6: { label:"Olaf",         img:"rune-page6.png" },
-  page7: { label:"Heimerdinger", img:"rune-page7.png" },
-  page8: { label:"Yorick",       img:"rune-page8.png" },
+  page1:{label:"Standard",img:"rune-page1.png"},
+  page2:{label:"Cut Down",img:"rune-page2.png"},
+  page3:{label:"Tanks",img:"rune-page3.png"},
+  page4:{label:"Résolution",img:"rune-page4.png"},
+  page5:{label:"Rumble",img:"rune-page5.png"},
+  page6:{label:"Olaf",img:"rune-page6.png"},
+  page7:{label:"Heimerdinger",img:"rune-page7.png"},
+  page8:{label:"Yorick",img:"rune-page8.png"},
 };
 
 const CHAMP_RUNE_MAP = {
@@ -384,7 +319,6 @@ const STEELCAPS_FIRST  = ["ambessa","yasuo","tryndamere","gnar"];
 const ABATTEUR_CHAMPS  = ["garen","k'sante","yorick"];
 const SHIELD_START     = ["teemo","rumble"];
 
-// Init datalists
 Object.entries(CHAMPS_BY_ROLE).forEach(([role, list]) => {
   const dl = document.getElementById('list-' + role);
   if (dl) list.forEach(c => { const o = document.createElement('option'); o.value = c; dl.appendChild(o); });
@@ -401,26 +335,26 @@ function getTags(name) {
 }
 
 function analyzeComp(champs) {
-  let ad=0,ap=0,cc=0,crit=0,burst=0,burn=0,shield=0,heal=0;
+  let ad=0,ap=0,cc=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
   champs.filter(Boolean).forEach(c => {
     const t = getTags(c);
-    if (t.includes("AD"))     ad++;
-    if (t.includes("AP"))     ap++;
-    if (t.includes("CC"))     cc++;
-    if (t.includes("CRIT"))   crit++;
-    if (t.includes("BURST"))  burst++;
-    if (t.includes("BURN"))   burn++;
-    if (t.includes("SHIELD")) shield++;
-    if (t.includes("HEAL"))   heal++;
+    if (t.includes("AD"))      ad++;
+    if (t.includes("AP"))      ap++;
+    if (t.includes("CC"))      cc++;
+    if (t.includes("CRIT"))    crit++;
+    if (t.includes("BURST"))   burst++;
+    if (t.includes("BURN"))    burn++;
+    if (t.includes("SHIELD"))  shield++;
+    if (t.includes("HEAL"))    heal++;
+    if (t.includes("EXECUTE")) execute++;
   });
-  return { ad,ap,cc,crit,burst,burn,shield,heal };
+  return { ad,ap,cc,crit,burst,burn,shield,heal,execute };
 }
 
-// Met à jour le preview champion sur un champ
 function updateChampPreview(role) {
-  const val = document.getElementById(role).value.trim();
-  const prev = document.getElementById('prev-' + role);
-  const img  = document.getElementById('img-' + role);
+  const val   = document.getElementById(role).value.trim();
+  const prev  = document.getElementById('prev-' + role);
+  const img   = document.getElementById('img-' + role);
   const input = document.getElementById(role);
   const known = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === val.toLowerCase());
   if (known) {
@@ -438,45 +372,50 @@ function onInput() {
   ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
   const champs = getChamps();
   if (!champs.some(Boolean)) {
-    document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter ennemie draft</span>';
+    document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter enemy draft…</span>';
     return;
   }
   const a = analyzeComp(champs);
   const tags = [];
-  if (a.ad > 0)     tags.push(`<span class="tag tag-ad">${a.ad} AD</span>`);
-  if (a.ap > 0)     tags.push(`<span class="tag tag-ap">${a.ap} AP</span>`);
-  if (a.cc >= 2)    tags.push(`<span class="tag tag-cc">CC</span>`);
-  if (a.crit >= 2)  tags.push(`<span class="tag tag-crit">${a.crit} Crit</span>`);
-  if (a.burst >= 2) tags.push(`<span class="tag tag-burst">Burst</span>`);
-  if (a.burn >= 1)  tags.push(`<span class="tag tag-burn">Burn</span>`);
-  if (a.shield >= 2)tags.push(`<span class="tag tag-shield">${a.shield} Shields</span>`);
-  if (a.heal >= 2)  tags.push(`<span class="tag tag-heal">${a.heal} Heals</span>`);
+  if (a.ad > 0)      tags.push(`<span class="tag tag-ad">${a.ad} AD</span>`);
+  if (a.ap > 0)      tags.push(`<span class="tag tag-ap">${a.ap} AP</span>`);
+  if (a.cc >= 2)     tags.push(`<span class="tag tag-cc">CC</span>`);
+  if (a.crit >= 1)   tags.push(`<span class="tag tag-crit">${a.crit} Crit</span>`);
+  if (a.burst >= 2)  tags.push(`<span class="tag tag-burst">Burst</span>`);
+  if (a.burn >= 1)   tags.push(`<span class="tag tag-burn">Burn</span>`);
+  if (a.shield >= 2) tags.push(`<span class="tag tag-shield">${a.shield} Shields</span>`);
+  if (a.heal >= 2)   tags.push(`<span class="tag tag-heal">${a.heal} Heals</span>`);
+  if (a.execute >= 1)tags.push(`<span class="tag tag-execute">Execute</span>`);
   document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">No particular profile detected</span>';
 }
 
 function getBoots(a) {
-  if (a.ad >= 3 || a.crit >= 2) return { name:"Plated Steelcaps",  note:"Many auto-attackers / crit enemies" };
-  if (a.cc >= 2)                 return { name:"Mercury's Treads",   note:"Many CC enemies" };
-  return                                { name:"Boots of Swiftness", note:"Standard situation — mobility" };
+  if (a.ad >= 3 || a.crit >= 1) return { name:"Plated Steelcaps", note:"Auto-attackers / crit enemies" };
+  if (a.cc >= 2)                 return { name:"Mercury's Treads",  note:"Many CC enemies" };
+  return                                { name:"Boots of Swiftness",note:"Standard — mobility" };
 }
 
 function getSituItems(a) {
   const situ = [];
   if (a.shield >= 2) {
     situ.push({
-      tag:"shield", tagLabel:`${a.shield} Shields`,
-      type:"single",
+      tag:"shield", tagLabel:`${a.shield} Shields`, type:"single",
       items:[{ name:"Serpent's Fang", note:"Reduces enemy shields by 50% — replace a defensive item" }]
     });
   }
   if (a.heal >= 2) {
     situ.push({
-      tag:"heal", tagLabel:`${a.heal} Heals`,
-      type:"double",
+      tag:"heal", tagLabel:`${a.heal} Heals`, type:"double",
       items:[
         { name:"Thornmail",           note:"AD/tank comp — Grievous Wounds on incoming auto-attacks" },
         { name:"Chempunk Chainsword", note:"AP/burst comp — Grievous Wounds active + passive" }
       ]
+    });
+  }
+  if (a.execute >= 1) {
+    situ.push({
+      tag:"execute", tagLabel:"Execute", type:"single",
+      items:[{ name:"Sterak's Gage", note:"Shield absorbs execute thresholds — stay alive at low HP" }]
     });
   }
   return situ;
@@ -493,13 +432,11 @@ function buildItems(top, a) {
   const boots = getBoots(a);
   const warnings = [];
 
-  // Starting item
   const startItem = shieldStart
     ? { name:"Doran's Shield", note:"vs " + top + " — sustain against poke" }
     : { name:"Doran's Blade",  note:"Standard start — damage + sustain" };
   warnings.push(`🛡 Start: ${startItem.name} — ${startItem.note}`);
 
-  // Rush warnings
   if (bootsFirst)     warnings.push("⚡ vs Olaf: buy Boots of Swiftness first before Black Cleaver");
   if (mercFirst)      warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
   if (steelcapsFirst) warnings.push("🥾 vs " + top + ": rush Plated Steelcaps before Black Cleaver");
@@ -507,8 +444,6 @@ function buildItems(top, a) {
   if (abatteur)       warnings.push("⚔ vs " + top + ": Serrated Edge possible before Black Cleaver");
 
   const items = [];
-
-  // Boots or BC first
   if (bootsFirst) {
     items.push({ slot:"Boots",  name:"Boots of Swiftness", note:"Rush vs Olaf — mobility" });
     items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot — armor reduction + health" });
@@ -527,7 +462,7 @@ function buildItems(top, a) {
   else           items.push({ slot:"Item 2", name:"Sterak's Gage",   note:"Shield + resistances — standard" });
 
   if (a.ad >= 3) {
-    if (a.crit >= 2) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"2+ crit enemies — reduces crit damage taken" });
+    if (a.crit >= 1) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"Crit enemies — reduces crit damage taken" });
     else             items.push({ slot:"Item 3", name:"Sterak's Gage",    note:"Shield + resistances" });
   } else if (a.ap >= 2 || a.burn >= 1) {
     if (a.burn >= 1) items.push({ slot:"Item 3", name:"Force of Nature",  note:"AP + burn — mobility and magic resistance" });
@@ -546,10 +481,10 @@ function buildItems(top, a) {
 
   const majoriteAP = a.ap >= 4;
   const mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
-  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean",  note:"AP majority — magic resistance + armor" });
-  else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail",  note:"Mixed composition — damage to health conversion" });
-  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail",  note:"Damage to health conversion in prolonged fights" });
-  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean",  note:"Omnidirectional resistances" });
+  if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"AP majority — magic resistance + armor" });
+  else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"Mixed composition — damage to health conversion" });
+  else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"Damage to health conversion in prolonged fights" });
+  else                                              items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
 
   return { items, warnings };
 }
@@ -557,7 +492,7 @@ function buildItems(top, a) {
 function itemRowHTML(item, i) {
   const img = itemImg(item.name);
   const iconHTML = img
-    ? `<div class="item-icon"><img src="${img}" alt="${item.name}" loading="lazy" /></div>`
+    ? `<div class="item-icon"><img src="${img}" alt="${item.name}" loading="lazy"/></div>`
     : `<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>`;
   return `<div class="item-row" style="animation:fadeUp 0.3s ease both ${i*0.05}s">
     ${iconHTML}
@@ -573,23 +508,25 @@ function calculate() {
     return;
   }
   document.getElementById('error-msg').innerHTML = '';
+
+  // Trouver le nom exact du champion (casse correcte)
+  const topKnown = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === top.toLowerCase()) || top;
+
   const a = analyzeComp([top,jg,mid,adc,sup]);
   const rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
-  const { items, warnings } = buildItems(top, a);
+  const { items, warnings } = buildItems(topKnown, a);
   const situ = getSituItems(a);
+
+  const guideUrl = GUIDE_BASE + champSlug(topKnown);
 
   let html = '';
 
   // Runes
   html += `<div class="section" style="animation:fadeUp 0.4s ease both">
     <div class="result-header">Rune page — ${rune.label}</div>
-    <div class="rune-card" style="padding:0;overflow:hidden;background:transparent;border:none;">
-      <img
-        src="${BASE_URL}${rune.img}"
-        alt="Page de runes ${rune.label}"
-        style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);"
-        loading="lazy"
-      />
+    <div style="padding:0;overflow:hidden;background:transparent;">
+      <img src="${BASE_URL}${rune.img}" alt="Rune page ${rune.label}"
+        style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);" loading="lazy"/>
     </div>
   </div>`;
 
@@ -597,6 +534,10 @@ function calculate() {
   html += `<div class="build-layout">`;
   html += `<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">
     <div class="result-header">Recommended build</div>`;
+
+  // Lien guide matchup
+  html += `<div class="guide-box">📖 <a href="${guideUrl}" target="_blank" rel="noopener">Urgot vs ${topKnown} — Full matchup guide ↗</a></div>`;
+
   warnings.forEach(w => { html += `<div class="warn-box">${w}</div>`; });
   html += '<div class="items-grid">';
   items.forEach((item,i) => { html += itemRowHTML(item, i); });
@@ -608,18 +549,14 @@ function calculate() {
     html += `<p class="situ-empty">No situational items</p>`;
   } else {
     situ.forEach((s,i) => {
-      const tagClass = s.tag === 'shield' ? 'situ-tag-shield' : 'situ-tag-heal';
+      const tagClass = `situ-tag-${s.tag}`;
       if (s.type === 'double') {
-        // Carte avec deux items côte à côte
-        html += `<div class="situ-item" style="animation-delay:${i*0.08}s; flex-direction:column; gap:6px;">
+        html += `<div class="situ-item" style="animation-delay:${i*0.08}s;flex-direction:column;gap:6px;">
           <span class="situ-tag ${tagClass}">${s.tagLabel}</span>
           ${s.items.map(it => {
             const img = itemImg(it.name);
             const icon = img ? `<div class="situ-icon"><img src="${img}" alt="${it.name}" loading="lazy"/></div>` : '';
-            return `<div style="display:flex;align-items:flex-start;gap:8px;">
-              ${icon}
-              <div><div class="situ-item-name">${it.name}</div><div class="situ-item-cond">${it.note}</div></div>
-            </div>`;
+            return `<div style="display:flex;align-items:flex-start;gap:8px;">${icon}<div><div class="situ-item-name">${it.name}</div><div class="situ-item-cond">${it.note}</div></div></div>`;
           }).join('<div style="height:5px;"></div>')}
         </div>`;
       } else {

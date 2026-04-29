@@ -60,16 +60,16 @@
     .comp-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
     .comp-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
     .tag { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 2px; }
-    .tag-ad    { background: rgba(200,75,75,0.12);  color: #E07070; border: 1px solid rgba(200,75,75,0.3); }
-    .tag-ap    { background: var(--purple-dark);    color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
-    .tag-cc    { background: var(--blue-dark);      color: var(--blue);   border: 1px solid rgba(11,196,227,0.3); }
-    .tag-crit  { background: rgba(200,155,60,0.1);  color: var(--gold);   border: 1px solid rgba(200,155,60,0.3); }
-    .tag-burst { background: rgba(180,30,180,0.1);  color: #D070D0;       border: 1px solid rgba(180,30,180,0.3); }
-    .tag-burn  { background: var(--orange-dark);    color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
-    .tag-shield{ background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25); }
-    .tag-heal  { background: rgba(30,164,122,0.08); color: #1EA47A;       border: 1px solid rgba(30,164,122,0.25); }
-    .tag-execute{ background: rgba(200,75,75,0.15); color: #FF6060;       border: 1px solid rgba(200,75,75,0.4); }
-    .tag-empty { font-size: 12px; color: var(--text-dim); font-style: italic; }
+    .tag-ad     { background: rgba(200,75,75,0.12);  color: #E07070; border: 1px solid rgba(200,75,75,0.3); }
+    .tag-ap     { background: var(--purple-dark);    color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
+    .tag-cc     { background: var(--blue-dark);      color: var(--blue);   border: 1px solid rgba(11,196,227,0.3); }
+    .tag-crit   { background: rgba(200,155,60,0.1);  color: var(--gold);   border: 1px solid rgba(200,155,60,0.3); }
+    .tag-burst  { background: rgba(180,30,180,0.1);  color: #D070D0;       border: 1px solid rgba(180,30,180,0.3); }
+    .tag-burn   { background: var(--orange-dark);    color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
+    .tag-shield { background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25); }
+    .tag-heal   { background: rgba(30,164,122,0.08); color: #1EA47A;       border: 1px solid rgba(30,164,122,0.25); }
+    .tag-execute{ background: rgba(200,75,75,0.15);  color: #FF6060;       border: 1px solid rgba(200,75,75,0.4); }
+    .tag-empty  { font-size: 12px; color: var(--text-dim); font-style: italic; }
     .btn-wrap { text-align: center; margin-top: 1.25rem; }
     .btn { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid var(--gold-dark); border-radius: 3px; padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s; }
     .btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,155,60,0.12), transparent); opacity: 0; transition: opacity 0.2s; }
@@ -78,8 +78,6 @@
     .btn:active { transform: scale(0.97); }
     .result-header { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
     .result-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .rune-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1rem 1.25rem; }
-    .divider { height: 1px; background: var(--border); margin: 10px 0; }
     .build-layout { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
     @media(max-width: 640px) { .build-layout { grid-template-columns: 1fr; } }
     .items-grid { display: flex; flex-direction: column; gap: 8px; }
@@ -111,6 +109,24 @@
     .guide-box a { color: #1EA47A; text-decoration: none; font-weight: 600; }
     .guide-box a:hover { text-decoration: underline; }
     .error { background: var(--red-dark); border: 1px solid rgba(200,75,75,0.3); border-radius: 3px; padding: 10px 14px; font-size: 13px; color: var(--red); text-align: center; margin-top: 1rem; }
+    /* Catégories par champion */
+    .cat-section { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; animation: fadeUp 0.4s ease both 0.2s; position: relative; }
+    .cat-section::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(200,155,60,0.1), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
+    .cat-grid { display: flex; flex-direction: column; gap: 8px; }
+    .cat-row { display: flex; align-items: flex-start; gap: 10px; }
+    .cat-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; min-width: 64px; padding-top: 5px; }
+    .cat-label-ad     { color: #E07070; }
+    .cat-label-ap     { color: var(--purple); }
+    .cat-label-cc     { color: var(--blue); }
+    .cat-label-crit   { color: var(--gold); }
+    .cat-label-burst  { color: #D070D0; }
+    .cat-label-burn   { color: var(--orange); }
+    .cat-label-shield { color: var(--blue); }
+    .cat-label-heal   { color: #1EA47A; }
+    .cat-label-execute{ color: #FF6060; }
+    .cat-champs { display: flex; flex-wrap: wrap; gap: 5px; }
+    .cat-champ { display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 3px 7px 3px 3px; font-size: 12px; color: var(--text-bright); }
+    .cat-champ img { width: 20px; height: 20px; border-radius: 2px; object-fit: cover; object-position: center top; }
     footer { text-align: center; margin-top: 2.5rem; font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
     @keyframes fadeDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:none} }
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
@@ -169,7 +185,7 @@
     </div>
     <p class="comp-label">Team composition analysis</p>
     <div class="comp-tags" id="comp-tags">
-      <span class="tag-empty">Enter enemy draft…</span>
+      <span class="tag-empty">Enter enemy draft...</span>
     </div>
     <div class="btn-wrap">
       <button class="btn" onclick="calculate()">Generate build</button>
@@ -189,10 +205,7 @@ fetch("https://ddragon.leagueoflegends.com/api/versions.json")
 const GUIDE_BASE = "https://sites.google.com/view/urgot-beginner-guide/urgot/";
 
 function champSlug(name) {
-  return name.toLowerCase()
-    .replace(/['\u2019]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
+  return name.toLowerCase().replace(/['\u2019]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
 }
 
 const CHAMP_DDR = {
@@ -206,7 +219,6 @@ const CHAMP_DDR = {
   "Naafiri":"Naafiri","Hwei":"Hwei","Smolder":"Smolder","Ambessa":"Ambessa",
   "Mel":"Mel","Yunara":"Yunara","Zaahen":"Zaahen"
 };
-
 function champImg(name) {
   const key = CHAMP_DDR[name] || name.replace(/['\s.]/g,'');
   return DDC(key);
@@ -230,63 +242,176 @@ const CHAMPS_BY_ROLE = {
   sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Heimerdinger","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Pyke","Rakan","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
 };
 
+// Tags: AD, AP, CRIT, BURST, BURN, SHIELD, HEAL, EXECUTE, BUMP(knockup/displacement sans tenacité)
+// CC count: "1CC","2CC","3CC","5CC" = nombre de CC hard par champion
 const CHAMP_TAGS = {
-  "Aatrox":["AD","HEAL"],"Akali":["AP","BURST"],"Alistar":["CC"],"Amumu":["AP","CC"],
-  "Ambessa":["AD","BURST","SHIELD"],"Annie":["AP","BURST","CC","SHIELD"],
-  "Aphelios":["AD","CRIT"],"Ashe":["AD","CRIT","CC"],
-  "Anivia":["AP","BURN","CC"],"Aurelion Sol":["AP","BURN"],"Aurora":["AP","BURST"],"Azir":["AP"],
-  "Bard":["CC","AP","HEAL"],"Bel'Veth":["AD"],"Blitzcrank":["CC","SHIELD"],
-  "Brand":["AP","BURN","BURST","CC"],"Braum":["CC","AP"],"Briar":["AD","CC","HEAL"],
-  "Caitlyn":["AD","CRIT"],"Camille":["AD","SHIELD"],"Cassiopeia":["AP","BURN","CC","HEAL"],
-  "Cho'Gath":["AP","CC","EXECUTE"],"Corki":["AD"],"Darius":["AD","HEAL","EXECUTE"],
-  "Diana":["AP","BURST","CC","SHIELD"],"Dr. Mundo":["AD","HEAL"],
-  "Draven":["AD","CRIT"],"Ekko":["AP","BURST","SHIELD"],"Elise":["AP","BURST"],
-  "Evelynn":["AP","BURST"],"Ezreal":["AD"],"Fiddlesticks":["AP","BURN","CC","HEAL"],
-  "Fiora":["AD","HEAL"],"Fizz":["AP","BURST","EXECUTE"],"Galio":["AP","CC","SHIELD"],
-  "Garen":["AD","EXECUTE"],"Gnar":["AD","CC"],"Gragas":["AP","CC"],"Graves":["AD","CRIT"],
-  "Gwen":["AP","BURST","HEAL"],"Hecarim":["AD","CC","HEAL"],"Heimerdinger":["AP","BURN"],
-  "Hwei":["AP","BURN","BURST","CC","SHIELD"],"Illaoi":["AD","HEAL"],"Irelia":["AD","HEAL"],
-  "Ivern":["CC","SHIELD"],"Janna":["AP","CC","HEAL","SHIELD"],
-  "Jarvan IV":["AD","CC","SHIELD"],"Jax":["AD","CC"],"Jayce":["AD"],
-  "Jhin":["AD","CRIT","EXECUTE"],"Jinx":["AD","CRIT"],"K'Sante":["CC","SHIELD"],
-  "Kai'Sa":["AD","CRIT","AP","SHIELD"],"Kalista":["AD"],"Karma":["AP","CC","SHIELD"],
-  "Kassadin":["AP","BURST","SHIELD"],"Katarina":["AP","BURST"],"Kennen":["AP","CC"],
-  "Kha'Zix":["AD","BURST","EXECUTE"],"Kindred":["AD","CRIT"],"Kog'Maw":["AD","AP","BURN"],
-  "LeBlanc":["AP","BURST"],"Lee Sin":["AD","HEAL"],"Leona":["CC"],
-  "Lillia":["AP","BURN","CC"],"Lissandra":["AP","CC"],"Lucian":["AD"],
-  "Lulu":["CC","SHIELD"],"Lux":["AP","BURST","SHIELD"],"Malphite":["AP","CC","SHIELD"],
-  "Malzahar":["AP","BURN","CC","EXECUTE"],"Maokai":["CC","AP","HEAL"],"Master Yi":["AD","HEAL"],
-  "Mel":["AP","BURST","SHIELD"],"Miss Fortune":["AD","CRIT"],
-  "Mordekaiser":["AP","BURN","HEAL","SHIELD"],"Morgana":["AP","CC","BURN","SHIELD"],
-  "Naafiri":["AD","BURST"],"Nami":["CC","HEAL"],"Nasus":["AD","HEAL"],
-  "Nautilus":["CC","SHIELD"],"Nidalee":["AP","BURST","HEAL"],"Nilah":["AD","CRIT"],
-  "Nocturne":["AD","BURST"],"Nunu":["CC","HEAL"],"Olaf":["AD","HEAL"],
-  "Orianna":["AP","CC","SHIELD"],"Ornn":["CC"],"Pantheon":["AD","BURST"],
-  "Poppy":["CC"],"Pyke":["AD","CC","BURST","EXECUTE"],"Qiyana":["AD","BURST"],
-  "Quinn":["AD","CRIT"],"Rakan":["CC","SHIELD"],"Rammus":["CC"],
-  "Rek'Sai":["AD"],"Renata Glasc":["CC","SHIELD"],"Renekton":["AD","HEAL"],
-  "Rengar":["AD","BURST","EXECUTE"],"Rumble":["AP","BURN","SHIELD"],"Ryze":["AP"],
-  "Samira":["AD","CRIT"],"Sejuani":["CC"],"Senna":["AD","SHIELD"],
-  "Seraphine":["AP","CC","SHIELD"],"Sett":["AD","SHIELD"],"Shaco":["AD","BURST"],
-  "Shen":["AD","SHIELD"],"Shyvana":["AP","BURN","SHIELD"],
-  "Singed":["AP","BURN"],"Sion":["CC","SHIELD"],"Sivir":["AD","CRIT"],
-  "Skarner":["CC","SHIELD"],"Smolder":["AD","CRIT","BURN","EXECUTE"],
-  "Sona":["CC","SHIELD","HEAL"],"Soraka":["HEAL"],"Swain":["AP","BURN","HEAL"],
-  "Syndra":["AP","BURST","EXECUTE"],"Tahm Kench":["CC","HEAL","AP","SHIELD"],
-  "Taliyah":["AP","CC"],"Talon":["AD","BURST","EXECUTE"],"Teemo":["AP","BURN"],
-  "Thresh":["CC","SHIELD"],"Tristana":["AD","CRIT"],"Trundle":["AD","HEAL"],
-  "Tryndamere":["AD","CRIT","HEAL"],"Twisted Fate":["AP","CC"],"Twitch":["AD","CRIT"],
-  "Udyr":["AP","AD","CC","HEAL","SHIELD"],"Varus":["AD","AP","BURST"],
-  "Vayne":["AD","EXECUTE"],"Veigar":["AP","BURST","EXECUTE"],"Vel'Koz":["AP","BURST"],
-  "Vi":["AD","CC","SHIELD"],"Viego":["AD","HEAL"],"Viktor":["AP","BURN","SHIELD"],
-  "Vladimir":["AP","BURN","HEAL"],"Volibear":["CC","AP","HEAL","SHIELD"],
-  "Warwick":["AD","HEAL","EXECUTE"],"Wukong":["AD"],"Xayah":["AD","CRIT"],
-  "Xerath":["AP","BURST"],"Xin Zhao":["AD","HEAL"],"Yasuo":["AD","CRIT","SHIELD"],
-  "Yone":["AD","CRIT","SHIELD"],"Yorick":["AD","HEAL"],"Yunara":["AD","AP","CRIT"],
-  "Yuumi":["HEAL","SHIELD"],"Zaahen":["AD","HEAL"],"Zac":["CC","AP","HEAL"],
-  "Zed":["AD","BURST","EXECUTE"],"Zeri":["AD","CRIT"],"Ziggs":["AP","BURST"],
-  "Zilean":["AP","CC"],"Zoe":["AP","BURST"],"Zyra":["AP","BURN","CC"]
+  "Aatrox":    ["AD","HEAL","BUMP"],
+  "Akali":     ["AP","BURST"],
+  "Alistar":   ["BUMP","2CC"],
+  "Amumu":     ["AP","3CC","BURN"],
+  "Ambessa":   ["AD","BURST","SHIELD","BUMP"],
+  "Anivia":    ["AP","BURN","1CC"],
+  "Annie":     ["AP","BURST","1CC","SHIELD"],
+  "Aphelios":  ["AD","CRIT"],
+  "Ashe":      ["AD","CRIT","1CC"],
+  "Aurelion Sol":["AP","BURN","BUMP"],
+  "Aurora":    ["AP","BURST"],
+  "Azir":      ["AP","BUMP"],
+  "Bard":      ["2CC","AP","HEAL"],
+  "Bel'Veth":  ["AD","BUMP"],
+  "Blitzcrank":["SHIELD","BUMP","1CC"],
+  "Brand":     ["AP","BURN","BURST","1CC"],
+  "Braum":     ["1CC","AP","BUMP"],
+  "Briar":     ["AD","2CC","HEAL"],
+  "Caitlyn":   ["AD","CRIT","1CC"],
+  "Camille":   ["AD","SHIELD","BUMP"],
+  "Cassiopeia":["AP","BURN","1CC","HEAL"],
+  "Cho'Gath":  ["AP","BUMP","EXECUTE","1CC"],
+  "Corki":     ["AD"],
+  "Darius":    ["AD","HEAL","EXECUTE","BUMP"],
+  "Diana":     ["AP","BURST","BUMP","SHIELD"],
+  "Dr. Mundo": ["AD","HEAL"],
+  "Draven":    ["AD","CRIT","BUMP"],
+  "Ekko":      ["AP","BURST","SHIELD","1CC"],
+  "Elise":     ["AP","BURST","1CC"],
+  "Evelynn":   ["AP","BURST","1CC"],
+  "Ezreal":    ["AD"],
+  "Fiddlesticks":["AP","BURN","3CC","HEAL"],
+  "Fiora":     ["AD","HEAL","1CC"],
+  "Fizz":      ["AP","BURST","BUMP"],
+  "Galio":     ["AP","1CC","SHIELD","BUMP"],
+  "Garen":     ["AD","EXECUTE"],
+  "Gnar":      ["AD","2CC"],
+  "Gragas":    ["AP","1CC","BUMP"],
+  "Graves":    ["AD","CRIT"],
+  "Gwen":      ["AP","BURST","HEAL"],
+  "Hecarim":   ["AD","1CC","HEAL"],
+  "Heimerdinger":["AP","BURN","1CC"],
+  "Hwei":      ["AP","BURN","BURST","1CC","SHIELD"],
+  "Illaoi":    ["AD","HEAL"],
+  "Irelia":    ["AD","HEAL","1CC"],
+  "Ivern":     ["1CC","SHIELD","BUMP"],
+  "Janna":     ["AP","BUMP","HEAL","SHIELD"],
+  "Jarvan IV": ["AD","BUMP","SHIELD"],
+  "Jax":       ["AD","1CC"],
+  "Jayce":     ["AD","BUMP"],
+  "Jhin":      ["AD","CRIT","1CC"],
+  "Jinx":      ["AD","CRIT","1CC"],
+  "K'Sante":   ["2CC","BUMP","SHIELD"],
+  "Kai'Sa":    ["AD","CRIT","AP","SHIELD"],
+  "Kalista":   ["AD","BUMP"],
+  "Karma":     ["AP","1CC","SHIELD"],
+  "Kassadin":  ["AP","BURST","SHIELD"],
+  "Katarina":  ["AP","BURST"],
+  "Kennen":    ["AP","5CC"],
+  "Kha'Zix":   ["AD","BURST"],
+  "Kindred":   ["AD","CRIT"],
+  "Kog'Maw":   ["AD","AP"],
+  "LeBlanc":   ["AP","BURST","1CC"],
+  "Lee Sin":   ["AD","HEAL","BUMP"],
+  "Leona":     ["3CC"],
+  "Lillia":    ["AP","BURN","1CC"],
+  "Lissandra": ["AP","2CC"],
+  "Lucian":    ["AD","CRIT"],
+  "Lulu":      ["1CC","SHIELD","BUMP"],
+  "Lux":       ["AP","BURST","SHIELD","1CC"],
+  "Malphite":  ["AP","BUMP","SHIELD"],
+  "Malzahar":  ["AP","BURN","1CC"],
+  "Maokai":    ["2CC","AP","HEAL","BUMP"],
+  "Master Yi": ["AD","HEAL"],
+  "Mel":       ["AP","BURST","SHIELD","1CC"],
+  "Miss Fortune":["AD","CRIT"],
+  "Mordekaiser":["AP","BURN","HEAL","SHIELD"],
+  "Morgana":   ["AP","2CC","BURN","SHIELD"],
+  "Naafiri":   ["AD","BURST"],
+  "Nami":      ["1CC","HEAL","BUMP"],
+  "Nasus":     ["AD","HEAL"],
+  "Nautilus":  ["1CC","BUMP","SHIELD"],
+  "Nidalee":   ["AP","BURST","HEAL"],
+  "Nilah":     ["AD","CRIT","BUMP"],
+  "Nocturne":  ["AD","BURST","1CC"],
+  "Nunu":      ["1CC","BUMP","HEAL","AP"],
+  "Olaf":      ["AD","HEAL"],
+  "Orianna":   ["AP","BUMP","SHIELD"],
+  "Ornn":      ["2CC","BUMP","AP"],
+  "Pantheon":  ["AD","BURST","1CC"],
+  "Poppy":     ["1CC","AD","BUMP"],
+  "Pyke":      ["AD","1CC","BURST","EXECUTE","BUMP"],
+  "Qiyana":    ["AD","BURST","2CC"],
+  "Quinn":     ["AD","CRIT"],
+  "Rakan":     ["1CC","SHIELD","BUMP"],
+  "Rammus":    ["3CC"],
+  "Rek'Sai":   ["AD","BUMP"],
+  "Renata Glasc":["2CC","SHIELD"],
+  "Renekton":  ["AD","HEAL","1CC"],
+  "Rengar":    ["AD","BURST"],
+  "Rumble":    ["AP","BURN","SHIELD"],
+  "Ryze":      ["AP","1CC"],
+  "Samira":    ["AD","CRIT"],
+  "Sejuani":   ["3CC"],
+  "Senna":     ["AD","SHIELD","CRIT"],
+  "Seraphine": ["AP","2CC","SHIELD"],
+  "Sett":      ["AD","SHIELD","1CC"],
+  "Shaco":     ["AD","BURST","3CC"],
+  "Shen":      ["AD","SHIELD","1CC"],
+  "Shyvana":   ["AP","BURN","SHIELD","1CC","AD"],
+  "Singed":    ["AP","BURN","BUMP","1CC"],
+  "Sion":      ["BUMP","SHIELD"],
+  "Sivir":     ["AD","CRIT"],
+  "Skarner":   ["3CC","SHIELD"],
+  "Smolder":   ["AD","CRIT","BURN","EXECUTE"],
+  "Sona":      ["1CC","SHIELD","HEAL"],
+  "Soraka":    ["HEAL","1CC"],
+  "Swain":     ["AP","BURN","HEAL","1CC"],
+  "Syndra":    ["AP","BURST","EXECUTE","BUMP","1CC"],
+  "Tahm Kench":["2CC","HEAL","AP","SHIELD","BUMP"],
+  "Taliyah":   ["AP","1CC"],
+  "Talon":     ["AD","BURST"],
+  "Teemo":     ["AP","BURN"],
+  "Thresh":    ["2CC","SHIELD"],
+  "Tristana":  ["AD","CRIT","BUMP"],
+  "Trundle":   ["AD","HEAL","BUMP"],
+  "Tryndamere":["AD","CRIT","HEAL"],
+  "Twisted Fate":["AP","1CC"],
+  "Twitch":    ["AD","CRIT"],
+  "Udyr":      ["AP","AD","1CC","HEAL","SHIELD"],
+  "Varus":     ["AD","AP","BURST","1CC"],
+  "Vayne":     ["AD","1CC"],
+  "Veigar":    ["AP","BURST","EXECUTE","1CC"],
+  "Vel'Koz":   ["AP","BURST","BUMP"],
+  "Vi":        ["AD","BUMP","SHIELD"],
+  "Viego":     ["AD","HEAL","1CC"],
+  "Viktor":    ["AP","BURN","SHIELD","1CC"],
+  "Vladimir":  ["AP","BURN","HEAL"],
+  "Volibear":  ["1CC","AP","HEAL","SHIELD"],
+  "Warwick":   ["AD","HEAL","1CC"],
+  "Wukong":    ["AD","BUMP"],
+  "Xayah":     ["AD","CRIT","1CC"],
+  "Xerath":    ["AP","BURST","1CC"],
+  "Xin Zhao":  ["AD","HEAL","BUMP"],
+  "Yasuo":     ["AD","CRIT","SHIELD","BUMP"],
+  "Yone":      ["AD","CRIT","SHIELD","BUMP"],
+  "Yorick":    ["AD","HEAL"],
+  "Yunara":    ["AD","AP","CRIT"],
+  "Yuumi":     ["HEAL","SHIELD"],
+  "Zaahen":    ["AD","HEAL","1CC"],
+  "Zac":       ["AP","HEAL","BUMP","2CC"],
+  "Zed":       ["AD","BURST","EXECUTE"],
+  "Zeri":      ["AD","CRIT"],
+  "Ziggs":     ["AP","BURST","BUMP"],
+  "Zilean":    ["AP","1CC"],
+  "Zoe":       ["AP","BURST","1CC"],
+  "Zyra":      ["AP","BURN","1CC","BUMP"]
 };
+
+// Extrait le nombre de CC d'un champion (tag "1CC","2CC","3CC","5CC" → valeur numérique)
+function getCCValue(tags) {
+  for (var t of tags) {
+    var m = t.match(/^(\d+)CC$/);
+    if (m) return parseInt(m[1]);
+  }
+  return 0;
+}
 
 const BASE_URL = "https://barnhak.github.io/Urgot-build-calculator/";
 
@@ -294,7 +419,7 @@ const RUNE_PAGES = {
   page1:{label:"Standard",img:"rune-page1.png"},
   page2:{label:"Cut Down",img:"rune-page2.png"},
   page3:{label:"Tanks",img:"rune-page3.png"},
-  page4:{label:"Résolution",img:"rune-page4.png"},
+  page4:{label:"Resolution",img:"rune-page4.png"},
   page5:{label:"Rumble",img:"rune-page5.png"},
   page6:{label:"Olaf",img:"rune-page6.png"},
   page7:{label:"Heimerdinger",img:"rune-page7.png"},
@@ -315,47 +440,47 @@ const STEELCAPS_FIRST  = ["ambessa","yasuo","tryndamere","gnar"];
 const ABATTEUR_CHAMPS  = ["garen","k'sante","yorick"];
 const SHIELD_START     = ["teemo","rumble"];
 
-Object.entries(CHAMPS_BY_ROLE).forEach(([role, list]) => {
-  const dl = document.getElementById('list-' + role);
-  if (dl) list.forEach(c => { const o = document.createElement('option'); o.value = c; dl.appendChild(o); });
+Object.entries(CHAMPS_BY_ROLE).forEach(function(e) {
+  var dl = document.getElementById('list-' + e[0]);
+  if (dl) e[1].forEach(function(c) { var o = document.createElement('option'); o.value = c; dl.appendChild(o); });
 });
 
 function getChamps() {
-  return ['top','jg','mid','adc','sup'].map(id => document.getElementById(id).value.trim());
+  return ['top','jg','mid','adc','sup'].map(function(id) { return document.getElementById(id).value.trim(); });
 }
 
 function getTags(name) {
   if (!name) return [];
-  const key = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === name.toLowerCase());
+  var key = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === name.toLowerCase(); });
   return key ? CHAMP_TAGS[key] : [];
 }
 
 function analyzeComp(champs) {
-  let ad=0,ap=0,cc=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
-  champs.filter(Boolean).forEach(c => {
-    const t = getTags(c);
+  var ad=0,ap=0,ccTotal=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
+  champs.filter(Boolean).forEach(function(c) {
+    var t = getTags(c);
     if (t.includes("AD"))      ad++;
     if (t.includes("AP"))      ap++;
-    if (t.includes("CC"))      cc++;
     if (t.includes("CRIT"))    crit++;
     if (t.includes("BURST"))   burst++;
     if (t.includes("BURN"))    burn++;
     if (t.includes("SHIELD"))  shield++;
     if (t.includes("HEAL"))    heal++;
     if (t.includes("EXECUTE")) execute++;
+    ccTotal += getCCValue(t);
   });
-  return { ad,ap,cc,crit,burst,burn,shield,heal,execute };
+  return { ad, ap, ccTotal, crit, burst, burn, shield, heal, execute };
 }
 
 function updateChampPreview(role) {
-  const val   = document.getElementById(role).value.trim();
-  const prev  = document.getElementById('prev-' + role);
-  const img   = document.getElementById('img-' + role);
-  const input = document.getElementById(role);
-  const known = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === val.toLowerCase());
+  var val = document.getElementById(role).value.trim();
+  var prev = document.getElementById('prev-' + role);
+  var img  = document.getElementById('img-' + role);
+  var input = document.getElementById(role);
+  var known = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === val.toLowerCase(); });
   if (known) {
     img.src = champImg(known);
-    img.onerror = () => { prev.classList.remove('visible'); input.classList.remove('has-icon'); };
+    img.onerror = function() { prev.classList.remove('visible'); input.classList.remove('has-icon'); };
     prev.classList.add('visible');
     input.classList.add('has-icon');
   } else {
@@ -366,43 +491,46 @@ function updateChampPreview(role) {
 
 function onInput() {
   ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
-  const champs = getChamps();
+  var champs = getChamps();
   if (!champs.some(Boolean)) {
     document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter enemy draft...</span>';
     return;
   }
-  const a = analyzeComp(champs);
-  const tags = [];
-  if (a.ad > 0)      tags.push(`<span class="tag tag-ad">${a.ad} AD</span>`);
-  if (a.ap > 0)      tags.push(`<span class="tag tag-ap">${a.ap} AP</span>`);
-  if (a.cc >= 2)     tags.push(`<span class="tag tag-cc">CC</span>`);
-  if (a.crit >= 1)   tags.push(`<span class="tag tag-crit">${a.crit} Crit</span>`);
-  if (a.burst >= 2)  tags.push(`<span class="tag tag-burst">Burst</span>`);
-  if (a.burn >= 1)   tags.push(`<span class="tag tag-burn">Burn</span>`);
-  if (a.shield >= 2) tags.push(`<span class="tag tag-shield">${a.shield} Shields</span>`);
-  if (a.heal >= 2)   tags.push(`<span class="tag tag-heal">${a.heal} Heals</span>`);
-  if (a.execute >= 1)tags.push(`<span class="tag tag-execute">Execute</span>`);
+  var a = analyzeComp(champs);
+  var tags = [];
+  if (a.ad > 0)       tags.push('<span class="tag tag-ad">' + a.ad + ' AD</span>');
+  if (a.ap > 0)       tags.push('<span class="tag tag-ap">' + a.ap + ' AP</span>');
+  if (a.ccTotal >= 2) tags.push('<span class="tag tag-cc">CC ' + a.ccTotal + '</span>');
+  if (a.crit >= 1)    tags.push('<span class="tag tag-crit">' + a.crit + ' Crit</span>');
+  if (a.burst >= 2)   tags.push('<span class="tag tag-burst">Burst</span>');
+  if (a.burn >= 1)    tags.push('<span class="tag tag-burn">Burn</span>');
+  if (a.shield >= 2)  tags.push('<span class="tag tag-shield">' + a.shield + ' Shields</span>');
+  if (a.heal >= 2)    tags.push('<span class="tag tag-heal">' + a.heal + ' Heals</span>');
+  if (a.execute >= 1) tags.push('<span class="tag tag-execute">Execute</span>');
   document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">No particular profile detected</span>';
 }
 
 function getBoots(a) {
-  if (a.cc >= 3)                 return { name:"Mercury's Treads",  note:"3+ CC enemies -- forced Tenacity" };
-  if (a.ad >= 3 || a.crit >= 1) return { name:"Plated Steelcaps",  note:"Auto-attackers / crit enemies" };
-  if (a.cc >= 2)                 return { name:"Mercury's Treads",  note:"Many CC enemies" };
-  return                                { name:"Boots of Swiftness",note:"Standard -- mobility" };
+  // 3+ AD → Steelcaps prioritaire même avec CC
+  if (a.ad >= 3)                  return { name:"Plated Steelcaps",  note:"3+ AD -- armor priority" };
+  // CC total >= 5 → Mercures forcés
+  if (a.ccTotal >= 5)             return { name:"Mercury's Treads",  note:a.ccTotal + " CC total -- forced Tenacity" };
+  // Crit ou beaucoup d'AD
+  if (a.crit >= 1)                return { name:"Plated Steelcaps",  note:"Crit enemies" };
+  // CC modéré
+  if (a.ccTotal >= 2)             return { name:"Mercury's Treads",  note:"CC enemies" };
+  return                                 { name:"Boots of Swiftness", note:"Standard -- mobility" };
 }
 
 function getSituItems(a) {
-  const situ = [];
+  var situ = [];
   if (a.shield >= 2) {
-    situ.push({
-      tag:"shield", tagLabel:`${a.shield} Shields`, type:"single",
+    situ.push({ tag:"shield", tagLabel:a.shield+" Shields", type:"single",
       items:[{ name:"Serpent's Fang", note:"Reduces enemy shields by 50% -- replace a defensive item" }]
     });
   }
   if (a.heal >= 2) {
-    situ.push({
-      tag:"heal", tagLabel:`${a.heal} Heals`, type:"double",
+    situ.push({ tag:"heal", tagLabel:a.heal+" Heals", type:"double",
       items:[
         { name:"Thornmail",           note:"AD/tank comp -- Grievous Wounds on incoming auto-attacks" },
         { name:"Chempunk Chainsword", note:"AP/burst comp -- Grievous Wounds active + passive" }
@@ -410,8 +538,7 @@ function getSituItems(a) {
     });
   }
   if (a.execute >= 1) {
-    situ.push({
-      tag:"execute", tagLabel:"Execute", type:"single",
+    situ.push({ tag:"execute", tagLabel:"Execute", type:"single",
       items:[{ name:"Sterak's Gage", note:"Shield absorbs execute thresholds -- stay alive at low HP" }]
     });
   }
@@ -419,20 +546,19 @@ function getSituItems(a) {
 }
 
 function buildItems(top, a) {
-  const n = (top||"").toLowerCase();
-  const bootsFirst     = BOOTS_FIRST.includes(n);
-  const mercFirst      = MERC_FIRST.includes(n);
-  const steelcapsFirst = STEELCAPS_FIRST.includes(n);
-  const bramble        = BRAMBLE_CHAMPS.includes(n);
-  const abatteur       = ABATTEUR_CHAMPS.includes(n);
-  const shieldStart    = SHIELD_START.includes(n);
-  const boots = getBoots(a);
-  const warnings = [];
+  var n = (top||"").toLowerCase();
+  var bootsFirst     = BOOTS_FIRST.includes(n);
+  var mercFirst      = MERC_FIRST.includes(n);
+  var steelcapsFirst = STEELCAPS_FIRST.includes(n);
+  var bramble        = BRAMBLE_CHAMPS.includes(n);
+  var abatteur       = ABATTEUR_CHAMPS.includes(n);
+  var shieldStart    = SHIELD_START.includes(n);
+  var boots = getBoots(a);
+  var warnings = [];
 
-  const startItem = shieldStart
-    ? { name:"Doran's Shield", note:"vs " + top + " -- sustain against poke" }
-    : { name:"Doran's Blade",  note:"Standard start -- damage + sustain" };
-  warnings.push("🛡 Start: " + startItem.name + " -- " + startItem.note);
+  var startName = shieldStart ? "Doran's Shield" : "Doran's Blade";
+  var startNote = shieldStart ? "vs " + top + " -- sustain against poke" : "Standard start -- damage + sustain";
+  warnings.push("🛡 Start: " + startName + " -- " + startNote);
 
   if (bootsFirst)     warnings.push("⚡ vs Olaf: buy Boots of Swiftness first before Black Cleaver");
   if (mercFirst)      warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
@@ -440,7 +566,7 @@ function buildItems(top, a) {
   if (bramble)        warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver");
   if (abatteur)       warnings.push("⚔ vs " + top + ": Serrated Edge possible before Black Cleaver");
 
-  const items = [];
+  var items = [];
   if (bootsFirst) {
     items.push({ slot:"Boots",  name:"Boots of Swiftness", note:"Rush vs Olaf -- mobility" });
     items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot -- armor reduction + health" });
@@ -468,7 +594,7 @@ function buildItems(top, a) {
     items.push({ slot:"Item 3", name:"Deadman's Plate", note:"Armor + mobility" });
   }
 
-  const has = name => items.some(i => i.name === name);
+  var has = function(name) { return items.some(function(i) { return i.name === name; }); };
   if (a.ad >= 3 && a.ap >= 2)      items.push({ slot:"Item 4", name:"Force of Nature",      note:"AP coverage alongside anti-AD" });
   else if (a.ad >= 3)               items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
   else if (a.ap >= 2) {
@@ -476,8 +602,8 @@ function buildItems(top, a) {
     else                            items.push({ slot:"Item 4", name:"Force of Nature",        note:"Mobility under AP damage" });
   } else                            items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
 
-  const majoriteAP = a.ap >= 4;
-  const mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
+  var majoriteAP = a.ap >= 4;
+  var mixte      = !majoriteAP && a.ap >= 2 && a.ad >= 2;
   if (majoriteAP && !has("Jak'Sho, The Protean"))  items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"AP majority -- magic resistance + armor" });
   else if (mixte)                                   items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"Mixed composition -- damage to health conversion" });
   else if (has("Jak'Sho, The Protean"))             items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"Damage to health conversion in prolonged fights" });
@@ -487,8 +613,8 @@ function buildItems(top, a) {
 }
 
 function itemRowHTML(item, i) {
-  const img = itemImg(item.name);
-  const iconHTML = img
+  var img = itemImg(item.name);
+  var iconHTML = img
     ? '<div class="item-icon"><img src="' + img + '" alt="' + item.name + '" loading="lazy"/></div>'
     : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
   return '<div class="item-row" style="animation:fadeUp 0.3s ease both ' + (i*0.05) + 's">'
@@ -498,39 +624,82 @@ function itemRowHTML(item, i) {
     + '</div>';
 }
 
+// Rendu de la section catégories par champion
+function renderCategories(champs) {
+  var CATS = [
+    { key:"AD",      label:"AD",      cls:"cat-label-ad" },
+    { key:"AP",      label:"AP",      cls:"cat-label-ap" },
+    { key:"CC",      label:"CC",      cls:"cat-label-cc",     isCC:true },
+    { key:"CRIT",    label:"Crit",    cls:"cat-label-crit" },
+    { key:"BURST",   label:"Burst",   cls:"cat-label-burst" },
+    { key:"BURN",    label:"Burn",    cls:"cat-label-burn" },
+    { key:"SHIELD",  label:"Shield",  cls:"cat-label-shield" },
+    { key:"HEAL",    label:"Heal",    cls:"cat-label-heal" },
+    { key:"EXECUTE", label:"Execute", cls:"cat-label-execute" },
+  ];
+
+  var filled = champs.filter(Boolean).map(function(c) {
+    var known = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === c.toLowerCase(); });
+    return known || null;
+  }).filter(Boolean);
+
+  if (!filled.length) return '';
+
+  var rows = '';
+  CATS.forEach(function(cat) {
+    var matching = filled.filter(function(c) {
+      var t = getTags(c);
+      if (cat.isCC) return getCCValue(t) > 0;
+      return t.includes(cat.key);
+    });
+    if (!matching.length) return;
+    var champPills = matching.map(function(c) {
+      return '<span class="cat-champ"><img src="' + champImg(c) + '" onerror="this.style.display=\'none\'" loading="lazy"/>' + c + '</span>';
+    }).join('');
+    rows += '<div class="cat-row"><span class="cat-label ' + cat.cls + '">' + cat.label + '</span><div class="cat-champs">' + champPills + '</div></div>';
+  });
+
+  if (!rows) return '';
+  return '<div class="cat-section"><div class="result-header">Champion categories</div><div class="cat-grid">' + rows + '</div></div>';
+}
+
 function calculate() {
-  const [top,jg,mid,adc,sup] = getChamps();
+  var champs = getChamps();
+  var top = champs[0];
   if (!top) {
     document.getElementById('error-msg').innerHTML = '<div class="error">Enter at least the enemy top champion.</div>';
     return;
   }
   document.getElementById('error-msg').innerHTML = '';
 
-  const topKnown = Object.keys(CHAMP_TAGS).find(k => k.toLowerCase() === top.toLowerCase()) || top;
-  const a = analyzeComp([top,jg,mid,adc,sup]);
-  const rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
-  const { items, warnings } = buildItems(topKnown, a);
-  const situ = getSituItems(a);
-  const guideUrl = GUIDE_BASE + champSlug(topKnown);
+  var topKnown = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === top.toLowerCase(); }) || top;
+  var a = analyzeComp(champs);
+  var rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
+  var bi = buildItems(topKnown, a);
+  var items = bi.items; var warnings = bi.warnings;
+  var situ = getSituItems(a);
+  var guideUrl = GUIDE_BASE + champSlug(topKnown);
 
-  let html = '';
+  var html = '';
 
+  // Runes
   html += '<div class="section" style="animation:fadeUp 0.4s ease both">'
     + '<div class="result-header">Rune page -- ' + rune.label + '</div>'
     + '<div style="padding:0;overflow:hidden;background:transparent;">'
     + '<img src="' + BASE_URL + rune.img + '" alt="Rune page ' + rune.label + '" style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);" loading="lazy"/>'
     + '</div></div>';
 
+  // Build + situationnel
   html += '<div class="build-layout">';
   html += '<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">'
     + '<div class="result-header">Recommended build</div>'
     + '<div class="guide-box">📖 <a href="' + guideUrl + '" target="_blank" rel="noopener">Urgot vs ' + topKnown + ' -- Full matchup guide ↗</a></div>';
-
   warnings.forEach(function(w) { html += '<div class="warn-box">' + w + '</div>'; });
   html += '<div class="items-grid">';
   items.forEach(function(item, i) { html += itemRowHTML(item, i); });
   html += '</div></div>';
 
+  // Panneau situationnel
   html += '<div class="situ-panel"><p class="situ-title">✦ Situational</p>';
   if (!situ.length) {
     html += '<p class="situ-empty">No situational items</p>';
@@ -549,11 +718,10 @@ function calculate() {
         });
         html += '</div>';
       } else {
-        var img = itemImg(s.items[0].name);
-        var iconHTML = img ? '<div class="situ-icon"><img src="' + img + '" alt="' + s.items[0].name + '" loading="lazy"/></div>' : '';
+        var img2 = itemImg(s.items[0].name);
+        var iconHTML = img2 ? '<div class="situ-icon"><img src="' + img2 + '" alt="' + s.items[0].name + '" loading="lazy"/></div>' : '';
         html += '<div class="situ-item" style="animation-delay:' + (i*0.08) + 's">'
-          + iconHTML
-          + '<div class="situ-text">'
+          + iconHTML + '<div class="situ-text">'
           + '<span class="situ-tag ' + tagClass + '">' + s.tagLabel + '</span>'
           + '<div class="situ-item-name">' + s.items[0].name + '</div>'
           + '<div class="situ-item-cond">' + s.items[0].note + '</div>'
@@ -562,6 +730,9 @@ function calculate() {
     });
   }
   html += '</div></div>';
+
+  // Catégories par champion
+  html += renderCategories(champs);
 
   document.getElementById('results').innerHTML = html;
   document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });

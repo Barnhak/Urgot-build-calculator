@@ -511,15 +511,20 @@ function onInput() {
 }
 
 function getBoots(a) {
-  // 3+ AD → Steelcaps prioritaire même avec CC
-  if (a.ad >= 3)                  return { name:"Plated Steelcaps",  note:"3+ AD -- armor priority" };
-  // CC total >= 5 → Mercures forcés
-  if (a.ccTotal >= 5)             return { name:"Mercury's Treads",  note:a.ccTotal + " CC total -- forced Tenacity" };
-  // Crit ou beaucoup d'AD
-  if (a.crit >= 1)                return { name:"Plated Steelcaps",  note:"Crit enemies" };
-  // CC modéré
-  if (a.ccTotal >= 2)             return { name:"Mercury's Treads",  note:"CC enemies" };
-  return                                 { name:"Boots of Swiftness", note:"Standard -- mobility" };
+  var wantSteelcaps = a.ad >= 3 || a.crit >= 1;
+  var wantMerc      = a.ccTotal >= 5;
+  var suggestMerc   = a.ccTotal >= 2;
+  if (wantSteelcaps && wantMerc) {
+    return {
+      conflict: true,
+      primary:   { name:"Plated Steelcaps", note:"3+ AD / crit -- armor priority" },
+      secondary: { name:"Mercury's Treads", note:a.ccTotal + " CC total -- consider Tenacity" }
+    };
+  }
+  if (wantSteelcaps)  return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : "Crit enemies" };
+  if (wantMerc)       return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- forced Tenacity" };
+  if (suggestMerc)    return { name:"Mercury's Treads",  note: "CC enemies" };
+  return                     { name:"Boots of Swiftness", note:"Standard -- mobility" };
 }
 
 function getSituItems(a) {
@@ -577,8 +582,12 @@ function buildItems(top, a) {
     items.push({ slot:"Boots",  name:"Plated Steelcaps",    note:"Rush vs " + top + " -- block auto-attacks" });
     items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot -- armor reduction + health" });
   } else {
-    items.push({ slot:"Item 1", name:"Black Cleaver",       note:"Core Urgot -- armor reduction + health" });
-    items.push({ slot:"Boots",  name:boots.name,            note:boots.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health" });
+    if (boots.conflict) {
+      items.push({ slot:"Boots", name:boots.primary.name, note:boots.primary.note, conflict: boots.secondary });
+    } else {
+      items.push({ slot:"Boots", name:boots.name, note:boots.note });
+    }
   }
 
   if (a.ad >= 3) items.push({ slot:"Item 2", name:"Deadman's Plate", note:"3+ AD champions -- armor + engage" });
@@ -617,6 +626,26 @@ function itemRowHTML(item, i) {
   var iconHTML = img
     ? '<div class="item-icon"><img src="' + img + '" alt="' + item.name + '" loading="lazy"/></div>'
     : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
+
+  if (item.conflict) {
+    var img2 = itemImg(item.conflict.name);
+    var icon2 = img2
+      ? '<div class="item-icon"><img src="' + img2 + '" alt="' + item.conflict.name + '" loading="lazy"/></div>'
+      : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
+    return '<div class="item-row" style="animation:fadeUp 0.3s ease both ' + (i*0.05) + 's; flex-wrap:wrap; gap:0;">'
+      + '<div class="item-slot" style="width:100%;margin-bottom:6px;">' + item.slot + '</div>'
+      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'
+      + iconHTML
+      + '<div><div class="item-name">' + item.name + '</div><div class="item-note">' + item.note + '</div></div>'
+      + '</div>'
+      + '<div style="width:1px;background:var(--border);margin:0 10px;align-self:stretch;"></div>'
+      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'
+      + icon2
+      + '<div><div class="item-name" style="color:var(--blue);">' + item.conflict.name + '</div><div class="item-note">' + item.conflict.note + '</div></div>'
+      + '</div>'
+      + '</div>';
+  }
+
   return '<div class="item-row" style="animation:fadeUp 0.3s ease both ' + (i*0.05) + 's">'
     + iconHTML
     + '<div class="item-slot">' + item.slot + '</div>'

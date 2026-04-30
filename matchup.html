@@ -225,11 +225,10 @@ function renderGrid(filter) {
     return;
   }
   filtered.forEach(function(champ, i) {
-    var url = "https://sites.google.com/view/urgot-beginner-guide/urgot/" + slugify(champ.name) + "/";
+    var url = "matchup/" + slugify(champ.name) + ".html";
     var a = document.createElement("a");
     a.className = "champ-card";
     a.href = url;
-    a.target = "_blank";
     a.style.animationDelay = (i * 0.02) + "s";
     var img = document.createElement("img");
     img.src = champ.img;
@@ -260,10 +259,9 @@ function navFilter() {
   var filtered = champions.filter(function(c){ return c.name.toLowerCase().includes(val.toLowerCase()); });
   navDropdown.style.display = filtered.length ? "block" : "none";
   filtered.forEach(function(champ) {
-    var url = "https://sites.google.com/view/urgot-beginner-guide/urgot/" + slugify(champ.name) + "/";
+    var url = "matchup/" + slugify(champ.name) + ".html";
     var a = document.createElement("a");
-    a.className = "nav-dropdown-item"; a.href = url; a.target = "_blank";
-    var img = document.createElement("img");
+    a.className = "nav-dropdown-item"; a.href = url; var img = document.createElement("img");
     img.src = "https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/" + champ.name.replace(/[^a-zA-Z]/g,"") + ".png";
     img.alt = champ.name;
     img.onerror = function(){ this.style.display="none"; };

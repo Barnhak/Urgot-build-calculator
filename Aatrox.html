@@ -189,7 +189,7 @@
         <!-- Runes -->
         <div class="rune-block">
           <div class="rune-img">
-            <img src="https://barnhak.github.io/Urgot-build-calculator/rune-page2.png" alt="Rune page Cut Down" />
+            <img src="https://barnhak.github.io/Urgot-build-calculator/runes/rune-page2.png" alt="Rune page Cut Down" />
           </div>
           <div class="rune-text">
             <h4>Runes</h4>
@@ -308,8 +308,7 @@ function navFilter() {
   filtered.forEach(function(name) {
     var a = document.createElement('a');
     a.className = 'nav-dropdown-item';
-    a.href = BASE_GUIDE + slugify(name) + '/';
-    a.target = '_blank';
+    a.href = slugify(name) + '.html';
     var img = document.createElement('img');
     img.src = BASE_DDR + name.replace(/[^a-zA-Z]/g,'') + '.png';
     img.alt = name;

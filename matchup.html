@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MatchUp — Urgot Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:        #4ADE80;
+      --green-mid:    #22C55E;
+      --green-dark:   #15803D;
+      --gold:         #C89B3C;
+      --gold-dark:    #785A28;
+      --bg:           #060D07;
+      --bg-surface:   #0B1A0D;
+      --bg-card:      #0F2211;
+      --border:       #1A3D1E;
+      --border-bright:#2D6A33;
+      --text:         #A8D4A0;
+      --text-dim:     #4A7550;
+      --text-bright:  #E8F5E2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 50% -5%, rgba(74,222,128,0.04) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(26,61,30,0.08) 50px),
+        repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(26,61,30,0.08) 50px);
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(6,13,7,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+
+    .nav-search { position: relative; }
+    .nav-search input {
+      background: rgba(15,34,17,0.8);
+      border: 1px solid var(--border-bright);
+      border-radius: 3px; color: var(--text-bright);
+      font-family: 'Rajdhani', sans-serif; font-size: 12px;
+      padding: 5px 30px 5px 10px; width: 180px; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, width 0.3s;
+    }
+    .nav-search input:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 2px rgba(74,222,128,0.1); width: 220px;
+    }
+    .nav-search input::placeholder { color: var(--text-dim); }
+    .nav-search-icon {
+      position: absolute; right: 8px; top: 50%;
+      transform: translateY(-50%); font-size: 11px;
+      color: var(--green-mid); pointer-events: none;
+    }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      width: 220px; background: var(--bg-card);
+      border: 1px solid var(--border-bright); border-radius: 4px;
+      max-height: 280px; overflow-y: auto; display: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7); z-index: 200;
+    }
+    .nav-dropdown::-webkit-scrollbar { width: 3px; }
+    .nav-dropdown::-webkit-scrollbar-thumb { background: var(--border-bright); }
+    .nav-dropdown h4 {
+      padding: 7px 12px; font-family: 'Cinzel', serif;
+      font-size: 8px; letter-spacing: 0.25em;
+      color: var(--text-dim); text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 12px; text-decoration: none;
+      color: var(--text); font-size: 13px; font-weight: 500;
+      border-bottom: 1px solid rgba(26,61,30,0.3);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-dropdown-item:last-child { border-bottom: none; }
+    .nav-dropdown-item:hover { background: var(--bg-surface); color: var(--green); }
+    .nav-dropdown-item img { width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--border); object-fit: cover; }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative; height: 50vh; min-height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; margin-top: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_3.jpg') center 30% / cover no-repeat;
+      filter: brightness(0.3) saturate(0.6);
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from{transform:scale(1.03)} to{transform:scale(1.08)} }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(6,13,7,0.4) 0%, rgba(6,13,7,0) 40%, rgba(6,13,7,0.8) 85%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; text-align: center; animation: fadeDown 0.8s ease both; }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif; font-size: 10px;
+      letter-spacing: 0.4em; color: var(--green-mid);
+      text-transform: uppercase; margin-bottom: 0.75rem; opacity: 0.8;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(32px, 6vw, 60px);
+      font-weight: 900; color: var(--text-bright); letter-spacing: 0.06em;
+      text-shadow: 0 0 60px rgba(74,222,128,0.15), 0 4px 20px rgba(0,0,0,0.8);
+    }
+    .hero-title span { color: var(--green); text-shadow: 0 0 30px rgba(74,222,128,0.4); }
+
+    /* ── MAIN ────────────────────────────────────────────────── */
+    .main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* Barre de filtre */
+    .filter-bar {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 2.5rem; animation: fadeUp 0.5s ease both;
+    }
+    .filter-input-wrap { position: relative; flex: 1; max-width: 340px; }
+    .filter-input-wrap input {
+      width: 100%; padding: 10px 40px 10px 14px;
+      background: var(--bg-surface); border: 1px solid var(--border-bright);
+      border-radius: 4px; color: var(--text-bright);
+      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .filter-input-wrap input:focus {
+      border-color: var(--green-mid); box-shadow: 0 0 0 2px rgba(74,222,128,0.1);
+    }
+    .filter-input-wrap input::placeholder { color: var(--text-dim); }
+    .filter-icon {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--green-mid); pointer-events: none;
+    }
+    .filter-count {
+      font-family: 'Cinzel', serif; font-size: 10px;
+      letter-spacing: 0.15em; color: var(--text-dim);
+    }
+
+    /* Grille */
+    .champ-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media(max-width: 800px) { .champ-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media(max-width: 560px) { .champ-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .champ-card {
+      display: block; text-decoration: none;
+      position: relative; border-radius: 4px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: border-color 0.25s, transform 0.25s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .champ-card:hover { border-color: var(--green-dark); transform: translateY(-3px); }
+
+    .champ-card::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 4px; border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(74,222,128,0.08), transparent 50%) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.25s; pointer-events: none;
+    }
+    .champ-card:hover::before { opacity: 1; }
+
+    .champ-img-wrap {
+      width: 100%; aspect-ratio: 1/1; overflow: hidden;
+    }
+    .champ-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      filter: brightness(0.85) saturate(0.8);
+      transition: filter 0.3s, transform 0.3s;
+      display: block;
+    }
+    .champ-card:hover .champ-img-wrap img {
+      filter: brightness(1) saturate(1); transform: scale(1.05);
+    }
+
+    .champ-name {
+      padding: 10px 8px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 13px; letter-spacing: 0.08em;
+      color: var(--text);
+      transition: color 0.2s;
+      border-top: 1px solid var(--border);
+    }
+    .champ-card:hover .champ-name { color: var(--green); }
+
+    .no-results {
+      grid-column: 1/-1; text-align: center;
+      padding: 3rem; color: var(--text-dim);
+      font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.15em;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem 1rem;
+      text-align: center; font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim);
+    }
+    footer a { color: var(--green-dark); text-decoration: none; }
+    footer a:hover { color: var(--green-mid); }
+
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:none} }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">Urgot Guide</a>
+    <ul class="nav-links">
+      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
+      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
+      <li><a href="matchup.html" class="active">MatchUp</a></li>
+      <li><a href="calculator.html">Build Calculator</a></li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()" />
+      <span class="nav-search-icon">🔍</span>
+      <div class="nav-dropdown" id="nav-dropdown">
+        <h4>Champions</h4>
+        <div id="nav-list"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Top Lane</p>
+      <h1 class="hero-title">Match<span>Up</span></h1>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="filter-bar">
+      <div class="filter-input-wrap">
+        <input type="text" id="filter-input" placeholder="Filter champions..." oninput="filterChamps()" />
+        <span class="filter-icon">🔍</span>
+      </div>
+      <span class="filter-count" id="filter-count"></span>
+    </div>
+    <div class="champ-grid" id="champ-grid"></div>
+  </main>
+
+  <footer>
+    Not affiliated with Riot Games &nbsp;·&nbsp;
+    <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Best Urgot World ↗</a>
+  </footer>
+
+<script>
+const champions = [
+  { name:'Aatrox',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg' },
+  { name:'Akali',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_0.jpg' },
+  { name:'Ambessa',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ambessa_0.jpg' },
+  { name:'Aurora',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aurora_0.jpg' },
+  { name:'Camille',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Camille_0.jpg' },
+  { name:'Cassiopeia',   img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Cassiopeia_0.jpg' },
+  { name:"Cho'Gath",     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Chogath_0.jpg' },
+  { name:'Darius',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Darius_0.jpg' },
+  { name:'Dr. Mundo',    img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/DrMundo_0.jpg' },
+  { name:'Fiora',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiora_0.jpg' },
+  { name:'Gangplank',    img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gangplank_0.jpg' },
+  { name:'Garen',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Garen_0.jpg' },
+  { name:'Gnar',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gnar_0.jpg' },
+  { name:'Gragas',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gragas_0.jpg' },
+  { name:'Gwen',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gwen_0.jpg' },
+  { name:'Heimerdinger', img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Heimerdinger_0.jpg' },
+  { name:'Hwei',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Hwei_0.jpg' },
+  { name:'Illaoi',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Illaoi_0.jpg' },
+  { name:'Irelia',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Irelia_0.jpg' },
+  { name:'Jax',          img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jax_0.jpg' },
+  { name:'Jayce',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jayce_0.jpg' },
+  { name:'Kayle',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kayle_0.jpg' },
+  { name:'Kennen',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kennen_0.jpg' },
+  { name:'Kled',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kled_0.jpg' },
+  { name:"K'Sante",      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/KSante_0.jpg' },
+  { name:'Lee Sin',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg' },
+  { name:'Malphite',     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Malphite_0.jpg' },
+  { name:'Maokai',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Maokai_0.jpg' },
+  { name:'Master Yi',    img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MasterYi_0.jpg' },
+  { name:'Mordekaiser',  img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Mordekaiser_0.jpg' },
+  { name:'Nasus',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nasus_0.jpg' },
+  { name:'Neeko',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Neeko_0.jpg' },
+  { name:'Olaf',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Olaf_0.jpg' },
+  { name:'Ornn',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ornn_0.jpg' },
+  { name:'Pantheon',     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pantheon_0.jpg' },
+  { name:'Poppy',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Poppy_0.jpg' },
+  { name:'Quinn',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Quinn_0.jpg' },
+  { name:'Renekton',     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Renekton_0.jpg' },
+  { name:'Riven',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Riven_0.jpg' },
+  { name:'Rumble',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rumble_0.jpg' },
+  { name:'Ryze',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ryze_0.jpg' },
+  { name:'Sett',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sett_0.jpg' },
+  { name:'Shen',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shen_0.jpg' },
+  { name:'Singed',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Singed_0.jpg' },
+  { name:'Sion',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sion_0.jpg' },
+  { name:'Smolder',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Smolder_0.jpg' },
+  { name:'Swain',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Swain_0.jpg' },
+  { name:'Sylas',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sylas_0.jpg' },
+  { name:'Tahm Kench',   img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/TahmKench_0.jpg' },
+  { name:'Teemo',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Teemo_0.jpg' },
+  { name:'Trundle',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Trundle_0.jpg' },
+  { name:'Tryndamere',   img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Tryndamere_0.jpg' },
+  { name:'Udyr',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Udyr_0.jpg' },
+  { name:'Varus',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Varus_0.jpg' },
+  { name:'Vayne',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_0.jpg' },
+  { name:'Vladimir',     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vladimir_0.jpg' },
+  { name:'Volibear',     img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Volibear_0.jpg' },
+  { name:'Warwick',      img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Warwick_0.jpg' },
+  { name:'Wukong',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MonkeyKing_0.jpg' },
+  { name:'Yasuo',        img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg' },
+  { name:'Yone',         img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yone_0.jpg' },
+  { name:'Yorick',       img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yorick_0.jpg' },
+  { name:'Zac',          img:'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zac_0.jpg' },
+  { name:'Zaahen',       img:'https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Zaahen.png' },
+].sort(function(a,b){ return a.name.localeCompare(b.name); });
+
+function slugify(name) {
+  return name.toLowerCase()
+    .replace(/ & /g,'-').replace(/[^\w\s-]/g,'')
+    .replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+function renderGrid(filter) {
+  var grid = document.getElementById('champ-grid');
+  var count = document.getElementById('filter-count');
+  var filtered = filter
+    ? champions.filter(function(c){ return c.name.toLowerCase().includes(filter.toLowerCase()); })
+    : champions;
+
+  count.textContent = filtered.length + ' champion' + (filtered.length > 1 ? 's' : '');
+  grid.innerHTML = '';
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-results">No champion found</div>';
+    return;
+  }
+
+  filtered.forEach(function(champ, i) {
+    var url = 'https://sites.google.com/view/urgot-beginner-guide/urgot/' + slugify(champ.name) + '/';
+    var a = document.createElement('a');
+    a.className = 'champ-card';
+    a.href = url;
+    a.target = '_blank';
+    a.style.animationDelay = (i * 0.02) + 's';
+    a.innerHTML =
+      '<div class="champ-img-wrap"><img src="' + champ.img + '" alt="' + champ.name + '" loading="lazy" onerror="this.src=\'https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/' + champ.name.replace(/[^a-zA-Z]/g,'') + '.png\'"/></div>'
+      + '<div class="champ-name">' + champ.name + '</div>';
+    grid.appendChild(a);
+  });
+}
+
+function filterChamps() {
+  renderGrid(document.getElementById('filter-input').value);
+}
+
+// Nav search
+const navChamps = champions.map(function(c) {
+  return { name: c.name, img: 'https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/' + (c.name.replace(/['\s.]/g,'') || c.name) + '.png' };
+});
+
+function navFilter() {
+  var val = document.getElementById('nav-search-input').value;
+  var navList = document.getElementById('nav-list');
+  var navDropdown = document.getElementById('nav-dropdown');
+  navList.innerHTML = '';
+  if (val.length < 1) { navDropdown.style.display = 'none'; return; }
+  var filtered = champions.filter(function(c){ return c.name.toLowerCase().includes(val.toLowerCase()); });
+  navDropdown.style.display = filtered.length ? 'block' : 'none';
+  filtered.forEach(function(champ) {
+    var url = 'https://sites.google.com/view/urgot-beginner-guide/urgot/' + slugify(champ.name) + '/';
+    var a = document.createElement('a');
+    a.className = 'nav-dropdown-item'; a.href = url; a.target = '_blank';
+    a.innerHTML = '<img src="' + champ.img + '" alt="' + champ.name + '" onerror="this.style.display=\'none\'"/><span>' + champ.name + '</span>';
+    navList.appendChild(a);
+  });
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-search')) document.getElementById('nav-dropdown').style.display = 'none';
+});
+
+// Init
+renderGrid('');
+document.getElementById('filter-count').textContent = champions.length + ' champions';
+</script>
+</body>
+</html>

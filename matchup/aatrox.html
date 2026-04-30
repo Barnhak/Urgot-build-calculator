@@ -127,7 +127,7 @@
       transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.3s ease;
       opacity: 0; margin-top: 0;
     }
-    .video-panel.open { max-height: 6px; opacity: 1; margin-top: 1rem; }
+    .video-panel.open { max-height: 600px; opacity: 1; margin-top: 1rem; }
     .video-inner { border-radius: 4px; overflow: hidden; border: 1px solid var(--border-bright); background: #000; }
     .video-inner video { width: 100%; display: block; max-height: 420px; }
 
@@ -148,12 +148,12 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="index.html">Urgot Guide</a>
+    <a class="nav-logo" href="../index.html">Urgot Guide</a>
     <ul class="nav-links">
       <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
       <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
-      <li><a href="matchup.html">MatchUp</a></li>
-      <li><a href="calculator.html">Build Calculator</a></li>
+      <li><a href="../matchup.html">MatchUp</a></li>
+      <li><a href="../calculator.html">Build Calculator</a></li>
     </ul>
     <div class="nav-search">
       <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()" />
@@ -189,7 +189,7 @@
         <!-- Runes -->
         <div class="rune-block">
           <div class="rune-img">
-            <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page2.png" alt="Rune page Cut Down" />
+            <img src="https://barnhak.github.io/Urgot-build-calculator/runes/rune-page2.png" alt="Rune page Cut Down" />
           </div>
           <div class="rune-text">
             <h4>Runes</h4>
@@ -228,7 +228,7 @@
         <div class="video-panel" id="video-early-game">
           <div class="video-inner">
             <video controls preload="none">
-              <source src="https://barnhak.github.io/Urgot-guide/video/earlygame_aatrox.mp4" type="video/mp4" />
+              <source src="https://barnhak.github.io/Urgot-build-calculator/video/earlygame_aatrox.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -290,7 +290,7 @@ function toggleVideo(id) {
 
 // Nav search
 const BASE_DDR = 'https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
-const BASE_GUIDE = 'https://sites.google.com/view/urgot-guide/urgot/';
+const BASE_GUIDE = 'https://sites.google.com/view/urgot-beginner-guide/urgot/';
 const champNames = ['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 
 function slugify(name) {

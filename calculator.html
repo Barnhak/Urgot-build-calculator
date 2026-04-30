@@ -62,7 +62,7 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://barnhak.github.io/Urgot-build-calculator/Urgot_0.png') center 30% / cover no-repeat;
+      background: url('https://barnhak.github.io/Urgot-guide/Urgot_0.png') center 30% / cover no-repeat;
       filter: brightness(0.25) saturate(0.6);
       animation: heroZoom 20s ease-in-out infinite alternate;
     }
@@ -301,7 +301,7 @@ const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}
 fetch("https://ddragon.leagueoflegends.com/api/versions.json")
   .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
 
-const BASE_URL  = "https://barnhak.github.io/Urgot-build-calculator/";
+const BASE_URL  = "https://barnhak.github.io/Urgot-Urgot-guide/";
 const RUNE_BASE = BASE_URL + "runes/";
 const GUIDE_BASE = "matchup/";
 

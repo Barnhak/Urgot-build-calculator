@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>K'Sante — Urgot Guide</title>
+  <title>Lee Sin — Urgot Guide</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -15,7 +15,7 @@
     .nav-search{position:relative}.nav-search input{background:rgba(15,34,17,0.8);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:12px;padding:5px 30px 5px 10px;width:180px;outline:none;transition:border-color 0.2s,width 0.3s}.nav-search input:focus{border-color:var(--green-mid);width:220px}.nav-search input::placeholder{color:var(--text-dim)}.nav-search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--green-mid);pointer-events:none}
     .nav-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:220px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);z-index:200}.nav-dropdown h4{padding:7px 12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;border-bottom:1px solid var(--border)}.nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:7px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border-bottom:1px solid rgba(26,61,30,0.3);transition:background 0.15s,color 0.15s}.nav-dropdown-item:last-child{border-bottom:none}.nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}.nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
     .hero{position:relative;height:55vh;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/KSante_0.jpg');background-size:cover;background-position:60% top;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+    .hero-bg{position:absolute;inset:0;background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg');background-size:cover;background-position:55% top;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
     @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.07)}}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.3) 0%,rgba(6,13,7,0) 35%,rgba(6,13,7,0.75) 80%,var(--bg) 100%)}
     .hero-content{position:relative;text-align:center;animation:fadeDown 0.8s ease both}.hero-champ-icon{width:72px;height:72px;border-radius:4px;border:2px solid var(--green-dark);margin:0 auto 1rem;overflow:hidden}.hero-champ-icon img{width:100%;height:100%;object-fit:cover}.hero-title{font-family:'Cinzel',serif;font-size:clamp(36px,7vw,72px);font-weight:900;color:var(--text-bright);letter-spacing:0.08em;text-shadow:0 0 60px rgba(74,222,128,0.15),0 4px 20px rgba(0,0,0,0.9)}.hero-score{margin-top:0.75rem;font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;text-shadow:0 0 20px rgba(74,222,128,0.4)}
@@ -34,10 +34,11 @@
   <nav>
     <a class="nav-logo" href="../index.html">Urgot Guide</a>
     <ul class="nav-links">
-      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
-      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
+      <li><a href="../mechanics.html">Mechanics</a></li>
+      <li><a href="../runes.html">Runes</a></li>
       <li><a href="../matchup.html">MatchUp</a></li>
       <li><a href="../calculator.html">Build Calculator</a></li>
+      <li><a href="../build.html">Build Guide</a></li>
     </ul>
     <div class="nav-search">
       <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
@@ -49,9 +50,9 @@
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/KSante.png" alt="K'Sante"/></div>
-      <h1 class="hero-title">K'Sante</h1>
-      <p class="hero-score">&#10022; K'Sante Hard Favored 7/10</p>
+      <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/LeeSin.png" alt="Lee Sin"/></div>
+      <h1 class="hero-title">Lee Sin</h1>
+      <p class="hero-score">&#10022; Skill MatchUp 5/10</p>
     </div>
   </section>
   <div class="page">
@@ -59,22 +60,21 @@
       <p class="section-title">Runes &amp; Summoners</p>
       <div class="rune-summ-grid">
         <div class="rune-block">
-          <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page3.png" alt="Rune page"/></div>
-          <div class="rune-text"><h4>Runes</h4><p>Like always on Urgot you go PTA, Triumph and Bloodline and Last Stand. And in secondary runes, Magic Boots and Approach Velocity.</p></div>
+          <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Rune page"/></div>
+          <div class="rune-text"><h4>Runes</h4><p>Like always on Urgot you go PTA, Triumph and Bloodline and Last Stand. And in secondary runes, Triple Tonic and Approach Velocity.</p></div>
         </div>
         <div class="summ-block">
           <h4>Summoners spells</h4>
-          <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="TP"/></div></div></div>
-          <div class="summ-text"><p>You will never have profit of Ignite in this MU except if K'Sante is trash but he's just too tanky to fall. Even if you kill him once, one item behind he will destroy you in 1v1 with 45 armor. Just scale and destroy his team.</p></div>
+          <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div><span class="summ-or">or</span><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerHaste.png" alt="Ghost"/></div></div></div>
+          <div class="summ-text"><p>I like Ignite way more than Ghost in this lane. After 6 if you Ghost on Lee he will just kick you and you lose a summ. When you jump on him you need to OS him so Ignite is better, and Lee Sin has some crazy heal.</p></div>
         </div>
       </div>
     </div>
     <div class="section-block">
       <p class="section-title">How to play VS</p>
-      <div class="paragraph"><p>Like I said, K'Sante is never going down in lane — he can literally outrange you with his Q and gap close with the slow + run you down, and until 9 you're a free 300g walking on lane.</p></div>
-<div class="paragraph"><p>You can still fight him level 1 — it's the best level to do so — but don't over trade with him or he will catch you and deal an absurd amount of damage. It's a farming lane so focus on the CS. The best is to get push so he can't abuse the long lane to run you down with Q and you can abuse trade pattern with him. He's really free on a gank so if your jungler comes just Q and if possible E him and he's dead. After first back he can buy 30 armor and you lose until 9+ BC and boots, and after that point you outscale him. Even at this point don't really try to kill K'Sante — if he R you it's a 50/50. The best you can do is Q then toggle then back off then Q and repeat but never commit if he's above 50% HP.</p></div>
-<div class="paragraph"><p>Still the lane is not hopeless — you can really abuse him when he goes to farm with Q + PTA and Flash E + R when he's around 40% HP, only if you have BC.</p></div>
-<div class="paragraph"><p>But be careful — do not commit an E when he has his E up, he'll dodge and flick you. You can buffer your E in K'Sante W but only when he launches himself or you will be more CC'd than him. You can even buffer your E in his R but you need a godlike timing and only him will move. Don't play near wall or you are dead on a R even full HP.</p></div>
+      <div class="paragraph"><p>Level 1 is when Lee Sin is the least annoying — go behind him and trade until PTA procs, disengage after that. His 2nd Q comes really quickly and Conq boosts him hard.</p></div>
+<div class="paragraph"><p>Lee Sin is an annoying MU — he can just Q poke you and if you don't hold your E he will just bait you with a Q W out and beat you up after you E in. He has crazy sustain with W but you can abuse him when he goes to farm. When he walks up stay behind the wave to dodge his Q and you can free Q + PTA him until 65% HP then Flash E and kill him. You can buffer your E in his R but the timing is crazy fast and Lee R animation goes after he pushes you — but if you succeed you win. Lee Sin gank setup is crazy when his kick is up so pay attention to that timing.</p></div>
+<div class="paragraph"><p>You hard outscale him but he will try to trap your team in bush and one shot someone so try following your team after lane. If you don't give him a huge lead he will be useless.</p></div>
     </div>
     
   </div>

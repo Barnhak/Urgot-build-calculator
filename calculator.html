@@ -62,9 +62,7 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background:
-        url('https://barnhak.github.io/Urgot-guide/Urgot_0.png')
-        center center / cover no-repeat;
+      background: url('https://barnhak.github.io/Urgot-build-calculator/Urgot_0.png') center 30% / cover no-repeat;
       filter: brightness(0.25) saturate(0.6);
       animation: heroZoom 20s ease-in-out infinite alternate;
     }
@@ -201,21 +199,22 @@
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">Urgot Guide</a>
-  <ul class="nav-links">
-    <li><a href="mechanics.html" class="active">Mechanics</a></li>
-    <li><a href="runes.html">Runes</a></li>
-    <li><a href="matchup.html">MatchUp</a></li>
-    <li><a href="calculator.html">Build Calculator</a></li>
-    <li><a href="build.html">Build Guide</a></li>
-  </ul>
-  <div class="nav-search">
-    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
-    <span class="nav-search-icon">🔍</span>
-    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">Urgot Guide</a>
+    <ul class="nav-links">
+      <li><a href="mechanics.html" class="active">Mechanics</a></li>
+      <li><a href="runes.html">Runes</a></li>
+      <li><a href="matchup.html">MatchUp</a></li>
+      <li><a href="calculator.html">Build Calculator</a></li>
+      <li><a href="build.html">Build Guide</a></li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+      <span class="nav-search-icon">🔍</span>
+      <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+    </div>
+  </nav>
 
   <!-- HERO -->
   <section class="hero">
@@ -300,7 +299,7 @@ const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}
 fetch("https://ddragon.leagueoflegends.com/api/versions.json")
   .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
 
-const BASE_URL  = "https://barnhak.github.io/Urgot-guide/";
+const BASE_URL  = "https://barnhak.github.io/Urgot-build-calculator/";
 const RUNE_BASE = BASE_URL + "runes/";
 const GUIDE_BASE = "matchup/";
 
@@ -325,17 +324,17 @@ function champImg(name) {
 }
 
 const ITEM_IDS = {
-  "Black Cleaver":3071,"Gluttonous Greaves ":223008,"Plated Steelcaps":3047,
+  "Black Cleaver":3071,"Gluttonous Greaves":223008,"Plated Steelcaps":3047,
   "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
   "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,
   "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
-  "Serpent's Fang":226695,"Thornmail":3075,"Chempunk Chainsword":6609,
+  "Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
   "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
 };
 function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
 
 const CHAMPS_BY_ROLE = {
-  top: ["Aatrox","Akali","Ambessa","Anivia","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yasuo","Yone","Yorick","Zac","Zaahen"],
+  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yasuo","Yone","Yorick","Zac","Zaahen"],
   jg:  ["Amumu","Bel'Veth","Briar","Diana","Ekko","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed"],
   mid: ["Ahri","Akali","Anivia","Annie","Aurelion Sol","Azir","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Viktor","Vladimir","Yasuo","Yone","Zed","Zoe","Zyra"],
   adc: ["Aphelios","Ashe","Caitlyn","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Xayah","Yunara","Zeri","Ziggs"],
@@ -413,7 +412,7 @@ const RUNE_PAGES = {
   page8:{label:"Yorick",img:"rune-page8.png"},
 };
 const CHAMP_RUNE_MAP = {
-  "aatrox":"page2","anivia":"page2","darius":"page2","aurora":"page2","irelia":"page2","varus":"page2","vayne":"page2","vladimir":"page2",
+  "aatrox":"page2","darius":"page2","aurora":"page2","irelia":"page2","varus":"page2","vayne":"page2","vladimir":"page2",
   "ornn":"page3","malphite":"page3","dr. mundo":"page3","cho'gath":"page3","zac":"page3","tahm kench":"page3","k'sante":"page3","maokai":"page3",
   "renekton":"page4","shen":"page4","rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
 };
@@ -438,7 +437,7 @@ function getTags(name) {
 }
 
 function analyzeComp(champs) {
-  var ad=0,ap=0,ccTotal=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
+  var ad=0,ap=0,ccTotal=0,ccPhysical=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
   champs.filter(Boolean).forEach(function(c) {
     var t = getTags(c);
     if (t.includes("AD"))      ad++;
@@ -449,9 +448,14 @@ function analyzeComp(champs) {
     if (t.includes("SHIELD"))  shield++;
     if (t.includes("HEAL"))    heal++;
     if (t.includes("EXECUTE")) execute++;
-    ccTotal += getCCValue(t);
+    var cc = getCCValue(t);
+    ccTotal += cc;
+    // Only count CC from non-pure-AP champions for Mercs decision
+    // Pure AP = has AP but no AD
+    var isPureAP = t.includes("AP") && !t.includes("AD");
+    if (!isPureAP) ccPhysical += cc;
   });
-  return { ad,ap,ccTotal,crit,burst,burn,shield,heal,execute };
+  return { ad,ap,ccTotal,ccPhysical,crit,burst,burn,shield,heal,execute };
 }
 
 function updateChampPreview(role) {
@@ -486,12 +490,20 @@ function onInput() {
 }
 
 function getBoots(a) {
-  if (a.crit >= 3)                 return { name:"Plated Steelcaps",  note: a.crit + " crit enemies -- armor priority" };
-  if (a.ccTotal >= 5)              return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- Tenacity mandatory" };
-  if (a.ad >= 3 && a.ccTotal >= 3) return { conflict:true, primary:{name:"Plated Steelcaps",note:"3+ AD -- armor priority"}, secondary:{name:"Mercury's Treads",note:a.ccTotal+" CC -- consider Tenacity"} };
-  if (a.ad >= 3 || a.crit >= 1)   return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : "Crit enemies" };
-  if (a.ccTotal >= 2)              return { name:"Mercury's Treads",  note: "CC enemies" };
-  return                                  { name:"Gluttonous Greaves", note: "Standard -- sustain" };
+  // Crit absolute priority
+  if (a.crit >= 3)                  return { name:"Plated Steelcaps",  note: a.crit + " crit enemies -- armor priority" };
+  // Overwhelming CC (4+ from ANY source) → Mercs mandatory
+  if (a.ccTotal >= 4)               return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- Tenacity mandatory" };
+  // 3+ AD + physical CC (4+) → conflict
+  if (a.ad >= 3 && a.ccPhysical >= 4) return { conflict:true, primary:{name:"Plated Steelcaps",note:"3+ AD -- armor priority"}, secondary:{name:"Mercury's Treads",note:a.ccTotal+" CC -- consider Tenacity"} };
+  // 3+ AD or 2+ crit → Steelcaps
+  if (a.ad >= 3 || a.crit >= 2)    return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : a.crit + " crit enemies" };
+  // Physical CC 3+ (non-AP sources) → Mercs
+  if (a.ccPhysical >= 3)            return { name:"Mercury's Treads",  note: a.ccPhysical + " CC (physical) -- Tenacity" };
+  // Mixed damage → Gluttonous Greaves
+  if (a.ap >= 2 && a.ad >= 2)       return { name:"Gluttonous Greaves", note: "Mixed damage comp -- omnivamp sustain" };
+  // Default
+  return                                   { name:"Gluttonous Greaves", note: "Standard -- omnivamp sustain" };
 }
 
 function getSituItems(a) {
@@ -509,7 +521,7 @@ function buildItems(top, a) {
   var abatteur = ABATTEUR_CHAMPS.includes(n), shieldStart = SHIELD_START.includes(n);
   var boots = getBoots(a), warnings = [], items = [];
   warnings.push("🛡 Start: " + (shieldStart ? "Doran's Shield -- vs " + top + " sustain against poke" : "Doran's Blade -- Standard start"));
-  if (bootsFirst)     warnings.push("⚡ vs Olaf: buy Boots of Swiftness first before Black Cleaver");
+  if (bootsFirst)     warnings.push("⚡ vs Olaf: buy Gluttonous Greaves first before Black Cleaver for mobility");
   if (mercFirst)      warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
   if (steelcapsFirst) warnings.push("🥾 vs " + top + ": rush Plated Steelcaps before Black Cleaver");
   if (bramble)        warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver");
@@ -528,7 +540,7 @@ function buildItems(top, a) {
     return { items, warnings };
   }
 
-  if (bootsFirst) { items.push({slot:"Boots",name:"Boots of Swiftness",note:"Rush vs Olaf"}); items.push({slot:"Item 1",name:"Black Cleaver",note:"Core Urgot"}); }
+  if (bootsFirst) { items.push({slot:"Boots",name:"Gluttonous Greaves",note:"Rush vs Olaf -- mobility + sustain"}); items.push({slot:"Item 1",name:"Black Cleaver",note:"Core Urgot"}); }
   else if (mercFirst) { items.push({slot:"Boots",name:"Mercury's Treads",note:"Rush vs Kennen"}); items.push({slot:"Item 1",name:"Black Cleaver",note:"Core Urgot"}); }
   else if (steelcapsFirst) { items.push({slot:"Boots",name:"Plated Steelcaps",note:"Rush vs "+top}); items.push({slot:"Item 1",name:"Black Cleaver",note:"Core Urgot"}); }
   else {

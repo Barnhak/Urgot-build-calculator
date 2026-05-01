@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build Guide — Urgot Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#4ADE80;--green-mid:#22C55E;--green-dark:#15803D;--green-dim:#166534;--green-deep:#052e16;
+      --bg:#060D07;--bg-surface:#0B1A0D;--bg-card:#0F2211;--bg-card2:#122614;
+      --border:#1A3D1E;--border-bright:#2D6A33;
+      --text:#A8D4A0;--text-dim:#4A7550;--text-bright:#E8F5E2;
+      --blue:#0BC4E3;--red:#C84B4B;--orange:#E67E22;--purple:#9B59B6;--gold:#C89B3C;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(74,222,128,0.04) 0%,transparent 60%),
+        repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),
+        repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(6,13,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+    .nav-links a{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--green)}
+    .nav-search{position:relative}
+    .nav-search input{background:rgba(15,34,17,0.8);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:12px;padding:5px 30px 5px 10px;width:180px;outline:none;transition:border-color 0.2s,width 0.3s}
+    .nav-search input:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(74,222,128,0.1);width:220px}
+    .nav-search input::placeholder{color:var(--text-dim)}
+    .nav-search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--green-mid);pointer-events:none}
+    .nav-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:220px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);z-index:200}
+    .nav-dropdown h4{padding:7px 12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;border-bottom:1px solid var(--border)}
+    .nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:7px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border-bottom:1px solid rgba(26,61,30,0.3);transition:background 0.15s,color 0.15s}
+    .nav-dropdown-item:last-child{border-bottom:none}
+    .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
+    .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
+
+    /* ── HERO ── */
+    .hero{position:relative;height:38vh;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png') center 20% / cover no-repeat;filter:brightness(0.22) saturate(0.5);animation:heroZoom 20s ease-in-out infinite alternate}
+    @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.08)}}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.4) 0%,rgba(6,13,7,0) 40%,rgba(6,13,7,0.85) 85%,var(--bg) 100%)}
+    .hero-content{position:relative;text-align:center;animation:fadeDown 0.7s ease both}
+    .hero-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.4em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.6rem;opacity:0.8}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--text-bright);letter-spacing:0.08em;text-shadow:0 0 60px rgba(74,222,128,0.15),0 4px 20px rgba(0,0,0,0.9)}
+    .hero-title span{color:var(--green);text-shadow:0 0 30px rgba(74,222,128,0.4)}
+    .hero-sub{font-size:13px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;margin-top:0.6rem}
+
+    /* ── MAIN ── */
+    .main{max-width:960px;margin:0 auto;padding:3rem 1.5rem 6rem}
+
+    /* ── SECTION CARDS (starter/boots) ── */
+    .section-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:2rem;margin-bottom:1.5rem;position:relative;animation:fadeUp 0.5s ease both}
+    .section-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .section-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.25rem}
+
+    .items-row{display:flex;flex-wrap:wrap;gap:14px}
+    .item-card{display:flex;align-items:flex-start;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:12px 14px;flex:1;min-width:220px;transition:border-color 0.2s}
+    .item-card:hover{border-color:var(--border-bright)}
+    .item-icon{width:48px;height:48px;border-radius:4px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0;background:var(--bg)}
+    .item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .item-info{}
+    .item-name{font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;color:var(--green-mid);margin-bottom:4px}
+    .item-desc{font-size:13px;color:var(--text);line-height:1.5}
+
+    /* ── COLLAPSIBLE CATEGORY ── */
+    .cat-wrapper{margin-bottom:12px;border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+    .cat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;background:var(--bg-surface);transition:background 0.2s;user-select:none;position:relative}
+    .cat-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-color,var(--green-dark));transition:background 0.2s}
+    .cat-header:hover{background:var(--bg-card)}
+    .cat-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-color,var(--green))}
+    .cat-badge{font-size:11px;color:var(--text-dim);letter-spacing:0.05em;font-family:'Rajdhani',sans-serif}
+    .cat-arrow{color:var(--accent-color,var(--green));font-size:12px;transition:transform 0.35s;margin-left:12px}
+    .cat-header.open .cat-arrow{transform:rotate(180deg)}
+    .cat-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;background:var(--bg-card)}
+    .cat-body.open{max-height:2000px}
+    .cat-inner{padding:1.25rem 1.25rem 1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+    .cat-item{display:flex;align-items:flex-start;gap:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:10px 12px;transition:border-color 0.2s}
+    .cat-item:hover{border-color:var(--border-bright)}
+    .cat-item-icon{width:44px;height:44px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0;background:var(--bg)}
+    .cat-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .cat-item-info{}
+    .cat-item-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;margin-bottom:3px}
+    .cat-item-desc{font-size:12px;color:var(--text-dim);line-height:1.45}
+
+    /* accent colors per category */
+    .cat-core .cat-header{--accent-color:var(--green)}
+    .cat-great .cat-header{--accent-color:#0BC4E3}
+    .cat-good .cat-header{--accent-color:var(--gold)}
+    .cat-situ .cat-header{--accent-color:var(--orange)}
+    .cat-bad .cat-header{--accent-color:var(--red)}
+    .cat-core .cat-item-name{color:var(--green)}
+    .cat-great .cat-item-name{color:#0BC4E3}
+    .cat-good .cat-item-name{color:var(--gold)}
+    .cat-situ .cat-item-name{color:var(--orange)}
+    .cat-bad .cat-item-name{color:var(--red)}
+
+    /* section divider */
+    .divider{display:flex;align-items:center;gap:14px;margin:2rem 0 1.5rem}
+    .divider span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-dim);white-space:nowrap}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+    /* first back grid */
+    .back-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+    .back-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:14px;text-align:center;transition:border-color 0.2s}
+    .back-card:hover{border-color:var(--border-bright)}
+    .back-card-icons{display:flex;justify-content:center;gap:6px;margin-bottom:8px}
+    .back-card .item-icon{width:40px;height:40px}
+    .back-card-price{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:0.08em;margin-bottom:6px}
+    .back-card-desc{font-size:12px;color:var(--text-dim);line-height:1.45}
+    .back-card.highlight{border-color:var(--green-dark);background:rgba(74,222,128,0.04)}
+    .back-card.highlight .back-card-price{color:var(--green)}
+    .back-card.bad{border-color:rgba(200,75,75,0.3);background:rgba(200,75,75,0.04)}
+    .back-card.bad .back-card-price{color:var(--red)}
+    .back-card.bad .back-card-desc{color:#C84B4B}
+
+    footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
+    footer a{color:var(--green-dark);text-decoration:none}
+    footer a:hover{color:var(--green-mid)}
+
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @media(max-width:600px){.items-row{flex-direction:column}.cat-inner{grid-template-columns:1fr}.nav-links{gap:1rem}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
+  <ul class="nav-links">
+    <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
+    <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
+    <li><a href="matchup.html">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html" class="active">Build Guide</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+    <span class="nav-search-icon">🔍</span>
+    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Urgot Guide</p>
+    <h1 class="hero-title">Item <span>Build</span></h1>
+    <p class="hero-sub">What to buy, when, and why</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- ── STARTER ITEMS ── -->
+  <div class="section-block" style="animation-delay:0.05s">
+    <p class="section-label">✦ Starter Item</p>
+    <div class="items-row">
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div>
+        <div class="item-info">
+          <div class="item-name">Doran's Blade</div>
+          <div class="item-desc">Default item — you will take it in 98% of matchups.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div>
+        <div class="item-info">
+          <div class="item-name">Doran's Shield</div>
+          <div class="item-desc">Take this in all the high range and poke matchups like Teemo or Rumble.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOOTS ── -->
+  <div class="section-block" style="animation-delay:0.1s">
+    <p class="section-label">✦ Boots</p>
+    <div class="items-row">
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3009.png" alt="Swiftness"/></div>
+        <div class="item-info">
+          <div class="item-name">Boots of Swiftness</div>
+          <div class="item-desc">Excellent in mixed damage compositions and the best boots for Urgot overall.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3047.png" alt="Steelcaps"/></div>
+        <div class="item-info">
+          <div class="item-name">Plated Steelcaps</div>
+          <div class="item-desc">Very good in 2/3+ AD team and a good rush in Ambessa, Tryndamere, Jayce.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3111.png" alt="Mercury's"/></div>
+        <div class="item-info">
+          <div class="item-name">Mercury's Treads</div>
+          <div class="item-desc">Essential in high CC compositions. Rush against Kennen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FIRST BACK ── -->
+  <div class="section-block" style="animation-delay:0.15s">
+    <p class="section-label">✦ First Back</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:1.25rem">
+      <strong style="color:var(--green)">Black Cleaver is the only first item</strong> — every game, no exception. You need to prioritise this over everything like potions, boots, Magic Resist or armor. Except in some matchups where boots are good to rush first like Yasuo, Ambessa, Kennen…
+    </p>
+    <div class="back-grid">
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1031.png" alt="Chain Vest"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1033.png" alt="Null-Magic Mantle"/></div>
+        </div>
+        <div class="back-card-price">600g</div>
+        <div class="back-card-desc">The cheapest "good" back for Urgot. It delays your BC spike and is only good in low interaction MUs like Garen or K'Sante.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1036.png" alt="Long Sword"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1082.png" alt="Cull"/></div>
+        </div>
+        <div class="back-card-price">750g</div>
+        <div class="back-card-desc">Not a great back — it's just before Pickaxe but it does the job.</div>
+      </div>
+      <div class="back-card bad">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3865.png" alt="World Atlas"/></div>
+        </div>
+        <div class="back-card-price">800g — NEVER BUY</div>
+        <div class="back-card-desc">The worst item to build ever. Gives no good stats.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3076.png" alt="Bramble Vest"/></div>
+        </div>
+        <div class="back-card-price">800g</div>
+        <div class="back-card-desc">Only buy on first back in specific MUs like Wukong, Renekton, Irelia, Fiora to destroy their lane.</div>
+      </div>
+      <div class="back-card highlight">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+        </div>
+        <div class="back-card-price">875g — THE component</div>
+        <div class="back-card-desc">Pickaxe is THE component to first buy for Black Cleaver. It's great if you can back to buy it.</div>
+      </div>
+      <div class="back-card highlight">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3044.png" alt="Phage"/></div>
+        </div>
+        <div class="back-card-price">1100g</div>
+        <div class="back-card-desc">Phage first back is a great back due to the HP, AD and MS. It lets you trade more and apply a lot more pressure in lane.</div>
+      </div>
+      <div class="back-card highlight" style="grid-column:span 1">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1036.png" alt="Long Sword"/></div>
+        </div>
+        <div class="back-card-price">1225g — BEST back</div>
+        <div class="back-card-desc">Pickaxe and a Long Sword is THE BEST back — it's a late back because you need a lot of gold but you get so much stat for its value.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHAT TO BUILD ── -->
+  <div class="divider"><span>✦ What Item to Build</span></div>
+
+  <!-- CORE -->
+  <div class="cat-wrapper cat-core">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Core Items</div>
+        <div class="cat-badge">Essential every game</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3071.png" alt="Black Cleaver"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Black Cleaver</div>
+            <div class="cat-item-desc">The first item of Urgot — essential every game.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3053.png" alt="Sterak's Gage"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Sterak's Gage</div>
+            <div class="cat-item-desc">Usually the second item for Urgot in 90% of games — can be built 3rd at the profit of a Deadman's Plate if enemy team has 3+ AD.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GREAT -->
+  <div class="cat-wrapper cat-great">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Great Items</div>
+        <div class="cat-badge">Highly recommended — build often</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/222504.png" alt="Rookern"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Rookern</div>
+            <div class="cat-item-desc">Excellent in burst AP (Magic) damage. Like Syndra, Ryze, Gwen, Aurora (Luden's).</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3143.png" alt="Randuin's Omen"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Randuin's Omen</div>
+            <div class="cat-item-desc">OP in 2+ crit compositions — so almost all ADCs and Yasuo, Yone, Viego…</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/4401.png" alt="Force of Nature"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Force of Nature</div>
+            <div class="cat-item-desc">Great buy in burn champion compositions like Teemo, Aurelion, Malzahar. Gives MS which is excellent on Urgot.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3742.png" alt="Deadman's Plate"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Deadman's Plate</div>
+            <div class="cat-item-desc">Great in high mobility compositions and huge slow — very good armor item if enemy team doesn't have a lot of crit. Good vs Ashe, Illaoi, Smolder…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOD -->
+  <div class="cat-wrapper cat-good">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Good Items</div>
+        <div class="cat-badge">Situationally strong — pick wisely</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3075.png" alt="Thornmail"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Thornmail</div>
+            <div class="cat-item-desc">The only anti heal item you will ever do on Urgot. Build Bramble Vest and finish it as your last item — it's not worth completing before your other items.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6665.png" alt="Jak'Sho"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Jak'Sho, The Protean</div>
+            <div class="cat-item-desc">Great item but only in 4th or 5th slot (not counting boots). Its passive scales with bonus resistances so you need to build defensive items first to make it effective.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/2501.png" alt="Overlord's Bloodmail"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Overlord's Bloodmail</div>
+            <div class="cat-item-desc">This item fell off but is still good on Urgot. Build it if you need to carry a game and need more damage — in S16 a more tanky Urgot is better.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITUATIONAL -->
+  <div class="cat-wrapper cat-situ">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Situational Items</div>
+        <div class="cat-badge">Niche — only in specific scenarios</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6675.png" alt="Shojin"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Spear of Shojin</div>
+            <div class="cat-item-desc">Only build Shojin in 2+ tank or HP stacker compositions, like Mundo, Cho'Gath, Skarner, Alistar… It boosts your passive and helps taking them down faster.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6695.png" alt="Serpent's Fang"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Serpent's Fang</div>
+            <div class="cat-item-desc">Only build on Urgot when enemy team has a lot of shields (Karma, Lulu, Ivern…) and no one else in your team can build it. It's not a great item on Urgot.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3110.png" alt="Frozen Heart"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Frozen Heart</div>
+            <div class="cat-item-desc">Almost never build in game. The only reason you can possibly build it: it's the highest armor item available and if there are 2/3+ attack speed dependent champions.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3211.png" alt="Hullbreaker"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Hullbreaker</div>
+            <div class="cat-item-desc">Less and less useful this season — the only way you can use it is if your team is really behind and your lane opponent can't stop you from pushing, so you can create a 4v3 at objectives for your team.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAD -->
+  <div class="cat-wrapper cat-bad">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Bad Items — Never Build These</div>
+        <div class="cat-badge">Avoid at all costs</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3077.png" alt="Tiamat"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Tiamat</div>
+            <div class="cat-item-desc">No synergy with Urgot's kit — you have built-in wave clear with your legs. A pure waste of gold.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6631.png" alt="Stridebreaker"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Stridebreaker</div>
+            <div class="cat-item-desc">Bad item on Urgot — you already have a slow on Q and the active is redundant. Very inefficient stats for the cost.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6609.png" alt="Chempunk Chainsword"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Chempunk Chainsword</div>
+            <div class="cat-item-desc">Use Thornmail instead — it's a much better anti-heal option on Urgot due to its armor and passive.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3065.png" alt="Spirit Visage"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Death's Dance</div>
+            <div class="cat-item-desc">Looks tempting but gives no tankiness. Urgot needs bulk to survive — this item actively makes you easier to kill despite the damage it provides.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6632.png" alt="Divine Sunderer"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Maw of Malmortius</div>
+            <div class="cat-item-desc">Bad stats for Urgot — the passive shield triggers too late and the AD is wasted. Build Rookern or FoN instead for AP matchups.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3179.png" alt="Umbral Glaive"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Endless Hunger</div>
+            <div class="cat-item-desc">Pure damage item with no tankiness — completely against Urgot's identity as a fighter/tank hybrid. You will die instantly with this.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6698.png" alt="Profane Hydra"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Bastion Breaker</div>
+            <div class="cat-item-desc">Never build this on Urgot — the ranged attack component doesn't synergize with his kit and it delays your essential defensive items significantly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  Not affiliated with Riot Games &nbsp;·&nbsp;
+  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
+  &nbsp;·&nbsp;
+  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
+</footer>
+
+<script>
+function toggleCat(header) {
+  var isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  var body = header.nextElementSibling;
+  body.classList.toggle('open', !isOpen);
+}
+
+// Nav search
+var champNames = ['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+var BASE_DDR = 'https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
+function slugify(name) { return name.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function navFilter() {
+  var val = document.getElementById('nav-search-input').value;
+  var nl = document.getElementById('nav-list');
+  var nd = document.getElementById('nav-dropdown');
+  nl.innerHTML = '';
+  if (val.length < 1) { nd.style.display = 'none'; return; }
+  var filtered = champNames.filter(function(n) { return n.toLowerCase().includes(val.toLowerCase()); });
+  nd.style.display = filtered.length ? 'block' : 'none';
+  filtered.forEach(function(name) {
+    var a = document.createElement('a');
+    a.className = 'nav-dropdown-item';
+    a.href = 'matchup/' + slugify(name) + '.html';
+    var img = document.createElement('img');
+    img.src = BASE_DDR + name.replace(/[^a-zA-Z]/g,'') + '.png';
+    img.alt = name;
+    img.onerror = function() { this.style.display = 'none'; };
+    var span = document.createElement('span');
+    span.textContent = name;
+    a.appendChild(img); a.appendChild(span);
+    nl.appendChild(a);
+  });
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-search')) document.getElementById('nav-dropdown').style.display = 'none';
+});
+</script>
+</body>
+</html>

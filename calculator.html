@@ -325,7 +325,7 @@ function champImg(name) {
 }
 
 const ITEM_IDS = {
-  "Black Cleaver":3071,"Boots of Swiftness":3009,"Plated Steelcaps":3047,
+  "Black Cleaver":3071,"Gluttonous Greaves ":223008,"Plated Steelcaps":3047,
   "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
   "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,
   "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
@@ -491,7 +491,7 @@ function getBoots(a) {
   if (a.ad >= 3 && a.ccTotal >= 3) return { conflict:true, primary:{name:"Plated Steelcaps",note:"3+ AD -- armor priority"}, secondary:{name:"Mercury's Treads",note:a.ccTotal+" CC -- consider Tenacity"} };
   if (a.ad >= 3 || a.crit >= 1)   return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : "Crit enemies" };
   if (a.ccTotal >= 2)              return { name:"Mercury's Treads",  note: "CC enemies" };
-  return                                  { name:"Boots of Swiftness", note: "Standard -- mobility" };
+  return                                  { name:"Gluttonous Greaves", note: "Standard -- sustain" };
 }
 
 function getSituItems(a) {

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback — Urgot Guide</title>
+  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#4ADE80;--green-mid:#22C55E;--green-dark:#15803D;
+      --bg:#060D07;--bg-surface:#0B1A0D;--bg-card:#0F2211;
+      --border:#1A3D1E;--border-bright:#2D6A33;
+      --text:#A8D4A0;--text-dim:#4A7550;--text-bright:#E8F5E2;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(74,222,128,0.04) 0%,transparent 60%),
+        repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),
+        repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(6,13,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+    .nav-links a{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--green)}
+    .nav-search{position:relative}
+    .nav-search input{background:rgba(15,34,17,0.8);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:12px;padding:5px 30px 5px 10px;width:180px;outline:none;transition:border-color 0.2s,width 0.3s}
+    .nav-search input:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(74,222,128,0.1);width:220px}
+    .nav-search input::placeholder{color:var(--text-dim)}
+    .nav-search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--green-mid);pointer-events:none}
+    .nav-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:220px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);z-index:200}
+    .nav-dropdown h4{padding:7px 12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;border-bottom:1px solid var(--border)}
+    .nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:7px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border-bottom:1px solid rgba(26,61,30,0.3);transition:background 0.15s,color 0.15s}
+    .nav-dropdown-item:last-child{border-bottom:none}
+    .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
+    .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
+
+    /* HERO */
+    .hero{position:relative;height:38vh;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png') center 20% / cover no-repeat;filter:brightness(0.22) saturate(0.5);animation:heroZoom 20s ease-in-out infinite alternate}
+    @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.08)}}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.4) 0%,rgba(6,13,7,0) 40%,rgba(6,13,7,0.85) 85%,var(--bg) 100%)}
+    .hero-content{position:relative;text-align:center;animation:fadeDown 0.7s ease both}
+    .hero-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.4em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.6rem;opacity:0.8}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--text-bright);letter-spacing:0.08em;text-shadow:0 0 60px rgba(74,222,128,0.15),0 4px 20px rgba(0,0,0,0.9)}
+    .hero-title span{color:var(--green);text-shadow:0 0 30px rgba(74,222,128,0.4)}
+    .hero-sub{font-size:13px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;margin-top:0.6rem}
+
+    /* MAIN */
+    .main{max-width:700px;margin:0 auto;padding:3rem 1.5rem 6rem}
+
+    /* INTRO BLOCK */
+    .intro-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:2rem;position:relative;animation:fadeUp 0.4s ease both}
+    .intro-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .intro-block p{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:0.75rem}
+    .intro-block p:last-child{margin-bottom:0}
+    .intro-block strong{color:var(--green-mid);font-weight:600}
+
+    /* FORM BLOCK */
+    .form-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:2rem;position:relative;animation:fadeUp 0.5s ease both}
+    .form-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+
+    .form-group{margin-bottom:1.5rem;position:relative}
+    .form-group:last-child{margin-bottom:0}
+
+    .form-label{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-mid);margin-bottom:0.75rem;font-weight:600}
+
+    .form-input,.form-textarea,.form-select{width:100%;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text-dim)}
+    .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(74,222,128,0.1)}
+
+    .form-textarea{resize:vertical;min-height:120px;font-family:'Rajdhani',sans-serif}
+
+    .form-select{cursor:pointer}
+    .form-select option{background:var(--bg);color:var(--text)}
+
+    .submit-btn{width:100%;padding:12px 24px;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:4px;color:var(--green);font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background 0.2s,border-color 0.2s;margin-top:1rem}
+    .submit-btn:hover:not(:disabled){background:rgba(74,222,128,0.18);border-color:var(--green-mid)}
+    .submit-btn:active:not(:disabled){transform:scale(0.98)}
+    .submit-btn:disabled{opacity:0.6;cursor:not-allowed}
+
+    .status-message{padding:1rem;border-radius:4px;margin-top:1rem;font-size:14px;display:none;animation:slideDown 0.3s ease}
+    .status-message.success{background:rgba(34,197,94,0.1);border:1px solid var(--green-dark);color:var(--green)}
+    .status-message.error{background:rgba(239,68,68,0.1);border:1px solid #dc2626;color:#fca5a5}
+
+    .status-message.show{display:block}
+
+    .config-box{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:1rem;margin-top:1.5rem;font-size:13px}
+    .config-box strong{color:var(--green-mid)}
+    .config-box ol{margin-left:1.5rem;color:var(--text);line-height:1.8}
+    .config-box li{margin-bottom:0.5rem}
+    .config-box code{background:rgba(74,222,128,0.08);padding:2px 6px;border-radius:2px;font-family:monospace;color:var(--green);font-size:12px}
+
+    footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
+    footer a{color:var(--green-dark);text-decoration:none}
+    footer a:hover{color:var(--green-mid)}
+
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
+  <ul class="nav-links">
+    <li><a href="mechanics.html">Mechanics</a></li>
+    <li><a href="runes.html">Runes</a></li>
+    <li><a href="matchup.html">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+    <span class="nav-search-icon">🔍</span>
+    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Urgot Guide</p>
+    <h1 class="hero-title"><span>Send</span> Feedback</h1>
+    <p class="hero-sub">Help us improve the guide</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <p>We'd love to hear from you! Whether you've found a bug, have a suggestion for improvement, or just want to share your thoughts about the guide, we're listening.</p>
+    <p>All feedback is valuable and helps us make the Urgot Guide better for everyone. Please be as detailed as possible — it really helps!</p>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-block">
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label class="form-label">Your Username</label>
+        <input type="text" class="form-input" id="username" name="username" placeholder="e.g., Quante, YourName..." required />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Feedback Type</label>
+        <select class="form-select" id="feedbackType" name="feedbackType" required>
+          <option value="">Select a type...</option>
+          <option value="🐛 Bug">Bug Report</option>
+          <option value="💡 Suggestion">Suggestion</option>
+          <option value="✨ Improvement">Improvement</option>
+          <option value="❓ Question">Question</option>
+          <option value="📝 Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Your Message</label>
+        <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you think..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Feedback</button>
+      <div id="statusMessage" class="status-message"></div>
+    </form>
+
+    <div class="config-box">
+      <strong>⚙️ Configuration needed</strong>
+      <p style="margin:0.5rem 0 1rem;color:var(--text)">To make this form work, you need to add a Discord Webhook URL. Follow these steps:</p>
+      <ol>
+        <li><strong>Create a Discord server</strong> (or use an existing one)</li>
+        <li><strong>Create a channel</strong> named <code>#feedback</code></li>
+        <li><strong>Right-click the channel</strong> → Edit Channel → Integrations → Webhooks → New Webhook</li>
+        <li><strong>Copy the Webhook URL</strong> and paste it in the code below</li>
+        <li><strong>Find this line in the feedback.html code:</strong><br/>
+          <code style="display:block;margin:0.75rem 0;padding:0.5rem;background:var(--bg);overflow-x:auto">const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE";</code>
+        </li>
+        <li><strong>Replace it with your actual webhook URL</strong> and save</li>
+      </ol>
+      <p style="margin:1rem 0 0;color:var(--text-dim);font-size:12px">Note: This is a client-side solution. For production, consider using a backend service.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Not affiliated with Riot Games &nbsp;·&nbsp;
+  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
+  &nbsp;·&nbsp;
+  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
+  &nbsp;·&nbsp;
+  <a href="feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
+</footer>
+
+<script>
+// ⚠️ IMPORTANT: Replace this with your Discord Webhook URL
+// Get it from: Server → Channel → Edit → Integrations → Webhooks → Copy URL
+const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE";
+
+// Champion search functionality
+var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
+
+function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+
+function navFilter(){
+  var val=document.getElementById('nav-search-input').value;
+  var nl=document.getElementById('nav-list');
+  var nd=document.getElementById('nav-dropdown');
+  nl.innerHTML='';
+  if(val.length<1){
+    nd.style.display='none';
+    return;
+  }
+  var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});
+  nd.style.display=f.length?'block':'none';
+  f.forEach(function(name){
+    var a=document.createElement('a');
+    a.className='nav-dropdown-item';
+    a.href='matchup/'+slugify(name)+'.html';
+    var img=document.createElement('img');
+    img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';
+    img.alt=name;
+    img.onerror=function(){this.style.display='none';};
+    var span=document.createElement('span');
+    span.textContent=name;
+    a.appendChild(img);
+    a.appendChild(span);
+    nl.appendChild(a);
+  });
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';
+});
+
+// Feedback form handler
+document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  if(WEBHOOK_URL === "https://discord.com/api/webhooks/1500466876017410058/WKnFE1N9KB8Jln35yVRQNXqS-ZTAAg7dv5P4qI3ff_cNIUrT1WbPKFWimVbN_3ZekXWs") {
+    showStatus('⚠️ Please configure the Discord Webhook URL first!', 'error');
+    return;
+  }
+
+  const username = document.getElementById('username').value;
+  const feedbackType = document.getElementById('feedbackType').value;
+  const message = document.getElementById('message').value;
+  const submitBtn = document.querySelector('.submit-btn');
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  try {
+    const embed = {
+      title: feedbackType,
+      description: message,
+      color: 4294834,
+      fields: [
+        {
+          name: 'Username',
+          value: username || 'Anonymous',
+          inline: true
+        },
+        {
+          name: 'Date',
+          value: new Date().toLocaleString(),
+          inline: true
+        }
+      ],
+      footer: {
+        text: 'Urgot Guide Feedback'
+      }
+    };
+
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        embeds: [embed]
+      })
+    });
+
+    if(response.ok) {
+      showStatus('✅ Feedback sent successfully! Thank you!', 'success');
+      document.getElementById('feedbackForm').reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Feedback';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(error) {
+    showStatus('❌ Failed to send feedback. Please check the webhook URL.', 'error');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Feedback';
+  }
+});
+
+function showStatus(message, type) {
+  const statusDiv = document.getElementById('statusMessage');
+  statusDiv.textContent = message;
+  statusDiv.className = 'status-message ' + type + ' show';
+  setTimeout(() => {
+    statusDiv.classList.remove('show');
+  }, 5000);
+}
+</script>
+
+</body>
+</html>

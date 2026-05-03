@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mechanics — Urgot Guide</title>
   <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -82,6 +83,20 @@
     .ability-use ol,.ability-use ul{padding-left:1.2rem;font-size:14px;line-height:1.8;color:var(--text)}
     .ability-use li{margin-bottom:4px}
 
+    /* DROPDOWN STYLES */
+    .ability-trigger{display:inline;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:3px;padding:2px 8px;color:var(--green);cursor:pointer;font-weight:600;letter-spacing:0.04em;transition:background 0.2s,border-color 0.2s;user-select:none}
+    .ability-trigger:hover{background:rgba(74,222,128,0.18);border-color:var(--green-mid)}
+    .ability-dropdown{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:1rem;animation:slideDown 0.3s ease}
+    .dropdown-section{padding:0}
+    .dropdown-header{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+    .dropdown-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.75rem}
+    .dropdown-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-surface);border:1px solid var(--border);border-radius:3px;padding:0.5rem 0.75rem;font-size:13px;transition:background 0.15s,border-color 0.15s}
+    .dropdown-item:hover{background:rgba(74,222,128,0.08);border-color:var(--border-bright)}
+    .champ-name{color:var(--text-bright);font-weight:500}
+    .ability-name-small{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--green);background:var(--bg-card);padding:2px 6px;border-radius:2px}
+
+    @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
     /* POWER SPIKES */
     .spike-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:1.5rem}
     .spike-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1.25rem;position:relative;overflow:hidden;transition:border-color 0.2s}
@@ -93,7 +108,7 @@
     .spike-desc{font-size:13px;color:var(--text-dim);line-height:1.55}
 
     /* SPELL MAX */
-    .spell-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:14px;animation:fadeUp 0.4s ease both}
+    .spell-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:14px;position:relative;animation:fadeUp 0.4s ease both}
     .spell-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.06),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
     .spell-max-order{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:1rem 0}
     .spell-badge{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.12em;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;padding:4px 12px;color:var(--green-mid)}
@@ -248,6 +263,100 @@
       <div class="ability-use">
         <div class="ability-use-label">How to use</div>
         <p>Urgot R is a key spell in teamfight — the fear has a huge impact. It's a really tricky ability to hit without a CC so try using your E before R. And if your opponent is a bit tanky, the 4s timer to burst might be too fast for you to proc so try to hold it until you can kill them in that window.</p>
+        <p style="margin-top:1rem"><span class="ability-trigger" onclick="toggleAbilityDropdown(event)">cast chain and drag them ▼</span>
+        <div class="ability-dropdown" id="ability-dropdown" style="display:none;margin-top:0.75rem">
+          <div class="dropdown-section">
+            <div class="dropdown-header">Cancel the pull (R2)</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item">
+                <span class="champ-name">Gangplank</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Sion</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Braum</span>
+                <span class="ability-name-small">E</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Milio</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Samira</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Yasuo</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Olaf</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Zaahen</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Rek'Sai</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Pantheon</span>
+                <span class="ability-name-small">E</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Master Yi</span>
+                <span class="ability-name-small">Q</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Gwen</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Fiora</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Elise</span>
+                <span class="ability-name-small">E</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Dr. Mundo</span>
+                <span class="ability-name-small">Passive</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Aurora</span>
+                <span class="ability-name-small">R travel</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Vladimir</span>
+                <span class="ability-name-small">W</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Udyr</span>
+                <span class="ability-name-small">Empowered E</span>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-section" style="margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem">
+            <div class="dropdown-header">Cancel only the execute</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item">
+                <span class="champ-name">Kayle</span>
+                <span class="ability-name-small">R</span>
+              </div>
+              <div class="dropdown-item">
+                <span class="champ-name">Tryndamere</span>
+                <span class="ability-name-small">R</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </p>
       </div>
     </div>
   </div>
@@ -291,7 +400,6 @@
     </p>
 
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px">Standard max order</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px">Standard max order</div>
     <div class="spell-max-order">
       <span class="spell-badge">E × 1</span>
       <span class="spell-arrow">→</span>
@@ -311,6 +419,13 @@
 
 </div>
 
+<div style="display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:2rem auto 0;padding:2rem 1.5rem 0">
+  <div style="flex:1"></div>
+  <a href="tech.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:4px;color:var(--green);text-decoration:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;transition:background 0.2s,border-color 0.2s;cursor:pointer;margin-left:auto">
+    Advanced Tech <span style="font-size:14px">→</span>
+  </a>
+</div>
+
 <footer>
   Not affiliated with Riot Games &nbsp;·&nbsp;
   <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
@@ -319,6 +434,18 @@
 </footer>
 
 <script>
+function toggleAbilityDropdown(e){
+  e.stopPropagation();
+  var dropdown=document.getElementById('ability-dropdown');
+  var trigger=e.target;
+  var isOpen=dropdown.style.display==='block';
+  dropdown.style.display=isOpen?'none':'block';
+  trigger.textContent=isOpen?'cast chain and drag them ▼':'cast chain and drag them ▲';
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.ability-use'))document.getElementById('ability-dropdown').style.display='none';
+});
+
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
 function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}

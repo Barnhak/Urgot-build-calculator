@@ -168,22 +168,7 @@
       <div id="statusMessage" class="status-message"></div>
     </form>
 
-    <div class="config-box">
-      <strong>⚙️ Configuration needed</strong>
-      <p style="margin:0.5rem 0 1rem;color:var(--text)">To make this form work, you need to add a Discord Webhook URL. Follow these steps:</p>
-      <ol>
-        <li><strong>Create a Discord server</strong> (or use an existing one)</li>
-        <li><strong>Create a channel</strong> named <code>#feedback</code></li>
-        <li><strong>Right-click the channel</strong> → Edit Channel → Integrations → Webhooks → New Webhook</li>
-        <li><strong>Copy the Webhook URL</strong> and paste it in the code below</li>
-        <li><strong>Find this line in the feedback.html code:</strong><br/>
-          <code style="display:block;margin:0.75rem 0;padding:0.5rem;background:var(--bg);overflow-x:auto">const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE";</code>
-        </li>
-        <li><strong>Replace it with your actual webhook URL</strong> and save</li>
-      </ol>
-      <p style="margin:1rem 0 0;color:var(--text-dim);font-size:12px">Note: This is a client-side solution. For production, consider using a backend service.</p>
-    </div>
-  </div>
+
 
 </div>
 
@@ -199,7 +184,7 @@
 <script>
 // ⚠️ IMPORTANT: Replace this with your Discord Webhook URL
 // Get it from: Server → Channel → Edit → Integrations → Webhooks → Copy URL
-const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE";
+const WEBHOOK_URL = https://discord.com/api/webhooks/1500466876017410058/WKnFE1N9KB8Jln35yVRQNXqS-ZTAAg7dv5P4qI3ff_cNIUrT1WbPKFWimVbN_3ZekXWs";
 
 // Champion search functionality
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];

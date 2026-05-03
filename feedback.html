@@ -89,10 +89,8 @@
     .status-message.show{display:block}
 
     .config-box{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:1rem;margin-top:1.5rem;font-size:13px}
-    .config-box strong{color:var(--green-mid)}
-    .config-box ol{margin-left:1.5rem;color:var(--text);line-height:1.8}
-    .config-box li{margin-bottom:0.5rem}
-    .config-box code{background:rgba(74,222,128,0.08);padding:2px 6px;border-radius:2px;font-family:monospace;color:var(--green);font-size:12px}
+    .config-box strong{color:var(--green)}
+    .config-box p{color:var(--text);margin:0.5rem 0}
 
     footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
     footer a{color:var(--green-dark);text-decoration:none}
@@ -168,7 +166,11 @@
       <div id="statusMessage" class="status-message"></div>
     </form>
 
-
+    <div class="config-box">
+      <strong>✅ Webhook Discord actif</strong>
+      <p>Le webhook est configuré et prêt à recevoir tes messages!</p>
+    </div>
+  </div>
 
 </div>
 
@@ -182,11 +184,8 @@
 </footer>
 
 <script>
-// ⚠️ IMPORTANT: Replace this with your Discord Webhook URL
-// Get it from: Server → Channel → Edit → Integrations → Webhooks → Copy URL
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1500466876017410058/WKnFE1N9KB8Jln35yVRQNXqS-ZTAAg7dv5P4qI3ff_cNIUrT1WbPKFWimVbN_3ZekXWs";
 
-// Champion search functionality
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
 
@@ -223,14 +222,8 @@ document.addEventListener('click',function(e){
   if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';
 });
 
-// Feedback form handler
 document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-
-  if(WEBHOOK_URL === "https://discord.com/api/webhooks/1500466876017410058/WKnFE1N9KB8Jln35yVRQNXqS-ZTAAg7dv5P4qI3ff_cNIUrT1WbPKFWimVbN_3ZekXWs") {
-    showStatus('⚠️ Please configure the Discord Webhook URL first!', 'error');
-    return;
-  }
 
   const username = document.getElementById('username').value;
   const feedbackType = document.getElementById('feedbackType').value;

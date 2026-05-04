@@ -76,13 +76,13 @@
         .champ-grid { display: grid; grid-template-columns: 1fr; gap: 3px; }
     
     
-    .champ-card { display: block; text-decoration: none; position: relative; overflow: hidden; background: var(--bg-card); height: 100px; transition: transform 0.25s; animation: fadeUp 0.4s ease both; cursor: pointer; }
+    .champ-card { display: block; text-decoration: none; position: relative; overflow: hidden; background: var(--bg-card); height: 200px; transition: transform 0.25s; animation: fadeUp 0.4s ease both; cursor: pointer; }
     .champ-card:hover { transform: scale(1.06); z-index: 10; }
     .champ-img-wrap { position: absolute; inset: 0; }
-    .champ-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8) saturate(0.75); transition: filter 0.3s, transform 0.3s; }
+    .champ-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; filter: brightness(0.8) saturate(0.75); transition: filter 0.3s, transform 0.3s; }
     .champ-card:hover .champ-img-wrap img { filter: brightness(1) saturate(1); transform: scale(1.08); }
-    .champ-img-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,13,7,0.92) 0%, rgba(6,13,7,0.35) 40%, transparent 65%); }
-    .champ-name { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 6px 10px; text-align: center; font-family: "Cinzel", serif; font-size: 11px; letter-spacing: 0.1em; color: var(--text-bright); text-shadow: 0 1px 6px rgba(0,0,0,0.9); transition: color 0.2s; z-index: 1; }
+    .champ-img-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgba(6,13,7,0.85) 0%, rgba(6,13,7,0.5) 35%, transparent 65%); }
+    .champ-name { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 2rem; font-family: "Cinzel", serif; font-size: 20px; font-weight: 700; letter-spacing: 0.15em; color: var(--text-bright); text-shadow: 0 2px 12px rgba(0,0,0,0.95); transition: color 0.2s; z-index: 1; }
     .champ-card:hover .champ-name { color: var(--green); }
     .champ-card::after { content: ""; position: absolute; inset: 0; border: 1px solid transparent; transition: border-color 0.25s; pointer-events: none; z-index: 2; }
     .champ-card:hover::after { border-color: var(--green-mid); }
@@ -96,22 +96,20 @@
 </head>
 <body>
   <nav>
-    <a class="nav-logo" href="index.html">Urgot Guide</a>
-    <ul class="nav-links">
-      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
-      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
-      <li><a href="matchup.html" class="active">MatchUp</a></li>
-      <li><a href="calculator.html">Build Calculator</a></li>
-    </ul>
-    <div class="nav-search">
-      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()" />
-      <span class="nav-search-icon">&#128269;</span>
-      <div class="nav-dropdown" id="nav-dropdown">
-        <h4>Champions</h4>
-        <div id="nav-list"></div>
-      </div>
-    </div>
-  </nav>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
+  <ul class="nav-links">
+    <li><a href="mechanics.html" class="active">Mechanics</a></li>
+    <li><a href="runes.html">Runes</a></li>
+    <li><a href="matchup.html">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+    <span class="nav-search-icon">🔍</span>
+    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+  </div>
+</nav>
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -131,11 +129,13 @@
     <div class="champ-grid" id="champ-grid"></div>
   </main>
   <footer>
-    Not affiliated with Riot Games &nbsp;&middot;&nbsp;
-    <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante &#8212; Twitch &#8599;</a>
-    &nbsp;&middot;&nbsp;
-    <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante &#8212; Twitter &#8599;</a>
-  </footer>
+  Not affiliated with Riot Games &nbsp;·&nbsp;
+  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
+  &nbsp;·&nbsp;
+  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
+  &nbsp;·&nbsp;
+  <a href="../feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
+</footer>
 <script>
 const champions = [
   { name:"Aatrox",       img:"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",       pos:"45% top" },

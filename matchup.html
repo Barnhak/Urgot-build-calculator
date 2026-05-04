@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MatchUp — Urgot Guide</title>
-  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
+    <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -72,25 +73,19 @@
     .filter-input-wrap input::placeholder { color: var(--text-dim); }
     .filter-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--green-mid); pointer-events: none; }
     .filter-count { font-family: "Cinzel", serif; font-size: 10px; letter-spacing: 0.15em; color: var(--text-dim); }
-    .champ-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    @media(max-width: 800px) { .champ-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media(max-width: 560px) { .champ-grid { grid-template-columns: repeat(2, 1fr); } }
-    .champ-card { display: block; text-decoration: none; position: relative; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-card); transition: border-color 0.25s, transform 0.25s; animation: fadeUp 0.4s ease both; }
-    .champ-card:hover { border-color: var(--green-dark); transform: translateY(-3px); }
-    .champ-card::before { content: ""; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.08), transparent 50%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
-    .champ-card:hover::before { opacity: 1; }
-    .champ-img-wrap { width: 100%; aspect-ratio: 1/1; overflow: hidden; }
-    .champ-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      /* object-position est défini via le style inline — PAS ici */
-      filter: brightness(0.85) saturate(0.8);
-      transition: filter 0.3s, transform 0.3s;
-      display: block;
-    }
-    .champ-card:hover .champ-img-wrap img { filter: brightness(1) saturate(1); transform: scale(1.05); }
-    .champ-name { padding: 10px 8px; text-align: center; font-family: "Cinzel", serif; font-size: 13px; letter-spacing: 0.08em; color: var(--text); transition: color 0.2s; border-top: 1px solid var(--border); }
+        .champ-grid { display: grid; grid-template-columns: 1fr; gap: 3px; }
+    
+    
+    .champ-card { display: block; text-decoration: none; position: relative; overflow: hidden; background: var(--bg-card); height: 100px; transition: transform 0.25s; animation: fadeUp 0.4s ease both; cursor: pointer; }
+    .champ-card:hover { transform: scale(1.06); z-index: 10; }
+    .champ-img-wrap { position: absolute; inset: 0; }
+    .champ-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8) saturate(0.75); transition: filter 0.3s, transform 0.3s; }
+    .champ-card:hover .champ-img-wrap img { filter: brightness(1) saturate(1); transform: scale(1.08); }
+    .champ-img-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,13,7,0.92) 0%, rgba(6,13,7,0.35) 40%, transparent 65%); }
+    .champ-name { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 6px 10px; text-align: center; font-family: "Cinzel", serif; font-size: 11px; letter-spacing: 0.1em; color: var(--text-bright); text-shadow: 0 1px 6px rgba(0,0,0,0.9); transition: color 0.2s; z-index: 1; }
     .champ-card:hover .champ-name { color: var(--green); }
+    .champ-card::after { content: ""; position: absolute; inset: 0; border: 1px solid transparent; transition: border-color 0.25s; pointer-events: none; z-index: 2; }
+    .champ-card:hover::after { border-color: var(--green-mid); }
     .no-results { grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-dim); font-family: "Cinzel", serif; font-size: 13px; letter-spacing: 0.15em; }
     footer { border-top: 1px solid var(--border); padding: 2rem 1rem; text-align: center; font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim); }
     footer a { color: var(--green-dark); text-decoration: none; }
@@ -100,21 +95,23 @@
   </style>
 </head>
 <body>
- <nav>
-  <a class="nav-logo" href="index.html">Urgot Guide</a>
-  <ul class="nav-links">
-    <li><a href="mechanics.html" class="active">Mechanics</a></li>
-    <li><a href="runes.html">Runes</a></li>
-    <li><a href="matchup.html">MatchUp</a></li>
-    <li><a href="calculator.html">Build Calculator</a></li>
-    <li><a href="build.html">Build Guide</a></li>
-  </ul>
-  <div class="nav-search">
-    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
-    <span class="nav-search-icon">🔍</span>
-    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
-  </div>
-</nav>
+  <nav>
+    <a class="nav-logo" href="index.html">Urgot Guide</a>
+    <ul class="nav-links">
+      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/mecanics">Mechanics</a></li>
+      <li><a href="https://sites.google.com/view/urgot-beginner-guide/urgot/runes">Runes</a></li>
+      <li><a href="matchup.html" class="active">MatchUp</a></li>
+      <li><a href="calculator.html">Build Calculator</a></li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()" />
+      <span class="nav-search-icon">&#128269;</span>
+      <div class="nav-dropdown" id="nav-dropdown">
+        <h4>Champions</h4>
+        <div id="nav-list"></div>
+      </div>
+    </div>
+  </nav>
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -200,7 +197,7 @@ const champions = [
   { name:"Yasuo",        img:"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",        pos:"80% top" },
   { name:"Yone",         img:"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yone_0.jpg",         pos:"60% top" },
   { name:"Yorick",       img:"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yorick_0.jpg",       pos:"55% top" },
-  { name:"Zaahen",       img:"https://barnhak.github.io/Urgot-guide/Zaahen_0.png",                             pos:"center top" },
+  { name:"Zaahen",       img:"https://barnhak.github.io/Urgot-build-calculator/Zaahen_0.png",                  pos:"center top" },
   { name:"Zac",          img:"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zac_0.jpg",          pos:"55% center" },
 ].sort(function(a,b){ return a.name.localeCompare(b.name); });
 

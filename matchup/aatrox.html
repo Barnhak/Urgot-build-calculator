@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aatrox — Urgot Guide</title>
-  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
+  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -186,12 +186,7 @@
                 <div class="starter-item-note">Standard start</div>
               </div>
             </div>
-            <span class="starter-sep">or</span>
-            <div class="starter-item">
-              <div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div>
-              <div>
-                <div class="starter-item-name">Doran's Shield</div>
-                <div class="starter-item-note">If you struggle early</div>
+
               </div>
             </div>
           </div>
@@ -207,14 +202,13 @@
 
     <!-- MODE TOGGLE -->
     <div class="mode-toggle">
-      <button class="mode-btn active" id="btn-simple" onclick="setMode('simple')">Simple</button>
-      
+      <button class="mode-btn active" id="btn-detailed" onclick="setMode('detailed')">Detailed</button>
       <div class="mode-sep"></div>
-      <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')">Detailed</button>
+      <button class="mode-btn" id="btn-simple" onclick="setMode('simple')">Simple</button>
     </div>
 
     <!-- DETAILED MODE -->
-    <div id="mode-detailed">
+    <div id="mode-detailed" style="display:none">
       <div class="paragraph">
         <p>The <span class="video-trigger" onclick="toggleVideo('early-game')">early game</span> is for Urgot by far. Aatrox has huge CD on his Q, making long trades really hard for him to take. So you can go in the 3rd bush and wait for the wave to crash to chase Aatrox and make him lose XP.</p>
         <div class="video-panel" id="video-early-game">
@@ -237,7 +231,7 @@
     </div>
 
     <!-- SIMPLE MODE -->
-    <div id="mode-simple" style="display:none">
+    <div id="mode-simple">
       <div class="phase-grid">
         <div class="phase-card">
           <div class="phase-badge">Phase 1</div>

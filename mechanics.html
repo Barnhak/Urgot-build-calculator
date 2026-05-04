@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mechanics & Tech — Urgot Guide</title>
+  <title>Mechanics &amp; Tech — Urgot Guide</title>
   <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
+
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -150,6 +151,34 @@
     .toggle-btn.active{background:var(--green-dark);color:var(--text-bright)}
     .toggle-btn:hover:not(.active){color:var(--green-mid)}
     .toggle-sep{width:1px;background:var(--border-bright);height:20px;flex-shrink:0}
+  
+
+    /* ABILITY TRIGGER DROPDOWN */
+    .ability-trigger{display:inline;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:3px;padding:2px 8px;color:var(--green);cursor:pointer;font-weight:600;letter-spacing:0.04em;transition:background 0.2s,border-color 0.2s;user-select:none}
+    .ability-trigger:hover{background:rgba(74,222,128,0.18);border-color:var(--green-mid)}
+    .ability-dropdown{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:1rem;animation:slideDown 0.3s ease}
+    .dropdown-section{padding:0}
+    .dropdown-header{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+    .dropdown-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.75rem}
+    .dropdown-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-surface);border:1px solid var(--border);border-radius:3px;padding:0.5rem 0.75rem;font-size:13px;transition:background 0.15s,border-color 0.15s}
+    .dropdown-item:hover{background:rgba(74,222,128,0.08);border-color:var(--border-bright)}
+    .champ-name{color:var(--text-bright);font-weight:500}
+    .ability-name-small{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--green);background:var(--bg-card);padding:2px 6px;border-radius:2px}
+    @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+    /* DUAL PANEL SYSTEM */
+    .panel-viewport{overflow:hidden;width:100%}
+    .panel-track{display:flex;width:200%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
+    .panel-track.show-right{transform:translateX(-50%)}
+    .panel-page{width:50%;flex-shrink:0;min-width:0}
+
+    /* Toggle button */
+    .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;gap:0;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
+    .toggle-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 20px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
+    .toggle-btn.active{background:var(--green-dark);color:var(--text-bright)}
+    .toggle-btn:hover:not(.active){color:var(--green-mid)}
+    .toggle-sep{width:1px;background:var(--border-bright);height:20px;flex-shrink:0}
+
   </style>
 </head>
 <body>
@@ -157,7 +186,7 @@
 <nav>
   <a class="nav-logo" href="index.html">Urgot Guide</a>
   <ul class="nav-links">
-    <li><a href="mechanics.html" id="nav-mechanics">Mechanics</a></li>
+    <li><a href="mechanics.html" id="nav-mechanics" class="active">Mechanics</a></li>
     <li><a href="runes.html">Runes</a></li>
     <li><a href="matchup.html">MatchUp</a></li>
     <li><a href="calculator.html">Build Calculator</a></li>
@@ -181,40 +210,28 @@
 <div class="panel-viewport">
   <div class="panel-track" id="panel-track">
 
-    <!-- ══════════════ PANEL LEFT: MECHANICS ══════════════ -->
+    <!-- ══ PANEL GAUCHE: MECHANICS ══ -->
     <div class="panel-page" id="panel-mech">
-      <section class="hero">
+            <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Urgot Guide</p>
     <h1 class="hero-title">Champion <span>Mechanics</span></h1>
-    <p class="hero-sub">Kit, power spikes & spell maxing</p>
+    <p class="hero-sub">Kit, power spikes &amp; spell maxing</p>
   </div>
 </section>
-      <div class="main">
-        
-
-  <!-- INTRO -->
+<div class="main">
   <div class="intro-block">
     <p>Urgot is the only ranged <strong>juggernaut</strong> (good at dealing damage and tanking) in the game. He plays top and is a beast in both early and late game — with huge damage output and a high health pool. On this page we will go through the kit, how to play Urgot, some tricks and more.</p>
-    <p style="margin-top:10px">If you want more detail about Urgot abilities, visit the <a href="https://leagueoflegends.fandom.com/wiki/Urgot" target="_blank" rel="noopener">Urgot Wiki page ↗</a></p>
+    <p style="margin-top:10px">If you want more detail about Urgot abilities, visit the <a href="https://wiki.leagueoflegends.com/en-us/Urgot" target="_blank" rel="noopener">Urgot Wiki page ↗</a></p>
   </div>
-
-  <!-- KIT -->
   <div class="section-divider"><span>✦ The Kit</span></div>
-
-  <!-- PASSIVE -->
   <div class="ability-block" style="animation-delay:0.05s">
     <div class="ability-inner">
-      <div class="ability-img">
-        <img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/p.gif" alt="Urgot Passive"/>
-      </div>
+      <div class="ability-img"><img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/p.gif" alt="Urgot Passive"/></div>
       <div class="ability-desc">
-        <div class="ability-label">
-          <span class="ability-key">Passive</span>
-          <span class="ability-name">Echoing Flame</span>
-        </div>
+        <div class="ability-label"><span class="ability-key">Passive</span><span class="ability-name">Echoing Flame</span></div>
         <p>Each Urgot leg has a shotgun which covers a 60° angle. Urgot basic auto attack will cause the shotgun to shoot in a cone dealing AD damage scaling with Urgot's base level AD and enemy max HP. It has a cooldown from 30s in early to 2.5s in late, per leg.</p>
       </div>
       <div class="ability-use">
@@ -223,18 +240,11 @@
       </div>
     </div>
   </div>
-
-  <!-- Q -->
   <div class="ability-block" style="animation-delay:0.08s">
     <div class="ability-inner">
-      <div class="ability-img">
-        <img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/q.gif" alt="Urgot Q"/>
-      </div>
+      <div class="ability-img"><img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/q.gif" alt="Urgot Q"/></div>
       <div class="ability-desc">
-        <div class="ability-label">
-          <span class="ability-key">Q</span>
-          <span class="ability-name">Corrosive Charge</span>
-        </div>
+        <div class="ability-label"><span class="ability-key">Q</span><span class="ability-name">Corrosive Charge</span></div>
         <p>Urgot launches a missile which explodes after 0.3s and slows the target for 1.5s.</p>
       </div>
       <div class="ability-use">
@@ -248,18 +258,11 @@
       </div>
     </div>
   </div>
-
-  <!-- W -->
   <div class="ability-block" style="animation-delay:0.11s">
     <div class="ability-inner">
-      <div class="ability-img">
-        <img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/w.gif" alt="Urgot W"/>
-      </div>
+      <div class="ability-img"><img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/w.gif" alt="Urgot W"/></div>
       <div class="ability-desc">
-        <div class="ability-label">
-          <span class="ability-key">W</span>
-          <span class="ability-name">Purge</span>
-        </div>
+        <div class="ability-label"><span class="ability-key">W</span><span class="ability-name">Purge</span></div>
         <p>Purge puts Urgot in a state where he can't auto but will fire at the nearest target at 3 attacks per second. His other spells will mark any champion if hit — in which case Purge will focus them instead of the nearest enemy. While in Purge, Urgot ignores minion collision and firing will cause him to be slowed by 125 points. At max rank this spell costs 0 mana and has no CD so you can switch at will.</p>
       </div>
       <div class="ability-use">
@@ -268,18 +271,11 @@
       </div>
     </div>
   </div>
-
-  <!-- E -->
   <div class="ability-block" style="animation-delay:0.14s">
     <div class="ability-inner">
-      <div class="ability-img">
-        <img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/e.gif" alt="Urgot E"/>
-      </div>
+      <div class="ability-img"><img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/e.gif" alt="Urgot E"/></div>
       <div class="ability-desc">
-        <div class="ability-label">
-          <span class="ability-key">E</span>
-          <span class="ability-name">Disdain</span>
-        </div>
+        <div class="ability-label"><span class="ability-key">E</span><span class="ability-name">Disdain</span></div>
         <p>Urgot shields himself and dashes forward. The first target he hits is bumped and thrown behind Urgot then CC'd for 1s. For the 1.75 next seconds (1.5 total CC he applies + 0.25s) Urgot can do nothing.</p>
       </div>
       <div class="ability-use">
@@ -289,81 +285,78 @@
       </div>
     </div>
   </div>
-
-  <!-- R -->
   <div class="ability-block" style="animation-delay:0.17s">
     <div class="ability-inner">
-      <div class="ability-img">
-        <img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/r.gif" alt="Urgot R"/>
-      </div>
+      <div class="ability-img"><img src="https://raw.githubusercontent.com/Barnhak/Urgot-guide/main/r.gif" alt="Urgot R"/></div>
       <div class="ability-desc">
-        <div class="ability-label">
-          <span class="ability-key">R</span>
-          <span class="ability-name">Fear Beyond Death</span>
-        </div>
+        <div class="ability-label"><span class="ability-key">R</span><span class="ability-name">Fear Beyond Death</span></div>
         <p>Urgot fires a drill (skillshot) which deals Physical damage to the first target it hits. This target is marked for 4 seconds — during this time the target is also revealed (giving true vision) and slowed by 0–75% based on target's missing health. If the target gets under 25% max HP, Urgot will cast chain and drag them for 1.5s and execute them, fearing nearby enemies and slowing them by 75% for 1.5s.</p>
       </div>
       <div class="ability-use">
         <div class="ability-use-label">How to use</div>
         <p>Urgot R is a key spell in teamfight — the fear has a huge impact. It's a really tricky ability to hit without a CC so try using your E before R. And if your opponent is a bit tanky, the 4s timer to burst might be too fast for you to proc so try to hold it until you can kill them in that window.</p>
+        <p style="margin-top:1rem"><span class="ability-trigger" onclick="toggleAbilityDropdown(event)">Abilities that cancel the pull / execute ▼</span>
+        <div class="ability-dropdown" id="ability-dropdown" style="display:none;margin-top:0.75rem">
+          <div class="dropdown-section">
+            <div class="dropdown-header">Cancel the pull (R2)</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item"><span class="champ-name">Gangplank</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Sion</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Braum</span><span class="ability-name-small">E</span></div>
+              <div class="dropdown-item"><span class="champ-name">Milio</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Samira</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Yasuo</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Olaf</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Zaahen</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Rek'Sai</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Pantheon</span><span class="ability-name-small">E</span></div>
+              <div class="dropdown-item"><span class="champ-name">Master Yi</span><span class="ability-name-small">Q</span></div>
+              <div class="dropdown-item"><span class="champ-name">Gwen</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Fiora</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Elise</span><span class="ability-name-small">E</span></div>
+              <div class="dropdown-item"><span class="champ-name">Dr. Mundo</span><span class="ability-name-small">Passive</span></div>
+              <div class="dropdown-item"><span class="champ-name">Aurora</span><span class="ability-name-small">R travel</span></div>
+              <div class="dropdown-item"><span class="champ-name">Vladimir</span><span class="ability-name-small">W</span></div>
+              <div class="dropdown-item"><span class="champ-name">Udyr</span><span class="ability-name-small">Empowered E</span></div>
+            </div>
+          </div>
+          <div class="dropdown-section" style="margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem">
+            <div class="dropdown-header">Cancel only the execute</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item"><span class="champ-name">Kayle</span><span class="ability-name-small">R</span></div>
+              <div class="dropdown-item"><span class="champ-name">Tryndamere</span><span class="ability-name-small">R</span></div>
+            </div>
+          </div>
+        </div></p>
       </div>
     </div>
   </div>
-
-  <!-- POWER SPIKES -->
   <div class="section-divider" style="margin-top:3rem"><span>✦ Power Spikes</span></div>
-
   <div class="spike-grid">
-    <div class="spike-card">
-      <div class="spike-number">1</div>
-      <div class="spike-lvl">Level 9</div>
-      <div class="spike-title">W Toggle + Black Cleaver</div>
-      <div class="spike-desc">At level 9 you unlock the toggle of W and you usually complete Black Cleaver. This is your first and biggest power spike — you become extremely dangerous.</div>
-    </div>
-    <div class="spike-card">
-      <div class="spike-number">2</div>
-      <div class="spike-lvl">After Level 9</div>
-      <div class="spike-title">Sterak's Gage</div>
-      <div class="spike-desc">Sterak makes you really tanky and allows you to pull more consistently your R in close matchups or teamfights. It's your defensive cornerstone.</div>
-    </div>
-    <div class="spike-card">
-      <div class="spike-number">3</div>
-      <div class="spike-lvl">Level 13 / 16</div>
-      <div class="spike-title">Late Game Passive</div>
-      <div class="spike-desc">At level 13 your passive reaches its lower cooldown (2.5s per leg) and at level 16 it deals more damage than ever — 100% of your base AD + 6% of the target's max HP.</div>
-    </div>
+    <div class="spike-card"><div class="spike-number">1</div><div class="spike-lvl">Level 9</div><div class="spike-title">W Toggle + Black Cleaver</div><div class="spike-desc">At level 9 you unlock the toggle of W and you usually complete Black Cleaver. This is your first and biggest power spike — you become extremely dangerous.</div></div>
+    <div class="spike-card"><div class="spike-number">2</div><div class="spike-lvl">After Level 9</div><div class="spike-title">Sterak's Gage</div><div class="spike-desc">Sterak makes you really tanky and allows you to pull more consistently your R in close matchups or teamfights. It's your defensive cornerstone.</div></div>
+    <div class="spike-card"><div class="spike-number">3</div><div class="spike-lvl">Level 13 / 16</div><div class="spike-title">Late Game Passive</div><div class="spike-desc">At level 13 your passive reaches its lower cooldown (2.5s per leg) and at level 16 it deals more damage than ever — 100% of your base AD + 6% of the target's max HP.</div></div>
   </div>
-
-  <!-- SPELL MAXING -->
   <div class="section-divider"><span>✦ Spell Maxing</span></div>
-
-  <div class="spell-block" style="position:relative">
-    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1rem">
-      <strong style="color:var(--green-mid)">Level 1</strong> — depends on who you are facing. If it's a high range opponent like Teemo, Vayne or Jayce you can start Q if they don't face check your bush. In any other case start E.
-    </p>
-    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1rem">
-      <strong style="color:var(--green-mid)">Level 2</strong> — If you started Q always take E after. Else you can take Q or W depending on your situation. If you need to push or you can kill/dive with E Flash, or even if you want to trade with a stable wave take W. If the target is low due to a hard trade level 1, take Q to apply pressure on him and deny in base.
-    </p>
-    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1.5rem">
-      Your goal is to <strong style="color:var(--green-mid)">max W at level 9</strong>. If you play Triple Tonic you can put in total: 3 in Q, 5 in W, 1 in E and 1 in R. Else 2 in Q, 5 in W, 1 in E and 1 in R. Max Q after W — your Q slow scales hard and grants more chase pressure and kill options. Max E last — it doesn't change a lot about your E.
-    </p>
-
+  <div class="spell-block">
+    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1rem"><strong style="color:var(--green-mid)">Level 1</strong> — depends on who you are facing. If it's a high range opponent like Teemo, Vayne or Jayce you can start Q if they don't face check your bush. In any other case start E.</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1rem"><strong style="color:var(--green-mid)">Level 2</strong> — If you started Q always take E after. Else you can take Q or W depending on your situation. If you need to push or you can kill/dive with E Flash, or even if you want to trade with a stable wave take W. If the target is low due to a hard trade level 1, take Q to apply pressure on him and deny in base.</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:1.5rem">Your goal is to <strong style="color:var(--green-mid)">max W at level 9</strong>. If you play Triple Tonic: 3 in Q, 5 in W, 1 in E and 1 in R. Else 2 in Q, 5 in W, 1 in E and 1 in R. Max Q after W — your Q slow scales hard and grants more chase pressure and kill options. Max E last.</p>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px">Standard max order</div>
     <div class="spell-max-order">
-      <span class="spell-badge">W × 5</span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">R × 3</span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">Q × 5</span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">E × 5</span>
+      <span class="spell-badge">E × 1</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">Q or W × 1</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">Other × 1</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">Q × 1 (2 with tonic)</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">W × 4</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">Q × max</span><span class="spell-arrow">→</span>
+      <span class="spell-badge">E × max</span>
     </div>
   </div>
-
-      </div>
+</div>
     </div>
 
-    <!-- ══════════════ PANEL RIGHT: TECH & COMBOS ══════════════ -->
+    <!-- ══ PANEL DROIT: TECH & COMBOS ══ -->
     <div class="panel-page" id="panel-tech">
       <section class="hero">
   <div class="hero-bg"></div>
@@ -626,98 +619,7 @@
         </div>
         <div class="fund-media">
           <!-- ✏️ <img src="URL.gif" alt=""/> -->
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fund-card">
-      <div class="fund-inner">
-        <div class="fund-body-wrap">
-          <div class="fund-title">Patience with your E</div>
-          <div class="fund-body">
-            E puts you behind the enemy — there's no backing out after. Only commit when you're sure you can finish the fight.
-            <ul class="fund-list">
-              <li>Never E if you don't know where the jungler is.</li>
-              <li>Always use Q → E to make it easier to hit, especially with Approach Velocity.</li>
-              <li>You can E more freely near your tower or when going horizontal — short lane.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="fund-media">
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fund-card">
-      <div class="fund-inner">
-        <div class="fund-body-wrap">
-          <div class="fund-title">Range is your biggest weapon</div>
-          <div class="fund-body">
-            Spacing wins games on Urgot. Stack short trades — Autos + Q + PTA — until you've chunked them enough to E + Flash kill. Make them spend resources to reach you. Never let someone just walk up and auto you for free.
-          </div>
-        </div>
-        <div class="fund-media">
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fund-card">
-      <div class="fund-inner">
-        <div class="fund-body-wrap">
-          <div class="fund-title">Manage your Shotgun Legs</div>
-          <div class="fund-body">
-            Your passive is a core damage source — treat it with care.
-            <ul class="fund-list">
-              <li>Keep front legs ready for trades, not wasted on minions.</li>
-              <li>Use side legs to CS — they affect the wave less.</li>
-              <li>Generally need 3–4+ legs active when you go for the all-in.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="fund-media">
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fund-card">
-      <div class="fund-inner">
-        <div class="fund-body-wrap">
-          <div class="fund-title">"The Line" — stay in your wave</div>
-          <div class="fund-body">
-            Draw an imaginary line between the two minion waves. Trading across it means you absorb their wave while they absorb yours — a losing exchange before level 9. Stay on your side and use your range to poke. If they cross the line, punish them with your wave backing you up.
-          </div>
-        </div>
-        <div class="fund-media">
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fund-card">
-      <div class="fund-inner">
-        <div class="fund-body-wrap">
-          <div class="fund-title">Wait for mistakes</div>
-          <div class="fund-body">
-            Most matchups require you to bait out a key ability before you can trade into it effectively.
-            <ul class="fund-list">
-              <li>Mordekaiser Q, Darius Q, Camille Q — let them whiff, then punish.</li>
-              <li>Trading into a full kit means they can extend and win.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="fund-media">
-          <div class="fund-gif-ph">GIF</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-      </div>
+          <div class="fund-gif-ph">GIF
     </div>
 
   </div>
@@ -733,38 +635,50 @@
 </footer>
 
 <script>
-var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
-var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
-function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
-function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href='matchup/'+slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
-document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
+function toggleAbilityDropdown(e) {
+  e.stopPropagation();
+  var dropdown = document.getElementById('ability-dropdown');
+  var trigger = e.target;
+  var isOpen = dropdown.style.display === 'block';
+  dropdown.style.display = isOpen ? 'none' : 'block';
+  trigger.textContent = isOpen ? 'Abilities that cancel the pull / execute ▼' : 'Abilities that cancel the pull / execute ▲';
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.ability-use')) {
+    var d = document.getElementById('ability-dropdown');
+    if (d) d.style.display = 'none';
+  }
+});
 
 function showPanel(panel) {
   var track = document.getElementById('panel-track');
   var btnMech = document.getElementById('btn-mech');
   var btnTech = document.getElementById('btn-tech');
+  var navMech = document.getElementById('nav-mechanics');
+  var navTech = document.getElementById('nav-tech');
   if (panel === 'tech') {
     track.classList.add('show-right');
-    btnMech.classList.remove('active');
-    btnTech.classList.add('active');
+    btnMech.classList.remove('active'); btnTech.classList.add('active');
+    navMech.classList.remove('active'); navTech.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
-    // update URL hash silently
     history.replaceState(null, '', '#tech');
   } else {
     track.classList.remove('show-right');
-    btnTech.classList.remove('active');
-    btnMech.classList.add('active');
+    btnTech.classList.remove('active'); btnMech.classList.add('active');
+    navTech.classList.remove('active'); navMech.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
     history.replaceState(null, '', '#mechanics');
   }
 }
-
-// Check hash on load
 (function() {
-  if (window.location.hash === '#tech') {
-    showPanel('tech');
-  }
+  if (window.location.hash === '#tech') showPanel('tech');
 })();
+
+var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
+var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href='matchup/'+slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
 </script>
 </body>
 </html>

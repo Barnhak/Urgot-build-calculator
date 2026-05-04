@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aatrox — Urgot Guide</title>
-  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg"/>
+  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -48,7 +48,7 @@
     .rune-summ-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     @media(max-width:600px){.rune-summ-grid{grid-template-columns:1fr}}
     .rune-block{display:flex;gap:14px;align-items:flex-start}
-    .rune-img{width:200px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
+    .rune-img{width:400px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
     .rune-img img{width:100%;display:block}
     .rune-text h4{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:var(--green-mid);text-transform:uppercase;margin-bottom:8px}
     .rune-text p{font-size:14px;line-height:1.7;color:var(--text)}
@@ -186,7 +186,12 @@
                 <div class="starter-item-note">Standard start</div>
               </div>
             </div>
-
+            <span class="starter-sep">or</span>
+            <div class="starter-item">
+              <div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div>
+              <div>
+                <div class="starter-item-name">Doran's Shield</div>
+                <div class="starter-item-note">If you struggle early</div>
               </div>
             </div>
           </div>
@@ -202,9 +207,10 @@
 
     <!-- MODE TOGGLE -->
     <div class="mode-toggle">
-      <button class="mode-btn active" id="btn-detailed" onclick="setMode('detailed')">Detailed</button>
+      <button class="mode-btn active" id="btn-simple" onclick="setMode('simple')">Simple</button>
+      
       <div class="mode-sep"></div>
-      <button class="mode-btn" id="btn-simple" onclick="setMode('simple')">Simple</button>
+      <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')">Detailed</button>
     </div>
 
     <!-- DETAILED MODE -->

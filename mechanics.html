@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mechanics — Urgot Guide</title>
-  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>Mechanics & Tech — Urgot Guide</title>
+  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --green:#4ADE80;--green-mid:#22C55E;--green-dark:#15803D;
@@ -17,10 +18,9 @@
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;
       background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(74,222,128,0.04) 0%,transparent 60%),
-        repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),
-        repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
+      repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),
+      repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
 
-    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(6,13,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-decoration:none}
     .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
@@ -28,7 +28,7 @@
     .nav-links a:hover,.nav-links a.active{color:var(--green)}
     .nav-search{position:relative}
     .nav-search input{background:rgba(15,34,17,0.8);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:12px;padding:5px 30px 5px 10px;width:180px;outline:none;transition:border-color 0.2s,width 0.3s}
-    .nav-search input:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(74,222,128,0.1);width:220px}
+    .nav-search input:focus{border-color:var(--green-mid);width:220px}
     .nav-search input::placeholder{color:var(--text-dim)}
     .nav-search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--green-mid);pointer-events:none}
     .nav-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:220px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);z-index:200}
@@ -38,9 +38,8 @@
     .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
 
-    /* HERO */
     .hero{position:relative;height:38vh;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png') center 20% / cover no-repeat;filter:brightness(0.22) saturate(0.5);animation:heroZoom 20s ease-in-out infinite alternate}
+    .hero-bg{position:absolute;inset:0;background:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png') center 20%/cover no-repeat;filter:brightness(0.22) saturate(0.5);animation:heroZoom 20s ease-in-out infinite alternate}
     @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.08)}}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.4) 0%,rgba(6,13,7,0) 40%,rgba(6,13,7,0.85) 85%,var(--bg) 100%)}
     .hero-content{position:relative;text-align:center;animation:fadeDown 0.7s ease both}
@@ -49,22 +48,61 @@
     .hero-title span{color:var(--green);text-shadow:0 0 30px rgba(74,222,128,0.4)}
     .hero-sub{font-size:13px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;margin-top:0.6rem}
 
-    /* MAIN */
-    .main{max-width:960px;margin:0 auto;padding:3rem 1.5rem 6rem}
+    .main{max-width:1050px;margin:0 auto;padding:3rem 1.5rem 6rem}
 
-    /* INTRO */
-    .intro-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:1.5rem;position:relative;animation:fadeUp 0.4s ease both}
-    .intro-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
-    .intro-block p{font-size:15px;line-height:1.8;color:var(--text)}
-    .intro-block strong{color:var(--green-mid);font-weight:600}
-    .intro-block a{color:var(--green);text-decoration:underline}
-
-    /* SECTION TITLE */
-    .section-divider{display:flex;align-items:center;gap:14px;margin:2.5rem 0 1.5rem}
+    .section-divider{display:flex;align-items:center;gap:14px;margin:2.5rem 0 1.25rem}
     .section-divider span{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);white-space:nowrap}
     .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 
-    /* ABILITY BLOCK */
+    /* TABLE */
+    .tech-table{width:100%;border-collapse:collapse;margin-bottom:2rem;animation:fadeUp 0.4s ease both}
+    .tech-table thead tr{background:var(--bg-card)}
+    .tech-table thead th{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green-mid);padding:12px 16px;border:1px solid var(--border-bright);text-align:left}
+    .tech-table tbody tr{border:1px solid var(--border);transition:background 0.15s}
+    .tech-table tbody tr:hover{background:rgba(74,222,128,0.03)}
+    .tech-table tbody tr:nth-child(even){background:rgba(15,34,17,0.4)}
+    .tech-table tbody tr:nth-child(even):hover{background:rgba(74,222,128,0.05)}
+    .tech-table td{padding:14px 16px;border:1px solid var(--border);vertical-align:top;font-size:14px;line-height:1.65;color:var(--text)}
+    .td-name{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.1em;color:var(--green);font-weight:700;min-width:140px;white-space:nowrap}
+    .td-buttons{font-size:14px;font-weight:600;color:var(--text-bright);min-width:200px}
+    .btn-seq{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:4px}
+    .btn-key{font-family:'Cinzel',serif;font-size:12px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;padding:3px 9px;color:var(--green-mid);white-space:nowrap}
+    .btn-arrow{color:var(--text-dim);font-size:12px}
+    .td-notes{font-size:13px;line-height:1.7;color:var(--text);min-width:260px}
+    .td-notes p{margin-bottom:6px}
+    .td-notes p:last-child{margin-bottom:0}
+    .note-highlight{color:var(--green-mid);font-weight:600}
+    .note-warning{color:#E07070;font-weight:600}
+    /* GIF cell */
+    .td-gif{min-width:120px;max-width:180px;text-align:center;vertical-align:middle}
+    .gif-wrap{border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card)}
+    .gif-wrap img{width:100%;display:block}
+    .gif-placeholder{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;padding:1.5rem 1rem;text-align:center}
+
+    /* FUNDAMENTALS */
+    .fund-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:2rem}
+    .fund-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;transition:border-color 0.2s;animation:fadeUp 0.4s ease both}
+    .fund-card:hover{border-color:var(--border-bright)}
+    .fund-card::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.07),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .fund-inner{display:grid;grid-template-columns:1fr 130px;min-height:120px}
+    .fund-body-wrap{padding:1rem 1rem 1rem 1.1rem;border-right:1px solid var(--border)}
+    .fund-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+    .fund-body{font-size:13px;line-height:1.7;color:var(--text)}
+    .fund-body strong{color:var(--green-mid)}
+    .fund-list{padding-left:1rem;font-size:13px;line-height:1.75;color:var(--text);margin-top:6px}
+    .fund-list li{margin-bottom:3px}
+    .fund-media{display:flex;align-items:center;justify-content:center;background:var(--bg-card)}
+    .fund-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .fund-gif-ph{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;padding:1rem;text-align:center}
+
+    footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
+    footer a{color:var(--green-dark);text-decoration:none;transition:color 0.2s}
+    footer a:hover{color:var(--green-mid)}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  
+
+    /* ABILITY BLOCKS (from mechanics) */
     .ability-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;margin-bottom:14px;overflow:hidden;position:relative;animation:fadeUp 0.4s ease both}
     .ability-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.06),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
     .ability-inner{display:grid;grid-template-columns:300px 1fr 1fr;gap:0}
@@ -82,22 +120,6 @@
     .ability-desc p,.ability-use p{font-size:14px;line-height:1.75;color:var(--text)}
     .ability-use ol,.ability-use ul{padding-left:1.2rem;font-size:14px;line-height:1.8;color:var(--text)}
     .ability-use li{margin-bottom:4px}
-
-    /* DROPDOWN STYLES */
-    .ability-trigger{display:inline;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:3px;padding:2px 8px;color:var(--green);cursor:pointer;font-weight:600;letter-spacing:0.04em;transition:background 0.2s,border-color 0.2s;user-select:none}
-    .ability-trigger:hover{background:rgba(74,222,128,0.18);border-color:var(--green-mid)}
-    .ability-dropdown{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;padding:1rem;animation:slideDown 0.3s ease}
-    .dropdown-section{padding:0}
-    .dropdown-header{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
-    .dropdown-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.75rem}
-    .dropdown-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-surface);border:1px solid var(--border);border-radius:3px;padding:0.5rem 0.75rem;font-size:13px;transition:background 0.15s,border-color 0.15s}
-    .dropdown-item:hover{background:rgba(74,222,128,0.08);border-color:var(--border-bright)}
-    .champ-name{color:var(--text-bright);font-weight:500}
-    .ability-name-small{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--green);background:var(--bg-card);padding:2px 6px;border-radius:2px}
-
-    @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-
-    /* POWER SPIKES */
     .spike-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:1.5rem}
     .spike-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1.25rem;position:relative;overflow:hidden;transition:border-color 0.2s}
     .spike-card:hover{border-color:var(--border-bright)}
@@ -106,20 +128,28 @@
     .spike-lvl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:6px}
     .spike-title{font-size:14px;font-weight:600;color:var(--text-bright);margin-bottom:6px}
     .spike-desc{font-size:13px;color:var(--text-dim);line-height:1.55}
-
-    /* SPELL MAX */
-    .spell-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:14px;position:relative;animation:fadeUp 0.4s ease both}
-    .spell-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.06),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .spell-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:14px;animation:fadeUp 0.4s ease both;position:relative}
     .spell-max-order{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:1rem 0}
     .spell-badge{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.12em;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;padding:4px 12px;color:var(--green-mid)}
     .spell-arrow{color:var(--border-bright);font-size:14px}
-    .spell-note{font-size:14px;line-height:1.75;color:var(--text);margin-top:8px}
+    .intro-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:1.75rem 2rem;margin-bottom:1.5rem;position:relative;animation:fadeUp 0.4s ease both}
+    .intro-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .intro-block p{font-size:15px;line-height:1.8;color:var(--text)}
+    .intro-block strong{color:var(--green-mid);font-weight:600}
+    .intro-block a{color:var(--green);text-decoration:underline}
 
-    footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
-    footer a{color:var(--green-dark);text-decoration:none}
-    footer a:hover{color:var(--green-mid)}
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    /* ── DUAL PANEL SYSTEM ────────────────────────────────── */
+    .panel-viewport{overflow:hidden;width:100%}
+    .panel-track{display:flex;width:200%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
+    .panel-track.show-right{transform:translateX(-50%)}
+    .panel-page{width:50%;flex-shrink:0;min-width:0}
+
+    /* Toggle button */
+    .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;gap:0;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6);cursor:pointer}
+    .toggle-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 20px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
+    .toggle-btn.active{background:var(--green-dark);color:var(--text-bright)}
+    .toggle-btn:hover:not(.active){color:var(--green-mid)}
+    .toggle-sep{width:1px;background:var(--border-bright);height:20px;flex-shrink:0}
   </style>
 </head>
 <body>
@@ -127,20 +157,33 @@
 <nav>
   <a class="nav-logo" href="index.html">Urgot Guide</a>
   <ul class="nav-links">
-    <li><a href="mechanics.html" class="active">Mechanics</a></li>
+    <li><a href="mechanics.html" id="nav-mechanics">Mechanics</a></li>
     <li><a href="runes.html">Runes</a></li>
     <li><a href="matchup.html">MatchUp</a></li>
     <li><a href="calculator.html">Build Calculator</a></li>
     <li><a href="build.html">Build Guide</a></li>
+    <li><a href="tech.html" id="nav-tech">Tech</a></li>
   </ul>
   <div class="nav-search">
     <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
-    <span class="nav-search-icon">🔍</span>
+    <span class="nav-search-icon">&#128269;</span>
     <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
   </div>
 </nav>
 
-<section class="hero">
+<!-- Toggle button -->
+<div class="page-toggle">
+  <button class="toggle-btn active" id="btn-mech" onclick="showPanel('mech')">Mechanics</button>
+  <div class="toggle-sep"></div>
+  <button class="toggle-btn" id="btn-tech" onclick="showPanel('tech')">Tech &amp; Combos</button>
+</div>
+
+<div class="panel-viewport">
+  <div class="panel-track" id="panel-track">
+
+    <!-- ══════════════ PANEL LEFT: MECHANICS ══════════════ -->
+    <div class="panel-page" id="panel-mech">
+      <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -149,13 +192,13 @@
     <p class="hero-sub">Kit, power spikes & spell maxing</p>
   </div>
 </section>
-
-<div class="main">
+      <div class="main">
+        
 
   <!-- INTRO -->
   <div class="intro-block">
     <p>Urgot is the only ranged <strong>juggernaut</strong> (good at dealing damage and tanking) in the game. He plays top and is a beast in both early and late game — with huge damage output and a high health pool. On this page we will go through the kit, how to play Urgot, some tricks and more.</p>
-    <p style="margin-top:10px">If you want more detail about Urgot abilities, visit the <a href="https://wiki.leagueoflegends.com/en-us/Urgot" target="_blank" rel="noopener">Urgot Wiki page ↗</a></p>
+    <p style="margin-top:10px">If you want more detail about Urgot abilities, visit the <a href="https://leagueoflegends.fandom.com/wiki/Urgot" target="_blank" rel="noopener">Urgot Wiki page ↗</a></p>
   </div>
 
   <!-- KIT -->
@@ -263,100 +306,6 @@
       <div class="ability-use">
         <div class="ability-use-label">How to use</div>
         <p>Urgot R is a key spell in teamfight — the fear has a huge impact. It's a really tricky ability to hit without a CC so try using your E before R. And if your opponent is a bit tanky, the 4s timer to burst might be too fast for you to proc so try to hold it until you can kill them in that window.</p>
-        <p style="margin-top:1rem"><span class="ability-trigger" onclick="toggleAbilityDropdown(event)">cast chain and drag them ▼</span>
-        <div class="ability-dropdown" id="ability-dropdown" style="display:none;margin-top:0.75rem">
-          <div class="dropdown-section">
-            <div class="dropdown-header">Cancel the pull (R2)</div>
-            <div class="dropdown-list">
-              <div class="dropdown-item">
-                <span class="champ-name">Gangplank</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Sion</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Braum</span>
-                <span class="ability-name-small">E</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Milio</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Samira</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Yasuo</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Olaf</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Zaahen</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Rek'Sai</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Pantheon</span>
-                <span class="ability-name-small">E</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Master Yi</span>
-                <span class="ability-name-small">Q</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Gwen</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Fiora</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Elise</span>
-                <span class="ability-name-small">E</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Dr. Mundo</span>
-                <span class="ability-name-small">Passive</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Aurora</span>
-                <span class="ability-name-small">R travel</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Vladimir</span>
-                <span class="ability-name-small">W</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Udyr</span>
-                <span class="ability-name-small">Empowered E</span>
-              </div>
-            </div>
-          </div>
-          <div class="dropdown-section" style="margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem">
-            <div class="dropdown-header">Cancel only the execute</div>
-            <div class="dropdown-list">
-              <div class="dropdown-item">
-                <span class="champ-name">Kayle</span>
-                <span class="ability-name-small">R</span>
-              </div>
-              <div class="dropdown-item">
-                <span class="champ-name">Tryndamere</span>
-                <span class="ability-name-small">R</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        </p>
       </div>
     </div>
   </div>
@@ -401,29 +350,377 @@
 
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px">Standard max order</div>
     <div class="spell-max-order">
-      <span class="spell-badge">E × 1</span>
+      <span class="spell-badge">W × 5</span>
       <span class="spell-arrow">→</span>
-      <span class="spell-badge">Q or W × 1</span>
+      <span class="spell-badge">R × 3</span>
       <span class="spell-arrow">→</span>
-      <span class="spell-badge">Other one × 1</span>
+      <span class="spell-badge">Q × 5</span>
       <span class="spell-arrow">→</span>
-      <span class="spell-badge">Q × 1 (2 with triple tonic)</span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">W × 4</span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">Q × max </span>
-      <span class="spell-arrow">→</span>
-      <span class="spell-badge">E × max</span>
+      <span class="spell-badge">E × 5</span>
     </div>
   </div>
 
-</div>
+      </div>
+    </div>
 
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:2rem auto 0;padding:2rem 1.5rem 0">
-  <div style="flex:1"></div>
-  <a href="tech.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:4px;color:var(--green);text-decoration:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;transition:background 0.2s,border-color 0.2s;cursor:pointer;margin-left:auto">
-    Advanced Tech <span style="font-size:14px">→</span>
-  </a>
+    <!-- ══════════════ PANEL RIGHT: TECH & COMBOS ══════════════ -->
+    <div class="panel-page" id="panel-tech">
+      <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Urgot Guide</p>
+    <h1 class="hero-title">Tech <span>&</span> Combos</h1>
+    <p class="hero-sub">Advanced mechanics, combos & trading fundamentals</p>
+  </div>
+</section>
+      <div class="main">
+        
+
+  <!-- ═══════════════ COMBOS ═══════════════ -->
+  <div class="section-divider"><span>✦ Combos</span></div>
+
+  <table class="tech-table">
+    <thead>
+      <tr>
+        <th>Combo</th>
+        <th>Input</th>
+        <th>Notes</th>
+        <th>GIF</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="td-name">Short Trade</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">Q</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Auto + 2W</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Auto</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Disengage</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:5px">proc PTA — turn off W → auto as they exit range</div>
+        </td>
+        <td class="td-notes">
+          <p>Urgot's bread and butter short trade. Lead and end with an auto if you can for max DPS.</p>
+          <p>The number of W ticks depends on how long you want to extend the trade. To disengage fast: Auto → 2W PTA → disengage.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap">
+            <!-- ✏️ Remplacer par: <img src="URL_DU_GIF.gif" alt="Short Trade"/> -->
+            <div class="gif-placeholder">GIF</div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Even Shorter Trade</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">Q</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Auto with Leg up</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p>Useful vs champs you can't stay in range of (e.g. Sett because he can E you).</p>
+          <p><span class="note-highlight">UNLESS VS SQUISHY RANGED, always combo Q + Auto + Leg.</span> Q'ing for Q damage alone will make you run OOM, especially vs Doran's Shield or sustain champs.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">E Trade</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">Q</span><span class="btn-arrow">→</span>
+            <span class="btn-key">E</span><span class="btn-arrow">→</span>
+            <span class="btn-key">W</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p>Use Q slow to land E more reliably.</p>
+          <p><span class="note-highlight">Turn on W during the E animation — it hits the front leg during the flip.</span></p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Max DPS All In</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">E + Flash</span><span class="btn-arrow">→</span>
+            <span class="btn-key">R</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Q</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Auto</span><span class="btn-arrow">→</span>
+            <span class="btn-key">W on</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:5px">W on during E + Flash</div>
+        </td>
+        <td class="td-notes">
+          <p>Q before R if it's a short flip and they have no Tenacity — otherwise R before Q in case they Flash.</p>
+          <p>Skip the auto if they're low enough to die to R alone.</p>
+          <p><span class="note-highlight">Weaving in the auto really increases burst!</span></p>
+          <p>If at max E range, use R before Q (short vs long E mechanic) — Q → R works instantly on short Es.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Faster Burst All In</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">E</span><span class="btn-arrow">→</span>
+            <span class="btn-key">W</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Flash</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Q</span><span class="btn-arrow">→</span>
+            <span class="btn-key">R</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p>Can lead off with Q here too.</p>
+          <p>Turning W on during E animation procs the front leg for faster burst — but you lose the extra auto DPS.</p>
+          <p>R before Q works here too — same mechanic as the previous combo.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ═══════════════ MECHANICS ═══════════════ -->
+  <div class="section-divider"><span>✦ Mechanics</span></div>
+
+  <table class="tech-table">
+    <thead>
+      <tr>
+        <th>Mechanic</th>
+        <th>How to do it</th>
+        <th>Notes</th>
+        <th>GIF</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="td-name">W Toggle</td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">3W ticks</span><span class="btn-arrow">→</span>
+            <span class="btn-key">W off</span><span class="btn-arrow">→</span>
+            <span class="btn-key">Auto</span>
+          </div>
+          <div class="btn-seq" style="margin-top:4px">
+            <span class="btn-arrow" style="padding-left:2px">→</span>
+            <span class="btn-key">W on</span><span class="btn-arrow">→</span>
+            <span class="btn-key">3W ticks</span><span class="btn-arrow">→</span>
+            <span class="btn-key">repeat</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p>Urgot's bread and butter — <span class="note-highlight">mandatory mechanic to learn.</span> Unlocks properly at level 9 when W is fully maxed.</p>
+          <p>Increases DPS and tower-taking speed at level 9 by around 35%.</p>
+          <p>Practice on dummies or towers. <span class="note-highlight">Use the SOUND CUE to nail the timing.</span></p>
+          <p>Late game it's less necessary — circling to proc shotgun legs does more DPS, especially when enemies are CC'd.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Short vs Long E</td>
+        <td class="td-buttons">
+          E distance matters<br/>
+          <span style="font-size:12px;color:var(--text-dim)">Point blank → halfway = "short"</span>
+        </td>
+        <td class="td-notes">
+          <p>A <span class="note-highlight">"short" E</span> gives you time to E → Q → R instantly.</p>
+          <p>A <span class="note-warning">"long" E</span>, especially vs Tenacity, leaves no time to Q — go E → R only, or they can Flash/dash your R away.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">E Buffer vs CC</td>
+        <td class="td-buttons">
+          Cast E during the <span class="note-highlight">"leaning back"</span> animation while CC lands
+        </td>
+        <td class="td-notes">
+          <p>The E buffer separates good Urgots from great ones. Different abilities are harder to buffer due to speed.</p>
+          <p><span class="note-highlight">Urgot can buffer CC only during the "winding up / leaning back" part of his E cast.</span> Once he's dashing forward, CC will cancel it.</p>
+          <p><span class="note-warning">Ambessa R, Skarner R and Bard R can never be E buffered.</span></p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Mana Bug<br/><span style="font-size:11px;color:var(--text-dim)">Free W cast</span></td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">Q → W</span>
+          </div>
+          <div class="btn-seq" style="margin-top:5px">
+            <span class="btn-key">E → W</span>
+          </div>
+          <div class="btn-seq" style="margin-top:5px">
+            <span class="btn-key">R → W</span>
+            <span style="font-size:12px;color:var(--text-dim)">(very fast)</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p><span class="note-highlight">If you only have mana for Q or E but not W, this lets you cast W for free.</span></p>
+          <p>Very useful early after a kill when low on mana — shove the wave before it freezes.</p>
+          <p>Mana is deducted after the Q/E/R animation completes, but W can be cast at the start of that animation "for free".</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-name">Auto Flash<br/><span style="font-size:11px;color:var(--text-dim)">Redirect Passive Leg</span></td>
+        <td class="td-buttons">
+          <div class="btn-seq">
+            <span class="btn-key">Auto</span><span class="btn-arrow">+</span>
+            <span class="btn-key">Flash</span>
+            <span style="font-size:12px;color:var(--text-dim)">toward a leg</span>
+          </div>
+        </td>
+        <td class="td-notes">
+          <p>Very useful for kills when the enemy is ready to react to a standard Flash + Auto, which is much slower.</p>
+          <p>They won't expect the passive leg damage from the side they think isn't facing them.</p>
+        </td>
+        <td class="td-gif">
+          <div class="gif-wrap"><div class="gif-placeholder">GIF</div></div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ═══════════════ FUNDAMENTALS ═══════════════ -->
+  <div class="section-divider"><span>✦ Trading Fundamentals</span></div>
+
+  <div class="fund-grid">
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">Build leads from level 1</div>
+          <div class="fund-body">
+            Every lead matters — whether it's a kill, a forced Flash, a reset timer or a gank setup. Once you have a lead, freeze the wave and force the opponent to walk into your range to catch up. Level timers, summoner advantages and item spikes are your tools for winning lane before you hit your powerspike.
+          </div>
+        </div>
+        <div class="fund-media">
+          <!-- ✏️ <img src="URL.gif" alt=""/> -->
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">Patience with your E</div>
+          <div class="fund-body">
+            E puts you behind the enemy — there's no backing out after. Only commit when you're sure you can finish the fight.
+            <ul class="fund-list">
+              <li>Never E if you don't know where the jungler is.</li>
+              <li>Always use Q → E to make it easier to hit, especially with Approach Velocity.</li>
+              <li>You can E more freely near your tower or when going horizontal — short lane.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fund-media">
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">Range is your biggest weapon</div>
+          <div class="fund-body">
+            Spacing wins games on Urgot. Stack short trades — Autos + Q + PTA — until you've chunked them enough to E + Flash kill. Make them spend resources to reach you. Never let someone just walk up and auto you for free.
+          </div>
+        </div>
+        <div class="fund-media">
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">Manage your Shotgun Legs</div>
+          <div class="fund-body">
+            Your passive is a core damage source — treat it with care.
+            <ul class="fund-list">
+              <li>Keep front legs ready for trades, not wasted on minions.</li>
+              <li>Use side legs to CS — they affect the wave less.</li>
+              <li>Generally need 3–4+ legs active when you go for the all-in.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fund-media">
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">"The Line" — stay in your wave</div>
+          <div class="fund-body">
+            Draw an imaginary line between the two minion waves. Trading across it means you absorb their wave while they absorb yours — a losing exchange before level 9. Stay on your side and use your range to poke. If they cross the line, punish them with your wave backing you up.
+          </div>
+        </div>
+        <div class="fund-media">
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-card">
+      <div class="fund-inner">
+        <div class="fund-body-wrap">
+          <div class="fund-title">Wait for mistakes</div>
+          <div class="fund-body">
+            Most matchups require you to bait out a key ability before you can trade into it effectively.
+            <ul class="fund-list">
+              <li>Mordekaiser Q, Darius Q, Camille Q — let them whiff, then punish.</li>
+              <li>Trading into a full kit means they can extend and win.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fund-media">
+          <div class="fund-gif-ph">GIF</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <footer>
@@ -436,23 +733,38 @@
 </footer>
 
 <script>
-function toggleAbilityDropdown(e){
-  e.stopPropagation();
-  var dropdown=document.getElementById('ability-dropdown');
-  var trigger=e.target;
-  var isOpen=dropdown.style.display==='block';
-  dropdown.style.display=isOpen?'none':'block';
-  trigger.textContent=isOpen?'cast chain and drag them ▼':'cast chain and drag them ▲';
-}
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.ability-use'))document.getElementById('ability-dropdown').style.display='none';
-});
-
-var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
+var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href='matchup/'+slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
 document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
+
+function showPanel(panel) {
+  var track = document.getElementById('panel-track');
+  var btnMech = document.getElementById('btn-mech');
+  var btnTech = document.getElementById('btn-tech');
+  if (panel === 'tech') {
+    track.classList.add('show-right');
+    btnMech.classList.remove('active');
+    btnTech.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    // update URL hash silently
+    history.replaceState(null, '', '#tech');
+  } else {
+    track.classList.remove('show-right');
+    btnTech.classList.remove('active');
+    btnMech.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#mechanics');
+  }
+}
+
+// Check hash on load
+(function() {
+  if (window.location.hash === '#tech') {
+    showPanel('tech');
+  }
+})();
 </script>
 </body>
 </html>

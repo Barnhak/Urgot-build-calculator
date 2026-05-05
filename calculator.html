@@ -500,8 +500,8 @@ function buildItems(top, a) {
   if (MERC_FIRST.includes(n))       warnings.push("👟 vs "+top+": rush Mercury's Treads before Black Cleaver");
   if (STEELCAPS_FIRST.includes(n))  warnings.push("🥾 vs "+top+": rush Plated Steelcaps before Black Cleaver");
   if (ABATTEUR_CHAMPS.includes(n))  warnings.push("⚔ vs "+top+": Cull / Gluttonous Greaves possible before Black Cleaver");
-  if (bramble)                       warnings.push("🌿 vs "+top+": rush Bramble Vest before Black Cleaver");
-  if (EXECUTIONER)                  warnings.push("🌿 vs"+top+": rush Executioner call before Cleaver");
+  if (bramble)                      warnings.push("🌿 vs "+top+": rush Bramble Vest before Black Cleaver");
+  if (EXECUTIONER.includes(n))      warnings.push("🌿 vs"+top+": rush Executioner call before Cleaver");
 
   items.push({ slot:"Boots",  name:bootsObj.name,  note:bootsObj.note });
   items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health" });

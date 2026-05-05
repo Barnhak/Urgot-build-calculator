@@ -370,12 +370,13 @@ const CHAMP_RUNE_MAP = {
   "renekton":"page4","shen":"page4","rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
 };
 
-const BRAMBLE_CHAMPS  = ["irelia","zac","fiora","warwick","renekton","wukong"];
+const BRAMBLE_CHAMPS  = ["irelia","fiora","renekton","wukong"];
 const BOOTS_FIRST     = ["olaf"];
 const MERC_FIRST      = ["kennen"];
 const STEELCAPS_FIRST = ["ambessa","yasuo","tryndamere","gnar"];
 const ABATTEUR_CHAMPS = ["garen","k'sante","yorick"];
 const SHIELD_START    = ["teemo","rumble"];
+const EXECUTIONER     = ["warwick","zac"];
 
 Object.entries(CHAMPS_BY_ROLE).forEach(function(e) {
   var dl = document.getElementById('list-' + e[0]);
@@ -500,6 +501,7 @@ function buildItems(top, a) {
   if (STEELCAPS_FIRST.includes(n))  warnings.push("🥾 vs "+top+": rush Plated Steelcaps before Black Cleaver");
   if (ABATTEUR_CHAMPS.includes(n))  warnings.push("⚔ vs "+top+": Cull / Gluttonous Greaves possible before Black Cleaver");
   if (bramble)                       warnings.push("🌿 vs "+top+": rush Bramble Vest before Black Cleaver");
+  if (EXECUTIONER)                  warnings.push("🌿 vs"+top+": rush Executioner call before Cleaver");
 
   items.push({ slot:"Boots",  name:bootsObj.name,  note:bootsObj.note });
   items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health" });

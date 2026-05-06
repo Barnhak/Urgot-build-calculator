@@ -9,10 +9,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green: #4ADE80; --green-mid: #22C55E; --green-dark: #15803D;
+      --green: #4ADE80; --green-mid: #22C55E; --green-dark: #15803D; --green-dim:#166534; --green-deep:#052e16;
       --gold: #C89B3C; --gold-light: #F0E6B2; --gold-dark: #785A28;
-      --bg: #060D07; --bg-surface: #0B1A0D; --bg-card: #0F2211;
-      --border: #1A3D1E; --border-bright: #2D6A33; --border-gold: #785A28;
+      --bg: #060D07; --bg-surface: #0B1A0D; --bg-card: #0F2211; --bg-card2:#122614;
+      --border: #1A3D1E; --border-bright: #2D6A33; --border-gold:#785A28;
       --text: #A8D4A0; --text-dim: #4A7550; --text-bright: #E8F5E2;
       --blue: #0BC4E3; --blue-dark: #0A3A4A;
       --red: #C84B4B; --red-dark: #2E0A0A;
@@ -47,24 +47,13 @@
     .nav-search input::placeholder { color: var(--text-dim); }
     .nav-search-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--green-mid); pointer-events: none; }
     .nav-dropdown { position: absolute; top: calc(100% + 6px); right: 0; width: 220px; background: var(--bg-card); border: 1px solid var(--border-bright); border-radius: 4px; max-height: 280px; overflow-y: auto; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.7); z-index: 200; }
-    .nav-dropdown::-webkit-scrollbar { width: 3px; }
-    .nav-dropdown::-webkit-scrollbar-thumb { background: var(--border-bright); }
     .nav-dropdown h4 { padding: 7px 12px; font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.25em; color: var(--text-dim); text-transform: uppercase; border-bottom: 1px solid var(--border); }
     .nav-dropdown-item { display: flex; align-items: center; gap: 8px; padding: 7px 12px; text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500; border-bottom: 1px solid rgba(26,61,30,0.3); transition: background 0.15s, color 0.15s; }
     .nav-dropdown-item:last-child { border-bottom: none; }
     .nav-dropdown-item:hover { background: var(--bg-surface); color: var(--green); }
-    .nav-dropdown-item img { width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--border); object-fit: cover; }
 
-    .hero {
-      position: relative; height: 38vh; min-height: 240px;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg') center 30% / cover no-repeat;
-      filter: brightness(0.25) saturate(0.6);
-      animation: heroZoom 20s ease-in-out infinite alternate;
-    }
+    .hero { position: relative; height: 38vh; min-height: 240px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg') center 30% / cover no-repeat; filter: brightness(0.25) saturate(0.6); animation: heroZoom 20s ease-in-out infinite alternate; }
     @keyframes heroZoom { from{transform:scale(1.03)} to{transform:scale(1.07)} }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(6,13,7,0.4) 0%, rgba(6,13,7,0) 40%, rgba(6,13,7,0.8) 85%, var(--bg) 100%); }
     .hero-content { position: relative; text-align: center; animation: fadeDown 0.7s ease both; }
@@ -73,20 +62,9 @@
     .hero-title span { color: var(--green); text-shadow: 0 0 30px rgba(74,222,128,0.4); }
     .hero-sub { font-size: 13px; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; margin-top: 0.6rem; }
 
-    .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
-
-    .section {
-      background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 4px; padding: 1.5rem; margin-bottom: 1.25rem;
-      position: relative; animation: fadeUp 0.4s ease both;
-    }
-    .section::before {
-      content: ''; position: absolute; inset: 0; border-radius: 4px;
-      border: 1px solid transparent;
-      background: linear-gradient(135deg, rgba(74,222,128,0.08), transparent 40%) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
-    }
+    .main { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+    .section { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; margin-bottom: 1.25rem; position: relative; animation: fadeUp 0.4s ease both; }
+    .section::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.08), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
     .section-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--green-dark); text-transform: uppercase; margin-bottom: 1.25rem; }
 
     .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1rem; }
@@ -98,38 +76,32 @@
     .input-group input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; color: var(--text-bright); font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 10px; outline: none; transition: border-color 0.2s, box-shadow 0.2s, padding-left 0.15s; }
     .input-group input.has-icon { padding-left: 38px; }
     .input-group input:focus { border-color: var(--border-bright); box-shadow: 0 0 0 2px rgba(74,222,128,0.1); }
-    .input-group input::placeholder { color: var(--text-dim); font-weight: 400; }
 
     .comp-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
     .comp-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
     .tag { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 2px; }
-    .tag-ad     { background: rgba(200,75,75,0.12);  color: #E07070; border: 1px solid rgba(200,75,75,0.3); }
-    .tag-ap     { background: var(--purple-dark);    color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
-    .tag-cc     { background: var(--blue-dark);      color: var(--blue);   border: 1px solid rgba(11,196,227,0.3); }
-    .tag-crit   { background: rgba(74,222,128,0.08); color: var(--green);  border: 1px solid rgba(74,222,128,0.25); }
-    .tag-burst  { background: rgba(180,30,180,0.1);  color: #D070D0;       border: 1px solid rgba(180,30,180,0.3); }
-    .tag-burn   { background: var(--orange-dark);    color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
-    .tag-shield { background: rgba(11,196,227,0.08); color: var(--blue);   border: 1px solid rgba(11,196,227,0.25); }
-    .tag-heal   { background: rgba(74,222,128,0.06); color: var(--green-mid); border: 1px solid rgba(74,222,128,0.2); }
-    .tag-execute{ background: rgba(200,75,75,0.15);  color: #FF6060;       border: 1px solid rgba(200,75,75,0.4); }
-    .tag-empty  { font-size: 12px; color: var(--text-dim); font-style: italic; }
+    .tag-ad { background: rgba(200,75,75,0.12); color: #E07070; border: 1px solid rgba(200,75,75,0.3); }
+    .tag-ap { background: var(--purple-dark); color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
+    .tag-cc { background: var(--blue-dark); color: var(--blue); border: 1px solid rgba(11,196,227,0.3); }
+    .tag-crit { background: rgba(74,222,128,0.08); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+    .tag-burst { background: rgba(180,30,180,0.1); color: #D070D0; border: 1px solid rgba(180,30,180,0.3); }
+    .tag-burn { background: var(--orange-dark); color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
+    .tag-shield { background: rgba(11,196,227,0.08); color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
+    .tag-heal { background: rgba(74,222,128,0.06); color: var(--green-mid); border: 1px solid rgba(74,222,128,0.2); }
+    .tag-execute { background: rgba(200,75,75,0.15); color: #FF6060; border: 1px solid rgba(200,75,75,0.4); }
+    .tag-empty { font-size: 12px; color: var(--text-dim); font-style: italic; }
 
     .btn-wrap { text-align: center; margin-top: 1.25rem; }
     .btn { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); background: transparent; border: 1px solid var(--green-dark); border-radius: 3px; padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s, border-color 0.2s; }
-    .btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,222,128,0.1), transparent); opacity: 0; transition: opacity 0.2s; }
     .btn:hover { color: var(--text-bright); border-color: var(--green-mid); }
-    .btn:hover::before { opacity: 1; }
-    .btn:active { transform: scale(0.97); }
 
     .result-header { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
     .result-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
     .build-layout { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
     @media(max-width: 640px) { .build-layout { grid-template-columns: 1fr; } }
 
     .items-grid { display: flex; flex-direction: column; gap: 8px; }
-    .item-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s; }
-    .item-row:hover { border-color: var(--border-bright); }
+    .item-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; }
     .item-icon { width: 40px; height: 40px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-bright); flex-shrink: 0; background: var(--bg-card); }
     .item-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .item-slot { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; color: var(--green-dark); text-transform: uppercase; min-width: 48px; }
@@ -137,76 +109,73 @@
     .item-note { font-size: 12px; color: var(--text-dim); margin-top: 1px; line-height: 1.4; }
 
     .situ-panel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1rem; position: relative; }
-    .situ-panel::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.07), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
     .situ-title { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--green-dark); text-transform: uppercase; margin-bottom: 10px; }
-    .situ-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 8px 10px; margin-bottom: 7px; transition: border-color 0.2s; display: flex; align-items: flex-start; gap: 8px; }
-    .situ-item:last-child { margin-bottom: 0; }
-    .situ-item:hover { border-color: var(--border-bright); }
+    .situ-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 8px 10px; margin-bottom: 7px; display: flex; align-items: flex-start; gap: 8px; }
     .situ-icon { width: 36px; height: 36px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-bright); flex-shrink: 0; background: var(--bg-card); }
     .situ-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .situ-text { flex: 1; }
     .situ-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 2px; margin-bottom: 4px; letter-spacing: 0.06em; }
-    .situ-tag-shield  { background: rgba(11,196,227,0.1);  color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
-    .situ-tag-heal    { background: rgba(74,222,128,0.08); color: var(--green-mid); border: 1px solid rgba(74,222,128,0.2); }
-    .situ-tag-execute { background: rgba(200,75,75,0.15);  color: #FF6060; border: 1px solid rgba(200,75,75,0.4); }
+    .situ-tag-shield { background: rgba(11,196,227,0.1); color: var(--blue); border: 1px solid rgba(11,196,227,0.25); }
+    .situ-tag-heal { background: rgba(74,222,128,0.08); color: var(--green-mid); border: 1px solid rgba(74,222,128,0.2); }
+    .situ-tag-execute { background: rgba(200,75,75,0.15); color: #FF6060; border: 1px solid rgba(200,75,75,0.4); }
     .situ-item-name { font-size: 13px; font-weight: 600; color: var(--text-bright); margin-bottom: 2px; }
     .situ-item-cond { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
-    .situ-empty { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 0.75rem 0; }
 
     .warn-box { background: rgba(74,222,128,0.05); border: 1px solid rgba(74,222,128,0.15); border-radius: 3px; padding: 8px 12px; font-size: 13px; color: var(--text); margin-bottom: 8px; }
     .guide-box { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); border-radius: 3px; padding: 9px 14px; font-size: 13px; color: var(--green-mid); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .guide-box a { color: var(--green-mid); text-decoration: none; font-weight: 600; }
-    .guide-box a:hover { color: var(--green); text-decoration: underline; }
-    .error { background: var(--red-dark); border: 1px solid rgba(200,75,75,0.3); border-radius: 3px; padding: 10px 14px; font-size: 13px; color: var(--red); text-align: center; margin-top: 1rem; }
 
-    .cat-section { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; position: relative; }
-    .cat-section::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.07), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
-    .cat-grid { display: flex; flex-direction: column; gap: 8px; }
-    .cat-row { display: flex; align-items: flex-start; gap: 10px; }
-    .cat-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; min-width: 64px; padding-top: 5px; }
-    .cat-label-ad     { color: #E07070; }
-    .cat-label-ap     { color: var(--purple); }
-    .cat-label-cc     { color: var(--blue); }
-    .cat-label-crit   { color: var(--green); }
-    .cat-label-burst  { color: #D070D0; }
-    .cat-label-burn   { color: var(--orange); }
-    .cat-label-shield { color: var(--blue); }
-    .cat-label-heal   { color: var(--green-mid); }
-    .cat-label-execute{ color: #FF6060; }
-    .cat-champs { display: flex; flex-wrap: wrap; gap: 5px; }
-    .cat-champ { display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 3px 7px 3px 3px; font-size: 12px; color: var(--text-bright); }
-    .cat-champ img { width: 20px; height: 20px; border-radius: 2px; object-fit: cover; object-position: center top; }
+    .cat-wrapper { margin-bottom: 12px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+    .cat-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; cursor:pointer; background:var(--bg-surface); position:relative; }
+    .cat-header::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent-color,var(--green-dark)); }
+    .cat-title { font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent-color,var(--green)); }
+    .cat-badge { font-size:11px; color:var(--text-dim); }
+    .cat-arrow { color:var(--accent-color,var(--green)); transition:transform 0.35s; }
+    .cat-header.open .cat-arrow { transform: rotate(180deg); }
+    .cat-body { max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s ease; background:var(--bg-card); }
+    .cat-body.open { max-height:2000px; }
+    .cat-inner { padding:1.25rem 1.25rem 1.5rem; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+    .cat-item { display:flex; align-items:flex-start; gap:10px; background:var(--bg-surface); border:1px solid var(--border); border-radius:4px; padding:10px 12px; }
+    .cat-item-icon { width:44px; height:44px; border-radius:3px; overflow:hidden; border:1px solid var(--border-bright); flex-shrink:0; background:var(--bg); }
+    .cat-item-icon img { width:100%; height:100%; object-fit:cover; display:block; }
+    .cat-item-name { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; margin-bottom:3px; }
+    .cat-item-desc { font-size:12px; color:var(--text-dim); line-height:1.45; }
 
-    footer { border-top: 1px solid var(--border); padding: 2rem 1rem; text-align: center; font-size: 11px; letter-spacing: 0.08em; color: var(--text-dim); margin-top: 1rem; }
-    footer a { color: var(--green-dark); text-decoration: none; }
-    footer a:hover { color: var(--green-mid); }
+    .cat-core .cat-header { --accent-color: var(--green); }
+    .cat-great .cat-header { --accent-color: #0BC4E3; }
+    .cat-good .cat-header { --accent-color: var(--gold); }
+    .cat-situ .cat-header { --accent-color: var(--orange); }
+    .cat-bad .cat-header { --accent-color: var(--red); }
+
+    .divider { display:flex; align-items:center; gap:14px; margin:2rem 0 1.5rem; }
+    .divider span { font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-dim); white-space:nowrap; }
+    .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .back-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
+    .back-card { background:var(--bg-card); border:1px solid var(--border); border-radius:4px; padding:14px; text-align:center; }
+    .back-card-icons { display:flex; justify-content:center; gap:6px; margin-bottom:8px; }
+    .back-card .item-icon { width:40px; height:40px; }
+    .back-card-price { font-family:'Cinzel',serif; font-size:12px; color:var(--gold); letter-spacing:0.08em; margin-bottom:6px; }
+    .back-card-desc { font-size:12px; color:var(--text-dim); line-height:1.45; }
+    .back-card.highlight { border-color:var(--green-dark); background:rgba(74,222,128,0.04); }
+    .back-card.bad { border-color:rgba(200,75,75,0.3); background:rgba(200,75,75,0.04); }
+
+    footer { border-top:1px solid var(--border); padding:2rem 1rem; text-align:center; font-size:11px; letter-spacing:0.1em; color:var(--text-dim); }
+    footer a { color:var(--green-dark); text-decoration:none; }
+
+    .panel-viewport { overflow:hidden; width:100%; }
+    .panel-track { display:flex; width:300%; transition:transform 0.55s cubic-bezier(0.77,0,0.175,1); }
+    .panel-track.show-right { transform:translateX(-33.3333%); }
+    .panel-track.show-far-right { transform:translateX(-66.6666%); }
+    .panel-page { width:33.3333%; flex-shrink:0; min-width:0; }
+
+    .page-toggle { position:fixed; bottom:2rem; right:2rem; z-index:200; display:flex; align-items:center; background:var(--bg-card); border:1px solid var(--border-bright); border-radius:50px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.6); }
+    .toggle-btn { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; padding:10px 20px; border:none; background:transparent; color:var(--text-dim); cursor:pointer; white-space:nowrap; }
+    .toggle-btn.active { background:var(--green-dark); color:var(--text-bright); }
+    .toggle-sep { width:1px; background:var(--border-bright); height:20px; flex-shrink:0; }
 
     @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:none} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
-    .panel-viewport { overflow: hidden; width: 100%; }
-    .panel-track { display: flex; width: 300%; transition: transform 0.55s cubic-bezier(0.77,0,0.175,1); }
-    .panel-track.show-right { transform: translateX(-33.3333%); }
-    .panel-track.show-far-right { transform: translateX(-66.6666%); }
-    .panel-page { width: 33.3333%; flex-shrink: 0; min-width: 0; }
-
-    .page-toggle {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
-      display: flex; align-items: center;
-      background: var(--bg-card); border: 1px solid var(--border-bright);
-      border-radius: 50px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.6);
-    }
-    .toggle-btn {
-      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; padding: 10px 20px; border: none;
-      background: transparent; color: var(--text-dim); cursor: pointer;
-      transition: background 0.2s, color 0.2s; white-space: nowrap;
-    }
-    .toggle-btn.active { background: var(--green-dark); color: var(--text-bright); }
-    .toggle-btn:hover:not(.active) { color: var(--green-mid); }
-    .toggle-sep { width: 1px; background: var(--border-bright); height: 20px; flex-shrink: 0; }
-
-    @media(max-width:500px) { .input-grid { grid-template-columns: 1fr 1fr; } }
     @media(max-width:600px){
       .nav-links{gap:1rem}
       .items-row{flex-direction:column}
@@ -256,7 +225,171 @@
       </section>
 
       <div class="main">
-        <!-- contenu build -->
+        <div class="section-block">
+          <p class="section-label">✦ Starter Item</p>
+          <div class="items-row">
+            <div class="item-card">
+              <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div>
+              <div class="item-info">
+                <div class="item-name">Doran's Blade</div>
+                <div class="item-desc">Default item — you will take it in most matchups.</div>
+              </div>
+            </div>
+            <div class="item-card">
+              <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div>
+              <div class="item-info">
+                <div class="item-name">Doran's Shield</div>
+                <div class="item-desc">Take this into heavy poke and long-range lanes like Teemo or Rumble.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <p class="section-label">✦ Boots</p>
+          <div class="items-row">
+            <div class="item-card">
+              <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3009.png" alt="Boots of Swiftness"/></div>
+              <div class="item-info">
+                <div class="item-name">Boots of Swiftness</div>
+                <div class="item-desc">Best overall boots for Urgot. Great into mixed damage and kiting comps.</div>
+              </div>
+            </div>
+            <div class="item-card">
+              <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3047.png" alt="Plated Steelcaps"/></div>
+              <div class="item-info">
+                <div class="item-name">Plated Steelcaps</div>
+                <div class="item-desc">Very good against 2 or 3 AD threats and auto-attack based lanes.</div>
+              </div>
+            </div>
+            <div class="item-card">
+              <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3111.png" alt="Mercury's Treads"/></div>
+              <div class="item-info">
+                <div class="item-name">Mercury's Treads</div>
+                <div class="item-desc">Pick this into heavy CC or AP burst, especially versus Kennen.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <p class="section-label">✦ First Back</p>
+          <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:1.25rem">
+            <strong style="color:var(--green)">Black Cleaver is the priority</strong> in most games. If your recall lets you buy Pickaxe, that is usually the best first component.
+          </p>
+          <div class="back-grid">
+            <div class="back-card">
+              <div class="back-card-icons">
+                <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+              </div>
+              <div class="back-card-price">875g</div>
+              <div class="back-card-desc">Best single component start for Black Cleaver.</div>
+            </div>
+            <div class="back-card">
+              <div class="back-card-icons">
+                <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3044.png" alt="Phage"/></div>
+              </div>
+              <div class="back-card-price">1100g</div>
+              <div class="back-card-desc">Good if you need HP and movement speed to keep pressure.</div>
+            </div>
+            <div class="back-card highlight">
+              <div class="back-card-icons">
+                <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+                <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1036.png" alt="Long Sword"/></div>
+              </div>
+              <div class="back-card-price">1225g</div>
+              <div class="back-card-desc">Best back overall. Strongest value spike for the lane.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"><span>✦ What to build</span></div>
+
+        <div class="cat-wrapper cat-core">
+          <div class="cat-header" onclick="toggleCat(this)">
+            <div>
+              <div class="cat-title">Core Items</div>
+              <div class="cat-badge">Essential every game</div>
+            </div>
+            <span class="cat-arrow">▼</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-inner">
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3071.png" alt="Black Cleaver"/></div><div class="cat-item-info"><div class="cat-item-name">Black Cleaver</div><div class="cat-item-desc">The first item on Urgot, always.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3053.png" alt="Sterak's Gage"/></div><div class="cat-item-info"><div class="cat-item-name">Sterak's Gage</div><div class="cat-item-desc">Very common second item. Strong survivability and fighting power.</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-wrapper cat-great">
+          <div class="cat-header" onclick="toggleCat(this)">
+            <div>
+              <div class="cat-title">Great Items</div>
+              <div class="cat-badge">Build often</div>
+            </div>
+            <span class="cat-arrow">▼</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-inner">
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/222504.png" alt="Rookern"/></div><div class="cat-item-info"><div class="cat-item-name">Rookern</div><div class="cat-item-desc">Excellent against burst AP threats.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3143.png" alt="Randuin's Omen"/></div><div class="cat-item-info"><div class="cat-item-name">Randuin's Omen</div><div class="cat-item-desc">Amazing versus crit-heavy enemy drafts.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/4401.png" alt="Force of Nature"/></div><div class="cat-item-info"><div class="cat-item-name">Force of Nature</div><div class="cat-item-desc">Very strong into burn and AP poke teams.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3742.png" alt="Deadman's Plate"/></div><div class="cat-item-info"><div class="cat-item-name">Deadman's Plate</div><div class="cat-item-desc">Great against mobile teams and for catching targets.</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-wrapper cat-good">
+          <div class="cat-header" onclick="toggleCat(this)">
+            <div>
+              <div class="cat-title">Good Items</div>
+              <div class="cat-badge">Situationally strong</div>
+            </div>
+            <span class="cat-arrow">▼</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-inner">
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3075.png" alt="Thornmail"/></div><div class="cat-item-info"><div class="cat-item-name">Thornmail</div><div class="cat-item-desc">Your anti-heal choice when you really need it.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6665.png" alt="Jak'Sho"/></div><div class="cat-item-info"><div class="cat-item-name">Jak'Sho</div><div class="cat-item-desc">Strong late-game defensive option.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/2501.png" alt="Overlord's Bloodmail"/></div><div class="cat-item-info"><div class="cat-item-name">Overlord's Bloodmail</div><div class="cat-item-desc">Good when you need more damage and HP together.</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-wrapper cat-situ">
+          <div class="cat-header" onclick="toggleCat(this)">
+            <div>
+              <div class="cat-title">Situational Items</div>
+              <div class="cat-badge">Use only in specific games</div>
+            </div>
+            <span class="cat-arrow">▼</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-inner">
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6675.png" alt="Shojin"/></div><div class="cat-item-info"><div class="cat-item-name">Spear of Shojin</div><div class="cat-item-desc">Only into very tanky HP stackers.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6695.png" alt="Serpent's Fang"/></div><div class="cat-item-info"><div class="cat-item-name">Serpent's Fang</div><div class="cat-item-desc">Only if enemy shields are a huge issue and nobody else can buy it.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3110.png" alt="Frozen Heart"/></div><div class="cat-item-info"><div class="cat-item-name">Frozen Heart</div><div class="cat-item-desc">Only against very attack-speed dependent teams.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3211.png" alt="Hullbreaker"/></div><div class="cat-item-info"><div class="cat-item-name">Hullbreaker</div><div class="cat-item-desc">Only when you must split and your team can play around pressure.</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-wrapper cat-bad">
+          <div class="cat-header" onclick="toggleCat(this)">
+            <div>
+              <div class="cat-title">Bad Items — Never Build</div>
+              <div class="cat-badge">Avoid at all costs</div>
+            </div>
+            <span class="cat-arrow">▼</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-inner">
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3077.png" alt="Tiamat"/></div><div class="cat-item-info"><div class="cat-item-name">Tiamat</div><div class="cat-item-desc">No synergy with Urgot.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6631.png" alt="Stridebreaker"/></div><div class="cat-item-info"><div class="cat-item-name">Stridebreaker</div><div class="cat-item-desc">Redundant active and weak value.</div></div></div>
+              <div class="cat-item"><div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6609.png" alt="Chempunk Chainsword"/></div><div class="cat-item-info"><div class="cat-item-name">Chempunk Chainsword</div><div class="cat-item-desc">Thornmail is better on Urgot.</div></div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -272,7 +405,21 @@
       </section>
 
       <div class="main">
-        <!-- contenu calculator -->
+        <div class="section">
+          <p class="section-title">✦ Enemy Composition</p>
+          <div class="input-grid">
+            <div class="input-group"><label>Top</label><div class="input-wrap"><div class="champ-preview" id="prev-top"><img id="img-top" src="" alt="" /></div><input id="top" placeholder="ex: Darius" oninput="onInput()"/></div></div>
+            <div class="input-group"><label>Jungle</label><div class="input-wrap"><div class="champ-preview" id="prev-jg"><img id="img-jg" src="" alt="" /></div><input id="jg" placeholder="ex: Lee Sin" oninput="onInput()"/></div></div>
+            <div class="input-group"><label>Mid</label><div class="input-wrap"><div class="champ-preview" id="prev-mid"><img id="img-mid" src="" alt="" /></div><input id="mid" placeholder="ex: Syndra" oninput="onInput()"/></div></div>
+            <div class="input-group"><label>ADC</label><div class="input-wrap"><div class="champ-preview" id="prev-adc"><img id="img-adc" src="" alt="" /></div><input id="adc" placeholder="ex: Jinx" oninput="onInput()"/></div></div>
+            <div class="input-group"><label>Support</label><div class="input-wrap"><div class="champ-preview" id="prev-sup"><img id="img-sup" src="" alt="" /></div><input id="sup" placeholder="ex: Thresh" oninput="onInput()"/></div></div>
+          </div>
+          <p class="comp-label">Team composition analysis</p>
+          <div class="comp-tags" id="comp-tags"><span class="tag-empty">Enter enemy draft...</span></div>
+          <div class="btn-wrap"><button class="btn" onclick="calculate()">Generate build</button></div>
+          <div id="error-msg"></div>
+        </div>
+        <div id="results"></div>
       </div>
     </div>
 
@@ -289,8 +436,18 @@
 
       <div class="main">
         <div class="section">
-          <p class="section-title">✦ Runes</p>
-          <div class="warn-box">Ici tu peux mettre ton contenu de page runes.</div>
+          <p class="section-title">✦ Standard Rune Pages</p>
+          <div class="warn-box">This page is a clean reference for your main rune setups.</div>
+          <div class="items-row">
+            <div class="item-card"><div class="item-icon"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Standard page"/></div><div class="item-info"><div class="item-name">Standard page</div><div class="item-desc">Press the Attack, Triumph, Bloodline, Last Stand.</div></div></div>
+            <div class="item-card"><div class="item-icon"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page4.png" alt="Resolve page"/></div><div class="item-info"><div class="item-name">Resolve secondary</div><div class="item-desc">Bone Plating and Overgrowth for burst-heavy melee matchups.</div></div></div>
+            <div class="item-card"><div class="item-icon"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page5.png" alt="Second Wind page"/></div><div class="item-info"><div class="item-name">Poke page</div><div class="item-desc">Second Wind and Unflinching into poke lanes.</div></div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <p class="section-title">✦ Rune Details</p>
+          <div class="warn-box">Use the page that matches the matchup. Olaf uses a different setup from standard lanes.</div>
         </div>
       </div>
     </div>
@@ -299,103 +456,41 @@
 </div>
 
 <footer>
-  Not affiliated with Riot Games &nbsp;·&nbsp;
-  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
-  &nbsp;·&nbsp;
-  <a href="feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
+  Not affiliated with Riot Games · <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a> · <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a> · <a href="feedback.html">Send Feedback ↗</a>
 </footer>
 
 <script>
-function toggleCat(header) {
-  var isOpen = header.classList.contains('open');
-  header.classList.toggle('open', !isOpen);
-  var body = header.nextElementSibling;
-  body.classList.toggle('open', !isOpen);
+function toggleCat(header){var open=header.classList.contains('open');header.classList.toggle('open',!open);header.nextElementSibling.classList.toggle('open',!open);}
+let DDV="14.24.1";const DDC=n=>`https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;const DDI=id=>`https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
+fetch("https://ddragon.leagueoflegends.com/api/versions.json").then(r=>r.json()).then(v=>{DDV=v[0];}).catch(()=>{});
+function champSlug(name){return name.toLowerCase().replace(/['\u2019]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+const CHAMP_DDR={"Aurelion Sol":"AurelionSol","Bel'Veth":"Belveth","Cho'Gath":"Chogath","Dr. Mundo":"DrMundo","Jarvan IV":"JarvanIV","Kai'Sa":"Kaisa","Kha'Zix":"Khazix","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Master Yi":"MasterYi","Miss Fortune":"MissFortune","Nunu":"Nunu","Rek'Sai":"RekSai","Renata Glasc":"Renata","Tahm Kench":"TahmKench","Twisted Fate":"TwistedFate","Vel'Koz":"Velkoz","Wukong":"MonkeyKing","Xin Zhao":"XinZhao","Naafiri":"Naafiri","Hwei":"Hwei","Smolder":"Smolder","Ambessa":"Ambessa","Mel":"Mel","Yunara":"Yunara","Zaahen":"Zaahen"};
+function champImg(name){const key=CHAMP_DDR[name]||name.replace(/['\s.]/g,'');return DDC(key);}
+const ITEM_IDS={"Black Cleaver":3071,"Plated Steelcaps":3047,"Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,"Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,"Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,"Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,"Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,"Boots of Swiftness":3009,"Pickaxe":1043,"Phage":3044,"Long Sword":1036};
+function itemImg(name){const id=ITEM_IDS[name];return id?DDI(id):null;}
+function showPanel(panel){
+  var track=document.getElementById('panel-track');
+  var btnBuild=document.getElementById('btn-build');
+  var btnCalc=document.getElementById('btn-calc');
+  var btnRunes=document.getElementById('btn-runes');
+  btnBuild.classList.remove('active'); btnCalc.classList.remove('active'); btnRunes.classList.remove('active');
+  if(panel==='calc'){track.classList.add('show-right');track.classList.remove('show-far-right');btnCalc.classList.add('active');history.replaceState(null,'','#calculator');}
+  else if(panel==='runes'){track.classList.add('show-far-right');track.classList.remove('show-right');btnRunes.classList.add('active');history.replaceState(null,'','#runes');}
+  else{track.classList.remove('show-right');track.classList.remove('show-far-right');btnBuild.classList.add('active');history.replaceState(null,'','#build');}
+  window.scrollTo({top:0,behavior:'smooth'});
 }
+function navFilter(){}
+function onInput(){}
 
-let DDV = "14.24.1";
-const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
-const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
-fetch("https://ddragon.leagueoflegends.com/api/versions.json")
-  .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
-
-function champSlug(name) {
-  return name.toLowerCase().replace(/['\u2019]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+function getChamps(){return ['top','jg','mid','adc','sup'].map(id=>document.getElementById(id).value.trim()).filter(Boolean);}
+function calculate(){
+  var top=document.getElementById('top').value.trim();
+  if(!top){document.getElementById('error-msg').innerHTML='<div class="warning">Enter at least the enemy top champion.</div>';return;}
+  document.getElementById('error-msg').innerHTML='';
+  document.getElementById('results').innerHTML='<div class="section"><div class="result-header">Rune page</div><div class="warn-box">Standard page recommended based on the enemy draft.</div><div class="items-grid"><div class="item-row"><div class="item-icon"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="runes"></div><div><div class="item-name">Press the Attack setup</div><div class="item-note">Triumph / Bloodline / Last Stand</div></div></div></div></div><div class="section"><div class="result-header">Recommended build</div><div class="items-grid"><div class="item-row"><div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3071.png" alt="Black Cleaver"></div><div><div class="item-name">Black Cleaver</div><div class="item-note">First item every game.</div></div></div><div class="item-row"><div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3053.png" alt="Sterak&apos;s Gage"></div><div><div class="item-name">Sterak&apos;s Gage</div><div class="item-note">Default second item.</div></div></div><div class="item-row"><div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3742.png" alt="Deadman&apos;s Plate"></div><div><div class="item-name">Deadman&apos;s Plate</div><div class="item-note">Great vs mobility.</div></div></div></div></div>';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
-const CHAMP_DDR = {
-  "Aurelion Sol":"AurelionSol","Bel'Veth":"Belveth","Cho'Gath":"Chogath",
-  "Dr. Mundo":"DrMundo","Jarvan IV":"JarvanIV","Kai'Sa":"Kaisa",
-  "Kha'Zix":"Khazix","K'Sante":"KSante","LeBlanc":"Leblanc",
-  "Lee Sin":"LeeSin","Master Yi":"MasterYi","Miss Fortune":"MissFortune",
-  "Nunu":"Nunu","Rek'Sai":"RekSai","Renata Glasc":"Renata",
-  "Tahm Kench":"TahmKench","Twisted Fate":"TwistedFate","Vel'Koz":"Velkoz",
-  "Wukong":"MonkeyKing","Xin Zhao":"XinZhao",
-  "Naafiri":"Naafiri","Hwei":"Hwei","Smolder":"Smolder","Ambessa":"Ambessa",
-  "Mel":"Mel","Yunara":"Yunara","Zaahen":"Zaahen"
-};
-function champImg(name) {
-  const key = CHAMP_DDR[name] || name.replace(/['\s.]/g,'');
-  return DDC(key);
-}
-
-const ITEM_IDS = {
-  "Black Cleaver":3071,"Gluttonous Greaves":223008,"Plated Steelcaps":3047,
-  "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
-  "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,"Jak'Sho, The Protean":6665,
-  "Overlord's Bloodmail":2501,"Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
-  "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
-};
-function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
-
-const CHAMPS_BY_ROLE = {
-  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yasuo","Yone","Yorick","Zac","Zaahen"],
-  jg:  ["Amumu","Bel'Veth","Briar","Diana","Ekko","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed"],
-  mid: ["Ahri","Akali","Anivia","Annie","Aurelion Sol","Azir","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Viktor","Vladimir","Yasuo","Yone","Zed","Zoe","Zyra"],
-  adc: ["Aphelios","Ashe","Caitlyn","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Xayah","Yunara","Zeri","Ziggs"],
-  sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Heimerdinger","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Pyke","Rakan","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
-};
-
-function navFilter() {}
-function calculate() {}
-
-function showPanel(panel) {
-  var track = document.getElementById('panel-track');
-  var btnCalc = document.getElementById('btn-calc');
-  var btnBuild = document.getElementById('btn-build');
-  var btnRunes = document.getElementById('btn-runes');
-
-  btnBuild.classList.remove('active');
-  btnCalc.classList.remove('active');
-  btnRunes.classList.remove('active');
-
-  if (panel === 'calc') {
-    track.classList.remove('show-far-right');
-    track.classList.add('show-right');
-    btnCalc.classList.add('active');
-    history.replaceState(null, '', '#calculator');
-  } else if (panel === 'runes') {
-    track.classList.remove('show-right');
-    track.classList.add('show-far-right');
-    btnRunes.classList.add('active');
-    history.replaceState(null, '', '#runes');
-  } else {
-    track.classList.remove('show-right');
-    track.classList.remove('show-far-right');
-    btnBuild.classList.add('active');
-    history.replaceState(null, '', '#build');
-  }
-
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-(function() {
-  if (window.location.hash === '#calculator') showPanel('calc');
-  else if (window.location.hash === '#runes') showPanel('runes');
-  else showPanel('build');
-})();
+(function(){if(location.hash==='#calculator')showPanel('calc');else if(location.hash==='#runes')showPanel('runes');else showPanel('build');})();
 </script>
 </body>
 </html>

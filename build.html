@@ -1233,14 +1233,14 @@ function showPanel(panel) {
   var track = document.getElementById('panel-track');
   var btnCalc = document.getElementById('btn-calc');
   var btnBuild = document.getElementById('btn-build');
-  if (panel === 'calculator'){
-    track.classList.remove('show-right');
-    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#build');
-  }  else {
+  if (panel === 'build') {
     track.classList.add('show-right');
     btnCalc.classList.remove('active'); btnBuild.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#build');
+  } else {
+    track.classList.remove('show-right');
+    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
     history.replaceState(null, '', '#calculator');
   }

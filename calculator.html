@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Build Calculator & Guide — Urgot Guide</title>
+  <title>Build Calculator &amp; Guide — Urgot Guide</title>
   <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --green: #4ADE80; --green-mid: #22C55E; --green-dark: #15803D;
@@ -30,6 +31,7 @@
         repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(26,61,30,0.08) 50px);
     }
 
+    /* ── NAV ─────────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -55,6 +57,7 @@
     .nav-dropdown-item:hover { background: var(--bg-surface); color: var(--green); }
     .nav-dropdown-item img { width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--border); object-fit: cover; }
 
+    /* ── HERO ─────────────────────────────────────────────── */
     .hero {
       position: relative; height: 38vh; min-height: 240px;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -73,6 +76,7 @@
     .hero-title span { color: var(--green); text-shadow: 0 0 30px rgba(74,222,128,0.4); }
     .hero-sub { font-size: 13px; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; margin-top: 0.6rem; }
 
+    /* ── MAIN ─────────────────────────────────────────────── */
     .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
     .section {
@@ -89,6 +93,7 @@
     }
     .section-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--green-dark); text-transform: uppercase; margin-bottom: 1.25rem; }
 
+    /* inputs */
     .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1rem; }
     .input-group label { display: block; font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
     .input-wrap { position: relative; display: flex; align-items: center; }
@@ -100,6 +105,7 @@
     .input-group input:focus { border-color: var(--border-bright); box-shadow: 0 0 0 2px rgba(74,222,128,0.1); }
     .input-group input::placeholder { color: var(--text-dim); font-weight: 400; }
 
+    /* tags */
     .comp-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
     .comp-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
     .tag { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 2px; }
@@ -114,6 +120,7 @@
     .tag-execute{ background: rgba(200,75,75,0.15);  color: #FF6060;       border: 1px solid rgba(200,75,75,0.4); }
     .tag-empty  { font-size: 12px; color: var(--text-dim); font-style: italic; }
 
+    /* btn */
     .btn-wrap { text-align: center; margin-top: 1.25rem; }
     .btn { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); background: transparent; border: 1px solid var(--green-dark); border-radius: 3px; padding: 11px 36px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.2s, border-color 0.2s; }
     .btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,222,128,0.1), transparent); opacity: 0; transition: opacity 0.2s; }
@@ -121,12 +128,15 @@
     .btn:hover::before { opacity: 1; }
     .btn:active { transform: scale(0.97); }
 
+    /* result header */
     .result-header { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
     .result-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
+    /* build layout */
     .build-layout { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
     @media(max-width: 640px) { .build-layout { grid-template-columns: 1fr; } }
 
+    /* items */
     .items-grid { display: flex; flex-direction: column; gap: 8px; }
     .item-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s; }
     .item-row:hover { border-color: var(--border-bright); }
@@ -136,6 +146,7 @@
     .item-name { font-size: 14px; font-weight: 600; color: var(--text-bright); }
     .item-note { font-size: 12px; color: var(--text-dim); margin-top: 1px; line-height: 1.4; }
 
+    /* situ panel */
     .situ-panel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1rem; position: relative; }
     .situ-panel::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.07), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
     .situ-title { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--green-dark); text-transform: uppercase; margin-bottom: 10px; }
@@ -153,12 +164,14 @@
     .situ-item-cond { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
     .situ-empty { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 0.75rem 0; }
 
+    /* warn / guide */
     .warn-box { background: rgba(74,222,128,0.05); border: 1px solid rgba(74,222,128,0.15); border-radius: 3px; padding: 8px 12px; font-size: 13px; color: var(--text); margin-bottom: 8px; }
     .guide-box { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); border-radius: 3px; padding: 9px 14px; font-size: 13px; color: var(--green-mid); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .guide-box a { color: var(--green-mid); text-decoration: none; font-weight: 600; }
     .guide-box a:hover { color: var(--green); text-decoration: underline; }
     .error { background: var(--red-dark); border: 1px solid rgba(200,75,75,0.3); border-radius: 3px; padding: 10px 14px; font-size: 13px; color: var(--red); text-align: center; margin-top: 1rem; }
 
+    /* catégories */
     .cat-section { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; position: relative; }
     .cat-section::before { content: ''; position: absolute; inset: 0; border-radius: 4px; border: 1px solid transparent; background: linear-gradient(135deg, rgba(74,222,128,0.07), transparent 40%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
     .cat-grid { display: flex; flex-direction: column; gap: 8px; }
@@ -181,39 +194,141 @@
     footer a { color: var(--green-dark); text-decoration: none; }
     footer a:hover { color: var(--green-mid); }
 
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:none} }
-
-    .panel-viewport { overflow: hidden; width: 100%; }
-    .panel-track { display: flex; width: 300%; transition: transform 0.55s cubic-bezier(0.77,0,0.175,1); }
-    .panel-track.show-right { transform: translateX(-33.3333%); }
-    .panel-track.show-far-right { transform: translateX(-66.6666%); }
-    .panel-page { width: 33.3333%; flex-shrink: 0; min-width: 0; }
-
-    .page-toggle {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
-      display: flex; align-items: center;
-      background: var(--bg-card); border: 1px solid var(--border-bright);
-      border-radius: 50px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.6)
-    }
-    .toggle-btn {
-      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; padding: 10px 20px; border: none;
-      background: transparent; color: var(--text-dim); cursor: pointer;
-      transition: background 0.2s, color 0.2s; white-space: nowrap
-    }
-    .toggle-btn.active { background: var(--green-dark); color: var(--text-bright) }
-    .toggle-btn:hover:not(.active) { color: var(--green-mid) }
-    .toggle-sep { width: 1px; background: var(--border-bright); height: 20px; flex-shrink: 0 }
-
     @media(max-width:500px) { .input-grid { grid-template-columns: 1fr 1fr; } }
-    @media(max-width:600px){
-      .nav-links{gap:1rem}
-      .items-row{flex-direction:column}
-      .cat-inner{grid-template-columns:1fr}
-      .page-toggle{right:1rem;left:1rem;justify-content:space-between;border-radius:18px}
-      .toggle-btn{padding:10px 14px;font-size:10px}
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:none} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:none} }
+  
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#4ADE80;--green-mid:#22C55E;--green-dark:#15803D;--green-dim:#166534;--green-deep:#052e16;
+      --bg:#060D07;--bg-surface:#0B1A0D;--bg-card:#0F2211;--bg-card2:#122614;
+      --border:#1A3D1E;--border-bright:#2D6A33;
+      --text:#A8D4A0;--text-dim:#4A7550;--text-bright:#E8F5E2;
+      --blue:#0BC4E3;--red:#C84B4B;--orange:#E67E22;--purple:#9B59B6;--gold:#C89B3C;
     }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(74,222,128,0.04) 0%,transparent 60%),
+        repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),
+        repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(6,13,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+    .nav-links a{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--green)}
+    .nav-search{position:relative}
+    .nav-search input{background:rgba(15,34,17,0.8);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-bright);font-family:'Rajdhani',sans-serif;font-size:12px;padding:5px 30px 5px 10px;width:180px;outline:none;transition:border-color 0.2s,width 0.3s}
+    .nav-search input:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(74,222,128,0.1);width:220px}
+    .nav-search input::placeholder{color:var(--text-dim)}
+    .nav-search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--green-mid);pointer-events:none}
+    .nav-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:220px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:4px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);z-index:200}
+    .nav-dropdown h4{padding:7px 12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;border-bottom:1px solid var(--border)}
+    .nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:7px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border-bottom:1px solid rgba(26,61,30,0.3);transition:background 0.15s,color 0.15s}
+    .nav-dropdown-item:last-child{border-bottom:none}
+    .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
+    .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
+
+    /* ── HERO ── */
+    .hero{position:relative;height:38vh;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Urgot_2.jpg') center 20% / cover no-repeat;filter:brightness(0.22) saturate(0.5);animation:heroZoom 20s ease-in-out infinite alternate}
+    @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.08)}}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.4) 0%,rgba(6,13,7,0) 40%,rgba(6,13,7,0.85) 85%,var(--bg) 100%)}
+    .hero-content{position:relative;text-align:center;animation:fadeDown 0.7s ease both}
+    .hero-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.4em;color:var(--green-mid);text-transform:uppercase;margin-bottom:0.6rem;opacity:0.8}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--text-bright);letter-spacing:0.08em;text-shadow:0 0 60px rgba(74,222,128,0.15),0 4px 20px rgba(0,0,0,0.9)}
+    .hero-title span{color:var(--green);text-shadow:0 0 30px rgba(74,222,128,0.4)}
+    .hero-sub{font-size:13px;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;margin-top:0.6rem}
+
+    /* ── MAIN ── */
+    .main{max-width:960px;margin:0 auto;padding:3rem 1.5rem 6rem}
+
+    /* ── SECTION CARDS (starter/boots) ── */
+    .section-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:2rem;margin-bottom:1.5rem;position:relative;animation:fadeUp 0.5s ease both}
+    .section-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+    .section-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.25rem}
+
+    .items-row{display:flex;flex-wrap:wrap;gap:14px}
+    .item-card{display:flex;align-items:flex-start;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:12px 14px;flex:1;min-width:220px;transition:border-color 0.2s}
+    .item-card:hover{border-color:var(--border-bright)}
+    .item-icon{width:48px;height:48px;border-radius:4px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0;background:var(--bg)}
+    .item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .item-info{}
+    .item-name{font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;color:var(--green-mid);margin-bottom:4px}
+    .item-desc{font-size:13px;color:var(--text);line-height:1.5}
+
+    /* ── COLLAPSIBLE CATEGORY ── */
+    .cat-wrapper{margin-bottom:12px;border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+    .cat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;background:var(--bg-surface);transition:background 0.2s;user-select:none;position:relative}
+    .cat-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-color,var(--green-dark));transition:background 0.2s}
+    .cat-header:hover{background:var(--bg-card)}
+    .cat-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-color,var(--green))}
+    .cat-badge{font-size:11px;color:var(--text-dim);letter-spacing:0.05em;font-family:'Rajdhani',sans-serif}
+    .cat-arrow{color:var(--accent-color,var(--green));font-size:12px;transition:transform 0.35s;margin-left:12px}
+    .cat-header.open .cat-arrow{transform:rotate(180deg)}
+    .cat-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;background:var(--bg-card)}
+    .cat-body.open{max-height:2000px}
+    .cat-inner{padding:1.25rem 1.25rem 1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+    .cat-item{display:flex;align-items:flex-start;gap:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:10px 12px;transition:border-color 0.2s}
+    .cat-item:hover{border-color:var(--border-bright)}
+    .cat-item-icon{width:44px;height:44px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0;background:var(--bg)}
+    .cat-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .cat-item-info{}
+    .cat-item-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;margin-bottom:3px}
+    .cat-item-desc{font-size:12px;color:var(--text-dim);line-height:1.45}
+
+    /* accent colors per category */
+    .cat-core .cat-header{--accent-color:var(--green)}
+    .cat-great .cat-header{--accent-color:#0BC4E3}
+    .cat-good .cat-header{--accent-color:var(--gold)}
+    .cat-situ .cat-header{--accent-color:var(--orange)}
+    .cat-bad .cat-header{--accent-color:var(--red)}
+    .cat-core .cat-item-name{color:var(--green)}
+    .cat-great .cat-item-name{color:#0BC4E3}
+    .cat-good .cat-item-name{color:var(--gold)}
+    .cat-situ .cat-item-name{color:var(--orange)}
+    .cat-bad .cat-item-name{color:var(--red)}
+
+    /* section divider */
+    .divider{display:flex;align-items:center;gap:14px;margin:2rem 0 1.5rem}
+    .divider span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-dim);white-space:nowrap}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+    /* first back grid */
+    .back-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+    .back-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:14px;text-align:center;transition:border-color 0.2s}
+    .back-card:hover{border-color:var(--border-bright)}
+    .back-card-icons{display:flex;justify-content:center;gap:6px;margin-bottom:8px}
+    .back-card .item-icon{width:40px;height:40px}
+    .back-card-price{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:0.08em;margin-bottom:6px}
+    .back-card-desc{font-size:12px;color:var(--text-dim);line-height:1.45}
+    .back-card.highlight{border-color:var(--green-dark);background:rgba(74,222,128,0.04)}
+    .back-card.highlight .back-card-price{color:var(--green)}
+    .back-card.bad{border-color:rgba(200,75,75,0.3);background:rgba(200,75,75,0.04)}
+    .back-card.bad .back-card-price{color:var(--red)}
+    .back-card.bad .back-card-desc{color:#C84B4B}
+
+    footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
+    footer a{color:var(--green-dark);text-decoration:none}
+    footer a:hover{color:var(--green-mid)}
+
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @media(max-width:600px){.items-row{flex-direction:column}.cat-inner{grid-template-columns:1fr}.nav-links{gap:1rem}}
+  
+
+    .panel-viewport{overflow:hidden;width:100%}
+    .panel-track{display:flex;width:200%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
+    .panel-track.show-right{transform:translateX(-50%)}
+    .panel-page{width:50%;flex-shrink:0;min-width:0}
+    .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
+    .toggle-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 20px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
+    .toggle-btn.active{background:var(--green-dark);color:var(--text-bright)}
+    .toggle-btn:hover:not(.active){color:var(--green-mid)}
+    .toggle-sep{width:1px;background:var(--border-bright);height:20px;flex-shrink:0}
   </style>
 </head>
 <body>
@@ -246,52 +361,414 @@
 
     <div class="panel-page" id="panel-build">
       <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Item <span>Build</span></h1>
-          <p class="hero-sub">What to buy, when, and why</p>
-        </div>
-      </section>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Urgot Guide</p>
+    <h1 class="hero-title">Item <span>Build</span></h1>
+    <p class="hero-sub">What to buy, when, and why</p>
+  </div>
+</section>
       <div class="main">
-        <!-- contenu build identique à ton fichier -->
+
+  <!-- ── STARTER ITEMS ── -->
+  <div class="section-block" style="animation-delay:0.05s">
+    <p class="section-label">✦ Starter Item</p>
+    <div class="items-row">
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div>
+        <div class="item-info">
+          <div class="item-name">Doran's Blade</div>
+          <div class="item-desc">Default item — you will take it in 98% of matchups.</div>
+        </div>
       </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div>
+        <div class="item-info">
+          <div class="item-name">Doran's Shield</div>
+          <div class="item-desc">Take this in all the high range and poke matchups like Teemo or Rumble.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOOTS ── -->
+  <div class="section-block" style="animation-delay:0.1s">
+    <p class="section-label">✦ Boots</p>
+    <div class="items-row">
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3009.png" alt="Swiftness"/></div>
+        <div class="item-info">
+          <div class="item-name">Boots of Swiftness</div>
+          <div class="item-desc">Excellent in mixed damage compositions and the best boots for Urgot overall.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3047.png" alt="Steelcaps"/></div>
+        <div class="item-info">
+          <div class="item-name">Plated Steelcaps</div>
+          <div class="item-desc">Very good in 2/3+ AD team and a good rush in Ambessa, Tryndamere, Jayce.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3111.png" alt="Mercury's"/></div>
+        <div class="item-info">
+          <div class="item-name">Mercury's Treads</div>
+          <div class="item-desc">Essential in high CC compositions. Rush against Kennen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FIRST BACK ── -->
+  <div class="section-block" style="animation-delay:0.15s">
+    <p class="section-label">✦ First Back</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:1.25rem">
+      <strong style="color:var(--green)">Black Cleaver is the only first item</strong> — every game, no exception. You need to prioritise this over everything like potions, boots, Magic Resist or armor. Except in some matchups where boots are good to rush first like Yasuo, Ambessa, Kennen…
+    </p>
+    <div class="back-grid">
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1031.png" alt="Chain Vest"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1033.png" alt="Null-Magic Mantle"/></div>
+        </div>
+        <div class="back-card-price">600g</div>
+        <div class="back-card-desc">The cheapest "good" back for Urgot. It delays your BC spike and is only good in low interaction MUs like Garen or K'Sante.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1036.png" alt="Long Sword"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1082.png" alt="Cull"/></div>
+        </div>
+        <div class="back-card-price">750g</div>
+        <div class="back-card-desc">Not a great back — it's just before Pickaxe but it does the job.</div>
+      </div>
+      <div class="back-card bad">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3865.png" alt="World Atlas"/></div>
+        </div>
+        <div class="back-card-price">800g — NEVER BUY</div>
+        <div class="back-card-desc">The worst item to build ever. Gives no good stats.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3076.png" alt="Bramble Vest"/></div>
+        </div>
+        <div class="back-card-price">800g</div>
+        <div class="back-card-desc">Only buy on first back in specific MUs like Wukong, Renekton, Irelia, Fiora to destroy their lane.</div>
+      </div>
+      <div class="back-card highlight">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+        </div>
+        <div class="back-card-price">875g — THE component</div>
+        <div class="back-card-desc">Pickaxe is THE component to first buy for Black Cleaver. It's great if you can back to buy it.</div>
+      </div>
+      <div class="back-card highlight">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3044.png" alt="Phage"/></div>
+        </div>
+        <div class="back-card-price">1100g</div>
+        <div class="back-card-desc">Phage first back is a great back due to the HP, AD and MS. It lets you trade more and apply a lot more pressure in lane.</div>
+      </div>
+      <div class="back-card highlight" style="grid-column:span 1">
+        <div class="back-card-icons">
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1043.png" alt="Pickaxe"/></div>
+          <div class="item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1036.png" alt="Long Sword"/></div>
+        </div>
+        <div class="back-card-price">1225g — BEST back</div>
+        <div class="back-card-desc">Pickaxe and a Long Sword is THE BEST back — it's a late back because you need a lot of gold but you get so much stat for its value.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHAT TO BUILD ── -->
+  <div class="divider"><span>✦ What Item to Build</span></div>
+
+  <!-- CORE -->
+  <div class="cat-wrapper cat-core">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Core Items</div>
+        <div class="cat-badge">Essential every game</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3071.png" alt="Black Cleaver"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Black Cleaver</div>
+            <div class="cat-item-desc">The first item of Urgot — essential every game.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3053.png" alt="Sterak's Gage"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Sterak's Gage</div>
+            <div class="cat-item-desc">Usually the second item for Urgot in 90% of games — can be built 3rd at the profit of a Deadman's Plate if enemy team has 3+ AD.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GREAT -->
+  <div class="cat-wrapper cat-great">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Great Items</div>
+        <div class="cat-badge">Highly recommended — build often</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/222504.png" alt="Rookern"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Rookern</div>
+            <div class="cat-item-desc">Excellent in burst AP (Magic) damage. Like Syndra, Ryze, Gwen, Aurora (Luden's).</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3143.png" alt="Randuin's Omen"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Randuin's Omen</div>
+            <div class="cat-item-desc">OP in 2+ crit compositions — so almost all ADCs and Yasuo, Yone, Viego…</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/4401.png" alt="Force of Nature"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Force of Nature</div>
+            <div class="cat-item-desc">Great buy in burn champion compositions like Teemo, Aurelion, Malzahar. Gives MS which is excellent on Urgot.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3742.png" alt="Deadman's Plate"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Deadman's Plate</div>
+            <div class="cat-item-desc">Great in high mobility compositions and huge slow — very good armor item if enemy team doesn't have a lot of crit. Good vs Ashe, Illaoi, Smolder…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOD -->
+  <div class="cat-wrapper cat-good">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Good Items</div>
+        <div class="cat-badge">Situationally strong — pick wisely</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3075.png" alt="Thornmail"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Thornmail</div>
+            <div class="cat-item-desc">The only anti heal item you will ever do on Urgot. Build Bramble Vest and finish it as your last item — it's not worth completing before your other items.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6665.png" alt="Jak'Sho"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Jak'Sho, The Protean</div>
+            <div class="cat-item-desc">Great item but only in 4th or 5th slot (not counting boots). Its passive scales with bonus resistances so you need to build defensive items first to make it effective.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/2501.png" alt="Overlord's Bloodmail"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Overlord's Bloodmail</div>
+            <div class="cat-item-desc">This item fell off but is still good on Urgot. Build it if you need to carry a game and need more damage — in S16 a more tanky Urgot is better.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITUATIONAL -->
+  <div class="cat-wrapper cat-situ">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Situational Items</div>
+        <div class="cat-badge">Niche — only in specific scenarios</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6675.png" alt="Shojin"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Spear of Shojin</div>
+            <div class="cat-item-desc">Only build Shojin in 2+ tank or HP stacker compositions, like Mundo, Cho'Gath, Skarner, Alistar… It boosts your passive and helps taking them down faster.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6695.png" alt="Serpent's Fang"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Serpent's Fang</div>
+            <div class="cat-item-desc">Only build on Urgot when enemy team has a lot of shields (Karma, Lulu, Ivern…) and no one else in your team can build it. It's not a great item on Urgot.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3110.png" alt="Frozen Heart"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Frozen Heart</div>
+            <div class="cat-item-desc">Almost never build in game. The only reason you can possibly build it: it's the highest armor item available and if there are 2/3+ attack speed dependent champions.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3211.png" alt="Hullbreaker"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Hullbreaker</div>
+            <div class="cat-item-desc">Less and less useful this season — the only way you can use it is if your team is really behind and your lane opponent can't stop you from pushing, so you can create a 4v3 at objectives for your team.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAD -->
+  <div class="cat-wrapper cat-bad">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div>
+        <div class="cat-title">Bad Items — Never Build These</div>
+        <div class="cat-badge">Avoid at all costs</div>
+      </div>
+      <span class="cat-arrow">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3077.png" alt="Tiamat"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Tiamat</div>
+            <div class="cat-item-desc">No synergy with Urgot's kit — you have built-in wave clear with your legs. A pure waste of gold.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6631.png" alt="Stridebreaker"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Stridebreaker</div>
+            <div class="cat-item-desc">Bad item on Urgot — you already have a slow on Q and the active is redundant. Very inefficient stats for the cost.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6609.png" alt="Chempunk Chainsword"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Chempunk Chainsword</div>
+            <div class="cat-item-desc">Use Thornmail instead — it's a much better anti-heal option on Urgot due to its armor and passive.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3065.png" alt="Spirit Visage"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Death's Dance</div>
+            <div class="cat-item-desc">Looks tempting but gives no tankiness. Urgot needs bulk to survive — this item actively makes you easier to kill despite the damage it provides.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6632.png" alt="Divine Sunderer"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Maw of Malmortius</div>
+            <div class="cat-item-desc">Bad stats for Urgot — the passive shield triggers too late and the AD is wasted. Build Rookern or FoN instead for AP matchups.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3179.png" alt="Umbral Glaive"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Endless Hunger</div>
+            <div class="cat-item-desc">Pure damage item with no tankiness — completely against Urgot's identity as a fighter/tank hybrid. You will die instantly with this.</div>
+          </div>
+        </div>
+        <div class="cat-item">
+          <div class="cat-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/6698.png" alt="Profane Hydra"/></div>
+          <div class="cat-item-info">
+            <div class="cat-item-name">Bastion Breaker</div>
+            <div class="cat-item-desc">Never build this on Urgot — the ranged attack component doesn't synergize with his kit and it delays your essential defensive items significantly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
     </div>
 
     <div class="panel-page" id="panel-calc">
       <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Build <span>Calculator</span></h1>
-          <p class="hero-sub">Adaptive runes & build based on enemy composition</p>
-        </div>
-      </section>
-      <div class="main">
-        <!-- contenu calculator identique à ton fichier -->
-      </div>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Urgot Guide</p>
+      <h1 class="hero-title">Build <span>Calculator</span></h1>
+      <p class="hero-sub">Adaptive runes & build based on enemy composition</p>
     </div>
-
-    <div class="panel-page" id="panel-runes">
-      <section class="hero">
-        <div class="hero-bg" style="background-image:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png')"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Rune <span>Pages</span></h1>
-          <p class="hero-sub">Keystones, pages & rune details</p>
-        </div>
-      </section>
-
+  </section>
       <div class="main">
-        <div class="section">
-          <p class="section-title">✦ Runes</p>
-          <div class="warn-box">Ici tu peux mettre ton contenu de page runes.</div>
-          <div class="guide-box">📖 <a href="runes.html">Ouvrir la page runes complète ↗</a></div>
+    <div class="section">
+      <p class="section-title">✦ Enemy Composition</p>
+      <div class="input-grid">
+        <div class="input-group">
+          <label>Top (opponent)</label>
+          <div class="input-wrap">
+            <div class="champ-preview" id="prev-top"><img id="img-top" src="" alt="" /></div>
+            <input id="top" placeholder="ex: Darius" list="list-top" autocomplete="off" oninput="onInput()" />
+            <datalist id="list-top"></datalist>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Jungle</label>
+          <div class="input-wrap">
+            <div class="champ-preview" id="prev-jg"><img id="img-jg" src="" alt="" /></div>
+            <input id="jg" placeholder="ex: Lee Sin" list="list-jg" autocomplete="off" oninput="onInput()" />
+            <datalist id="list-jg"></datalist>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Mid</label>
+          <div class="input-wrap">
+            <div class="champ-preview" id="prev-mid"><img id="img-mid" src="" alt="" /></div>
+            <input id="mid" placeholder="ex: Syndra" list="list-mid" autocomplete="off" oninput="onInput()" />
+            <datalist id="list-mid"></datalist>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>ADC</label>
+          <div class="input-wrap">
+            <div class="champ-preview" id="prev-adc"><img id="img-adc" src="" alt="" /></div>
+            <input id="adc" placeholder="ex: Jinx" list="list-adc" autocomplete="off" oninput="onInput()" />
+            <datalist id="list-adc"></datalist>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Support</label>
+          <div class="input-wrap">
+            <div class="champ-preview" id="prev-sup"><img id="img-sup" src="" alt="" /></div>
+            <input id="sup" placeholder="ex: Thresh" list="list-sup" autocomplete="off" oninput="onInput()" />
+            <datalist id="list-sup"></datalist>
+          </div>
         </div>
       </div>
+      <p class="comp-label">Team composition analysis</p>
+      <div class="comp-tags" id="comp-tags">
+        <span class="tag-empty">Enter enemy draft...</span>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn" onclick="calculate()">Generate build</button>
+      </div>
+      <div id="error-msg"></div>
+    </div>
+    <div id="results"></div>
+  </div>
     </div>
 
   </div>
@@ -313,6 +790,7 @@ function toggleCat(header) {
   var body = header.nextElementSibling;
   body.classList.toggle('open', !isOpen);
 }
+
 
 let DDV = "14.24.1";
 const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
@@ -348,7 +826,8 @@ const ITEM_IDS = {
   "Black Cleaver":3071,"Gluttonous Greaves":223008,"Plated Steelcaps":3047,
   "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
   "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,"Jak'Sho, The Protean":6665,
-  "Overlord's Bloodmail":2501,"Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
+  "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
+  "Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
   "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
 };
 function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
@@ -361,30 +840,439 @@ const CHAMPS_BY_ROLE = {
   sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Heimerdinger","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Pyke","Rakan","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
 };
 
-const CHAMP_TAGS = {};
-const CHAMP_RUNE_MAP = {};
+const CHAMP_TAGS = {
+  "Aatrox": ["AD","HEAL","BUMP","MELEE"],"Akali": ["AP","BURST","MELEE"],"Alistar": ["BUMP","2CC","MELEE"],"Amumu": ["AP","3CC","BURN","MELEE"],
+  "Ambessa": ["AD","BURST","SHIELD","BUMP","MELEE"],"Anivia": ["AP","BURN","1CC","RANGE"],"Annie": ["AP","BURST","1CC","SHIELD","MELEE"],
+  "Aphelios": ["AD","CRIT","RANGE"],"Ashe": ["AD","CRIT","1CC","RANGE"],"Aurelion Sol": ["AP","BURN","BUMP","RANGE"],"Aurora": ["AP","BURST","RANGE"],"Azir": ["AP","BUMP","RANGE"],
+  "Bard": ["2CC","AP","HEAL","RANGE"],"Bel'Veth": ["AD","BUMP","MELEE"],"Blitzcrank": ["SHIELD","BUMP","1CC","RANGE"],
+  "Brand": ["AP","BURN","BURST","1CC","RANGE"],"Braum": ["1CC","AP","BUMP","RANGE"],"Briar": ["AD","2CC","HEAL","MELEE"],
+  "Caitlyn": ["AD","CRIT","1CC","RANGE"],"Camille": ["AD","SHIELD","BUMP","MELEE"],"Cassiopeia": ["AP","BURN","1CC","HEAL","RANGE"],
+  "Cho'Gath": ["AP","BUMP","EXECUTE","1CC","MELEE"],"Corki": ["AD","RANGE"],"Darius": ["AD","HEAL","EXECUTE","BUMP","MELEE"],
+  "Diana": ["AP","BURST","BUMP","SHIELD","MELEE"],"Dr. Mundo": ["AD","HEAL","MELEE"],"Draven": ["AD","CRIT","BUMP","RANGE"],
+  "Ekko": ["AP","BURST","SHIELD","1CC","MELEE"],"Elise": ["AP","BURST","1CC","MELEE"],"Evelynn": ["AP","BURST","1CC","MELEE"],"Ezreal": ["AD","RANGE"],
+  "Fiddlesticks": ["AP","BURN","3CC","HEAL","MELEE"],"Fiora": ["AD","HEAL","1CC","MELEE"],"Fizz": ["AP","BURST","BUMP","MELEE"],
+  "Galio": ["AP","1CC","SHIELD","BUMP","MELEE"],"Garen": ["AD","EXECUTE","MELEE"],"Gnar": ["AD","2CC","RANGE"],"Gragas": ["AP","1CC","BUMP","MELEE"],
+  "Graves": ["AD","CRIT","MELEE"],"Gwen": ["AP","BURST","HEAL","MELEE"],"Hecarim": ["AD","1CC","HEAL","MELEE"],"Heimerdinger": ["AP","BURN","1CC","RANGE"],
+  "Hwei": ["AP","BURN","BURST","1CC","SHIELD","RANGE"],"Illaoi": ["AD","HEAL","MELEE"],"Irelia": ["AD","HEAL","1CC","MELEE"],
+  "Ivern": ["1CC","SHIELD","BUMP","MELEE"],"Janna": ["AP","BUMP","HEAL","SHIELD","RANGE"],"Jarvan IV": ["AD","BUMP","SHIELD","MELEE"],
+  "Jax": ["AD","1CC","MELEE"],"Jayce": ["AD","BUMP","RANGE"],"Jhin": ["AD","CRIT","1CC","RANGE"],"Jinx": ["AD","CRIT","1CC","RANGE"],
+  "K'Sante": ["2CC","BUMP","SHIELD","MELEE"],"Kai'Sa": ["AD","CRIT","AP","SHIELD","RANGE"],"Kalista": ["AD","BUMP","RANGE"],
+  "Karma": ["AP","1CC","SHIELD","RANGE"],"Kassadin": ["AP","BURST","SHIELD","MELEE"],"Katarina": ["AP","BURST","MELEE"],"Kennen": ["AP","5CC","RANGE"],
+  "Kha'Zix": ["AD","BURST","MELEE"],"Kindred": ["AD","CRIT","MELEE"],"Kog'Maw": ["AD","AP","RANGE"],
+  "LeBlanc": ["AP","BURST","1CC","RANGE"],"Lee Sin": ["AD","HEAL","BUMP","MELEE"],"Leona": ["3CC","MELEE"],
+  "Lillia": ["AP","BURN","1CC","MELEE"],"Lissandra": ["AP","2CC","MELEE"],"Lucian": ["AD","CRIT","RANGE"],
+  "Lulu": ["1CC","SHIELD","BUMP","RANGE"],"Lux": ["AP","BURST","SHIELD","1CC","RANGE"],"Malphite": ["AP","BUMP","SHIELD","MELEE"],
+  "Malzahar": ["AP","BURN","1CC","RANGE"],"Maokai": ["2CC","AP","HEAL","BUMP","MELEE"],"Master Yi": ["AD","HEAL","MELEE"],
+  "Mel": ["AP","BURST","SHIELD","1CC","RANGE"],"Miss Fortune": ["AD","CRIT","RANGE"],
+  "Mordekaiser": ["AP","BURN","HEAL","SHIELD","MELEE"],"Morgana": ["AP","2CC","BURN","SHIELD","RANGE"],
+  "Naafiri": ["AD","BURST","MELEE"],"Nami": ["1CC","HEAL","BUMP","RANGE"],"Nasus": ["AD","HEAL","MELEE"],
+  "Nautilus": ["1CC","BUMP","SHIELD","MELEE"],"Nidalee": ["AP","BURST","HEAL","MELEE"],"Nilah": ["AD","CRIT","BUMP","MELEE"],
+  "Nocturne": ["AD","BURST","1CC","MELEE"],"Nunu": ["1CC","BUMP","HEAL","AP","MELEE"],"Olaf": ["AD","HEAL","MELEE"],
+  "Orianna": ["AP","BUMP","SHIELD","RANGE"],"Ornn": ["2CC","BUMP","AP","MELEE"],"Pantheon": ["AD","BURST","1CC","MELEE"],
+  "Poppy": ["1CC","AD","BUMP","MELEE"],"Pyke": ["AD","1CC","BURST","EXECUTE","BUMP","MELEE"],"Qiyana": ["AD","BURST","2CC","MELEE"],
+  "Quinn": ["AD","CRIT","RANGE"],"Rakan": ["1CC","SHIELD","BUMP","MELEE"],"Rammus": ["3CC","MELEE"],
+  "Rek'Sai": ["AD","BUMP","MELEE"],"Renata Glasc": ["2CC","SHIELD","RANGE"],"Renekton": ["AD","HEAL","1CC","MELEE"],
+  "Rengar": ["AD","BURST","MELEE"],"Rumble": ["AP","BURN","SHIELD","MELEE"],"Ryze": ["AP","1CC","RANGE"],
+  "Samira": ["AD","CRIT","RANGE"],"Sejuani": ["3CC","MELEE"],"Senna": ["AD","SHIELD","CRIT","RANGE"],
+  "Seraphine": ["AP","2CC","SHIELD","RANGE"],"Sett": ["AD","SHIELD","1CC","MELEE"],"Shaco": ["AD","BURST","3CC","MELEE"],
+  "Shen": ["AD","SHIELD","1CC","MELEE"],"Shyvana": ["AP","BURN","SHIELD","1CC","AD","MELEE"],
+  "Singed": ["AP","BURN","BUMP","1CC","MELEE"],"Sion": ["BUMP","SHIELD","MELEE"],"Sivir": ["AD","CRIT","RANGE"],
+  "Skarner": ["3CC","SHIELD","MELEE"],"Smolder": ["AD","CRIT","BURN","EXECUTE","RANGE"],
+  "Sona": ["1CC","SHIELD","HEAL","RANGE"],"Soraka": ["HEAL","1CC","RANGE"],"Swain": ["AP","BURN","HEAL","1CC","RANGE"],
+  "Syndra": ["AP","BURST","EXECUTE","BUMP","1CC","RANGE"],"Tahm Kench": ["2CC","HEAL","AP","SHIELD","BUMP","MELEE"],
+  "Taliyah": ["AP","1CC","RANGE"],"Talon": ["AD","BURST","MELEE"],"Teemo": ["AP","BURN","RANGE"],
+  "Thresh": ["2CC","SHIELD","RANGE"],"Tristana": ["AD","CRIT","BUMP","RANGE"],"Trundle": ["AD","HEAL","BUMP","MELEE"],
+  "Tryndamere": ["AD","CRIT","HEAL","MELEE"],"Twisted Fate": ["AP","1CC","RANGE"],"Twitch": ["AD","CRIT","RANGE"],
+  "Udyr": ["AP","AD","1CC","HEAL","SHIELD","MELEE"],"Varus": ["AD","AP","BURST","1CC","RANGE"],
+  "Vayne": ["AD","1CC","RANGE"],"Veigar": ["AP","BURST","EXECUTE","1CC","RANGE"],"Vel'Koz": ["AP","BURST","BUMP","RANGE"],
+  "Vi": ["AD","BUMP","SHIELD","MELEE"],"Viego": ["AD","HEAL","1CC","MELEE"],"Viktor": ["AP","BURN","SHIELD","1CC","RANGE"],
+  "Vladimir": ["AP","BURN","HEAL","RANGE"],"Volibear": ["1CC","AP","HEAL","SHIELD","MELEE"],
+  "Warwick": ["AD","HEAL","1CC","MELEE"],"Wukong": ["AD","BUMP","MELEE"],"Xayah": ["AD","CRIT","1CC","RANGE"],
+  "Xerath": ["AP","BURST","1CC","RANGE"],"Xin Zhao": ["AD","HEAL","BUMP","MELEE"],"Yasuo": ["AD","CRIT","SHIELD","BUMP","MELEE"],
+  "Yone": ["AD","CRIT","SHIELD","BUMP","MELEE"],"Yorick": ["AD","HEAL","MELEE"],"Yunara": ["AD","AP","CRIT","RANGE"],
+  "Yuumi": ["HEAL","SHIELD","RANGE"],"Zaahen": ["AD","HEAL","1CC","MELEE"],"Zac": ["AP","HEAL","BUMP","2CC","MELEE"],
+  "Zed": ["AD","BURST","EXECUTE","MELEE"],"Zeri": ["AD","CRIT","RANGE"],"Ziggs": ["AP","BURST","BUMP","RANGE"],
+  "Zilean": ["AP","1CC","RANGE"],"Zoe": ["AP","BURST","1CC","RANGE"],"Zyra": ["AP","BURN","1CC","BUMP","RANGE"]
+};
 
-function getBoots(a) { return { name:"Gluttonous Greaves", note:"Standard -- omnivamp sustain" }; }
-function getSituItems(a) { return []; }
-function buildItems(top, a) {
-  return {
-    warnings: ["🛡 Start: Doran's Blade -- Standard start"],
-    items: [
-      {slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"},
-      {slot:"Boots", name:"Gluttonous Greaves", note:"Standard boots"},
-      {slot:"Item 2", name:"Sterak's Gage", note:"Core Urgot -- shields"},
-    ]
-  };
+function getCCValue(tags) {
+  for (var t of tags) { var m = t.match(/^(\d+)CC$/); if (m) return parseInt(m[1]); }
+  return 0;
 }
-function renderCategories(champs) { return ''; }
-function getChamps() { return []; }
-function analyzeComp(champs) { return {}; }
+
+const RUNE_PAGES = {
+  page1:{label:"Standard",img:"rune-page1.png"},
+  page2:{label:"Cut Down",img:"rune-page2.png"},
+  page3:{label:"Tanks",img:"rune-page3.png"},
+  page4:{label:"Resolution",img:"rune-page4.png"},
+  page5:{label:"Rumble",img:"rune-page5.png"},
+  page6:{label:"Olaf",img:"rune-page6.png"},
+  page7:{label:"Heimerdinger",img:"rune-page7.png"},
+  page8:{label:"Yorick",img:"rune-page8.png"},
+};
+const CHAMP_RUNE_MAP = {
+  "aatrox":"page2","darius":"page2","aurora":"page2","irelia":"page2","varus":"page2","vayne":"page2","vladimir":"page2",
+  "ornn":"page3","malphite":"page3","dr. mundo":"page3","cho'gath":"page3","zac":"page3","tahm kench":"page3","k'sante":"page3","maokai":"page3",
+  "renekton":"page4","shen":"page4","rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
+};
+const BRAMBLE_CHAMPS  = ["irelia","zac","fiora","warwick","renekton","wukong"];
+const BOOTS_FIRST     = ["olaf"];
+const MERC_FIRST      = ["kennen"];
+const STEELCAPS_FIRST = ["ambessa","yasuo","tryndamere","gnar"];
+const ABATTEUR_CHAMPS = ["garen","k'sante","yorick"];
+const SHIELD_START    = ["teemo","rumble"];
+
+Object.entries(CHAMPS_BY_ROLE).forEach(function(e) {
+  var dl = document.getElementById('list-' + e[0]);
+  if (dl) e[1].forEach(function(c) { var o = document.createElement('option'); o.value = c; dl.appendChild(o); });
+});
+
+function getChamps() { return ['top','jg','mid','adc','sup'].map(function(id) { return document.getElementById(id).value.trim(); }); }
+
+function getTags(name) {
+  if (!name) return [];
+  var key = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === name.toLowerCase(); });
+  return key ? CHAMP_TAGS[key] : [];
+}
+
+function analyzeComp(champs) {
+  var ad=0,ap=0,melee=0,ccTotal=0,ccPhysical=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
+  var topTags = champs[0] ? getTags(champs[0]) : [];
+  champs.filter(Boolean).forEach(function(c) {
+    var t = getTags(c);
+    if (t.includes("AD"))      ad++;
+    if (t.includes("AP"))      ap++;
+    if (t.includes("MELEE"))   melee++;
+    if (t.includes("CRIT"))    crit++;
+    if (t.includes("BURST"))   burst++;
+    if (t.includes("BURN"))    burn++;
+    if (t.includes("SHIELD"))  shield++;
+    if (t.includes("HEAL"))    heal++;
+    if (t.includes("EXECUTE")) execute++;
+    var cc = getCCValue(t);
+    ccTotal += cc;
+    var isPureAP = t.includes("AP") && !t.includes("AD");
+    if (!isPureAP) ccPhysical += cc;
+  });
+  return { ad,ap,melee,ccTotal,ccPhysical,crit,burst,burn,shield,heal,execute,_topTags:topTags };
+}
+
+function updateChampPreview(role) {
+  var val = document.getElementById(role).value.trim();
+  var prev = document.getElementById('prev-' + role);
+  var img  = document.getElementById('img-' + role);
+  var input = document.getElementById(role);
+  var known = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === val.toLowerCase(); });
+  if (known) {
+    img.src = champImg(known);
+    img.onerror = function() { prev.classList.remove('visible'); input.classList.remove('has-icon'); };
+    prev.classList.add('visible'); input.classList.add('has-icon');
+  } else { prev.classList.remove('visible'); input.classList.remove('has-icon'); }
+}
+
+function onInput() {
+  ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
+  var champs = getChamps();
+  if (!champs.some(Boolean)) { document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter enemy draft...</span>'; return; }
+  var a = analyzeComp(champs);
+  var tags = [];
+  if (a.ad > 0)       tags.push('<span class="tag tag-ad">' + a.ad + ' AD</span>');
+  if (a.ap > 0)       tags.push('<span class="tag tag-ap">' + a.ap + ' AP</span>');
+  if (a.ccTotal >= 2) tags.push('<span class="tag tag-cc">CC ' + a.ccTotal + '</span>');
+  if (a.crit >= 1)    tags.push('<span class="tag tag-crit">' + a.crit + ' Crit</span>');
+  if (a.burst >= 2)   tags.push('<span class="tag tag-burst">Burst</span>');
+  if (a.burn >= 1)    tags.push('<span class="tag tag-burn">Burn</span>');
+  if (a.shield >= 2)  tags.push('<span class="tag tag-shield">' + a.shield + ' Shields</span>');
+  if (a.heal >= 2)    tags.push('<span class="tag tag-heal">' + a.heal + ' Heals</span>');
+  if (a.execute >= 1) tags.push('<span class="tag tag-execute">Execute</span>');
+  document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">No particular profile detected</span>';
+}
+
+function getBoots(a) {
+  // Crit absolute priority
+  if (a.crit >= 3)                  return { name:"Plated Steelcaps",  note: a.crit + " crit enemies -- armor priority" };
+  // Overwhelming CC (4+ from ANY source) → Mercs mandatory
+  if (a.ccTotal >= 4)               return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- Tenacity mandatory" };
+  // 3+ AD + physical CC (4+) → conflict
+  if (a.ad >= 3 && a.ccPhysical >= 4) return { conflict:true, primary:{name:"Plated Steelcaps",note:"3+ AD -- armor priority"}, secondary:{name:"Mercury's Treads",note:a.ccTotal+" CC -- consider Tenacity"} };
+  // 3+ AD or 2+ crit → Steelcaps
+  if (a.ad >= 3 || a.crit >= 2)    return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : a.crit + " crit enemies" };
+  // Physical CC 3+ (non-AP sources) → Mercs
+  if (a.ccPhysical >= 3)            return { name:"Mercury's Treads",  note: a.ccPhysical + " CC (physical) -- Tenacity" };
+  // Mixed damage → Gluttonous Greaves
+  if (a.ap >= 2 && a.ad >= 2)       return { name:"Gluttonous Greaves", note: "Mixed damage comp -- omnivamp sustain" };
+  // Default
+  return                                   { name:"Gluttonous Greaves", note: "Standard -- omnivamp sustain" };
+}
+
+function getSituItems(a) {
+  var situ = [];
+  // Thornmail: only if specified in matchup (lane vs heavy healer like Fiora/Warwick)
+  // Chempunk: only if 3+ healers in comp
+  if (a.heal >= 3) {
+    situ.push({ tag:"heal", tagLabel:a.heal+" Heals", type:"double", items:[
+      { name:"Thornmail", note:"Build only if your matchup specifically requires it (Fiora, Warwick lane)" },
+      { name:"Chempunk Chainsword", note:"3+ heal sources -- upgrade worth it here; otherwise sit on 800g component" }
+    ]});
+  } else if (a.heal >= 2) {
+    situ.push({ tag:"heal", tagLabel:a.heal+" Heals", type:"single", items:[
+      { name:"Bramble Vest", note:"Sit on 800g component only -- only upgrade to Thornmail if matchup specifically requires it" }
+    ]});
+  }
+  return situ;
+}
+
+function buildItems(top, a) {
+  var n = (top||"").toLowerCase();
+  var bootsFirst   = BOOTS_FIRST.includes(n);
+  var mercFirst    = MERC_FIRST.includes(n);
+  var steelcapsFirst = STEELCAPS_FIRST.includes(n);
+  var bramble      = BRAMBLE_CHAMPS.includes(n);
+  var shieldStart  = SHIELD_START.includes(n);
+  var boots = getBoots(a), warnings = [], items = [];
+
+  // ── Start item ────────────────────────────────────────────
+  warnings.push("🛡 Start: " + (shieldStart
+    ? "Doran's Shield -- vs " + top + " to sustain poke"
+    : "Doran's Blade -- Standard start"));
+
+  // ── Lane-specific warnings ────────────────────────────────
+  if (bootsFirst)      warnings.push("⚡ vs Olaf: buy Gluttonous Greaves FIRST before Black Cleaver");
+  if (mercFirst)       warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
+  if (steelcapsFirst)  warnings.push("🥾 vs " + top + ": rush Plated Steelcaps before Black Cleaver");
+  if (bramble)         warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver -- don't upgrade it");
+
+  // ══════════════════════════════════════════════════════════
+  // CORE: Black Cleaver + Sterak's ALWAYS items 1-2
+  // ══════════════════════════════════════════════════════════
+  if (bootsFirst) {
+    items.push({slot:"Boots", name:"Gluttonous Greaves", note:"Rush vs Olaf -- mobility to escape his R"});
+    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
+  } else if (mercFirst) {
+    items.push({slot:"Boots", name:"Mercury's Treads", note:"Rush vs " + top + " -- Tenacity priority"});
+    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
+  } else if (steelcapsFirst) {
+    items.push({slot:"Boots", name:"Plated Steelcaps", note:"Rush vs " + top + " -- armor priority"});
+    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
+  } else {
+    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
+    if (boots.conflict)
+      items.push({slot:"Boots", name:boots.primary.name, note:boots.primary.note, conflict:boots.secondary});
+    else
+      items.push({slot:"Boots", name:boots.name, note:boots.note});
+  }
+  items.push({slot:"Item 2", name:"Sterak's Gage", note:"Core Urgot -- only 80+ AD tanky item not nerfed for ranged; shields amp with HP"});
+
+  // ══════════════════════════════════════════════════════════
+  // BIG FOUR for slots 3-4: Deadman's / Randuin's / Rookern / Force of Nature
+  // Rule: pick 2 of the Big Four based on damage type
+  // ══════════════════════════════════════════════════════════
+  var has = function(name) { return items.some(function(i) { return i.name === name; }); };
+
+  // Determine armor item (slot 3) and MR item (slot 4)
+  // Heavy AD (3+) → Deadman's default, Randuin if 2+ crit
+  // Heavy AP (3+) → Rookern default, Force of Nature if 2+ burn
+  // Equal → itemize for laner (top lane opponent damage type)
+  var topTags = a._topTags || [];
+  var topIsAP = topTags.includes("AP") && !topTags.includes("AD");
+  var topIsAD = topTags.includes("AD") && !topTags.includes("AP");
+
+  var heavyAD = a.ad >= 3;
+  var heavyAP = a.ap >= 3;
+  var equalDmg = !heavyAD && !heavyAP;
+
+  // Slot 3
+  if (heavyAD) {
+    if (a.crit >= 2)
+      items.push({slot:"Item 3", name:"Randuin's Omen", note:a.crit + " crit -- reduces crit damage taken; better vs fed ADC"});
+    else
+      items.push({slot:"Item 3", name:"Deadman's Plate", note:"3+ AD -- best armor item; out-of-combat MS to engage"});
+  } else if (heavyAP) {
+    if (a.burn >= 2)
+      items.push({slot:"Item 3", name:"Force of Nature", note:"2+ burn AP -- needs sustained spell spam to stack; great vs " + a.burn + " burn"});
+    else
+      items.push({slot:"Item 3", name:"Rookern", note:"3+ AP -- immediate shield impact; better than FoN vs burst AP"});
+  } else {
+    // Equal: itemize for laner
+    if (topIsAP) {
+      if (a.burn >= 2)
+        items.push({slot:"Item 3", name:"Force of Nature", note:"Lane vs AP + burn -- stack with sustained poke"});
+      else
+        items.push({slot:"Item 3", name:"Rookern", note:"Lane vs AP -- immediate shield; Deadman's as boots alternative if equal + Steelcaps"});
+    } else {
+      if (a.crit >= 2)
+        items.push({slot:"Item 3", name:"Randuin's Omen", note:"Crit threat + AD laner -- reduces crit damage"});
+      else
+        items.push({slot:"Item 3", name:"Deadman's Plate", note:"AD laner -- default armor; great movement speed; go Randuin if 2+ crit"});
+    }
+  }
+
+  // Slot 4: second of the Big Four (cover the other damage type)
+  if (heavyAD) {
+    if (a.burn >= 2)
+      items.push({slot:"Item 4", name:"Force of Nature", note:"AP burn coverage alongside AD armor"});
+    else if (a.ap >= 2)
+      items.push({slot:"Item 4", name:"Rookern", note:"AP coverage alongside anti-AD"});
+    else
+      items.push({slot:"Item 4", name:"Deadman's Plate", note:has("Deadman's Plate") ? "" : "Second armor layer -- high AD comp"});
+  } else if (heavyAP) {
+    if (a.crit >= 2)
+      items.push({slot:"Item 4", name:"Randuin's Omen", note:"Crit champions + AP comp -- crit reduction"});
+    else if (a.ad >= 2)
+      items.push({slot:"Item 4", name:"Deadman's Plate", note:"AD coverage alongside anti-AP"});
+    else
+      items.push({slot:"Item 4", name:"Deadman's Plate", note:"Armor layer + movement speed"});
+  } else {
+    // Equal: cover the other type vs laner
+    if (topIsAP) {
+      if (a.crit >= 2)
+        items.push({slot:"Item 4", name:"Randuin's Omen", note:"Crit ADC coverage -- use Steelcaps as alt boots"});
+      else
+        items.push({slot:"Item 4", name:"Deadman's Plate", note:"AD coverage -- equal comp, itemize armor for AD threats"});
+    } else {
+      if (a.burn >= 2)
+        items.push({slot:"Item 4", name:"Force of Nature", note:"Burn AP coverage -- sustain spell pressure"});
+      else
+        items.push({slot:"Item 4", name:"Rookern", note:"AP coverage -- immediate shield value"});
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // BLOODMAIL: slot 3 if mixed damage (AD+AP both) + 3+ melee
+  //            slot 5 if 3+ melee (standard)
+  // JAK'SHO:   slot 5 ONLY, and only if already have 2+ tank items (Deadman/Randuin/Rookern/FoN)
+  // ══════════════════════════════════════════════════════════
+  var bigFour = ["Deadman's Plate","Randuin's Omen","Rookern","Force of Nature"];
+  var tankItemCount = bigFour.filter(function(i){ return has(i); }).length;
+
+  // Bloodmail slot 3 special case: mixed damage + 3+ melee → go now
+  // (already pushed items 1-2 + boots, slot 3 was just pushed above)
+  // We check if this applies and override slot 3 recommendation with a note
+  if (!heavyAD && !heavyAP && a.melee >= 3) {
+    // Mixed + heavy melee: Bloodmail as 3rd item (remove last pushed item 3 and replace)
+    items = items.filter(function(i){ return i.slot !== "Item 3"; });
+    items.push({slot:"Item 3", name:"Overlord's Bloodmail", note:"Mixed damage + " + a.melee + " melees -- you hit them constantly; go Bloodmail early for max value"});
+  }
+
+  // Slot 5 flex
+  if (a.melee >= 3 && !has("Overlord's Bloodmail")) {
+    items.push({slot:"Item 5 (flex)", name:"Overlord's Bloodmail", note:a.melee + " melees -- you hit them enough for bonus AD to matter"});
+  } else {
+    // Fill missing Big Four
+    var missingFour = bigFour.filter(function(i){ return !has(i); });
+    if (missingFour.length > 0) {
+      items.push({slot:"Item 5 (flex)", name:missingFour[0], note:"Complete the Big Four -- fill remaining resistance gap"});
+    } else if (tankItemCount >= 2) {
+      // Jak'Sho only if already have 2+ Big Four tank items
+      items.push({slot:"Item 5 (flex)", name:"Jak'Sho, The Protean", note:"2+ tank items already -- Jak'Sho valid here; only vs melee-heavy long fights"});
+    } else {
+      items.push({slot:"Item 5 (flex)", name:"Deadman's Plate", note:"Extra armor + mobility layer"});
+    }
+  }
+
+  return { items, warnings };
+}
+
 function itemRowHTML(item, i) {
   var img = itemImg(item.name);
-  return '<div class="item-row"><div class="item-icon">'+(img ? '<img src="'+img+'" alt="'+item.name+'" loading="lazy"/>' : '')+'</div><div><div class="item-slot">'+item.slot+'</div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>';
+  var iconHTML = img ? '<div class="item-icon"><img src="' + img + '" alt="' + item.name + '" loading="lazy"/></div>' : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
+  if (item.conflict) {
+    var img2 = itemImg(item.conflict.name);
+    var icon2 = img2 ? '<div class="item-icon"><img src="' + img2 + '" alt="' + item.conflict.name + '" loading="lazy"/></div>' : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
+    return '<div class="item-row" style="animation:fadeUp 0.3s ease both '+(i*0.05)+'s;flex-wrap:wrap;gap:0;">'
+      + '<div class="item-slot" style="width:100%;margin-bottom:6px;">'+item.slot+'</div>'
+      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'+iconHTML+'<div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>'
+      + '<div style="width:1px;background:var(--border);margin:0 10px;align-self:stretch;"></div>'
+      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'+icon2+'<div><div class="item-name" style="color:var(--blue);">'+item.conflict.name+'</div><div class="item-note">'+item.conflict.note+'</div></div></div>'
+      + '</div>';
+  }
+  return '<div class="item-row" style="animation:fadeUp 0.3s ease both '+(i*0.05)+'s">'+iconHTML+'<div class="item-slot">'+item.slot+'</div><div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>';
 }
-function calculate() {}
 
+function renderCategories(champs) {
+  var CATS = [
+    {key:"AD",label:"AD",cls:"cat-label-ad"},{key:"AP",label:"AP",cls:"cat-label-ap"},
+    {key:"CC",label:"CC",cls:"cat-label-cc",isCC:true},{key:"CRIT",label:"Crit",cls:"cat-label-crit"},
+    {key:"BURST",label:"Burst",cls:"cat-label-burst"},{key:"BURN",label:"Burn",cls:"cat-label-burn"},
+    {key:"SHIELD",label:"Shield",cls:"cat-label-shield"},{key:"HEAL",label:"Heal",cls:"cat-label-heal"},
+    {key:"EXECUTE",label:"Execute",cls:"cat-label-execute"},
+  ];
+  var filled = champs.filter(Boolean).map(function(c) {
+    return Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === c.toLowerCase(); }) || null;
+  }).filter(Boolean);
+  if (!filled.length) return '';
+  var rows = '';
+  CATS.forEach(function(cat) {
+    var matching = filled.filter(function(c) {
+      var t = getTags(c);
+      return cat.isCC ? getCCValue(t) > 0 : t.includes(cat.key);
+    });
+    if (!matching.length) return;
+    var pills = matching.map(function(c) {
+      return '<span class="cat-champ"><img src="'+champImg(c)+'" onerror="this.style.display=\'none\'" loading="lazy"/>'+c+'</span>';
+    }).join('');
+    rows += '<div class="cat-row"><span class="cat-label '+cat.cls+'">'+cat.label+'</span><div class="cat-champs">'+pills+'</div></div>';
+  });
+  if (!rows) return '';
+  return '<div class="cat-section"><div class="result-header">Champion categories</div><div class="cat-grid">'+rows+'</div></div>';
+}
+
+function calculate() {
+  var champs = getChamps(), top = champs[0];
+  if (!top) { document.getElementById('error-msg').innerHTML = '<div class="error">Enter at least the enemy top champion.</div>'; return; }
+  document.getElementById('error-msg').innerHTML = '';
+  var topKnown = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === top.toLowerCase(); }) || top;
+  var a = analyzeComp(champs);
+  var rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
+  var bi = buildItems(topKnown, a);
+  var situ = getSituItems(a);
+  var guideUrl = GUIDE_BASE + champSlug(topKnown) + '.html';
+  var html = '';
+
+  html += '<div class="section" style="animation:fadeUp 0.4s ease both">'
+    + '<div class="result-header">Rune page — ' + rune.label + '</div>'
+    + '<img src="' + RUNE_BASE + rune.img + '" alt="Rune page ' + rune.label + '" style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);" loading="lazy"/>'
+    + '</div>';
+
+  html += '<div class="build-layout">';
+  html += '<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">'
+    + '<div class="result-header">Recommended build</div>'
+    + '<div class="guide-box">📖 <a href="' + guideUrl + '">Urgot vs ' + topKnown + ' — Full matchup guide ↗</a></div>';
+  bi.warnings.forEach(function(w) { html += '<div class="warn-box">' + w + '</div>'; });
+  html += '<div class="items-grid">';
+  bi.items.forEach(function(item, i) { html += itemRowHTML(item, i); });
+  html += '</div></div>';
+
+  html += '<div class="situ-panel"><p class="situ-title">✦ Situational</p>';
+  if (!situ.length) {
+    html += '<p class="situ-empty">No situational items</p>';
+  } else {
+    situ.forEach(function(s, i) {
+      var tc = 'situ-tag-' + s.tag;
+      if (s.type === 'double') {
+        html += '<div class="situ-item" style="flex-direction:column;gap:6px;"><span class="situ-tag '+tc+'">'+s.tagLabel+'</span>';
+        s.items.forEach(function(it, j) {
+          var img = itemImg(it.name);
+          var icon = img ? '<div class="situ-icon"><img src="'+img+'" alt="'+it.name+'" loading="lazy"/></div>' : '';
+          if (j > 0) html += '<div style="height:5px;"></div>';
+          html += '<div style="display:flex;align-items:flex-start;gap:8px;">'+icon+'<div><div class="situ-item-name">'+it.name+'</div><div class="situ-item-cond">'+it.note+'</div></div></div>';
+        });
+        html += '</div>';
+      } else {
+        var img2 = itemImg(s.items[0].name);
+        var iH = img2 ? '<div class="situ-icon"><img src="'+img2+'" alt="'+s.items[0].name+'" loading="lazy"/></div>' : '';
+        html += '<div class="situ-item">'+iH+'<div class="situ-text"><span class="situ-tag '+tc+'">'+s.tagLabel+'</span><div class="situ-item-name">'+s.items[0].name+'</div><div class="situ-item-cond">'+s.items[0].note+'</div></div></div>';
+      }
+    });
+  }
+  html += '</div></div>';
+  html += renderCategories(champs);
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// Nav search
 var champNames = ['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 
 function slugify(name) { return name.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
@@ -415,16 +1303,324 @@ document.addEventListener('click', function(e) {
 });
 document.addEventListener('keydown', function(e) { if (e.key === 'Enter') calculate(); });
 
+<div class="panel-page" id="panel-runes">
+      <section class="hero">
+        <div class="hero-bg" style="background-image:url('https://barnhak.github.io/Urgot-guide/Urgot_0.png')"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Urgot Guide</p>
+          <h1 class="hero-title">Rune <span>Pages</span></h1>
+          <p class="hero-sub">Keystones, pages & rune details</p>
+        </div>
+      </section>
+ <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Urgot Guide</p>
+    <h1 class="hero-title">Rune <span>Pages</span></h1>
+    <p class="hero-sub">Keystones, pages & rune details</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- KEYSTONES -->
+  <div class="section-divider"><span>✦ Urgot Keystones</span></div>
+
+  <div class="keystone-grid">
+    <div class="keystone-card">
+      <div class="keystone-img">
+        <img src="https://www.mobafire.com/images/rune/keystones/press-the-attack.png" alt="Press the Attack"
+          onerror="this.src='https://barnhak.github.io/Urgot-guide/PTA.png';this.style.objectPosition='50% 30%'"/>
+      </div>
+      <div class="keystone-body">
+        <div class="keystone-badge">Main Keystone — 99% of games</div>
+        <div class="keystone-name">Press the Attack (PTA)</div>
+        <div class="keystone-desc">PTA is the main keystone you will use in 99% of your games while playing Urgot. It gives high damage, trade power and pressure — it synergizes perfectly with your W and passive to shred enemies fast.</div>
+      </div>
+    </div>
+    <div class="keystone-card">
+      <div class="keystone-img">
+        <img src="https://www.mobafire.com/images/rune/keystones/arcane-comet.png" alt="Deathfire Touch"
+          onerror="this.src='https://barnhak.github.io/Urgot-guide/deathfire.png';this.style.objectPosition='50% 50%'"/>
+      </div>
+      <div class="keystone-body">
+        <div class="keystone-badge">Niche Keystone</div>
+        <div class="keystone-name">Deathfire Touch</div>
+        <div class="keystone-desc">Deathfire Touch will only be useful in matchups where you can auto or trade freely like Heimerdinger. It provides burn damage on hit which helps sustain poke in difficult lanes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUNE PAGES -->
+  <div class="section-divider"><span>✦ Rune Pages</span></div>
+
+  <div class="rune-pages-grid" style="margin-bottom:2rem">
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Standard page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 1 — Default</div>
+        <div class="rune-card-name">Standard</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Most matchups</span>
+        </div>
+        <div class="rune-card-desc">The go-to page for Urgot in the vast majority of games. PTA with Triumph, Bloodline, Last Stand. Secondary: Triple Tonic + Approach Velocity.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page2.png" alt="Cut Down page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 2</div>
+        <div class="rune-card-name">Cut Down</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Aatrox</span><span class="rune-champ-tag">Darius</span>
+          <span class="rune-champ-tag">Aurora</span><span class="rune-champ-tag">Irelia</span>
+          <span class="rune-champ-tag">Varus</span><span class="rune-champ-tag">Vayne</span>
+          <span class="rune-champ-tag">Vladimir</span><span class="rune-champ-tag">Sett</span>
+          <span class="rune-champ-tag">Singed</span>
+        </div>
+        <div class="rune-card-desc">Replaces Last Stand with Cut Down to burst high-HP opponents. Also takes Cosmic Insight in secondary for more kill pressure.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page3.png" alt="Tanks page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 3</div>
+        <div class="rune-card-name">Vs Tanks</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Ornn</span><span class="rune-champ-tag">Malphite</span>
+          <span class="rune-champ-tag">Dr. Mundo</span><span class="rune-champ-tag">Cho'Gath</span>
+          <span class="rune-champ-tag">Zac</span><span class="rune-champ-tag">Tahm Kench</span>
+          <span class="rune-champ-tag">K'Sante</span><span class="rune-champ-tag">Maokai</span>
+          <span class="rune-champ-tag">Poppy</span>
+        </div>
+        <div class="rune-card-desc">Takes Magic Boots and Approach Velocity in secondary. Magic Boots saves 300g vs tanks where boots aren't priority.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page4.png" alt="Resolution page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 4</div>
+        <div class="rune-card-name">Resolution</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Renekton</span><span class="rune-champ-tag">Shen</span>
+        </div>
+        <div class="rune-card-desc">Replaces standard secondary with Bone Plating and Overgrowth to survive early burst and scale defensively.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page5.png" alt="Rumble page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 5</div>
+        <div class="rune-card-name">Vs Rumble</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Rumble</span>
+        </div>
+        <div class="rune-card-desc">Takes Second Wind and Unflinching in secondary to sustain Rumble's constant poke and thermometer damage.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page6.png" alt="Olaf page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 6</div>
+        <div class="rune-card-name">Vs Olaf — Sorcery</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Olaf</span>
+        </div>
+        <div class="rune-card-desc">Full Sorcery secondary with Nimbus Cloak and Celerity — gives massive MS when you cast a summ, key to outrunning Olaf's R. Replaces Triple Tonic entirely.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page7.png" alt="Heimerdinger page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 7</div>
+        <div class="rune-card-name">Vs Heimerdinger</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Heimerdinger</span>
+        </div>
+        <div class="rune-card-desc">Uses Deathfire Touch (Comet replaced) as keystone to sustain poke against Heimer's turrets. You farm at range and poke him down before flashing in.</div>
+      </div>
+    </div>
+
+    <div class="rune-page-card">
+      <div class="rune-img-wrap">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page8.png" alt="Yorick page"/>
+      </div>
+      <div class="rune-card-body">
+        <div class="rune-card-tag">Page 8</div>
+        <div class="rune-card-name">Vs Yorick</div>
+        <div class="rune-card-champs">
+          <span class="rune-champ-tag">Yorick</span>
+        </div>
+        <div class="rune-card-desc">Specific page to counter Yorick's passive sustain and ghouls. Secondary adapted for the matchup's particular demands.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RUNE DETAILS -->
+  <div class="section-divider"><span>✦ Rune Details</span></div>
+
+  <!-- PRECISION -->
+  <div class="rune-detail" style="animation:fadeUp 0.4s ease both 0.05s">
+    <div class="rune-detail-inner">
+      <div class="rune-detail-img">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Precision tree"/>
+      </div>
+      <div class="rune-detail-body">
+        <div class="rune-tree-label precision">Precision Tree — Primary</div>
+        <div class="rune-detail-name">Standard Precision Choices</div>
+        <div class="rune-picks">
+          <div class="rune-row">
+            <span class="rune-row-label">Keystone</span>
+            <span class="rune-pill main">Press the Attack</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 1</span>
+            <span class="rune-pill main">Triumph</span>
+            <span style="font-size:12px;color:var(--text-dim);margin-left:4px">vs Presence of Mind if you need mana</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 2</span>
+            <span class="rune-pill main">Bloodline</span>
+            <span style="font-size:12px;color:var(--text-dim);margin-left:4px">Lifesteal for sustain</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 3</span>
+            <span class="rune-pill main">Last Stand</span>
+            <span class="rune-pill" style="margin-left:6px">Cut Down</span>
+            <span style="font-size:12px;color:var(--text-dim);margin-left:4px">vs high HP</span>
+          </div>
+        </div>
+        <div class="rune-desc">Triumph restores HP on kill which is huge for chaining kills. Bloodline gives lifesteal to stay in lane. Last Stand is best when you're low HP fighting, Cut Down is better vs high HP targets like tanks or Darius/Aatrox.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECONDARY STANDARD -->
+  <div class="rune-detail" style="animation:fadeUp 0.4s ease both 0.08s">
+    <div class="rune-detail-inner">
+      <div class="rune-detail-img">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Secondary standard"/>
+      </div>
+      <div class="rune-detail-body">
+        <div class="rune-tree-label sorcery">Sorcery Tree — Secondary (Standard)</div>
+        <div class="rune-detail-name">Triple Tonic + Approach Velocity</div>
+        <div class="rune-picks">
+          <div class="rune-row">
+            <span class="rune-row-label">Row 1</span>
+            <span class="rune-pill main">Triple Tonic</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 2</span>
+            <span class="rune-pill main">Approach Velocity</span>
+          </div>
+        </div>
+        <div class="rune-desc">Triple Tonic gives 3 pots at start which is huge sustain, and also gives ability haste. Approach Velocity lets you close the gap when you slow with Q — essential for chasing and executing enemies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECONDARY SORCERY OLAF -->
+  <div class="rune-detail" style="animation:fadeUp 0.4s ease both 0.11s">
+    <div class="rune-detail-inner">
+      <div class="rune-detail-img">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page6.png" alt="Olaf page sorcery"/>
+      </div>
+      <div class="rune-detail-body">
+        <div class="rune-tree-label sorcery">Sorcery Tree — Secondary (Vs Olaf)</div>
+        <div class="rune-detail-name">Nimbus Cloak + Celerity</div>
+        <div class="rune-picks">
+          <div class="rune-row">
+            <span class="rune-row-label">Row 1</span>
+            <span class="rune-pill main">Nimbus Cloak</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 2</span>
+            <span class="rune-pill main">Celerity</span>
+          </div>
+        </div>
+        <div class="rune-desc">Only vs Olaf. Nimbus Cloak gives insane Move Speed (like a mini Ghost) when you cast a summoner spell — essential to escape his R. Celerity boosts your bonus MS by 7% which is a lot when combined with Nimbus Cloak.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECONDARY RESOLVE -->
+  <div class="rune-detail" style="animation:fadeUp 0.4s ease both 0.14s">
+    <div class="rune-detail-inner">
+      <div class="rune-detail-img">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page4.png" alt="Resolve secondary"/>
+      </div>
+      <div class="rune-detail-body">
+        <div class="rune-tree-label resolve">Resolve Tree — Secondary (Resolution)</div>
+        <div class="rune-detail-name">Bone Plating + Overgrowth</div>
+        <div class="rune-picks">
+          <div class="rune-row">
+            <span class="rune-row-label">Row 1</span>
+            <span class="rune-pill main">Bone Plating</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 2</span>
+            <span class="rune-pill main">Overgrowth</span>
+          </div>
+        </div>
+        <div class="rune-desc">Bone Plating reduces incoming burst damage from combos — perfect vs Renekton and Shen who spam multi-hit combos. Overgrowth scales your HP across the game giving you more durability for executing R.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECONDARY SECOND WIND -->
+  <div class="rune-detail" style="animation:fadeUp 0.4s ease both 0.17s">
+    <div class="rune-detail-inner">
+      <div class="rune-detail-img">
+        <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page5.png" alt="Second Wind page"/>
+      </div>
+      <div class="rune-detail-body">
+        <div class="rune-tree-label resolve">Resolve Tree — Secondary (Vs Rumble)</div>
+        <div class="rune-detail-name">Second Wind + Unflinching</div>
+        <div class="rune-picks">
+          <div class="rune-row">
+            <span class="rune-row-label">Row 1</span>
+            <span class="rune-pill main">Second Wind</span>
+          </div>
+          <div class="rune-row">
+            <span class="rune-row-label">Row 2</span>
+            <span class="rune-pill main">Unflinching</span>
+          </div>
+        </div>
+        <div class="rune-desc">Second Wind regenerates HP after taking damage from champions — crucial for surviving Rumble's Q burn poke. Unflinching helps you resist the slow from his E so you can reposition during fights.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 function showPanel(panel) {
   var track = document.getElementById('panel-track');
   var btnCalc = document.getElementById('btn-calc');
   var btnBuild = document.getElementById('btn-build');
-  var btnRunes = document.getElementById('btn-runes');
-
-  btnBuild.classList.remove('active');
-  btnCalc.classList.remove('active');
-  btnRunes.classList.remove('active');
-
   if (panel === 'calc') {
     track.classList.remove('show-far-right');
     track.classList.add('show-right');

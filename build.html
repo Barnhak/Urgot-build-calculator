@@ -1544,24 +1544,37 @@ function showPanel(panel) {
   var track = document.getElementById('panel-track');
   var btnCalc = document.getElementById('btn-calc');
   var btnBuild = document.getElementById('btn-build');
+  var btnRunes = document.getElementById('btn-runes');
+
+  btnBuild.classList.remove('active');
+  btnCalc.classList.remove('active');
+  btnRunes.classList.remove('active');
+
   if (panel === 'calc') {
+    track.classList.remove('show-far-right');
     track.classList.add('show-right');
-    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
+    btnCalc.classList.add('active');
     history.replaceState(null, '', '#calculator');
-  } if (panel === 'runes') {
-    track.classList.add('show-right');
-    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#runes');
-  }else {
+  } else if (panel === 'runes') {
     track.classList.remove('show-right');
-    btnCalc.classList.remove('active'); btnBuild.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
+    track.classList.add('show-far-right');
+    btnRunes.classList.add('active');
+    history.replaceState(null, '', '#runes');
+  } else {
+    track.classList.remove('show-right');
+    track.classList.remove('show-far-right');
+    btnBuild.classList.add('active');
     history.replaceState(null, '', '#build');
   }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-(function() { if (window.location.hash === '#calculator') showPanel('calc'); })();
+
+(function() {
+  if (window.location.hash === '#calculator') showPanel('calc');
+  else if (window.location.hash === '#runes') showPanel('runes');
+  else showPanel('build');
+})();
 </script>
 </body>
 </html>

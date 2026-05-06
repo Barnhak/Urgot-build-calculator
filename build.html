@@ -787,8 +787,15 @@ function toggleCat(header) {
   body.classList.toggle('open', !isOpen);
 }
 
+let DDV = "16.9.1";
+const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
+const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
+fetch("https://ddragon.leagueoflegends.com/api/versions.json")
+  .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
 
-
+const BASE_URL   = "https://barnhak.github.io/Urgot-build-calculator/";
+const RUNE_BASE  = "https://barnhak.github.io/Urgot-guide/runes/";
+const GUIDE_BASE = "matchup/";
 
 function champSlug(name) {
   return name.toLowerCase().replace(/['\u2019]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
@@ -1222,21 +1229,20 @@ document.addEventListener('click', function(e) { if (!e.target.closest('.nav-sea
 document.addEventListener('keydown', function(e) { if (e.key==='Enter') calculate(); });
 
 
-
 function showPanel(panel) {
   var track = document.getElementById('panel-track');
   var btnCalc = document.getElementById('btn-calc');
   var btnBuild = document.getElementById('btn-build');
-  if (panel === 'build') {
-    track.classList.add('show-right');
-    btnCalc.classList.remove('active'); btnBuild.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#build');
-  } else {
+  if (panel === 'build'){
     track.classList.remove('show-right');
     btnBuild.classList.remove('active'); btnCalc.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
     history.replaceState(null, '', '#calculator');
+  }  else {
+    track.classList.add('show-right');
+    btnCalc.classList.remove('active'); btnBuild.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#build');
   }
 }
 (function() { if (window.location.hash === '#build') showPanel('build'); })();

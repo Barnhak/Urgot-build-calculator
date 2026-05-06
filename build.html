@@ -1237,12 +1237,12 @@ function showPanel(panel) {
     track.classList.remove('show-right');
     btnBuild.classList.remove('active'); btnCalc.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#calculator');
+    history.replaceState(null, '', '#build');
   }  else {
     track.classList.add('show-right');
     btnCalc.classList.remove('active'); btnBuild.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#build');
+    history.replaceState(null, '', '#calculator');
   }
 }
 (function() { if (window.location.hash === '#build') showPanel('build'); })();

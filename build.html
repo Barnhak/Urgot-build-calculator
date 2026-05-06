@@ -1246,7 +1246,12 @@ function showPanel(panel) {
     btnBuild.classList.remove('active'); btnCalc.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
     history.replaceState(null, '', '#calculator');
-  } else {
+  } if (panel === 'runes') {
+    track.classList.add('show-right');
+    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#runes');
+  }else {
     track.classList.remove('show-right');
     btnCalc.classList.remove('active'); btnBuild.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});

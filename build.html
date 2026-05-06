@@ -321,10 +321,22 @@
   
 
     .panel-viewport{overflow:hidden;width:100%}
-    .panel-track{display:flex;width:300%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
-    .panel-track.show-right{transform:translateX(-33.3333%)}
-    .panel-track.show-far-right{transform:translateX(-66.6666%)}
-    .panel-page{width:33.3333%;flex-shrink:0;min-width:0}
+    .panel-track {
+    display: flex;
+    width: 300%;
+    transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
+    }
+    .panel-track.show-right {
+      transform: translateX(-33.333333%);
+    }
+    .panel-track.show-far-right {
+      transform: translateX(-66.666666%);
+    }
+    .panel-page {
+      width: 33.333333%;
+      flex-shrink: 0;
+      min-width: 0;
+    }
     .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
     .toggle-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 20px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
     .toggle-btn.active{background:var(--green-dark);color:var(--text-bright)}

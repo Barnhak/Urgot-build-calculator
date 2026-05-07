@@ -9,7 +9,6 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--green:#4ADE80;--green-mid:#22C55E;--green-dark:#15803D;--bg:#060D07;--bg-surface:#0B1A0D;--bg-card:#0F2211;--border:#1A3D1E;--border-bright:#2D6A33;--text:#A8D4A0;--text-dim:#4A7550;--text-bright:#E8F5E2}
-    html,body{height:100%}
     body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(74,222,128,0.04) 0%,transparent 60%),repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px),repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(26,61,30,0.08) 50px);}
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(6,13,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-decoration:none}
@@ -29,12 +28,12 @@
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
 
     /* PANEL SYSTEM */
-    .panel-viewport{overflow:hidden;width:100%;margin-top:57px}
+    .panel-viewport{overflow:hidden;width:100%;padding-top:57px}
     .panel-track{display:flex;width:300%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
     .panel-track.show-mid{transform:translateX(-33.333%)}
     .panel-track.show-right{transform:translateX(-66.666%)}
     .panel-page{width:33.333%;flex-shrink:0;min-width:0;min-height:3000px}
-    .panel-page iframe{width:100%;min-height:3000px;border:none;display:block;background:var(--bg)}
+    .panel-page iframe{width:100%;min-height:3000px;border:none;display:block}
 
     /* TOGGLE */
     .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
@@ -72,28 +71,27 @@
 
 <div class="panel-viewport">
   <div class="panel-track" id="panel-track">
-    <div class="panel-page"><iframe id="frame-build" src="build.html" onload="resizeFrame(this)"></iframe></div>
-    <div class="panel-page"><iframe id="frame-runes" src="runes.html" onload="resizeFrame(this)"></iframe></div>
-    <div class="panel-page"><iframe id="frame-calc" src="calculator.html" onload="resizeFrame(this)"></iframe></div>
+    <div class="panel-page"><iframe id="frame-build" src="build_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
+    <div class="panel-page"><iframe id="frame-runes" src="runes_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
+    <div class="panel-page"><iframe id="frame-calc"  src="calculator_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
   </div>
 </div>
 
 <script>
 function resizeFrame(frame) {
   try {
-    var h = Math.max(
-      frame.contentDocument.body.scrollHeight,
-      frame.contentDocument.documentElement.scrollHeight,
-      2000
-    );
+    var body = frame.contentDocument.body;
+    var html = frame.contentDocument.documentElement;
+    var h = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, 1000);
     frame.style.height = h + 'px';
-    // retry after images load
+    frame.parentElement.style.minHeight = h + 'px';
     setTimeout(function() {
       try {
-        var h2 = Math.max(frame.contentDocument.body.scrollHeight, frame.contentDocument.documentElement.scrollHeight, 2000);
+        var h2 = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, 1000);
         frame.style.height = h2 + 'px';
+        frame.parentElement.style.minHeight = h2 + 'px';
       } catch(e) {}
-    }, 800);
+    }, 1000);
   } catch(e) {}
 }
 
@@ -123,7 +121,6 @@ function showPanel(panel) {
   else if (h==='#calculator') showPanel('calc');
 })();
 
-// Nav search (outer nav)
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
 function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}

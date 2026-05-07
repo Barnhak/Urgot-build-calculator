@@ -28,12 +28,12 @@
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
 
     /* PANEL SYSTEM */
-    .panel-viewport{overflow:hidden;width:100%;padding-top:57px}
+    .panel-viewport{overflow:hidden;width:100%;padding-top:0}
     .panel-track{display:flex;width:300%;transition:transform 0.55s cubic-bezier(0.77,0,0.175,1)}
     .panel-track.show-mid{transform:translateX(-33.333%)}
     .panel-track.show-right{transform:translateX(-66.666%)}
-    .panel-page{width:33.333%;flex-shrink:0;min-width:0;min-height:3000px}
-    .panel-page iframe{width:100%;min-height:3000px;border:none;display:block}
+    .panel-page{width:33.333%;flex-shrink:0;min-width:0}
+    .panel-page iframe{width:100%;border:none;display:block}
 
     /* TOGGLE */
     .page-toggle{position:fixed;bottom:2rem;right:2rem;z-index:200;display:flex;align-items:center;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
@@ -49,10 +49,10 @@
   <a class="nav-logo" href="index.html">Urgot Guide</a>
   <ul class="nav-links">
     <li><a href="mechanics.html">Mechanics</a></li>
-    <li><a href="build#runes" class="active">Runes</a></li>
-    <li><a href="matchup">MatchUp</a></li>
-    <li><a href="build#calculator.html">Build Calculator</a></li>
-    <li><a href="build#build">Build Guide</a></li>
+    <li><a href="runes.html" class="active">Runes</a></li>
+    <li><a href="matchup.html">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
   </ul>
   <div class="nav-search">
     <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
@@ -71,9 +71,9 @@
 
 <div class="panel-viewport">
   <div class="panel-track" id="panel-track">
-    <div class="panel-page"><iframe id="frame-build" src="build_only.html" scrolling="no"></iframe></div>
-    <div class="panel-page"><iframe id="frame-runes" src="runes_only.html" scrolling="no""></iframe></div>
-    <div class="panel-page"><iframe id="frame-calc"  src="calculator_only.html" scrolling="no"></iframe></div>
+    <div class="panel-page"><iframe id="frame-build" src="build_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
+    <div class="panel-page"><iframe id="frame-runes" src="runes_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
+    <div class="panel-page"><iframe id="frame-calc"  src="calculator_only.html" scrolling="no" onload="resizeFrame(this)"></iframe></div>
   </div>
 </div>
 
@@ -82,16 +82,22 @@ function resizeFrame(frame) {
   try {
     var body = frame.contentDocument.body;
     var html = frame.contentDocument.documentElement;
-    var h = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, 1000);
-    frame.style.height = h + 'px';
-    frame.parentElement.style.minHeight = h + 'px';
-    setTimeout(function() {
+    function doResize() {
       try {
-        var h2 = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, 1000);
-        frame.style.height = h2 + 'px';
-        frame.parentElement.style.minHeight = h2 + 'px';
+        var h = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, 800);
+        frame.style.height = h + 'px';
+        frame.parentElement.style.minHeight = h + 'px';
       } catch(e) {}
-    }, 1000);
+    }
+    doResize();
+    setTimeout(doResize, 300);
+    setTimeout(doResize, 800);
+    setTimeout(doResize, 2000);
+    // Observe DOM changes (e.g. collapsible sections expanding)
+    try {
+      var obs = new MutationObserver(doResize);
+      obs.observe(body, {childList:true, subtree:true, attributes:true});
+    } catch(e) {}
   } catch(e) {}
 }
 
@@ -122,7 +128,7 @@ function showPanel(panel) {
 })();
 
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
-var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/';
+var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
 function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href='matchup/'+slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
 document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});

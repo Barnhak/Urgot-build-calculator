@@ -343,7 +343,8 @@
       <p class="hero-sub">Adaptive runes & build based on enemy composition</p>
     </div>
   </section>
-      <div class="main">
+
+  <div class="main">
     <div class="section">
       <p class="section-title">✦ Enemy Composition</p>
       <div class="input-grid">
@@ -389,29 +390,31 @@
         </div>
       </div>
       <p class="comp-label">Team composition analysis</p>
-      <div class="comp-tags" id="comp-tags">
-        <span class="tag-empty">Enter enemy draft...</span>
-      </div>
-      <div class="btn-wrap">
-        <button class="btn" onclick="calculate()">Generate build</button>
-      </div>
+      <div class="comp-tags" id="comp-tags"><span class="tag-empty">Enter enemy draft...</span></div>
+      <div class="btn-wrap"><button class="btn" onclick="calculate()">Generate build</button></div>
       <div id="error-msg"></div>
     </div>
     <div id="results"></div>
   </div>
+
+  <footer>
+    Not affiliated with Riot Games &nbsp;·&nbsp;
+    <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
+    &nbsp;·&nbsp;
+    <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
+    &nbsp;·&nbsp;
+    <a href="../feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
+  </footer>
+
 <script>
-
-
-
-
-let DDV = "14.24.1";
+let DDV = "16.9.1";
 const DDC = n => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${n}.png`;
 const DDI = id => `https://ddragon.leagueoflegends.com/cdn/${DDV}/img/item/${id}.png`;
 fetch("https://ddragon.leagueoflegends.com/api/versions.json")
   .then(r => r.json()).then(v => { DDV = v[0]; }).catch(() => {});
 
-const BASE_URL  = "https://barnhak.github.io/Urgot-build-calculator/";
-const RUNE_BASE = BASE_URL + "runes/";
+const BASE_URL   = "https://barnhak.github.io/Urgot-build-calculator/";
+const RUNE_BASE  = BASE_URL + "runes/";
 const GUIDE_BASE = "matchup/";
 
 function champSlug(name) {
@@ -436,75 +439,88 @@ function champImg(name) {
 
 const ITEM_IDS = {
   "Black Cleaver":3071,"Gluttonous Greaves":223008,"Plated Steelcaps":3047,
-  "Mercury's Treads":3111,"Sterak's Gage":3053,"Deadman's Plate":3742,
-  "Randuin's Omen":3143,"Force of Nature":4401,"Rookern":222504,"Jak'Sho, The Protean":6665,
-  "Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
+  "Mercury's Treads":3111,"Sorcerer's Shoes":3020,"Sterak's Gage":3053,
+  "Deadman's Plate":3742,"Randuin's Omen":3143,"Force of Nature":4401,
+  "Rookern":222504,"Jak'Sho, The Protean":6665,"Overlord's Bloodmail":2501,
   "Serpent's Fang":6695,"Thornmail":3075,"Chempunk Chainsword":6609,
   "Bramble Vest":3076,"Doran's Blade":1055,"Doran's Shield":1054,
 };
 function itemImg(name) { const id = ITEM_IDS[name]; return id ? DDI(id) : null; }
 
 const CHAMPS_BY_ROLE = {
-  top: ["Aatrox","Akali","Ambessa","Aurora","Camille","Cho'Gath","Darius","Dr. Mundo","Fiora","Garen","Gnar","Gragas","Gwen","Heimerdinger","Hwei","Illaoi","Irelia","Jax","Jayce","K'Sante","Kennen","Malphite","Maokai","Mordekaiser","Nasus","Olaf","Ornn","Pantheon","Poppy","Quinn","Renekton","Rengar","Rumble","Ryze","Sett","Shen","Singed","Sion","Smolder","Tahm Kench","Teemo","Tryndamere","Varus","Vayne","Vladimir","Volibear","Warwick","Wukong","Yasuo","Yone","Yorick","Zac","Zaahen"],
-  jg:  ["Amumu","Bel'Veth","Briar","Diana","Ekko","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed"],
-  mid: ["Ahri","Akali","Anivia","Annie","Aurelion Sol","Azir","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Viktor","Vladimir","Yasuo","Yone","Zed","Zoe","Zyra"],
-  adc: ["Aphelios","Ashe","Caitlyn","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Xayah","Yunara","Zeri","Ziggs"],
-  sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Heimerdinger","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Pyke","Rakan","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
+  top: ['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'],
+  jg:  ["Aatrox","Ambessa","Amumu","Bel'Veth","Briar","Diana","Ekko","Dr. Mundo","Elise","Evelynn","Fiddlesticks","Gragas","Graves","Hecarim","Ivern","Jarvan IV","Jax","Karthus","Kayn","Kha'Zix","Kindred","Lee Sin","Lillia","Master Yi","Naafiri","Nidalee","Nocturne","Nunu","Olaf","Pantheon","Qiyana","Rammus","Rek'Sai","Rengar","Sejuani","Shaco","Shyvana","Skarner","Sylas","Talon","Taliyah","Trundle","Udyr","Vi","Viego","Volibear","Warwick","Wukong","Xin Zhao","Zac","Zed","Zyra"],
+  mid: ["Ahri","Akali","Akshan","Anivia","Annie","Aurelion Sol","Aurora","Azir","Brand","Cassiopeia","Corki","Diana","Ekko","Fizz","Galio","Hwei","Irelia","Kassadin","Katarina","LeBlanc","Lissandra","Lux","Malzahar","Mel","Naafiri","Orianna","Pantheon","Qiyana","Ryze","Smolder","Swain","Sylas","Syndra","Taliyah","Talon","Twisted Fate","Veigar","Vel'Koz","Vex","Viktor","Vladimir","Xerath","Yasuo","Yone","Zed","Zoe","Zyra"],
+  adc: ["Aphelios","Ashe","Brand","Caitlyn","Corki","Draven","Ezreal","Jhin","Jinx","Kai'Sa","Kalista","Kog'Maw","Lucian","Miss Fortune","Nilah","Samira","Senna","Sivir","Smolder","Swain","Tristana","Twitch","Varus","Vayne","Veigar","Xayah","Yasuo","Yunara","Zeri","Ziggs"],
+  sup: ["Alistar","Bard","Blitzcrank","Brand","Braum","Janna","Karma","Leona","Lulu","Lux","Maokai","Mel","Morgana","Nami","Nautilus","Neeko","Pantheon","Poppy","Pyke","Rakan","Rell","Renata Glasc","Senna","Seraphine","Sona","Soraka","Swain","Tahm Kench","Taric","Thresh","Vel'Koz","Xerath","Yuumi","Zilean","Zyra"]
 };
 
+// ── FIXED: Ahri added to CHAMP_TAGS ──
 const CHAMP_TAGS = {
-  "Aatrox": ["AD","HEAL","BUMP","MELEE"],"Akali": ["AP","BURST","MELEE"],"Alistar": ["BUMP","2CC","MELEE"],"Amumu": ["AP","3CC","BURN","MELEE"],
-  "Ambessa": ["AD","BURST","SHIELD","BUMP","MELEE"],"Anivia": ["AP","BURN","1CC","RANGE"],"Annie": ["AP","BURST","1CC","SHIELD","MELEE"],
-  "Aphelios": ["AD","CRIT","RANGE"],"Ashe": ["AD","CRIT","1CC","RANGE"],"Aurelion Sol": ["AP","BURN","BUMP","RANGE"],"Aurora": ["AP","BURST","RANGE"],"Azir": ["AP","BUMP","RANGE"],
-  "Bard": ["2CC","AP","HEAL","RANGE"],"Bel'Veth": ["AD","BUMP","MELEE"],"Blitzcrank": ["SHIELD","BUMP","1CC","RANGE"],
-  "Brand": ["AP","BURN","BURST","1CC","RANGE"],"Braum": ["1CC","AP","BUMP","RANGE"],"Briar": ["AD","2CC","HEAL","MELEE"],
-  "Caitlyn": ["AD","CRIT","1CC","RANGE"],"Camille": ["AD","SHIELD","BUMP","MELEE"],"Cassiopeia": ["AP","BURN","1CC","HEAL","RANGE"],
-  "Cho'Gath": ["AP","BUMP","EXECUTE","1CC","MELEE"],"Corki": ["AD","RANGE"],"Darius": ["AD","HEAL","EXECUTE","BUMP","MELEE"],
-  "Diana": ["AP","BURST","BUMP","SHIELD","MELEE"],"Dr. Mundo": ["AD","HEAL","MELEE"],"Draven": ["AD","CRIT","BUMP","RANGE"],
-  "Ekko": ["AP","BURST","SHIELD","1CC","MELEE"],"Elise": ["AP","BURST","1CC","MELEE"],"Evelynn": ["AP","BURST","1CC","MELEE"],"Ezreal": ["AD","RANGE"],
-  "Fiddlesticks": ["AP","BURN","3CC","HEAL","MELEE"],"Fiora": ["AD","HEAL","1CC","MELEE"],"Fizz": ["AP","BURST","BUMP","MELEE"],
-  "Galio": ["AP","1CC","SHIELD","BUMP","MELEE"],"Garen": ["AD","EXECUTE","MELEE"],"Gnar": ["AD","2CC","RANGE"],"Gragas": ["AP","1CC","BUMP","MELEE"],
-  "Graves": ["AD","CRIT","MELEE"],"Gwen": ["AP","BURST","HEAL","MELEE"],"Hecarim": ["AD","1CC","HEAL","MELEE"],"Heimerdinger": ["AP","BURN","1CC","RANGE"],
-  "Hwei": ["AP","BURN","BURST","1CC","SHIELD","RANGE"],"Illaoi": ["AD","HEAL","MELEE"],"Irelia": ["AD","HEAL","1CC","MELEE"],
-  "Ivern": ["1CC","SHIELD","BUMP","MELEE"],"Janna": ["AP","BUMP","HEAL","SHIELD","RANGE"],"Jarvan IV": ["AD","BUMP","SHIELD","MELEE"],
-  "Jax": ["AD","1CC","MELEE"],"Jayce": ["AD","BUMP","RANGE"],"Jhin": ["AD","CRIT","1CC","RANGE"],"Jinx": ["AD","CRIT","1CC","RANGE"],
-  "K'Sante": ["2CC","BUMP","SHIELD","MELEE"],"Kai'Sa": ["AD","CRIT","AP","SHIELD","RANGE"],"Kalista": ["AD","BUMP","RANGE"],
-  "Karma": ["AP","1CC","SHIELD","RANGE"],"Kassadin": ["AP","BURST","SHIELD","MELEE"],"Katarina": ["AP","BURST","MELEE"],"Kennen": ["AP","5CC","RANGE"],
-  "Kha'Zix": ["AD","BURST","MELEE"],"Kindred": ["AD","CRIT","MELEE"],"Kog'Maw": ["AD","AP","RANGE"],
-  "LeBlanc": ["AP","BURST","1CC","RANGE"],"Lee Sin": ["AD","HEAL","BUMP","MELEE"],"Leona": ["3CC","MELEE"],
-  "Lillia": ["AP","BURN","1CC","MELEE"],"Lissandra": ["AP","2CC","MELEE"],"Lucian": ["AD","CRIT","RANGE"],
-  "Lulu": ["1CC","SHIELD","BUMP","RANGE"],"Lux": ["AP","BURST","SHIELD","1CC","RANGE"],"Malphite": ["AP","BUMP","SHIELD","MELEE"],
-  "Malzahar": ["AP","BURN","1CC","RANGE"],"Maokai": ["2CC","AP","HEAL","BUMP","MELEE"],"Master Yi": ["AD","HEAL","MELEE"],
-  "Mel": ["AP","BURST","SHIELD","1CC","RANGE"],"Miss Fortune": ["AD","CRIT","RANGE"],
-  "Mordekaiser": ["AP","BURN","HEAL","SHIELD","MELEE"],"Morgana": ["AP","2CC","BURN","SHIELD","RANGE"],
-  "Naafiri": ["AD","BURST","MELEE"],"Nami": ["1CC","HEAL","BUMP","RANGE"],"Nasus": ["AD","HEAL","MELEE"],
-  "Nautilus": ["1CC","BUMP","SHIELD","MELEE"],"Nidalee": ["AP","BURST","HEAL","MELEE"],"Nilah": ["AD","CRIT","BUMP","MELEE"],
-  "Nocturne": ["AD","BURST","1CC","MELEE"],"Nunu": ["1CC","BUMP","HEAL","AP","MELEE"],"Olaf": ["AD","HEAL","MELEE"],
-  "Orianna": ["AP","BUMP","SHIELD","RANGE"],"Ornn": ["2CC","BUMP","AP","MELEE"],"Pantheon": ["AD","BURST","1CC","MELEE"],
-  "Poppy": ["1CC","AD","BUMP","MELEE"],"Pyke": ["AD","1CC","BURST","EXECUTE","BUMP","MELEE"],"Qiyana": ["AD","BURST","2CC","MELEE"],
-  "Quinn": ["AD","CRIT","RANGE"],"Rakan": ["1CC","SHIELD","BUMP","MELEE"],"Rammus": ["3CC","MELEE"],
-  "Rek'Sai": ["AD","BUMP","MELEE"],"Renata Glasc": ["2CC","SHIELD","RANGE"],"Renekton": ["AD","HEAL","1CC","MELEE"],
-  "Rengar": ["AD","BURST","MELEE"],"Rumble": ["AP","BURN","SHIELD","MELEE"],"Ryze": ["AP","1CC","RANGE"],
-  "Samira": ["AD","CRIT","RANGE"],"Sejuani": ["3CC","MELEE"],"Senna": ["AD","SHIELD","CRIT","RANGE"],
-  "Seraphine": ["AP","2CC","SHIELD","RANGE"],"Sett": ["AD","SHIELD","1CC","MELEE"],"Shaco": ["AD","BURST","3CC","MELEE"],
-  "Shen": ["AD","SHIELD","1CC","MELEE"],"Shyvana": ["AP","BURN","SHIELD","1CC","AD","MELEE"],
-  "Singed": ["AP","BURN","BUMP","1CC","MELEE"],"Sion": ["BUMP","SHIELD","MELEE"],"Sivir": ["AD","CRIT","RANGE"],
-  "Skarner": ["3CC","SHIELD","MELEE"],"Smolder": ["AD","CRIT","BURN","EXECUTE","RANGE"],
-  "Sona": ["1CC","SHIELD","HEAL","RANGE"],"Soraka": ["HEAL","1CC","RANGE"],"Swain": ["AP","BURN","HEAL","1CC","RANGE"],
-  "Syndra": ["AP","BURST","EXECUTE","BUMP","1CC","RANGE"],"Tahm Kench": ["2CC","HEAL","AP","SHIELD","BUMP","MELEE"],
-  "Taliyah": ["AP","1CC","RANGE"],"Talon": ["AD","BURST","MELEE"],"Teemo": ["AP","BURN","RANGE"],
-  "Thresh": ["2CC","SHIELD","RANGE"],"Tristana": ["AD","CRIT","BUMP","RANGE"],"Trundle": ["AD","HEAL","BUMP","MELEE"],
-  "Tryndamere": ["AD","CRIT","HEAL","MELEE"],"Twisted Fate": ["AP","1CC","RANGE"],"Twitch": ["AD","CRIT","RANGE"],
-  "Udyr": ["AP","AD","1CC","HEAL","SHIELD","MELEE"],"Varus": ["AD","AP","BURST","1CC","RANGE"],
-  "Vayne": ["AD","1CC","RANGE"],"Veigar": ["AP","BURST","EXECUTE","1CC","RANGE"],"Vel'Koz": ["AP","BURST","BUMP","RANGE"],
-  "Vi": ["AD","BUMP","SHIELD","MELEE"],"Viego": ["AD","HEAL","1CC","MELEE"],"Viktor": ["AP","BURN","SHIELD","1CC","RANGE"],
-  "Vladimir": ["AP","BURN","HEAL","RANGE"],"Volibear": ["1CC","AP","HEAL","SHIELD","MELEE"],
-  "Warwick": ["AD","HEAL","1CC","MELEE"],"Wukong": ["AD","BUMP","MELEE"],"Xayah": ["AD","CRIT","1CC","RANGE"],
-  "Xerath": ["AP","BURST","1CC","RANGE"],"Xin Zhao": ["AD","HEAL","BUMP","MELEE"],"Yasuo": ["AD","CRIT","SHIELD","BUMP","MELEE"],
-  "Yone": ["AD","CRIT","SHIELD","BUMP","MELEE"],"Yorick": ["AD","HEAL","MELEE"],"Yunara": ["AD","AP","CRIT","RANGE"],
-  "Yuumi": ["HEAL","SHIELD","RANGE"],"Zaahen": ["AD","HEAL","1CC","MELEE"],"Zac": ["AP","HEAL","BUMP","2CC","MELEE"],
-  "Zed": ["AD","BURST","EXECUTE","MELEE"],"Zeri": ["AD","CRIT","RANGE"],"Ziggs": ["AP","BURST","BUMP","RANGE"],
-  "Zilean": ["AP","1CC","RANGE"],"Zoe": ["AP","BURST","1CC","RANGE"],"Zyra": ["AP","BURN","1CC","BUMP","RANGE"]
+  "Ahri":["AP","BURST","1CC","RANGE"],
+  "Aatrox":["AD","HEAL","BUMP","MELEE"],"Akali":["AP","BURST","MELEE"],"Alistar":["BUMP","2CC","MELEE","TANK"],
+  "Amumu":["AP","3CC","BURN","MELEE"],"Ambessa":["AD","BURST","SHIELD","BUMP","MELEE"],
+  "Anivia":["AP","BURN","1CC","RANGE"],"Annie":["AP","BURST","1CC","SHIELD","RANGE"],
+  "Aphelios":["AD","CRIT","RANGE"],"Ashe":["AD","CRIT","1CC","RANGE"],
+  "Aurelion Sol":["AP","BURN","BUMP","RANGE"],"Aurora":["AP","BURST","RANGE"],"Azir":["AP","BUMP","RANGE"],
+  "Bard":["2CC","AP","HEAL","RANGE"],"Bel'Veth":["AD","BUMP","MELEE"],"Blitzcrank":["SHIELD","BUMP","1CC","MELEE"],
+  "Brand":["AP","BURN","BURST","1CC","RANGE"],"Braum":["1CC","AP","BUMP","MELEE"],"Briar":["AD","2CC","HEAL","MELEE"],
+  "Caitlyn":["AD","CRIT","1CC","RANGE"],"Camille":["AD","SHIELD","BUMP","MELEE"],
+  "Cassiopeia":["AP","BURN","1CC","HEAL","RANGE"],"Cho'Gath":["AP","BUMP","EXECUTE","1CC","MELEE","TANK"],
+  "Corki":["AD","CRIT","RANGE"],"Darius":["AD","HEAL","EXECUTE","BUMP","MELEE"],
+  "Diana":["AP","BURST","BUMP","SHIELD","MELEE"],"Dr. Mundo":["AD","HEAL","MELEE","TANK"],"Draven":["AD","CRIT","BUMP","RANGE"],
+  "Ekko":["AP","BURST","SHIELD","1CC","MELEE"],"Elise":["AP","BURST","1CC","MELEE"],
+  "Evelynn":["AP","BURST","1CC","MELEE"],"Ezreal":["AD","RANGE"],
+  "Fiddlesticks":["AP","BURN","3CC","HEAL","RANGE"],"Fiora":["AD","HEAL","1CC","MELEE"],"Fizz":["AP","BURST","BUMP","MELEE"],
+  "Galio":["AP","1CC","SHIELD","BUMP","MELEE"],"Garen":["AD","EXECUTE","MELEE"],"Gnar":["AD","2CC","MELEE"],
+  "Gragas":["AP","1CC","BUMP","MELEE"],"Graves":["AD","CRIT","RANGE"],"Gwen":["AP","BURST","HEAL","MELEE"],
+  "Hecarim":["AD","1CC","HEAL","MELEE"],"Heimerdinger":["AP","BURN","1CC","RANGE"],
+  "Hwei":["AP","BURN","BURST","1CC","SHIELD","RANGE"],"Illaoi":["AD","HEAL","MELEE"],"Irelia":["AD","HEAL","1CC","MELEE"],
+  "Ivern":["1CC","SHIELD","BUMP","RANGE"],"Janna":["AP","BUMP","HEAL","SHIELD","RANGE"],
+  "Jarvan IV":["AD","BUMP","SHIELD","MELEE"],"Jax":["AP","1CC","AD","MELEE"],"Jayce":["AD","BUMP","MELEE"],
+  "Jhin":["AD","CRIT","1CC","RANGE"],"Jinx":["AD","CRIT","1CC","RANGE"],
+  "K'Sante":["2CC","BUMP","SHIELD","MELEE","TANK"],"Kai'Sa":["AD","CRIT","AP","SHIELD","RANGE"],"Kalista":["AD","BUMP","RANGE"],
+  "Karma":["AP","1CC","SHIELD","RANGE"],"Kassadin":["AP","BURST","SHIELD","MELEE"],"Katarina":["AP","BURST","MELEE"],
+  "Kennen":["AP","5CC","RANGE"],"Kha'Zix":["AD","BURST","MELEE"],"Kindred":["AD","CRIT","RANGE"],"Kog'Maw":["AD","AP","RANGE"],
+  "LeBlanc":["AP","BURST","1CC","RANGE"],"Lee Sin":["AD","HEAL","BUMP","MELEE"],"Leona":["3CC","MELEE"],
+  "Lillia":["AP","BURN","1CC","MELEE"],"Lissandra":["AP","2CC","RANGE"],"Lucian":["AD","CRIT","RANGE"],
+  "Lulu":["1CC","SHIELD","BUMP","RANGE"],"Lux":["AP","BURST","SHIELD","1CC","RANGE"],
+  "Malphite":["AP","BUMP","SHIELD","MELEE","TANK"],"Malzahar":["AP","BURN","1CC","RANGE"],
+  "Maokai":["2CC","AP","HEAL","BUMP","MELEE","TANK"],"Master Yi":["AD","HEAL","MELEE"],
+  "Mel":["AP","BURST","SHIELD","1CC","RANGE"],"Miss Fortune":["AD","CRIT","RANGE"],
+  "Mordekaiser":["AP","BURN","HEAL","SHIELD","MELEE"],"Morgana":["AP","2CC","BURN","SHIELD","RANGE"],
+  "Naafiri":["AD","BURST","MELEE"],"Nami":["1CC","HEAL","BUMP","RANGE"],"Nasus":["AD","HEAL","MELEE"],
+  "Nautilus":["1CC","BUMP","SHIELD","MELEE"],"Nidalee":["AP","BURST","HEAL","RANGE"],
+  "Nilah":["AD","CRIT","BUMP","HEAL","MELEE"],"Nocturne":["AD","BURST","1CC","MELEE"],
+  "Nunu":["1CC","BUMP","HEAL","AP","MELEE"],"Olaf":["AD","HEAL","MELEE"],
+  "Orianna":["AP","BUMP","SHIELD","RANGE"],"Ornn":["2CC","BUMP","AP","MELEE","TANK"],
+  "Pantheon":["AD","BURST","1CC","MELEE"],"Poppy":["1CC","AD","BUMP","MELEE"],
+  "Pyke":["AD","1CC","BURST","EXECUTE","BUMP","MELEE"],"Qiyana":["AD","BURST","2CC","MELEE"],
+  "Quinn":["AD","CRIT","RANGE"],"Rakan":["1CC","SHIELD","BUMP","MELEE"],"Rammus":["3CC","MELEE"],
+  "Rek'Sai":["AD","BUMP","MELEE"],"Renata Glasc":["2CC","SHIELD","RANGE"],"Renekton":["AD","HEAL","1CC","MELEE"],
+  "Rengar":["AD","BURST","MELEE"],"Rumble":["AP","BURN","SHIELD","MELEE"],"Ryze":["AP","1CC","RANGE"],
+  "Samira":["AD","CRIT","MELEE"],"Sejuani":["3CC","MELEE","TANK"],"Senna":["AD","SHIELD","CRIT","RANGE"],
+  "Seraphine":["AP","2CC","SHIELD","RANGE"],"Sett":["AD","SHIELD","1CC","MELEE"],
+  "Shaco":["AD","BURST","3CC","AP","MELEE"],"Shen":["AD","SHIELD","1CC","MELEE"],
+  "Shyvana":["AP","BURN","SHIELD","1CC","AD","MELEE"],"Singed":["AP","BURN","BUMP","1CC","MELEE"],
+  "Sion":["BUMP","SHIELD","MELEE"],"Sivir":["AD","CRIT","RANGE"],"Skarner":["3CC","SHIELD","MELEE","TANK"],
+  "Smolder":["AD","CRIT","BURN","EXECUTE","RANGE"],"Sona":["1CC","SHIELD","HEAL","RANGE"],
+  "Soraka":["HEAL","1CC","RANGE"],"Swain":["AP","BURN","HEAL","1CC","RANGE"],
+  "Syndra":["AP","BURST","EXECUTE","BUMP","1CC","RANGE"],"Tahm Kench":["2CC","HEAL","AP","SHIELD","BUMP","MELEE"],
+  "Taliyah":["AP","1CC","RANGE"],"Talon":["AD","BURST","MELEE"],"Teemo":["AP","BURN","RANGE"],
+  "Thresh":["2CC","SHIELD","MELEE"],"Tristana":["AD","CRIT","BUMP","RANGE"],"Trundle":["AD","HEAL","BUMP","MELEE"],
+  "Tryndamere":["AD","CRIT","HEAL","MELEE"],"Twisted Fate":["AP","1CC","RANGE"],"Twitch":["AD","CRIT","RANGE"],
+  "Udyr":["AP","AD","1CC","HEAL","SHIELD","MELEE"],"Varus":["AD","AP","BURST","1CC","RANGE"],
+  "Vayne":["AD","1CC","RANGE"],"Veigar":["AP","BURST","EXECUTE","1CC","RANGE"],"Vel'Koz":["AP","BURST","BUMP","RANGE"],
+  "Vi":["AD","BUMP","SHIELD","MELEE"],"Viego":["AD","HEAL","1CC","MELEE"],"Viktor":["AP","BURN","SHIELD","1CC","RANGE"],
+  "Vladimir":["AP","BURN","HEAL","RANGE"],"Volibear":["1CC","AP","HEAL","SHIELD","MELEE"],
+  "Warwick":["AD","HEAL","1CC","MELEE"],"Wukong":["AD","BUMP","MELEE"],"Xayah":["AD","CRIT","1CC","RANGE"],
+  "Xerath":["AP","BURST","1CC","RANGE"],"Xin Zhao":["AD","HEAL","BUMP","MELEE"],
+  "Yasuo":["AD","CRIT","SHIELD","BUMP","MELEE"],"Yone":["AD","CRIT","SHIELD","BUMP","MELEE"],
+  "Yorick":["AD","HEAL","MELEE"],"Yunara":["AD","AP","CRIT","RANGE"],"Yuumi":["HEAL","SHIELD","RANGE"],
+  "Zaahen":["AD","HEAL","1CC","MELEE"],"Zac":["AP","HEAL","BUMP","2CC","MELEE","TANK"],
+  "Zed":["AD","BURST","EXECUTE","MELEE"],"Zeri":["AD","CRIT","RANGE"],"Ziggs":["AP","BURST","BUMP","RANGE"],
+  "Zilean":["AP","1CC","RANGE"],"Zoe":["AP","BURST","1CC","RANGE"],"Zyra":["AP","BURN","1CC","BUMP","RANGE"]
 };
 
 function getCCValue(tags) {
@@ -513,20 +529,17 @@ function getCCValue(tags) {
 }
 
 const RUNE_PAGES = {
-  page1:{label:"Standard",img:"rune-page1.png"},
-  page2:{label:"Cut Down",img:"rune-page2.png"},
-  page3:{label:"Tanks",img:"rune-page3.png"},
-  page4:{label:"Resolution",img:"rune-page4.png"},
-  page5:{label:"Rumble",img:"rune-page5.png"},
-  page6:{label:"Olaf",img:"rune-page6.png"},
-  page7:{label:"Heimerdinger",img:"rune-page7.png"},
-  page8:{label:"Yorick",img:"rune-page8.png"},
+  page1:{label:"Standard",img:"rune-page1.png"},page2:{label:"Cut Down",img:"rune-page2.png"},
+  page3:{label:"Tanks",img:"rune-page3.png"},page4:{label:"Resolution",img:"rune-page4.png"},
+  page5:{label:"Rumble",img:"rune-page5.png"},page6:{label:"Olaf",img:"rune-page6.png"},
+  page7:{label:"Heimerdinger",img:"rune-page7.png"},page8:{label:"Yorick",img:"rune-page8.png"},
 };
 const CHAMP_RUNE_MAP = {
   "aatrox":"page2","darius":"page2","aurora":"page2","irelia":"page2","varus":"page2","vayne":"page2","vladimir":"page2",
   "ornn":"page3","malphite":"page3","dr. mundo":"page3","cho'gath":"page3","zac":"page3","tahm kench":"page3","k'sante":"page3","maokai":"page3",
   "renekton":"page4","shen":"page4","rumble":"page5","olaf":"page6","heimerdinger":"page7","yorick":"page8"
 };
+
 const BRAMBLE_CHAMPS  = ["irelia","zac","fiora","warwick","renekton","wukong"];
 const BOOTS_FIRST     = ["olaf"];
 const MERC_FIRST      = ["kennen"];
@@ -548,32 +561,31 @@ function getTags(name) {
 }
 
 function analyzeComp(champs) {
-  var ad=0,ap=0,melee=0,ccTotal=0,ccPhysical=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0;
-  var topTags = champs[0] ? getTags(champs[0]) : [];
+  var ad=0,ap=0,ccTotal=0,ccPhysical=0,crit=0,burst=0,burn=0,shield=0,heal=0,execute=0,melee=0,bump=0,tank=0;
   champs.filter(Boolean).forEach(function(c) {
     var t = getTags(c);
     if (t.includes("AD"))      ad++;
     if (t.includes("AP"))      ap++;
-    if (t.includes("MELEE"))   melee++;
     if (t.includes("CRIT"))    crit++;
     if (t.includes("BURST"))   burst++;
     if (t.includes("BURN"))    burn++;
     if (t.includes("SHIELD"))  shield++;
     if (t.includes("HEAL"))    heal++;
     if (t.includes("EXECUTE")) execute++;
+    if (t.includes("MELEE"))   melee++;
+    if (t.includes("BUMP"))    bump++;
+    if (t.includes("TANK"))    tank++;
     var cc = getCCValue(t);
     ccTotal += cc;
     var isPureAP = t.includes("AP") && !t.includes("AD");
     if (!isPureAP) ccPhysical += cc;
   });
-  return { ad,ap,melee,ccTotal,ccPhysical,crit,burst,burn,shield,heal,execute,_topTags:topTags };
+  return { ad,ap,ccTotal,ccPhysical,crit,burst,burn,shield,heal,execute,melee,bump,tank };
 }
 
 function updateChampPreview(role) {
-  var val = document.getElementById(role).value.trim();
-  var prev = document.getElementById('prev-' + role);
-  var img  = document.getElementById('img-' + role);
-  var input = document.getElementById(role);
+  var val=document.getElementById(role).value.trim(), prev=document.getElementById('prev-'+role),
+      img=document.getElementById('img-'+role), input=document.getElementById(role);
   var known = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === val.toLowerCase(); });
   if (known) {
     img.src = champImg(known);
@@ -586,8 +598,7 @@ function onInput() {
   ['top','jg','mid','adc','sup'].forEach(updateChampPreview);
   var champs = getChamps();
   if (!champs.some(Boolean)) { document.getElementById('comp-tags').innerHTML = '<span class="tag-empty">Enter enemy draft...</span>'; return; }
-  var a = analyzeComp(champs);
-  var tags = [];
+  var a = analyzeComp(champs), tags = [];
   if (a.ad > 0)       tags.push('<span class="tag tag-ad">' + a.ad + ' AD</span>');
   if (a.ap > 0)       tags.push('<span class="tag tag-ap">' + a.ap + ' AP</span>');
   if (a.ccTotal >= 2) tags.push('<span class="tag tag-cc">CC ' + a.ccTotal + '</span>');
@@ -597,189 +608,131 @@ function onInput() {
   if (a.shield >= 2)  tags.push('<span class="tag tag-shield">' + a.shield + ' Shields</span>');
   if (a.heal >= 2)    tags.push('<span class="tag tag-heal">' + a.heal + ' Heals</span>');
   if (a.execute >= 1) tags.push('<span class="tag tag-execute">Execute</span>');
+  if (a.melee >= 3)   tags.push('<span class="tag tag-ad">' + a.melee + ' Melee</span>');
   document.getElementById('comp-tags').innerHTML = tags.length ? tags.join('') : '<span class="tag-empty">No particular profile detected</span>';
 }
 
-function getBoots(a) {
-  // Crit absolute priority
-  if (a.crit >= 3)                  return { name:"Plated Steelcaps",  note: a.crit + " crit enemies -- armor priority" };
-  // Overwhelming CC (4+ from ANY source) → Mercs mandatory
-  if (a.ccTotal >= 4)               return { name:"Mercury's Treads",  note: a.ccTotal + " CC total -- Tenacity mandatory" };
-  // 3+ AD + physical CC (4+) → conflict
-  if (a.ad >= 3 && a.ccPhysical >= 4) return { conflict:true, primary:{name:"Plated Steelcaps",note:"3+ AD -- armor priority"}, secondary:{name:"Mercury's Treads",note:a.ccTotal+" CC -- consider Tenacity"} };
-  // 3+ AD or 2+ crit → Steelcaps
-  if (a.ad >= 3 || a.crit >= 2)    return { name:"Plated Steelcaps",  note: a.ad >= 3 ? "3+ AD -- armor priority" : a.crit + " crit enemies" };
-  // Physical CC 3+ (non-AP sources) → Mercs
-  if (a.ccPhysical >= 3)            return { name:"Mercury's Treads",  note: a.ccPhysical + " CC (physical) -- Tenacity" };
-  // Mixed damage → Gluttonous Greaves
-  if (a.ap >= 2 && a.ad >= 2)       return { name:"Gluttonous Greaves", note: "Mixed damage comp -- omnivamp sustain" };
-  // Default
-  return                                   { name:"Gluttonous Greaves", note: "Standard -- omnivamp sustain" };
+function getBoots(n, a) {
+  if (BOOTS_FIRST.includes(n))     return { name:"Sorcerer's Shoes",   note:"Rush vs "+n+" -- mobility" };
+  if (MERC_FIRST.includes(n))      return { name:"Mercury's Treads",   note:"Rush vs "+n+" -- Tenacity" };
+  if (STEELCAPS_FIRST.includes(n)) return { name:"Plated Steelcaps",   note:"Rush vs "+n+" -- armor" };
+  if (ABATTEUR_CHAMPS.includes(n)) return { name:"Gluttonous Greaves", note:"vs "+n+" -- omnivamp sustain" };
+  if (a.ccTotal >= 6)              return { name:"Mercury's Treads",   note:a.ccTotal+" CC total -- Tenacity mandatory" };
+  if (a.ad >= 3 || a.crit >= 2)   return { name:"Plated Steelcaps",   note:a.ad >= 3 ? "3+ AD -- armor priority" : a.crit+" crit enemies" };
+  if (a.ccPhysical >= 3)           return { name:"Mercury's Treads",   note:a.ccPhysical+" CC (physical) -- Tenacity" };
+  if (a.ap >= 2 && a.ad >= 2)      return { name:"Gluttonous Greaves", note:"Mixed damage comp -- omnivamp sustain" };
+  return                                  { name:"Gluttonous Greaves", note:"Standard -- omnivamp sustain" };
 }
 
 function getSituItems(a) {
   var situ = [];
-  // Thornmail: only if specified in matchup (lane vs heavy healer like Fiora/Warwick)
-  // Chempunk: only if 3+ healers in comp
-  if (a.heal >= 3) {
-    situ.push({ tag:"heal", tagLabel:a.heal+" Heals", type:"double", items:[
-      { name:"Thornmail", note:"Build only if your matchup specifically requires it (Fiora, Warwick lane)" },
-      { name:"Chempunk Chainsword", note:"3+ heal sources -- upgrade worth it here; otherwise sit on 800g component" }
-    ]});
-  } else if (a.heal >= 2) {
-    situ.push({ tag:"heal", tagLabel:a.heal+" Heals", type:"single", items:[
-      { name:"Bramble Vest", note:"Sit on 800g component only -- only upgrade to Thornmail if matchup specifically requires it" }
-    ]});
-  }
+  if (a.shield >= 2) situ.push({ tag:"shield", tagLabel:a.shield+" Shields", type:"single", items:[{ name:"Serpent's Fang", note:"Reduces enemy shields by 50% -- replace a defensive item" }] });
+  if (a.heal >= 2)   situ.push({ tag:"heal",   tagLabel:a.heal+" Heals",     type:"double", items:[{ name:"Thornmail", note:"AD/tank comp -- Grievous Wounds on auto-attacks" },{ name:"Chempunk Chainsword", note:"AP/burst comp -- Grievous Wounds active + passive" }] });
   return situ;
 }
 
 function buildItems(top, a) {
-  var n = (top||"").toLowerCase();
-  var bootsFirst   = BOOTS_FIRST.includes(n);
-  var mercFirst    = MERC_FIRST.includes(n);
-  var steelcapsFirst = STEELCAPS_FIRST.includes(n);
-  var bramble      = BRAMBLE_CHAMPS.includes(n);
-  var shieldStart  = SHIELD_START.includes(n);
-  var boots = getBoots(a), warnings = [], items = [];
+  var n           = (top || "").toLowerCase();
+  var bootsObj    = getBoots(n, a);
+  var bramble     = BRAMBLE_CHAMPS.includes(n);
+  var shieldStart = SHIELD_START.includes(n);
+  var warnings    = [], items = [];
+  var topTags     = getTags(top);
+  var topIsAD     = topTags.includes("AD") && !topTags.includes("AP");
+  var topIsAP     = topTags.includes("AP") && !topTags.includes("AD");
+  var fonCondition = (a.burn >= 2) || (a.bump >= 1 && a.ccTotal >= 6);
+  var thornmail5   = bramble;
 
-  // ── Start item ────────────────────────────────────────────
-  warnings.push("🛡 Start: " + (shieldStart
-    ? "Doran's Shield -- vs " + top + " to sustain poke"
-    : "Doran's Blade -- Standard start"));
-
-  // ── Lane-specific warnings ────────────────────────────────
-  if (bootsFirst)      warnings.push("⚡ vs Olaf: buy Gluttonous Greaves FIRST before Black Cleaver");
-  if (mercFirst)       warnings.push("👟 vs " + top + ": rush Mercury's Treads before Black Cleaver");
-  if (steelcapsFirst)  warnings.push("🥾 vs " + top + ": rush Plated Steelcaps before Black Cleaver");
-  if (bramble)         warnings.push("🌿 vs " + top + ": rush Bramble Vest before Black Cleaver -- don't upgrade it");
-
-  // ══════════════════════════════════════════════════════════
-  // CORE: Black Cleaver + Sterak's ALWAYS items 1-2
-  // ══════════════════════════════════════════════════════════
-  if (bootsFirst) {
-    items.push({slot:"Boots", name:"Gluttonous Greaves", note:"Rush vs Olaf -- mobility to escape his R"});
-    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
-  } else if (mercFirst) {
-    items.push({slot:"Boots", name:"Mercury's Treads", note:"Rush vs " + top + " -- Tenacity priority"});
-    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
-  } else if (steelcapsFirst) {
-    items.push({slot:"Boots", name:"Plated Steelcaps", note:"Rush vs " + top + " -- armor priority"});
-    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
-  } else {
-    items.push({slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health"});
-    if (boots.conflict)
-      items.push({slot:"Boots", name:boots.primary.name, note:boots.primary.note, conflict:boots.secondary});
+  // ══════════════════════════════════════════
+  // CAS SPÉCIAL : TRUNDLE
+  // ══════════════════════════════════════════
+  if (n === "trundle") {
+    warnings.push("🛡 Start: Doran's Blade -- Standard start");
+    warnings.push("🧊 vs Trundle: he steals your resistances -- prioritize health/damage over pure tank");
+    items.push({ slot:"Boots",  name:bootsObj.name,           note:bootsObj.note });
+    items.push({ slot:"Item 1", name:"Black Cleaver",          note:"Core Urgot -- armor reduction + health" });
+    items.push({ slot:"Item 2", name:"Sterak's Gage",          note:"Shield + health -- he can't steal shield value" });
+    items.push({ slot:"Item 3", name:"Overlord's Bloodmail",   note:"Damage to health conversion -- not stealable by Trundle" });
+    items.push({ slot:"Item 4", name:"Chempunk Chainsword",    note:"Grievous Wounds -- cuts his passive healing" });
+    if (a.ad >= 3)
+      items.push({ slot:"Item 5", name:"Deadman's Plate",       note:"3+ AD -- armor + engage" });
+    else if (a.ap >= 3)
+      items.push({ slot:"Item 5", name:"Rookern",               note:"3+ AP -- shield against AP damage" });
     else
-      items.push({slot:"Boots", name:boots.name, note:boots.note});
+      items.push({ slot:"Item 5", name:"Jak'Sho, The Protean",  note:"Mixed comp -- omnidirectional resistances" });
+    return { items, warnings };
   }
-  items.push({slot:"Item 2", name:"Sterak's Gage", note:"Core Urgot -- only 80+ AD tanky item not nerfed for ranged; shields amp with HP"});
 
-  // ══════════════════════════════════════════════════════════
-  // BIG FOUR for slots 3-4: Deadman's / Randuin's / Rookern / Force of Nature
-  // Rule: pick 2 of the Big Four based on damage type
-  // ══════════════════════════════════════════════════════════
-  var has = function(name) { return items.some(function(i) { return i.name === name; }); };
+  // ── Warnings (logique générale) ──
+  warnings.push("🛡 Start: " + (shieldStart ? "Doran's Shield -- vs "+top+" sustain against poke" : "Doran's Blade -- Standard start"));
+  if (BOOTS_FIRST.includes(n))      warnings.push("⚡ vs "+top+": rush Sorcerer's Shoes before Black Cleaver");
+  if (MERC_FIRST.includes(n))       warnings.push("👟 vs "+top+": rush Mercury's Treads before Black Cleaver");
+  if (STEELCAPS_FIRST.includes(n))  warnings.push("🥾 vs "+top+": rush Plated Steelcaps before Black Cleaver");
+  if (ABATTEUR_CHAMPS.includes(n))  warnings.push("⚔ vs "+top+": Cull / Gluttonous Greaves possible before Black Cleaver");
+  if (bramble)                       warnings.push("🌿 vs "+top+": rush Bramble Vest before Black Cleaver");
 
-  // Determine armor item (slot 3) and MR item (slot 4)
-  // Heavy AD (3+) → Deadman's default, Randuin if 2+ crit
-  // Heavy AP (3+) → Rookern default, Force of Nature if 2+ burn
-  // Equal → itemize for laner (top lane opponent damage type)
-  var topTags = a._topTags || [];
-  var topIsAP = topTags.includes("AP") && !topTags.includes("AD");
-  var topIsAD = topTags.includes("AD") && !topTags.includes("AP");
+  items.push({ slot:"Boots",  name:bootsObj.name,  note:bootsObj.note });
+  items.push({ slot:"Item 1", name:"Black Cleaver", note:"Core Urgot -- armor reduction + health" });
 
-  var heavyAD = a.ad >= 3;
-  var heavyAP = a.ap >= 3;
-  var equalDmg = !heavyAD && !heavyAP;
-
-  // Slot 3
-  if (heavyAD) {
-    if (a.crit >= 2)
-      items.push({slot:"Item 3", name:"Randuin's Omen", note:a.crit + " crit -- reduces crit damage taken; better vs fed ADC"});
-    else
-      items.push({slot:"Item 3", name:"Deadman's Plate", note:"3+ AD -- best armor item; out-of-combat MS to engage"});
-  } else if (heavyAP) {
-    if (a.burn >= 2)
-      items.push({slot:"Item 3", name:"Force of Nature", note:"2+ burn AP -- needs sustained spell spam to stack; great vs " + a.burn + " burn"});
-    else
-      items.push({slot:"Item 3", name:"Rookern", note:"3+ AP -- immediate shield impact; better than FoN vs burst AP"});
-  } else {
-    // Equal: itemize for laner
-    if (topIsAP) {
-      if (a.burn >= 2)
-        items.push({slot:"Item 3", name:"Force of Nature", note:"Lane vs AP + burn -- stack with sustained poke"});
-      else
-        items.push({slot:"Item 3", name:"Rookern", note:"Lane vs AP -- immediate shield; Deadman's as boots alternative if equal + Steelcaps"});
+  // ══════════════════════════════════════════
+  // CASE A : 3+ AD
+  // ══════════════════════════════════════════
+  if (a.ad >= 3) {
+    if (topIsAD) {
+      items.push({ slot:"Item 2", name:"Deadman's Plate", note:"AD toplaner -- armor + engage (swap 2/3 to taste)" });
+      items.push({ slot:"Item 3", name:"Sterak's Gage",   note:"Shield + resistances (swap 2/3 to taste)" });
+      if (fonCondition) items.push({ slot:"Item 4", name:"Force of Nature",     note:"2+ burn or bump + CC≥6 -- mobility & MR" });
+      else              items.push({ slot:"Item 4", name:"Rookern",              note:"Shield against AP damage" });
+      if (thornmail5)        items.push({ slot:"Item 5", name:"Thornmail",            note:"Grievous Wounds -- anti-heal (bramble matchup)" });
+      else if (a.crit >= 2)  items.push({ slot:"Item 5", name:"Randuin's Omen",       note:"2+ crit enemies -- reduces crit damage taken" });
+      else if (a.melee >= 3) items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"3+ melee enemies -- damage to health conversion" });
+      else                   items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
     } else {
-      if (a.crit >= 2)
-        items.push({slot:"Item 3", name:"Randuin's Omen", note:"Crit threat + AD laner -- reduces crit damage"});
-      else
-        items.push({slot:"Item 3", name:"Deadman's Plate", note:"AD laner -- default armor; great movement speed; go Randuin if 2+ crit"});
+      items.push({ slot:"Item 2", name:"Sterak's Gage", note:"Shield + resistances" });
+      if (fonCondition) items.push({ slot:"Item 3", name:"Force of Nature", note:"2+ burn or bump + CC≥6 -- mobility & MR" });
+      else              items.push({ slot:"Item 3", name:"Rookern",          note:"Shield against AP damage" });
+      if (a.ad >= 3 && a.crit >= 2) items.push({ slot:"Item 4", name:"Randuin's Omen",      note:"3+ AD + 2+ crit -- reduces crit damage taken" });
+      else if (a.ad >= 3)           items.push({ slot:"Item 4", name:"Deadman's Plate",      note:"3+ AD -- armor + engage" });
+      else                          items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
+      if (thornmail5)        items.push({ slot:"Item 5", name:"Thornmail",            note:"Grievous Wounds -- anti-heal (bramble matchup)" });
+      else if (a.melee >= 3) items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"3+ melee enemies -- damage to health conversion" });
+      else                   items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
     }
-  }
 
-  // Slot 4: second of the Big Four (cover the other damage type)
-  if (heavyAD) {
-    if (a.burn >= 2)
-      items.push({slot:"Item 4", name:"Force of Nature", note:"AP burn coverage alongside AD armor"});
-    else if (a.ap >= 2)
-      items.push({slot:"Item 4", name:"Rookern", note:"AP coverage alongside anti-AD"});
-    else
-      items.push({slot:"Item 4", name:"Deadman's Plate", note:has("Deadman's Plate") ? "" : "Second armor layer -- high AD comp"});
-  } else if (heavyAP) {
-    if (a.crit >= 2)
-      items.push({slot:"Item 4", name:"Randuin's Omen", note:"Crit champions + AP comp -- crit reduction"});
-    else if (a.ad >= 2)
-      items.push({slot:"Item 4", name:"Deadman's Plate", note:"AD coverage alongside anti-AP"});
-    else
-      items.push({slot:"Item 4", name:"Deadman's Plate", note:"Armor layer + movement speed"});
-  } else {
-    // Equal: cover the other type vs laner
-    if (topIsAP) {
-      if (a.crit >= 2)
-        items.push({slot:"Item 4", name:"Randuin's Omen", note:"Crit ADC coverage -- use Steelcaps as alt boots"});
-      else
-        items.push({slot:"Item 4", name:"Deadman's Plate", note:"AD coverage -- equal comp, itemize armor for AD threats"});
+  // ══════════════════════════════════════════
+  // CASE B : 3+ AP
+  // ══════════════════════════════════════════
+  } else if (a.ap >= 3) {
+    items.push({ slot:"Item 2", name:"Sterak's Gage", note:"Shield + resistances" });
+    if (topIsAD && a.crit >= 2) items.push({ slot:"Item 3", name:"Randuin's Omen",  note:"AD toplaner + 2+ crit -- reduces crit damage taken" });
+    else if (topIsAD)           items.push({ slot:"Item 3", name:"Deadman's Plate",  note:"AD toplaner -- armor + engage" });
+    else                        items.push({ slot:"Item 3", name:"Rookern",           note:"AP toplaner -- shield against AP damage" });
+    if (thornmail5) {
+      if (a.melee >= 3) items.push({ slot:"Item 4", name:"Overlord's Bloodmail", note:"3+ melee -- damage to health conversion" });
+      else              items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
     } else {
-      if (a.burn >= 2)
-        items.push({slot:"Item 4", name:"Force of Nature", note:"Burn AP coverage -- sustain spell pressure"});
-      else
-        items.push({slot:"Item 4", name:"Rookern", note:"AP coverage -- immediate shield value"});
+      if (topIsAP) items.push({ slot:"Item 4", name:"Deadman's Plate",  note:"AP toplaner -- armor coverage" });
+      else         items.push({ slot:"Item 4", name:"Force of Nature",   note:"3+ AP -- mobility and magic resistance" });
     }
-  }
+    if (thornmail5)        items.push({ slot:"Item 5", name:"Thornmail",            note:"Grievous Wounds -- anti-heal (bramble matchup)" });
+    else if (a.melee >= 3) items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"3+ melee -- damage to health conversion" });
+    else                   items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
 
-  // ══════════════════════════════════════════════════════════
-  // BLOODMAIL: slot 3 if mixed damage (AD+AP both) + 3+ melee
-  //            slot 5 if 3+ melee (standard)
-  // JAK'SHO:   slot 5 ONLY, and only if already have 2+ tank items (Deadman/Randuin/Rookern/FoN)
-  // ══════════════════════════════════════════════════════════
-  var bigFour = ["Deadman's Plate","Randuin's Omen","Rookern","Force of Nature"];
-  var tankItemCount = bigFour.filter(function(i){ return has(i); }).length;
-
-  // Bloodmail slot 3 special case: mixed damage + 3+ melee → go now
-  // (already pushed items 1-2 + boots, slot 3 was just pushed above)
-  // We check if this applies and override slot 3 recommendation with a note
-  if (!heavyAD && !heavyAP && a.melee >= 3) {
-    // Mixed + heavy melee: Bloodmail as 3rd item (remove last pushed item 3 and replace)
-    items = items.filter(function(i){ return i.slot !== "Item 3"; });
-    items.push({slot:"Item 3", name:"Overlord's Bloodmail", note:"Mixed damage + " + a.melee + " melees -- you hit them constantly; go Bloodmail early for max value"});
-  }
-
-  // Slot 5 flex
-  if (a.melee >= 3 && !has("Overlord's Bloodmail")) {
-    items.push({slot:"Item 5 (flex)", name:"Overlord's Bloodmail", note:a.melee + " melees -- you hit them enough for bonus AD to matter"});
+  // ══════════════════════════════════════════
+  // CASE C : Default
+  // ══════════════════════════════════════════
   } else {
-    // Fill missing Big Four
-    var missingFour = bigFour.filter(function(i){ return !has(i); });
-    if (missingFour.length > 0) {
-      items.push({slot:"Item 5 (flex)", name:missingFour[0], note:"Complete the Big Four -- fill remaining resistance gap"});
-    } else if (tankItemCount >= 2) {
-      // Jak'Sho only if already have 2+ Big Four tank items
-      items.push({slot:"Item 5 (flex)", name:"Jak'Sho, The Protean", note:"2+ tank items already -- Jak'Sho valid here; only vs melee-heavy long fights"});
+    items.push({ slot:"Item 2", name:"Sterak's Gage",  note:"Shield + resistances -- standard" });
+    items.push({ slot:"Item 3", name:"Deadman's Plate", note:"Armor + mobility" });
+    if (a.ap >= 2) {
+      if (fonCondition) items.push({ slot:"Item 4", name:"Force of Nature",     note:"AP + burn/bump -- mobility & MR" });
+      else              items.push({ slot:"Item 4", name:"Rookern",              note:"Shield against AP damage" });
     } else {
-      items.push({slot:"Item 5 (flex)", name:"Deadman's Plate", note:"Extra armor + mobility layer"});
+      items.push({ slot:"Item 4", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
     }
+    if (thornmail5)        items.push({ slot:"Item 5", name:"Thornmail",            note:"Grievous Wounds -- anti-heal (bramble matchup)" });
+    else if (a.melee >= 3) items.push({ slot:"Item 5", name:"Overlord's Bloodmail", note:"3+ melee -- damage to health conversion" });
+    else                   items.push({ slot:"Item 5", name:"Jak'Sho, The Protean", note:"Omnidirectional resistances" });
   }
 
   return { items, warnings };
@@ -787,18 +740,12 @@ function buildItems(top, a) {
 
 function itemRowHTML(item, i) {
   var img = itemImg(item.name);
-  var iconHTML = img ? '<div class="item-icon"><img src="' + img + '" alt="' + item.name + '" loading="lazy"/></div>' : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
-  if (item.conflict) {
-    var img2 = itemImg(item.conflict.name);
-    var icon2 = img2 ? '<div class="item-icon"><img src="' + img2 + '" alt="' + item.conflict.name + '" loading="lazy"/></div>' : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
-    return '<div class="item-row" style="animation:fadeUp 0.3s ease both '+(i*0.05)+'s;flex-wrap:wrap;gap:0;">'
-      + '<div class="item-slot" style="width:100%;margin-bottom:6px;">'+item.slot+'</div>'
-      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'+iconHTML+'<div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>'
-      + '<div style="width:1px;background:var(--border);margin:0 10px;align-self:stretch;"></div>'
-      + '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">'+icon2+'<div><div class="item-name" style="color:var(--blue);">'+item.conflict.name+'</div><div class="item-note">'+item.conflict.note+'</div></div></div>'
-      + '</div>';
-  }
-  return '<div class="item-row" style="animation:fadeUp 0.3s ease both '+(i*0.05)+'s">'+iconHTML+'<div class="item-slot">'+item.slot+'</div><div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>';
+  var iconHTML = img
+    ? '<div class="item-icon"><img src="'+img+'" alt="'+item.name+'" loading="lazy"/></div>'
+    : '<div class="item-icon" style="display:flex;align-items:center;justify-content:center;font-size:18px;">⚔</div>';
+  return '<div class="item-row" style="animation:fadeUp 0.3s ease both '+(i*0.05)+'s">'
+    +iconHTML+'<div class="item-slot">'+item.slot+'</div>'
+    +'<div><div class="item-name">'+item.name+'</div><div class="item-note">'+item.note+'</div></div></div>';
 }
 
 function renderCategories(champs) {
@@ -807,7 +754,7 @@ function renderCategories(champs) {
     {key:"CC",label:"CC",cls:"cat-label-cc",isCC:true},{key:"CRIT",label:"Crit",cls:"cat-label-crit"},
     {key:"BURST",label:"Burst",cls:"cat-label-burst"},{key:"BURN",label:"Burn",cls:"cat-label-burn"},
     {key:"SHIELD",label:"Shield",cls:"cat-label-shield"},{key:"HEAL",label:"Heal",cls:"cat-label-heal"},
-    {key:"EXECUTE",label:"Execute",cls:"cat-label-execute"},
+    {key:"EXECUTE",label:"Execute",cls:"cat-label-execute"},{key:"MELEE",label:"Melee",cls:"cat-label-ad"},
   ];
   var filled = champs.filter(Boolean).map(function(c) {
     return Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === c.toLowerCase(); }) || null;
@@ -815,10 +762,7 @@ function renderCategories(champs) {
   if (!filled.length) return '';
   var rows = '';
   CATS.forEach(function(cat) {
-    var matching = filled.filter(function(c) {
-      var t = getTags(c);
-      return cat.isCC ? getCCValue(t) > 0 : t.includes(cat.key);
-    });
+    var matching = filled.filter(function(c) { var t=getTags(c); return cat.isCC ? getCCValue(t)>0 : t.includes(cat.key); });
     if (!matching.length) return;
     var pills = matching.map(function(c) {
       return '<span class="cat-champ"><img src="'+champImg(c)+'" onerror="this.style.display=\'none\'" loading="lazy"/>'+c+'</span>';
@@ -830,110 +774,77 @@ function renderCategories(champs) {
 }
 
 function calculate() {
-  var champs = getChamps(), top = champs[0];
-  if (!top) { document.getElementById('error-msg').innerHTML = '<div class="error">Enter at least the enemy top champion.</div>'; return; }
+  var champs=getChamps(), top=champs[0];
+  if (!top) { document.getElementById('error-msg').innerHTML='<div class="error">Enter at least the enemy top champion.</div>'; return; }
   document.getElementById('error-msg').innerHTML = '';
   var topKnown = Object.keys(CHAMP_TAGS).find(function(k) { return k.toLowerCase() === top.toLowerCase(); }) || top;
-  var a = analyzeComp(champs);
-  var rune = RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()] || "page1"];
-  var bi = buildItems(topKnown, a);
-  var situ = getSituItems(a);
-  var guideUrl = GUIDE_BASE + champSlug(topKnown) + '.html';
-  var html = '';
+  var a=analyzeComp(champs), rune=RUNE_PAGES[CHAMP_RUNE_MAP[top.toLowerCase()]||"page1"];
+  var bi=buildItems(topKnown,a), situ=getSituItems(a), guideUrl=GUIDE_BASE+champSlug(topKnown)+'.html';
+  var html='';
 
   html += '<div class="section" style="animation:fadeUp 0.4s ease both">'
-    + '<div class="result-header">Rune page — ' + rune.label + '</div>'
-    + '<img src="' + RUNE_BASE + rune.img + '" alt="Rune page ' + rune.label + '" style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);" loading="lazy"/>'
-    + '</div>';
+    +'<div class="result-header">Rune page — '+rune.label+'</div>'
+    +'<img src="'+RUNE_BASE+rune.img+'" alt="Rune page '+rune.label+'" style="width:100%;display:block;border-radius:4px;border:1px solid var(--border);" loading="lazy"/>'
+    +'</div>';
 
   html += '<div class="build-layout">';
   html += '<div class="section" style="animation:fadeUp 0.4s ease both 0.1s">'
-    + '<div class="result-header">Recommended build</div>'
-    + '<div class="guide-box">📖 <a href="' + guideUrl + '">Urgot vs ' + topKnown + ' — Full matchup guide ↗</a></div>';
-  bi.warnings.forEach(function(w) { html += '<div class="warn-box">' + w + '</div>'; });
+    +'<div class="result-header">Recommended build</div>'
+    +'<div class="guide-box">📖 <a href="'+guideUrl+'">Urgot vs '+topKnown+' — Full matchup guide ↗</a></div>';
+  bi.warnings.forEach(function(w) { html += '<div class="warn-box">'+w+'</div>'; });
   html += '<div class="items-grid">';
-  bi.items.forEach(function(item, i) { html += itemRowHTML(item, i); });
+  bi.items.forEach(function(item,i) { html += itemRowHTML(item,i); });
   html += '</div></div>';
 
   html += '<div class="situ-panel"><p class="situ-title">✦ Situational</p>';
   if (!situ.length) {
     html += '<p class="situ-empty">No situational items</p>';
   } else {
-    situ.forEach(function(s, i) {
-      var tc = 'situ-tag-' + s.tag;
-      if (s.type === 'double') {
+    situ.forEach(function(s) {
+      var tc='situ-tag-'+s.tag;
+      if (s.type==='double') {
         html += '<div class="situ-item" style="flex-direction:column;gap:6px;"><span class="situ-tag '+tc+'">'+s.tagLabel+'</span>';
-        s.items.forEach(function(it, j) {
-          var img = itemImg(it.name);
-          var icon = img ? '<div class="situ-icon"><img src="'+img+'" alt="'+it.name+'" loading="lazy"/></div>' : '';
-          if (j > 0) html += '<div style="height:5px;"></div>';
+        s.items.forEach(function(it,j) {
+          var img=itemImg(it.name), icon=img?'<div class="situ-icon"><img src="'+img+'" alt="'+it.name+'" loading="lazy"/></div>':'';
+          if (j>0) html += '<div style="height:5px;"></div>';
           html += '<div style="display:flex;align-items:flex-start;gap:8px;">'+icon+'<div><div class="situ-item-name">'+it.name+'</div><div class="situ-item-cond">'+it.note+'</div></div></div>';
         });
         html += '</div>';
       } else {
-        var img2 = itemImg(s.items[0].name);
-        var iH = img2 ? '<div class="situ-icon"><img src="'+img2+'" alt="'+s.items[0].name+'" loading="lazy"/></div>' : '';
+        var img2=itemImg(s.items[0].name), iH=img2?'<div class="situ-icon"><img src="'+img2+'" alt="'+s.items[0].name+'" loading="lazy"/></div>':'';
         html += '<div class="situ-item">'+iH+'<div class="situ-text"><span class="situ-tag '+tc+'">'+s.tagLabel+'</span><div class="situ-item-name">'+s.items[0].name+'</div><div class="situ-item-cond">'+s.items[0].note+'</div></div></div>';
       }
     });
   }
   html += '</div></div>';
   html += renderCategories(champs);
-
   document.getElementById('results').innerHTML = html;
   document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
-// Nav search
-var champNames = ['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+var champNames = ['Aatrox','Ahri','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 
 function slugify(name) { return name.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 
 function navFilter() {
-  var val = document.getElementById('nav-search-input').value;
-  var navList = document.getElementById('nav-list');
-  var navDropdown = document.getElementById('nav-dropdown');
+  var val=document.getElementById('nav-search-input').value,
+      navList=document.getElementById('nav-list'), navDropdown=document.getElementById('nav-dropdown');
   navList.innerHTML = '';
-  if (val.length < 1) { navDropdown.style.display = 'none'; return; }
+  if (val.length<1) { navDropdown.style.display='none'; return; }
   var filtered = champNames.filter(function(n) { return n.toLowerCase().includes(val.toLowerCase()); });
   navDropdown.style.display = filtered.length ? 'block' : 'none';
   filtered.forEach(function(name) {
-    var a = document.createElement('a');
-    a.className = 'nav-dropdown-item';
-    a.href = 'matchup/' + slugify(name) + '.html';
-    var img = document.createElement('img');
-    img.src = DDC(name.replace(/[^a-zA-Z]/g,''));
-    img.alt = name; img.onerror = function(){ this.style.display='none'; };
-    var span = document.createElement('span'); span.textContent = name;
-    a.appendChild(img); a.appendChild(span);
-    navList.appendChild(a);
+    var a=document.createElement('a'); a.className='nav-dropdown-item';
+    a.href='matchup/'+slugify(name)+'.html';
+    var img=document.createElement('img'); img.src=DDC(name.replace(/[^a-zA-Z]/g,'')); img.alt=name;
+    img.onerror=function(){this.style.display='none';};
+    var span=document.createElement('span'); span.textContent=name;
+    a.appendChild(img); a.appendChild(span); navList.appendChild(a);
   });
 }
 
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.nav-search')) document.getElementById('nav-dropdown').style.display = 'none';
-});
-document.addEventListener('keydown', function(e) { if (e.key === 'Enter') calculate(); });
-
-
-
-function showPanel(panel) {
-  var track = document.getElementById('panel-track');
-  var btnCalc = document.getElementById('btn-calc');
-  var btnBuild = document.getElementById('btn-build');
-  if (panel === 'calc') {
-    track.classList.add('show-right');
-    btnBuild.classList.remove('active'); btnCalc.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#calculator');
-  } else {
-    track.classList.remove('show-right');
-    btnCalc.classList.remove('active'); btnBuild.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    history.replaceState(null, '', '#build');
-  }
-}
-(function() { if (window.location.hash === '#calculator') showPanel('calc'); })();
+document.addEventListener('click', function(e) { if (!e.target.closest('.nav-search')) document.getElementById('nav-dropdown').style.display='none'; });
+document.addEventListener('keydown', function(e) { if (e.key==='Enter') calculate(); });
 
 </script>
 </body>

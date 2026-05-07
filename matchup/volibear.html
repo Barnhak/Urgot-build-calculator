@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vladimir — Urgot Guide</title>
+<html lang="en"><head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volibear — Urgot Guide</title>
   <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
@@ -28,7 +26,18 @@
     .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
     .hero{position:relative;height:55vh;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vladimir_0.jpg');background-size:cover;background-position:59% top;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+    .hero-bg{position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_0.jpg') 55% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+
+    .starter-block{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+    .starter-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px}
+    .starter-items{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .starter-item{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:5px 10px 5px 5px;transition:border-color 0.2s}
+    .starter-item:hover{border-color:var(--border-bright)}
+    .starter-item-icon{width:32px;height:32px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0}
+    .starter-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .starter-item-name{font-size:12px;font-weight:500;color:var(--text-bright)}
+    .starter-item-note{font-size:11px;color:var(--text-dim)}
+    .starter-sep{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--text-dim);padding:0 4px}
     @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.07)}}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.3) 0%,rgba(6,13,7,0) 35%,rgba(6,13,7,0.75) 80%,var(--bg) 100%)}
     .hero-content{position:relative;text-align:center;animation:fadeDown 0.8s ease both}
@@ -44,7 +53,7 @@
     .rune-summ-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     @media(max-width:600px){.rune-summ-grid{grid-template-columns:1fr}}
     .rune-block{display:flex;gap:14px;align-items:flex-start}
-    .rune-img{width:140px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
+    .rune-img{width:200px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
     .rune-img img{width:100%;display:block}
     .rune-text h4{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:var(--green-mid);text-transform:uppercase;margin-bottom:8px}
     .rune-text p{font-size:14px;line-height:1.7;color:var(--text)}
@@ -57,78 +66,85 @@
     .summ-text p{font-size:14px;line-height:1.7;color:var(--text)}
     .paragraph{margin-bottom:1.25rem}
     .paragraph p{font-size:15px;line-height:1.8;color:var(--text)}
-    .enemy-rune-text p{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:1rem}
-    .enemy-rune-text p:last-child{margin-bottom:0}
+    .mode-toggle{display:flex;align-items:center;gap:0;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;margin-bottom:1.5rem;width:fit-content}
+    .mode-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
+    .mode-btn.active{background:var(--green-dark);color:var(--text-bright)}
+    .mode-btn:hover:not(.active){color:var(--green-mid)}
+    .mode-sep{width:1px;background:var(--border-bright);height:16px;flex-shrink:0}
+    .phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .phase-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1.25rem;position:relative;overflow:hidden;transition:border-color 0.2s}
+    .phase-card:hover{border-color:var(--border-bright)}
+    .phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--green-dark)}
+    .phase-badge{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:6px}
+    .phase-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:8px}
+    .phase-body{font-size:13px;line-height:1.65;color:var(--text)}
+    .phase-body ul{padding-left:1rem;margin-top:4px}
+    .phase-body li{margin-bottom:3px}
     footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
-    footer a{color:var(--green-dark);text-decoration:none}
+    footer a{color:var(--green-dark);text-decoration:none;transition:color 0.2s}
     footer a:hover{color:var(--green-mid)}
     @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   </style>
-</head>
-<body>
-  <nav>
-    <a class="nav-logo" href="../index.html">Urgot Guide</a>
-    <ul class="nav-links">
-      <li><a href="../mechanics.html">Mechanics</a></li>
-      <li><a href="../runes.html">Runes</a></li>
-      <li><a href="../matchup.html">MatchUp</a></li>
-      <li><a href="../calculator.html">Build Calculator</a></li>
-      <li><a href="../build.html">Build Guide</a></li>
-    </ul>
-    <div class="nav-search">
-      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
-      <span class="nav-search-icon">&#128269;</span>
-      <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
-    </div>
-  </nav>
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Vladimir.png" alt="Vladimir"/></div>
-      <h1 class="hero-title">Vladimir</h1>
-      <p class="hero-score">&#10022; Vladimir Favored 6/10</p>
-    </div>
-  </section>
-  <div class="page">
-    <div class="section-block">
-      <p class="section-title">Runes &amp; Summoners</p>
-      <div class="rune-summ-grid">
-        <div class="rune-block">
-          <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page2.png" alt="Rune page"/></div>
-          <div class="rune-text"><h4>Runes</h4><p>Like always on Urgot you go PTA, Triumph and Bloodline and Last Stand Cut Down. And in secondary runes, Triple Tonic and Approach Velocity to gap close and have kill pressure.</p></div>
-        </div>
-        <div class="summ-block">
-          <h4>Summoners spells</h4>
-          <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div></div>
-          <div class="summ-text"><p>Ignite is mandatory — it counters his Q healing and his W pool sustain, and is essential to kill him before he can pool away.</p></div>
-        </div>
+</head><body>
+<nav>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
+  <ul class="nav-links">
+    <li><a href="mechanics.html">Mechanics</a></li>
+    <li><a href="runes.html">Runes</a></li>
+    <li><a href="matchup.html" class="active">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+    <span class="nav-search-icon">&#128269;</span>
+    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-bg" style="position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Volibear_0.jpg') 57% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Volibear.png" alt="Volibear"/></div>
+    <h1 class="hero-title">Volibear</h1>
+    <p class="hero-score">&#10022; Skill MatchUp 5/10</p>
+  </div>
+</section>
+<div class="page">
+  <div class="section-block">
+    <p class="section-title">Runes &amp; Summoners</p>
+    <div class="rune-summ-grid">
+      <div class="rune-block">
+        <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Rune page"/></div>
+        <div class="rune-text"><h4>Runes</h4><p>PTA, Triumph, Bloodline, Last Stand. Secondary: Triple Tonic + Approach Velocity.</p></div>
+      </div>
+      <div class="summ-block">
+        <h4>Summoners spells</h4>
+        <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div><span class="starter-sep">or</span><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="TP"/></div></div></div>
+        <div class="summ-text"><p>Ignite for anti heal and kill pressure. TP for scaling.</p></div>
+        <div class="starter-block"><div class="starter-label">Starter item</div><div class="starter-items"><div class="starter-item"><div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div><div><div class="starter-item-name">Doran's Blade</div><div class="starter-item-note">Standard start</div></div></div><span class="starter-sep">or</span><div class="starter-item"><div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1054.png" alt="Doran's Shield"/></div><div><div class="starter-item-name">Doran's Shield</div><div class="starter-item-note">If you struggle early</div></div></div></div></div>
       </div>
     </div>
-    <div class="section-block">
-      <p class="section-title">How to play VS</p>
-      <div class="paragraph"><p>Wincon is fighting really hard early. If you can't get a lead play respectful until 9 and don't let him Q outsustain. Early game use E as a gapclosing tool to trade with Q → PTA, back off before he gets empowered Q.</p></div>
-<div class="paragraph"><p>Level 1 look to get behind him and get aggro — E forwards and just auto. Look to disengage before his Q comes up again if he's not in lethal range to Ignite. Try to test his reactions by E'ing at him, pretend you are disengaging and walk backwards after a Q auto trade — he will walk forwards as you walk back, then E him. Against competent Vladimirs you will only be able to E him before he pools with E + Flash.</p></div>
-<div class="paragraph"><p>Hard lane to get good trades on pre-9 — don't overforce, play trades slow with Q. At 70% look for E + Flash + Ignite + R. Be careful not to R2 during his pool animation as it can block R2. Even if he pools after your E stun wears off, Ignite will tick him down and you can execute when he resurfaces.</p></div>
-<div class="paragraph"><p>After 9 you hard win — you can E to gapclose and stick on Vlad with Q slow. Vladimir likes to run straight at you when he gets his empowered Q MS — easy timing to Q poke him. If you haven't found leads early just farm until 9.</p></div>
-    </div>
+  </div>
+  <div class="section-block">
+    <p class="section-title">How to play VS</p>
+    <div class="mode-toggle"><button class="mode-btn active" id="btn-simple" onclick="setMode('simple')">Simple</button><div class="mode-sep"></div><button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')">Detailed</button></div>
+    <div id="mode-simple"><div class="phase-grid"><div class="phase-card"><div class="phase-badge">Phase 1</div><div class="phase-title">Level 1–3</div><div class="phase-body">Be aggressive level 1 before he stacks passive. E buffer his E stun.<ul><li>Get level 2 prio with your range</li><li>Secure early HP advantage</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 2</div><div class="phase-title">Level 4–8</div><div class="phase-body">After level 3 just farm — he statchecks you with W healing.<ul><li>E buffer away from his Q before it connects</li><li>Never let him get W2 proc — lane-ending heal</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 3</div><div class="phase-title">Level 9+</div><div class="phase-body">Post-9 with BC + anti heal you win 1v1. His R cannot block R2.<ul><li>Anti heal is mandatory before fighting back</li><li>His R no longer blocks R2 anymore</li></ul></div></div></div></div>
+    <div id="mode-detailed" style="display:none">
+<div class="paragraph"><p>Look to get behind him and fight level 1, after you auto him start sidestepping to dodge his E then look to E → Auto. Use this trade and your range advantage to secure level 2 prio. Do not let him auto the wave for free level 1 or he can stack his passive.</p></div>
+<div class="paragraph"><p>After level 3 just farm until 9, Volibear is a huge lane bully that omega statchecks you. If you take one bad trade he can easily dive you with his R. Let the wave push in and farm. If he runs at you with Q, buffer E away before the stun connects to avoid the combo + E damage. After level 6 if you E away don't walk back into his range because he can just R on you. Unless you can flip him into tower range never E forwards until 9. Make sure to wait for his W mark to time out, getting hit by one second W is lane ending.</p></div>
+<div class="paragraph"><p>Pay attention to the W mark, never let him get W2 off. Disengage and wait for it to expire and if he's low enough you can try to kill with R. Thankfully Volibears usually auto push to stack his passive so just use your range, don't let him walk up and auto/W you for free, use Q to space/slow him and focus on letting the wave push to you.</p></div>
+<div class="paragraph"><p>You need 1st item + Executioner's if you don't have Ignite to even think about fighting back. You can win 1v1 at 9+ with Black Cleaver/Executioner's and you hard outscale as the game goes on. Volibear's R cannot block R2 anymore.</p></div>
     
   </div>
-  <footer>
-  Not affiliated with Riot Games &nbsp;·&nbsp;
-  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://barnhak.github.io/Urgot-guide/feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
-</footer>
-<script>
+</div>
+<footer>Not affiliated with Riot Games &nbsp;·&nbsp;<a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>&nbsp;·&nbsp;<a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>&nbsp;·&nbsp;<a href="../feedback.html" style="color:var(--green-dark);text-decoration:none">Send Feedback ↗</a></footer>
+<script>function setMode(mode){var det=document.getElementById('mode-detailed');var sim=document.getElementById('mode-simple');var btnD=document.getElementById('btn-detailed');var btnS=document.getElementById('btn-simple');if(mode==='simple'){det.style.display='none';sim.style.display='block';btnS.classList.add('active');btnD.classList.remove('active');}else{sim.style.display='none';det.style.display='block';btnD.classList.add('active');btnS.classList.remove('active');}}
+function toggleVideo(id){var panel=document.getElementById('video-'+id);var trigger=panel.previousElementSibling.querySelector('.video-trigger');var isOpen=panel.classList.contains('open');document.querySelectorAll('.video-panel.open').forEach(function(p){p.classList.remove('open');var t=p.previousElementSibling?p.previousElementSibling.querySelector('.video-trigger'):null;if(t)t.classList.remove('open');});if(!isOpen){panel.classList.add('open');if(trigger)trigger.classList.add('open');setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}}
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
-var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K\'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
-function slugify(n){return n.toLowerCase().replace(/[^a-z0-9 -]/g,'').replace(/ +/g,'-');}
+var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href=slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
-document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
-</script>
-</body>
-</html>
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});</script>
+</body></html>

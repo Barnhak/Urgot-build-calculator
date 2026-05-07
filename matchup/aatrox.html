@@ -27,9 +27,19 @@
     .nav-dropdown-item:last-child{border-bottom:none}
     .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
-
     .hero{position:relative;height:55vh;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg') 45% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+    .hero-bg{position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_0.jpg') 55% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+
+    .starter-block{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+    .starter-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px}
+    .starter-items{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .starter-item{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:5px 10px 5px 5px;transition:border-color 0.2s}
+    .starter-item:hover{border-color:var(--border-bright)}
+    .starter-item-icon{width:32px;height:32px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0}
+    .starter-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .starter-item-name{font-size:12px;font-weight:500;color:var(--text-bright)}
+    .starter-item-note{font-size:11px;color:var(--text-dim)}
+    .starter-sep{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--text-dim);padding:0 4px}
     @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.07)}}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.3) 0%,rgba(6,13,7,0) 35%,rgba(6,13,7,0.75) 80%,var(--bg) 100%)}
     .hero-content{position:relative;text-align:center;animation:fadeDown 0.8s ease both}
@@ -37,14 +47,11 @@
     .hero-champ-icon img{width:100%;height:100%;object-fit:cover}
     .hero-title{font-family:'Cinzel',serif;font-size:clamp(36px,7vw,72px);font-weight:900;color:var(--text-bright);letter-spacing:0.08em;text-shadow:0 0 60px rgba(74,222,128,0.15),0 4px 20px rgba(0,0,0,0.9)}
     .hero-score{margin-top:0.75rem;font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;text-shadow:0 0 20px rgba(74,222,128,0.4)}
-
     .page{max-width:900px;margin:0 auto;padding:4rem 1.5rem 6rem}
     .section-block{background:var(--bg-surface);border:1px solid var(--border);border-radius:4px;padding:2rem;margin-bottom:1.5rem;position:relative;animation:fadeUp 0.5s ease both}
     .section-block::before{content:'';position:absolute;inset:0;border-radius:4px;border:1px solid transparent;background:linear-gradient(135deg,rgba(74,222,128,0.08),transparent 40%) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
     .section-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
     .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
-
-    /* RUNES & SUMMS */
     .rune-summ-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     @media(max-width:600px){.rune-summ-grid{grid-template-columns:1fr}}
     .rune-block{display:flex;gap:14px;align-items:flex-start}
@@ -59,39 +66,13 @@
     .summ-icon img{width:100%;height:100%;object-fit:cover;display:block}
     .summ-or{font-size:11px;color:var(--text-dim);letter-spacing:0.1em}
     .summ-text p{font-size:14px;line-height:1.7;color:var(--text)}
-
-    /* STARTER ITEM */
-    .starter-block{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
-    .starter-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px}
-    .starter-items{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .starter-item{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:5px 10px 5px 5px;transition:border-color 0.2s}
-    .starter-item:hover{border-color:var(--border-bright)}
-    .starter-item-icon{width:32px;height:32px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0}
-    .starter-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
-    .starter-item-name{font-size:12px;font-weight:500;color:var(--text-bright)}
-    .starter-item-note{font-size:11px;color:var(--text-dim)}
-    .starter-sep{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--text-dim);padding:0 4px}
-
-    /* GUIDE MODE TOGGLE */
+    .paragraph{margin-bottom:1.25rem}
+    .paragraph p{font-size:15px;line-height:1.8;color:var(--text)}
     .mode-toggle{display:flex;align-items:center;gap:0;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;margin-bottom:1.5rem;width:fit-content}
     .mode-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
     .mode-btn.active{background:var(--green-dark);color:var(--text-bright)}
     .mode-btn:hover:not(.active){color:var(--green-mid)}
     .mode-sep{width:1px;background:var(--border-bright);height:16px;flex-shrink:0}
-
-    /* DETAILED MODE */
-    .paragraph{margin-bottom:1.25rem}
-    .paragraph p{font-size:15px;line-height:1.8;color:var(--text)}
-    .video-trigger{display:inline;background:rgba(74,222,128,0.1);border:1px solid var(--green-dark);border-radius:3px;padding:1px 6px;color:var(--green);cursor:pointer;font-weight:600;letter-spacing:0.04em;transition:background 0.2s,border-color 0.2s;white-space:nowrap}
-    .video-trigger:hover{background:rgba(74,222,128,0.18);border-color:var(--green-mid)}
-    .video-trigger::after{content:' ▶';font-size:10px;opacity:0.7}
-    .video-trigger.open::after{content:' ▼'}
-    .video-panel{max-height:0;overflow:hidden;transition:max-height 0.5s ease,opacity 0.4s ease,margin 0.3s ease;opacity:0;margin-top:0}
-    .video-panel.open{max-height:600px;opacity:1;margin-top:1rem}
-    .video-inner{border-radius:4px;overflow:hidden;border:1px solid var(--border-bright);background:#000}
-    .video-inner video{width:100%;display:block;max-height:420px}
-
-    /* SIMPLE MODE — phase cards */
     .phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
     .phase-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1.25rem;position:relative;overflow:hidden;transition:border-color 0.2s}
     .phase-card:hover{border-color:var(--border-bright)}
@@ -101,11 +82,6 @@
     .phase-body{font-size:13px;line-height:1.65;color:var(--text)}
     .phase-body ul{padding-left:1rem;margin-top:4px}
     .phase-body li{margin-bottom:3px}
-
-    /* ENEMY RUNES */
-    .enemy-rune-text p{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:1rem}
-    .enemy-rune-text p:last-child{margin-bottom:0}
-
     footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
     footer a{color:var(--green-dark);text-decoration:none;transition:color 0.2s}
     footer a:hover{color:var(--green-mid)}
@@ -114,15 +90,14 @@
   </style>
 </head>
 <body>
-
 <nav>
-  <a class="nav-logo" href="../index.html">Urgot Guide</a>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
   <ul class="nav-links">
-    <li><a href="../mechanics.html">Mechanics</a></li>
-    <li><a href="../runes.html">Runes</a></li>
-    <li><a href="../matchup.html">MatchUp</a></li>
-    <li><a href="../calculator.html">Build Calculator</a></li>
-    <li><a href="../build.html">Build Guide</a></li>
+    <li><a href="mechanics.html">Mechanics</a></li>
+    <li><a href="runes.html">Runes</a></li>
+    <li><a href="matchup.html" class="active">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
   </ul>
   <div class="nav-search">
     <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
@@ -130,9 +105,8 @@
     <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
   </div>
 </nav>
-
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" style="position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg') 45% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Aatrox.png" alt="Aatrox"/></div>
@@ -140,149 +114,37 @@
     <p class="hero-score">&#10022; Aatrox Favored 7/10</p>
   </div>
 </section>
-
 <div class="page">
-
-  <!-- RUNES & SUMMONERS -->
   <div class="section-block">
     <p class="section-title">Runes &amp; Summoners</p>
     <div class="rune-summ-grid">
-
       <div class="rune-block">
-        <div class="rune-img">
-          <img src="https://barnhak.github.io/Urgot-guide/runes/rune-page2.png" alt="Rune page Cut Down"/>
-        </div>
-        <div class="rune-text">
-          <h4>Runes</h4>
-          <p>Like always on Urgot you go PTA, Triumph and Bloodline, Triple Tonic — but it's better here to take Cut Down and Cosmic Insight. Aatrox is a matchup where you need to burst him and one shot him to get the kill, so Cut Down is essential.</p>
-        </div>
+        <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page2.png" alt="Rune page"/></div>
+        <div class="rune-text"><h4>Runes</h4><p>Like always on Urgot you go PTA, Triumph and Bloodline and Last Stand Cut Down. And in secondary runes, Triple Tonic and Approach Velocity.</p></div>
       </div>
-
       <div class="summ-block">
         <h4>Summoners spells</h4>
-        <div class="summ-row">
-          <div class="summ-icons">
-            <div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div>
-            <div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div>
-          </div>
-          <span class="summ-or">or</span>
-          <div class="summ-icons">
-            <div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div>
-            <div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="TP"/></div>
-          </div>
-        </div>
-        <div class="summ-text">
-          <p>Ignite is highly recommended due to the amount of healing Aatrox has. TP is viable if you struggle a lot in this matchup but buy anti heal.</p>
-        </div>
-
-        <!-- STARTER ITEM -->
-        <div class="starter-block">
-          <div class="starter-label">Starter item</div>
-          <div class="starter-items">
-            <div class="starter-item">
-              <div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div>
-              <div>
-                <div class="starter-item-name">Doran's Blade</div>
-                <div class="starter-item-note">Standard start</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div><span class="starter-sep">or</span><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="TP"/></div></div></div>
+        <div class="summ-text"><p>Ignite highly recommended due to Aatrox's healing. TP if you struggle and prefer to scale.</p></div>
+        <div class="starter-block"><div class="starter-label">Starter item</div><div class="starter-items"><div class="starter-item"><div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div><div><div class="starter-item-name">Doran's Blade</div><div class="starter-item-note">Standard start</div></div></div></div></div>
       </div>
-
     </div>
   </div>
-
-  <!-- HOW TO PLAY -->
   <div class="section-block">
     <p class="section-title">How to play VS</p>
-
-    <!-- MODE TOGGLE -->
     <div class="mode-toggle">
       <button class="mode-btn active" id="btn-simple" onclick="setMode('simple')">Simple</button>
-      
       <div class="mode-sep"></div>
       <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')">Detailed</button>
     </div>
-
-    <!-- DETAILED MODE -->
-    <div id="mode-detailed" style="display:none">
-      <div class="paragraph">
-        <p>The <span class="video-trigger" onclick="toggleVideo('early-game')">early game</span> is for Urgot by far. Aatrox has huge CD on his Q, making long trades really hard for him to take. So you can go in the 3rd bush and wait for the wave to crash to chase Aatrox and make him lose XP.</p>
-        <div class="video-panel" id="video-early-game">
-          <div class="video-inner">
-            <video controls preload="none">
-              <source src="https://barnhak.github.io/Urgot-guide/video/earlygame_aatrox.mp4" type="video/mp4"/>
-            </video>
-          </div>
-        </div>
-      </div>
-      <div class="paragraph">
-        <p>You can try to bait Q1 and Q2 by walking up and down to Aatrox and get as close as possible to try and flip him (E).</p>
-      </div>
-      <div class="paragraph">
-        <p>The matchup shifts around level 3 to 8. Aatrox will be really strong especially around level 5-6, in which he will have way lower Q cooldown and his R stat checks you really hard. So until level 9 you will need to preserve as much your summoners and health as you can. You also need to freeze the wave under tower — without which he will be able to run you down on the long lane with his ultimate.</p>
-      </div>
-      <div class="paragraph">
-        <p>The most important thing is to try and dodge his Q1 E. It's his main tool to poke you before an all-in or to escape a go-in from you. So you can only go on him if his E is down or if you slow him after he E's.</p>
-      </div>
-    </div>
-
-    <!-- SIMPLE MODE -->
-    <div id="mode-simple">
-      <div class="phase-grid">
-        <div class="phase-card">
-          <div class="phase-badge">Phase 1</div>
-          <div class="phase-title">Level 1–3</div>
-          <div class="phase-body">
-            You win hard early. Go to the 3rd bush and wait for the wave — bait his Q1/Q2 and flip him when he misses.
-            <ul>
-              <li>Abuse the huge Q cooldowns</li>
-              <li>Try to deny XP by chasing him out of lane</li>
-              <li>Play with your range and buffer your E in his Q2 / Q3</li>
-            </ul>
-          </div>
-        </div>
-        <div class="phase-card">
-          <div class="phase-badge">Phase 2</div>
-          <div class="phase-title">Level 5–8</div>
-          <div class="phase-body">
-            Aatrox gets stronger with lower Q CD and steelcaps. Respect him and play safe in long lane.
-            <ul>
-              <li>Preserve your Sums and HP</li>
-              <li>Freeze the wave under tower and poke him</li>
-              <li>When his E is in CD you can kill at 70%HP with flash ignite</li>
-            </ul>
-          </div>
-        </div>
-        <div class="phase-card">
-          <div class="phase-badge">Phase 3</div>
-          <div class="phase-title">Level 9+</div>
-          <div class="phase-body">
-            You hard outscale with BC + W toggle. Look to deny a flank in team fight.
-            <ul>
-              <li>You kill on a E</li>
-              <li>Extended trades now favor you</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <div id="mode-simple"><div class="phase-grid"><div class="phase-card"><div class="phase-badge">Phase 1</div><div class="phase-title">Level 1–3</div><div class="phase-body">You win hard early — Aatrox has huge Q cooldowns. Get behind him in the 3rd bush, bait Q1/Q2 and flip when he misses.<ul><li>Deny XP after wave crashes</li><li>Get level 2 prio</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 2</div><div class="phase-title">Level 4–8</div><div class="phase-body">Matchup shifts at level 5–6. Lower Q CD and his R spike make him strong. Respect his power until level 9.<ul><li>Preserve Flash and HP</li><li>Freeze the wave under tower</li><li>Only go in if his E is on CD</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 3</div><div class="phase-title">Level 9+</div><div class="phase-body">You outscale hard with BC + W toggle. E + Flash + Ignite OS when he's ~70% HP.<ul><li>Play around his Q CD windows</li><li>Extended trades favor you now</li></ul></div></div></div></div>
+    <div id="mode-detailed" style="display:none"><div class="paragraph"><p>The early game is strongly in your favor. Aatrox has huge Q cooldowns, making long trades really hard for him. Go in the 3rd bush, wait for the wave to crash, and chase Aatrox to make him lose XP.</p></div>
+<div class="paragraph"><p>Try to bait Q1 and Q2 by walking up and down near Aatrox, getting as close as possible to try and flip him.</p></div>
+<div class="paragraph"><p>The matchup shifts around level 3–8. Aatrox is really strong around level 5–6 with lower Q cooldown and his R stat-checks you hard. Until level 9 preserve your summoners and HP. Freeze the wave under tower — without it he can run you down on the long lane with his ultimate.</p></div>
+<div class="paragraph"><p>The most important thing is to dodge his Q1 E. It's his main tool to poke before an all-in or to escape your go-in. Only go on him if his E is down or if you slow him after he E's.</p></div></div>
   </div>
-
-  <!-- ENEMY RUNES -->
-  <div class="section-block">
-    <p class="section-title">Enemy runes &amp; how to play around</p>
-    <div class="enemy-rune-text">
-      <p>This season Aatrox has two rune pages — one with Conqueror and one with Comet.</p>
-      <p>With Conqueror, Aatrox will play for long trades — bait his Q and refuse extended fights unless he's around 70% HP and an all-in with Flash + Ignite can kill him.</p>
-      <p>With Comet, Aatrox will play to hard poke you with Q and all-in when you're low. Bait or dodge his Q, then trade longer when he has no CD and abuse those windows.</p>
-    </div>
-  </div>
-
+  <div class="section-block"><p class="section-title">Enemy runes &amp; how to play around</p><div class="enemy-rune-text"><p>Aatrox has two rune pages — Conqueror and Comet. With Conqueror he plays for long trades — bait his Q and refuse extended fights unless he's around 70% HP and an all-in with Flash + Ignite can kill him. With Comet he plays to hard poke with Q and all-in when you're low — bait or dodge his Q, trade longer when he has no CD.</p></div></div>
 </div>
-
 <footer>
   Not affiliated with Riot Games &nbsp;·&nbsp;
   <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
@@ -291,43 +153,12 @@
   &nbsp;·&nbsp;
   <a href="../feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
 </footer>
-
-<script>
-function setMode(mode) {
-  var det = document.getElementById('mode-detailed');
-  var sim = document.getElementById('mode-simple');
-  var btnD = document.getElementById('btn-detailed');
-  var btnS = document.getElementById('btn-simple');
-  if (mode === 'simple') {
-    det.style.display = 'none'; sim.style.display = 'block';
-    btnS.classList.add('active'); btnD.classList.remove('active');
-  } else {
-    sim.style.display = 'none'; det.style.display = 'block';
-    btnD.classList.add('active'); btnS.classList.remove('active');
-  }
-}
-
-function toggleVideo(id) {
-  var panel = document.getElementById('video-' + id);
-  var trigger = panel.previousElementSibling.querySelector('.video-trigger');
-  var isOpen = panel.classList.contains('open');
-  document.querySelectorAll('.video-panel.open').forEach(function(p) {
-    p.classList.remove('open');
-    var t = p.previousElementSibling ? p.previousElementSibling.querySelector('.video-trigger') : null;
-    if (t) t.classList.remove('open');
-  });
-  if (!isOpen) {
-    panel.classList.add('open');
-    if (trigger) trigger.classList.add('open');
-    setTimeout(function() { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
-  }
-}
-
+<script>function setMode(mode){var det=document.getElementById('mode-detailed');var sim=document.getElementById('mode-simple');var btnD=document.getElementById('btn-detailed');var btnS=document.getElementById('btn-simple');if(mode==='simple'){det.style.display='none';sim.style.display='block';btnS.classList.add('active');btnD.classList.remove('active');}else{sim.style.display='none';det.style.display='block';btnD.classList.add('active');btnS.classList.remove('active');}}
+function toggleVideo(id){var panel=document.getElementById('video-'+id);var trigger=panel.previousElementSibling.querySelector('.video-trigger');var isOpen=panel.classList.contains('open');document.querySelectorAll('.video-panel.open').forEach(function(p){p.classList.remove('open');var t=p.previousElementSibling?p.previousElementSibling.querySelector('.video-trigger'):null;if(t)t.classList.remove('open');});if(!isOpen){panel.classList.add('open');if(trigger)trigger.classList.add('open');setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}}
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
 var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
 function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href=slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
-document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
-</script>
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});</script>
 </body>
 </html>

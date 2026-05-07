@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trundle — Urgot Guide</title>
+<html lang="en"><head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tryndamere — Urgot Guide</title>
   <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
@@ -28,7 +26,18 @@
     .nav-dropdown-item:hover{background:var(--bg-surface);color:var(--green)}
     .nav-dropdown-item img{width:24px;height:24px;border-radius:3px;border:1px solid var(--border);object-fit:cover}
     .hero{position:relative;height:55vh;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Trundle_0.jpg');background-size:cover;background-position:55% top;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+    .hero-bg{position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_0.jpg') 55% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate}
+
+    .starter-block{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+    .starter-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px}
+    .starter-items{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .starter-item{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:5px 10px 5px 5px;transition:border-color 0.2s}
+    .starter-item:hover{border-color:var(--border-bright)}
+    .starter-item-icon{width:32px;height:32px;border-radius:3px;border:1px solid var(--border-bright);overflow:hidden;flex-shrink:0}
+    .starter-item-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .starter-item-name{font-size:12px;font-weight:500;color:var(--text-bright)}
+    .starter-item-note{font-size:11px;color:var(--text-dim)}
+    .starter-sep{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--text-dim);padding:0 4px}
     @keyframes heroZoom{from{transform:scale(1.03)}to{transform:scale(1.07)}}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,13,7,0.3) 0%,rgba(6,13,7,0) 35%,rgba(6,13,7,0.75) 80%,var(--bg) 100%)}
     .hero-content{position:relative;text-align:center;animation:fadeDown 0.8s ease both}
@@ -44,7 +53,7 @@
     .rune-summ-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     @media(max-width:600px){.rune-summ-grid{grid-template-columns:1fr}}
     .rune-block{display:flex;gap:14px;align-items:flex-start}
-    .rune-img{width:140px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
+    .rune-img{width:200px;flex-shrink:0;border-radius:4px;border:1px solid var(--border);overflow:hidden}
     .rune-img img{width:100%;display:block}
     .rune-text h4{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:var(--green-mid);text-transform:uppercase;margin-bottom:8px}
     .rune-text p{font-size:14px;line-height:1.7;color:var(--text)}
@@ -57,78 +66,88 @@
     .summ-text p{font-size:14px;line-height:1.7;color:var(--text)}
     .paragraph{margin-bottom:1.25rem}
     .paragraph p{font-size:15px;line-height:1.8;color:var(--text)}
-    .enemy-rune-text p{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:1rem}
-    .enemy-rune-text p:last-child{margin-bottom:0}
+    .mode-toggle{display:flex;align-items:center;gap:0;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:50px;overflow:hidden;margin-bottom:1.5rem;width:fit-content}
+    .mode-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;border:none;background:transparent;color:var(--text-dim);cursor:pointer;transition:background 0.2s,color 0.2s;white-space:nowrap}
+    .mode-btn.active{background:var(--green-dark);color:var(--text-bright)}
+    .mode-btn:hover:not(.active){color:var(--green-mid)}
+    .mode-sep{width:1px;background:var(--border-bright);height:16px;flex-shrink:0}
+    .phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .phase-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1.25rem;position:relative;overflow:hidden;transition:border-color 0.2s}
+    .phase-card:hover{border-color:var(--border-bright)}
+    .phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--green-dark)}
+    .phase-badge{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:var(--green-mid);text-transform:uppercase;margin-bottom:6px}
+    .phase-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:8px}
+    .phase-body{font-size:13px;line-height:1.65;color:var(--text)}
+    .phase-body ul{padding-left:1rem;margin-top:4px}
+    .phase-body li{margin-bottom:3px}
     footer{border-top:1px solid var(--border);padding:2rem 1rem;text-align:center;font-size:11px;letter-spacing:0.1em;color:var(--text-dim)}
-    footer a{color:var(--green-dark);text-decoration:none}
+    footer a{color:var(--green-dark);text-decoration:none;transition:color 0.2s}
     footer a:hover{color:var(--green-mid)}
     @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   </style>
-</head>
-<body>
-  <nav>
-    <a class="nav-logo" href="../index.html">Urgot Guide</a>
-    <ul class="nav-links">
-      <li><a href="../mechanics.html">Mechanics</a></li>
-      <li><a href="../runes.html">Runes</a></li>
-      <li><a href="../matchup.html">MatchUp</a></li>
-      <li><a href="../calculator.html">Build Calculator</a></li>
-      <li><a href="../build.html">Build Guide</a></li>
-    </ul>
-    <div class="nav-search">
-      <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
-      <span class="nav-search-icon">&#128269;</span>
-      <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
-    </div>
-  </nav>
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Trundle.png" alt="Trundle"/></div>
-      <h1 class="hero-title">Trundle</h1>
-      <p class="hero-score">&#10022; Skill MatchUp 5/10</p>
-    </div>
-  </section>
-  <div class="page">
-    <div class="section-block">
-      <p class="section-title">Runes &amp; Summoners</p>
-      <div class="rune-summ-grid">
-        <div class="rune-block">
-          <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Rune page"/></div>
-          <div class="rune-text"><h4>Runes</h4><p>Like always on Urgot you go PTA, Triumph and Bloodline and Last Stand. And in secondary runes, Triple Tonic and Approach Velocity to gap close and have kill pressure.</p></div>
-        </div>
-        <div class="summ-block">
-          <h4>Summoners spells</h4>
-          <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div></div>
-          <div class="summ-text"><p>Ignite is key — you need it to OS him and the anti heal counters his passive. No reason to take anything else.</p></div>
-        </div>
+</head><body>
+<nav>
+  <a class="nav-logo" href="index.html">Urgot Guide</a>
+  <ul class="nav-links">
+    <li><a href="mechanics.html">Mechanics</a></li>
+    <li><a href="runes.html">Runes</a></li>
+    <li><a href="matchup.html" class="active">MatchUp</a></li>
+    <li><a href="calculator.html">Build Calculator</a></li>
+    <li><a href="build.html">Build Guide</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" id="nav-search-input" placeholder="Search champion..." oninput="navFilter()"/>
+    <span class="nav-search-icon">&#128269;</span>
+    <div class="nav-dropdown" id="nav-dropdown"><h4>Champions</h4><div id="nav-list"></div></div>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-bg" style="position:absolute;inset:0;background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Tryndamere_0.jpg') 59% top/cover no-repeat;filter:brightness(0.35) saturate(0.7);animation:heroZoom 20s ease-in-out infinite alternate"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-champ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Tryndamere.png" alt="Tryndamere"/></div>
+    <h1 class="hero-title">Tryndamere</h1>
+    <p class="hero-score">&#10022; Tryndamere Favored 7/10</p>
+  </div>
+</section>
+<div class="page">
+  <div class="section-block">
+    <p class="section-title">Runes &amp; Summoners</p>
+    <div class="rune-summ-grid">
+      <div class="rune-block">
+        <div class="rune-img"><img src="https://barnhak.github.io/Urgot-guide/runes/rune-page1.png" alt="Rune page"/></div>
+        <div class="rune-text"><h4>Runes</h4><p>PTA, Triumph, Bloodline, Last Stand. Secondary: Triple Tonic + Approach Velocity.</p></div>
       </div>
+      <div class="summ-block">
+        <h4>Summoners spells</h4>
+        <div class="summ-row"><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerDot.png" alt="Ignite"/></div></div><span class="starter-sep">or</span><div class="summ-icons"><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"/></div><div class="summ-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="TP"/></div></div></div>
+        <div class="summ-text"><p>Ignite is key for pre-6 kills and anti heal. TP for scaling.</p></div>
+        <div class="starter-block"><div class="starter-label">Starter item</div><div class="starter-items"><div class="starter-item"><div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1055.png" alt="Doran's Blade"/></div><div><div class="starter-item-name">Doran's Blade</div><div class="starter-item-note">Standard start</div></div></div></div></div></div></div></div>
+      
+        <div class="starter-block"><div class="starter-label">Rush item</div><div class="starter-items"><div class="starter-item"><div class="starter-item-icon"><img src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3047.png" alt="Plated Steelcaps"/></div><div><div class="starter-item-name">Plated Steelcaps</div><div class="starter-item-note">Rush — armor vs physical</div></div></div></div></div>
+      
     </div>
-    <div class="section-block">
-      <p class="section-title">How to play VS</p>
-      <div class="paragraph"><p>Wincon is using your range to chunk Trundle to around 60% HP before looking to all-in with Ignite + R. Maintain your spacing — don't let him walk up and Q you for free. Steelcaps rush makes the lane a lot easier if you struggle.</p></div>
-<div class="paragraph"><p>Trundle is really strong level 1 — do not fight until minions arrive. When the minions crash look to just chunk: Auto → E → Auto Auto PTA → Disengage. Try to flip Trundle sideways rather than behind you — he can run you down with Ghost + Lethal Tempo + Q. Do not extend the trade, back off until your E is up again. Should always get level 2 prio.</p></div>
-<div class="paragraph"><p>Trundle is really strong in long trades with Q + Lethal Tempo but has low range. Gameplan is to use your range advantage to chunk him to around 60% HP before looking to one shot with Ignite + R. If he walks up to CS: Q → PTA/Leg trade. Never E aggressively pre-9 unless he's chunked and you're intending to all-in. Play around your Q — if Trundle tries to walk at you with W move speed, use your Q + range to push him back. If you don't want to fight and he Pillars (E) you, click to the side of it and E away — don't E into the pillar. Trundle clears minions really slowly so slow pushing big waves and freezing are strong strategies.</p></div>
-<div class="paragraph"><p>Post-9 save E → R combo for when he's around 60-70% HP — R won't time out. Trundle can cancel your E with his pillar if timed well. His level 6 is extremely strong 1v1 — be very respectful especially with Ghost + long lane. Don't go tank build vs Trundle, you need to be able to 1v1 him — BC/Sterak → bruiser items is good. Trundle will only play to split push — kill him in sidelane before grouping. If you have enough damage Trundle gets one shot in your E flip before he can Ult.</p></div>
-    </div>
+  </div>
+  <div class="section-block">
+    <p class="section-title">How to play VS</p>
+    <div class="mode-toggle"><button class="mode-btn active" id="btn-simple" onclick="setMode('simple')">Simple</button><div class="mode-sep"></div><button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')">Detailed</button></div>
+    <div id="mode-simple"><div class="phase-grid"><div class="phase-card"><div class="phase-badge">Phase 1</div><div class="phase-title">Level 1–3</div><div class="phase-body">Deny him fury stacks with your range. Don't fight until minions arrive.<ul><li>Rush Steelcaps — reduces his physical damage</li><li>E buffer away if he spins on you</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 2</div><div class="phase-title">Level 4–8</div><div class="phase-body">His R from level 6 counters your R. Play very safe and farm.<ul><li>Never E forward if he has ult, high fury, or full HP</li><li>Kite him out with Q slow</li></ul></div></div><div class="phase-card"><div class="phase-badge">Phase 3</div><div class="phase-title">Level 9+</div><div class="phase-body">You hard outscale. Time your R to expire his ult — use full 4 seconds of slow.<ul><li>R him at ~200 HP to time out his ult</li><li>Ignite at the END — don't waste it in his R</li></ul></div></div></div></div>
+    <div id="mode-detailed" style="display:none">
+<div class="paragraph"><p>Don't fight Tryndamere until minions arrive. Always start in lane, don't let Trynda get free fury stacks. Instantly look to take bush/auto him as he walks up, don't let him stack fury for free. Hold your E, just use your autos. If he spins on you, Auto → E → Auto Auto PTA → Disengage. If he doesn't spin push him off CS with your legs/range and get level 2 prio.</p></div>
+<div class="paragraph"><p>You can play really aggressive in this matchup with PTA + Ignite pre-6 but after 6 you have to play a lot more respectful. His R/sustain counter you from level 6-9, just let the wave push into you and farm. They usually hit it a lot to stack fury. If the wave is pushing out slow push and build big waves, stand in front of your minions and try to auto so he can't stack fury and hope the wave crashes. Be very careful in the long lane, they will always look to run you down with W slow + Ghost + Lethal Tempo. Tryndamere W is castable without needing vision of you, he can tell if you're cheesing in a bush.</p></div>
+<div class="paragraph"><p>Trade based around his fury. If he has low fury be aggressive and use your range + legs to push him off so he can't auto for fury. If he has high fury you have to respect and hold your Q. If he spins on you use your Q to slow and make space, you don't want to E here or he can run you down/dive you. Never E forwards if he has ult, high fury, or full HP. Also keep in mind he can E to dodge your E.</p></div>
+<div class="paragraph"><p>For the all-in/dive, use the full 4 seconds of R slow + R pull animation to time out his ult. Make sure you R him at ~200HP. If R base damage can kill Trynda even if he's in R it will auto pull, that is bad. As he dives once he's lower: R → E/Auto to force his R → Run and let R2 auto time out after 4s → Pull him in + Ignite → hope his R is over. Usually Tryndamere will have ~0.5-1s of Ult left so hit him with an auto and Ignite at the end of the fight so it's not wasted in his R. Tryndamere has infinite sustain and is hard to all-in because of R, don't overtrade/OOM yourself with Q/E, just use your Range + Autos.</p></div>
+<div class="paragraph"><p>Try to get Plated Steelcaps first base. After 9/Black Cleaver hard outscale for the rest of the game. You hard outscale Tryndamere because later on you do so much damage you force his R in your E flip alone, then you can kite him out easily. You won't kill but Tryndamere without R is not a champ.</p></div>
     
   </div>
-  <footer>
-  Not affiliated with Riot Games &nbsp;·&nbsp;
-  <a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://barnhak.github.io/Urgot-guide/feedback.html" style="color:var(--green-dark);text-decoration:none;transition:color 0.2s">Send Feedback ↗</a>
-</footer>
-<script>
+</div>
+<footer>Not affiliated with Riot Games &nbsp;·&nbsp;<a href="https://www.twitch.tv/quante" target="_blank" rel="noopener">Quante — Twitch ↗</a>&nbsp;·&nbsp;<a href="https://x.com/quantelol" target="_blank" rel="noopener">Quante — Twitter ↗</a>&nbsp;·&nbsp;<a href="../feedback.html" style="color:var(--green-dark);text-decoration:none">Send Feedback ↗</a></footer>
+<script>function setMode(mode){var det=document.getElementById('mode-detailed');var sim=document.getElementById('mode-simple');var btnD=document.getElementById('btn-detailed');var btnS=document.getElementById('btn-simple');if(mode==='simple'){det.style.display='none';sim.style.display='block';btnS.classList.add('active');btnD.classList.remove('active');}else{sim.style.display='none';det.style.display='block';btnD.classList.add('active');btnS.classList.remove('active');}}
+function toggleVideo(id){var panel=document.getElementById('video-'+id);var trigger=panel.previousElementSibling.querySelector('.video-trigger');var isOpen=panel.classList.contains('open');document.querySelectorAll('.video-panel.open').forEach(function(p){p.classList.remove('open');var t=p.previousElementSibling?p.previousElementSibling.querySelector('.video-trigger'):null;if(t)t.classList.remove('open');});if(!isOpen){panel.classList.add('open');if(trigger)trigger.classList.add('open');setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}}
 var BASE_DDR='https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/';
-var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K\'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
-function slugify(n){return n.toLowerCase().replace(/[^a-z0-9 -]/g,'').replace(/ +/g,'-');}
+var champNames=['Aatrox','Akali','Ambessa','Anivia','Aurora','Camille','Cassiopeia',"Cho'Gath",'Darius','Dr. Mundo','Fiora','Gangplank','Garen','Gnar','Gragas','Gwen','Heimerdinger','Illaoi','Irelia','Jax','Jayce','Kayle','Kennen','Kled',"K'Sante",'Lee Sin','Malphite','Maokai','Master Yi','Mordekaiser','Nasus','Olaf','Ornn','Pantheon','Poppy','Quinn','Renekton','Riven','Rumble','Ryze','Sett','Shen','Singed','Sion','Swain','Sylas','Tahm Kench','Teemo','Trundle','Tryndamere','Udyr','Varus','Vayne','Vladimir','Volibear','Warwick','Yasuo','Yone','Yorick','Zaahen','Zac'];
+function slugify(n){return n.toLowerCase().replace(/ & /g,'-').replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function navFilter(){var val=document.getElementById('nav-search-input').value;var nl=document.getElementById('nav-list');var nd=document.getElementById('nav-dropdown');nl.innerHTML='';if(val.length<1){nd.style.display='none';return;}var f=champNames.filter(function(n){return n.toLowerCase().includes(val.toLowerCase());});nd.style.display=f.length?'block':'none';f.forEach(function(name){var a=document.createElement('a');a.className='nav-dropdown-item';a.href=slugify(name)+'.html';var img=document.createElement('img');img.src=BASE_DDR+name.replace(/[^a-zA-Z]/g,'')+'.png';img.alt=name;img.onerror=function(){this.style.display='none';};var span=document.createElement('span');span.textContent=name;a.appendChild(img);a.appendChild(span);nl.appendChild(a);});}
-document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});
-</script>
-</body>
-</html>
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-search'))document.getElementById('nav-dropdown').style.display='none';});</script>
+</body></html>

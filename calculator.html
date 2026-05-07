@@ -1,388 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build Calculator & Guide — Urgot Guide</title>
-  <link rel="icon" type="image/png" href="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Urgot.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --green: #4ADE80;
-      --green-mid: #22C55E;
-      --green-dark: #15803D;
-      --bg: #060D07;
-      --bg-surface: #0B1A0D;
-      --bg-card: #0F2211;
-      --border: #1A3D1E;
-      --border-bright: #2D6A33;
-      --text: #A8D4A0;
-      --text-dim: #4A7550;
-      --text-bright: #E8F5E2;
-    }
+login as: administrator
+Keyboard-interactive authentication prompts from server:
+End of keyboard-interactive prompts from server
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │                 • MobaXterm Personal Edition v25.3 •                 │
+    │               (SSH client, X server and network tools)               │
+    │                                                                      │
+    │ ⮞ SSH session to administrator@10.102.96.183                         │
+    │   • Direct SSH      :  ✓                                             │
+    │   • SSH compression :  ✓                                             │
+    │   • SSH-browser     :  ✓                                             │
+    │   • X11-forwarding  :  ✗  (disabled or not supported by server)      │
+    │                                                                      │
+    │ ⮞ For more info, ctrl+click on help or visit our website.            │
+    └──────────────────────────────────────────────────────────────────────┘
 
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      background-image:
-        radial-gradient(ellipse 80% 40% at 50% -5%, rgba(74,222,128,0.04) 0%, transparent 60%),
-        repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(26,61,30,0.08) 50px),
-        repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(26,61,30,0.08) 50px);
-    }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(6,13,7,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
+  WARNING this chassis IP Address: ... 10.102.96.183 is part of a node controller
+  Please connect to the node directly with this IP Address: ... 10.102.96.162
 
-    .nav-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      color: var(--green);
-      text-decoration: none;
-    }
+admin@183(3216)> get_measurements 5 X1-Line1
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
+*******************************
+*    Slot 5                   *
+*    PM_600FRS06-SF           *
+*    X1-Line1 Measurement     *
+*    LINE_Number 1            *
+*******************************
 
-    .nav-links a {
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-decoration: none;
-    }
+*************************************************************
+*     Measurement                           * Value * Unit  *
+*************************************************************
+*  1. Current Line Trscv Tx Power           * 3.0   * dBm   *
+*  2. Min Line Trscv Tx Power               * 0.0   * dBm   *
+*  3. Max Line Trscv Tx Power               * 3.0   * dBm   *
+*  4. Current Line Trscv Rx Power           * -32.8 * dBm   *
+*  5. Min Line Trscv Rx Power               * -40.0 * dBm   *
+*  6. Max Line Trscv Rx Power               * 0.0   * dBm   *
+*  7. Current Residual Chromatic Dispersion * 0.0   * ps/nm *
+*  8. Min Residual Chromatic Dispersion     * 0.0   * ps/nm *
+*  9. Max Residual Chromatic Dispersion     * 0.0   * ps/nm *
+*************************************************************
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--green);
-    }
-
-    .hero {
-      position: relative;
-      height: 38vh;
-      min-height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      margin-top: 70px;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(0,0,0,0.65));
-      filter: brightness(0.25) saturate(0.6);
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(6,13,7,0.2) 0%, rgba(6,13,7,0.7) 100%);
-    }
-
-    .hero-content {
-      position: relative;
-      text-align: center;
-    }
-
-    .hero-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      color: var(--green-mid);
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(24px, 5vw, 48px);
-      font-weight: 900;
-      color: var(--text-bright);
-      letter-spacing: 0.08em;
-    }
-
-    .hero-title span {
-      color: var(--green);
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-top: 0.6rem;
-    }
-
-    .page-toggle {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      border-radius: 50px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
-    }
-
-    .toggle-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border: none;
-      background: transparent;
-      color: var(--text-dim);
-      cursor: pointer;
-    }
-
-    .toggle-btn.active {
-      background: var(--green-dark);
-      color: var(--text-bright);
-    }
-
-    .toggle-sep {
-      width: 1px;
-      background: var(--border-bright);
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    .panel-viewport {
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .panel-track {
-      display: flex;
-      width: 300%;
-      transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
-    }
-
-    .panel-track.show-right { transform: translateX(-33.3333%); }
-    .panel-track.show-far-right { transform: translateX(-66.6666%); }
-
-    .panel-page {
-      width: 33.3333%;
-      flex-shrink: 0;
-      min-width: 0;
-    }
-
-    .main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 6rem;
-    }
-
-    .section {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--green-dark);
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-    }
-
-    .placeholder {
-      border: 1px dashed rgba(74,222,128,0.25);
-      background: rgba(74,222,128,0.03);
-      border-radius: 4px;
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
-      min-height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-    }
-
-    @media (max-width: 600px) {
-      .nav-links { gap: 1rem; }
-      .page-toggle {
-        left: 1rem;
-        right: 1rem;
-        justify-content: space-between;
-        border-radius: 18px;
-      }
-      .toggle-btn { padding: 10px 14px; font-size: 10px; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <a class="nav-logo" href="index.html">Urgot Guide</a>
-  <ul class="nav-links">
-    <li><a href="mechanics.html">Mechanics</a></li>
-    <li><a href="runes.html">Runes</a></li>
-    <li><a href="matchup.html">MatchUp</a></li>
-    <li><a href="build.html">Build Guide</a></li>
-  </ul>
-</nav>
-
-<div class="page-toggle">
-  <button class="toggle-btn active" id="btn-build" onclick="showPanel('build')">Build guide</button>
-  <div class="toggle-sep"></div>
-  <button class="toggle-btn" id="btn-calc" onclick="showPanel('calc')">Build Calculator</button>
-  <div class="toggle-sep"></div>
-  <button class="toggle-btn" id="btn-runes" onclick="showPanel('runes')">Runes</button>
-</div>
-
-<div class="panel-viewport">
-  <div class="panel-track" id="panel-track">
-
-    <div class="panel-page">
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Item <span>Build</span></h1>
-          <p class="hero-sub">Your content here</p>
-        </div>
-      </section>
-
-      <div class="main">
-        <div class="section">
-          <p class="section-title">✦ Build guide</p>
-          <div class="placeholder">
-            Mets ici ton contenu pour la page Build guide.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-page">
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Build <span>Calculator</span></h1>
-          <p class="hero-sub">Your content here</p>
-        </div>
-      </section>
-
-      <div class="main">
-        <div class="section">
-          <p class="section-title">✦ Build calculator</p>
-          <div class="placeholder">
-            Mets ici ton calculateur ou le contenu que tu veux pour cette page.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-page">
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Urgot Guide</p>
-          <h1 class="hero-title">Rune <span>Pages</span></h1>
-          <p class="hero-sub">Your content here</p>
-        </div>
-      </section>
-
-      <div class="main">
-        <div class="section">
-          <p class="section-title">✦ Runes</p>
-          <div class="placeholder">
-            Mets ici ton contenu pour la page Runes.
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<footer>
-  Not affiliated with Riot Games
-</footer>
-
-<script>
-function showPanel(panel) {
-  const track = document.getElementById('panel-track');
-  const btnBuild = document.getElementById('btn-build');
-  const btnCalc = document.getElementById('btn-calc');
-  const btnRunes = document.getElementById('btn-runes');
-
-  btnBuild.classList.remove('active');
-  btnCalc.classList.remove('active');
-  btnRunes.classList.remove('active');
-
-  if (panel === 'calc') {
-    track.classList.add('show-right');
-    track.classList.remove('show-far-right');
-    btnCalc.classList.add('active');
-    history.replaceState(null, '', '#calculator');
-  } else if (panel === 'runes') {
-    track.classList.add('show-far-right');
-    track.classList.remove('show-right');
-    btnRunes.classList.add('active');
-    history.replaceState(null, '', '#runes');
-  } else {
-    track.classList.remove('show-right');
-    track.classList.remove('show-far-right');
-    btnBuild.classList.add('active');
-    history.replaceState(null, '', '#build');
-  }
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-(function() {
-  if (window.location.hash === '#calculator') showPanel('calc');
-  else if (window.location.hash === '#runes') showPanel('runes');
-  else showPanel('build');
-})();
-</script>
-
-</body>
-</html>
+admin@183(3216)>
